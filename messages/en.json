@@ -1,0 +1,357 @@
+{
+  "meta": {
+    "title": "Arrocería Yerga · Wood-fired Valencian paella",
+    "description": "Valencian rice dishes cooked over orange-wood fire. Book your table and choose your rice."
+  },
+  "home": {
+    "title": "Rice won't wait. Your table will.",
+    "subtitle": "Wood-fired paellas cooked to order for your table. Book and choose your rice."
+  },
+  "reserva": {
+    "titulo": "Book your table",
+    "subtitulo": "We only offer times with a table that is genuinely free.",
+    "pasos": {
+      "comensales": "Party and day",
+      "hora": "Time",
+      "zona": "Area",
+      "arroz": "Your rice",
+      "datos": "Your details",
+      "confirmacion": "Confirmed"
+    },
+    "paso": "Step {actual} of {total}",
+    "atras": "Back",
+    "continuar": "Continue",
+    "comensales": {
+      "titulo": "How many of you?",
+      "persona": "{n, plural, one {# person} other {# people}}",
+      "mas": "More than {max}",
+      "grupoAyuda": "For groups of more than {max} we set up your table by hand."
+    },
+    "calendario": {
+      "titulo": "Which day?",
+      "anterior": "Previous month",
+      "siguiente": "Next month",
+      "cerrado": "Closed",
+      "completo": "Full",
+      "disponible": "Tables available",
+      "cargando": "Looking for tables…",
+      "leyenda": "Crossed-out days are closed or full."
+    },
+    "horas": {
+      "titulo": "What time?",
+      "comida": "Lunch",
+      "cena": "Dinner",
+      "completa": "Full",
+      "avisame": "Notify me if it frees up",
+      "ninguna": "There are no tables left that day for {n, plural, one {# person} other {# people}}.",
+      "otroDia": "Choose another day",
+      "reteniendo": "Holding your table…",
+      "sinGrupo": "We can't seat that many online. Send us a group request."
+    },
+    "zona": {
+      "titulo": "Where would you like to sit?",
+      "ayuda": "At that time there is room in both areas.",
+      "sala": "Dining room",
+      "terraza": "Terrace"
+    },
+    "arroz": {
+      "titulo": "Choose your rice",
+      "ayuda": "Good rice is cooked to order. Choose now and it will be just right when you arrive.",
+      "minimo": "Minimum {n} people",
+      "raciones": "For how many",
+      "porPersona": "{precio} per person",
+      "saltar": "I'd rather decide at the table",
+      "elegido": "Selected",
+      "quitar": "Remove",
+      "otro": "Add another rice",
+      "ninguno": "There are no pre-order rice dishes for {n, plural, one {# person} other {# people}}; you can choose at the table.",
+      "max": "At most as many portions as people.",
+      "elegir": "Choose"
+    },
+    "datos": {
+      "titulo": "Your details",
+      "nombre": "Name",
+      "telefono": "Phone",
+      "correo": "Email",
+      "alergias": "Allergies or intolerances",
+      "alergiasAyuda": "Optional. The kitchen will take it into account.",
+      "salud": "I agree that this health information is used only to prepare my booking.",
+      "ocasion": "Celebrating something?",
+      "ocasiones": {
+        "": "Nothing special",
+        "cumpleanos": "Birthday",
+        "aniversario": "Anniversary",
+        "negocios": "Business lunch",
+        "celebracion": "Celebration",
+        "otra": "Other"
+      },
+      "tronas": "High chairs",
+      "sillaRuedas": "Someone uses a wheelchair",
+      "notas": "Anything else we should know",
+      "privacidad": "I have read and accept the <link>privacy policy</link>.",
+      "comercial": "I'd like to receive news and offers from Yerga (optional).",
+      "reservar": "Confirm booking",
+      "enviando": "Confirming…",
+      "retenida": "We're holding your table for {tiempo}",
+      "caducada": "The hold has expired, but we'll try to keep your table when you confirm."
+    },
+    "resumen": {
+      "comensales": "{n, plural, one {# person} other {# people}}",
+      "zona": "Area",
+      "arroz": "Rice"
+    },
+    "ok": {
+      "titulo": "Table booked!",
+      "texto": "See you on {fecha} at {hora}.",
+      "correo": "We've sent the confirmation to {correo}.",
+      "calendario": "Add to calendar",
+      "gestionar": "View, change or cancel my booking",
+      "volver": "Back to home"
+    },
+    "fallo": {
+      "ocupada": "Someone got there first and that table is no longer free.",
+      "alternativas": "These are the nearest free times:",
+      "general": "We couldn't complete the booking. Try again or call us on {telefono}.",
+      "limite": "Too many attempts. Please wait a few minutes.",
+      "turnstile": "We couldn't verify you're not a robot. Please reload the page."
+    },
+    "errores": {
+      "nombre": "Please enter your name.",
+      "telefono": "Please check the phone number.",
+      "correo": "Please check the email.",
+      "privacidad": "Please accept the privacy policy.",
+      "salud": "We need your consent to store allergies.",
+      "fecha": "Choose a day.",
+      "hora": "Choose a time.",
+      "form": "Please check your details."
+    },
+    "grupo": {
+      "titulo": "Group request",
+      "texto": "For {n, plural, one {# person} other {# people}} we set up the table by hand. Tell us when and we'll confirm shortly.",
+      "personas": "People",
+      "fecha": "Day",
+      "hora": "Approximate time",
+      "enviar": "Send request",
+      "ok": "Received! We'll confirm your booking by email or phone.",
+      "volverOnline": "We're fewer: book online"
+    },
+    "espera": {
+      "titulo": "We'll let you know if a table frees up",
+      "texto": "If a table for {n, plural, one {# person} other {# people}} frees up on {fecha} ({turno}), we'll email you straight away.",
+      "enviar": "Sign me up",
+      "ok": "Done. If a table frees up, we'll email you.",
+      "cerrar": "Close"
+    },
+    "gestion": {
+      "titulo": "Your booking",
+      "estado": {
+        "pendiente": "Awaiting confirmation from the restaurant",
+        "confirmada": "Confirmed",
+        "reconfirmada": "Confirmed by you",
+        "sentada": "In progress",
+        "finalizada": "Finished",
+        "cancelada": "Cancelled",
+        "no_presentada": "No-show"
+      },
+      "cambiar": "Change day, time or party size",
+      "cancelar": "Cancel booking",
+      "cancelarSeguro": "Are you sure? The table will be released for someone else.",
+      "siCancelar": "Yes, cancel",
+      "noCancelar": "No, keep it",
+      "cancelada": "Booking cancelled. We hope to see you soon!",
+      "fueraPlazo": "Less than {horas} hours to go: for changes or cancellations, call us on {telefono}.",
+      "confirmar": "Yes, we're coming",
+      "reconfirmada": "Thank you! See you soon.",
+      "noEncontrada": "We can't find this booking. Please check the link in your email.",
+      "guardar": "Save changes",
+      "cambiada": "Booking updated.",
+      "volver": "Back"
+    },
+    "cuentaAtras": "{min}:{seg}"
+  },
+  "web": {
+    "nav": {
+      "arroces": "Rice dishes",
+      "carta": "Menu",
+      "producto": "Produce",
+      "casa": "Our house",
+      "llegar": "Getting here",
+      "reservar": "Book a table",
+      "idioma": "Language",
+      "menu": "Menu",
+      "cerrar": "Close",
+      "saltar": "Skip to content"
+    },
+    "portada": {
+      "escenas": [
+        "Fire",
+        "Sofrito",
+        "Ingredients",
+        "Stock and rice",
+        "Socarrat"
+      ],
+      "fuego": "Embers of orange-tree wood.",
+      "sofrito": "Olive oil, tomato and paprika colour the pan.",
+      "ingredientes": "Chicken, rabbit, garrofó and bajoqueta.",
+      "caldo": "The stock rises and the rice is scattered in a cross, as tradition demands.",
+      "socarrat": "The stock evaporates and the edge turns golden.",
+      "desliza": "Scroll to cook",
+      "sonido": "Sound of the simmer",
+      "sonidoOn": "Sound on",
+      "estatica": "This is how a paella is made at Yerga, step by step."
+    },
+    "disponibilidad": "{n, plural, one {# table} other {# tables}} left for {cuando}",
+    "cuando": {
+      "hoy": "today",
+      "manana": "tomorrow",
+      "comida": "lunch",
+      "cena": "dinner"
+    },
+    "arroces": {
+      "titulo": "Our rice dishes",
+      "intro": "Cooked to order over wood fire. Choose yours when you book and it will be just right when you arrive.",
+      "minimo": "Minimum {n} people",
+      "porPersona": "{precio} / person",
+      "ingredientes": "Ingredients",
+      "alergenos": "Allergens",
+      "sinAlergenos": "No mandatory-declaration allergens",
+      "reservarCon": "Book with this rice",
+      "verMas": "See details of {nombre}"
+    },
+    "entrantes": {
+      "titulo": "To start",
+      "intro": "What we order while the paella rests."
+    },
+    "producto": {
+      "titulo": "Our produce",
+      "albufera": "L'Albufera",
+      "horta": "L'Horta",
+      "mar": "Mediterranean Sea",
+      "valencia": "Valencia",
+      "arroz": "D.O. Valencia rice",
+      "huerta": "Vegetables from l'Horta",
+      "lonja": "Fish from the market",
+      "lena": "Orange-tree firewood"
+    },
+    "casa": {
+      "titulo": "A story we cook and want to share",
+      "historia": "Story",
+      "equipo": "Team",
+      "sala": "Dining room and terrace",
+      "salaTexto": "A bright dining room by the window and a terrace for long Sunday lunches.",
+      "alma": "That humility, that warmth, that “there's always room for one more” is the soul of Yerga.",
+      "foto": "Grandma Yerga serving rice to the family (placeholder photo).",
+      "elementos": "Every element has its story",
+      "arroz": "Rice, our ingredient and our land.",
+      "paella": "The paella, a symbol of sharing, gathering and caring.",
+      "casaElemento": "Her home, where there was always a hot meal for everyone.",
+      "almaElemento": "The soul, the love she put into every meal and that we keep serving today."
+    },
+    "carta": {
+      "titulo": "Menu",
+      "intro": "Prices include VAT. Ask us about allergens: we'll tell you everything.",
+      "verCompleta": "See the full menu",
+      "arroces": "Rice dishes",
+      "entrantes": "To start",
+      "postres": "Desserts",
+      "grupos": "Group menus",
+      "ejemplo": "sample",
+      "avisoEjemplo": "Sample menu and prices: to be replaced with the real ones.",
+      "temporada": "Season: {t}"
+    },
+    "alergenos": {
+      "gluten": "Gluten",
+      "crustaceos": "Crustaceans",
+      "huevo": "Egg",
+      "pescado": "Fish",
+      "cacahuetes": "Peanuts",
+      "soja": "Soy",
+      "lacteos": "Milk",
+      "frutos_cascara": "Tree nuts",
+      "apio": "Celery",
+      "mostaza": "Mustard",
+      "sesamo": "Sesame",
+      "sulfitos": "Sulphites",
+      "altramuces": "Lupin",
+      "moluscos": "Molluscs"
+    },
+    "opiniones": {
+      "titulo": "What people say",
+      "ver": "See on {origen}"
+    },
+    "llegar": {
+      "titulo": "Getting here",
+      "direccion": "Address",
+      "horario": "Opening hours",
+      "aparcamiento": "Parking",
+      "contacto": "Contact",
+      "llamar": "Call",
+      "whatsapp": "WhatsApp",
+      "mapa": "Open in maps",
+      "cerrado": "Closed",
+      "dias": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "comida": "Lunch",
+      "cena": "Dinner",
+      "azulejo": "Look for the tiles by the door",
+      "azulejoAlt": "Valencian tile plaque reading “Yerga, Valencian rice house”, with Albufera boats, a barraca cottage and a rice plant."
+    },
+    "pie": {
+      "legal": "Legal notice",
+      "privacidad": "Privacy",
+      "cookies": "Cookies",
+      "panel": "Staff login",
+      "derechos": "© {anio} {nombre}"
+    },
+    "cta": {
+      "titulo": "Shall we save you a table?",
+      "texto": "Good rice is cooked to order and tables are limited."
+    },
+    "seo": {
+      "paella": {
+        "titulo": "Authentic wood-fired Valencian paella",
+        "descripcion": "Real Valencian paella: chicken, rabbit, garrofó and bajoqueta, over orange-wood fire. Book and pre-order it."
+      },
+      "arroceria": {
+        "titulo": "Rice restaurant in {localidad}",
+        "descripcion": "Rice restaurant in {localidad} serving wood-fired Valencian rice dishes. Book online with real availability."
+      },
+      "grupos": {
+        "titulo": "Group meals and celebrations",
+        "descripcion": "Group meals with wood-fired Valencian paella: set menus, tables for groups and booking on request."
+      },
+      "cuerpos": {
+        "paella": [
+          "Valencian paella takes few ingredients and a lot of craft: chicken, rabbit, garrofó beans, bajoqueta, tomato, paprika, saffron, water, salt, olive oil and Valencia D.O. rice. At Yerga we cook it over orange-tree wood, which gives a lively heat and an aroma gas never will.",
+          "It is cooked to order for a minimum of two people. Choose your paella when you book and it will be just right, with its socarrat, when you sit down."
+        ],
+        "arroceria": [
+          "Wood-fired Valencian rice dishes: Valencian paella, arròs a banda, senyoret, black rice, fideuà, oven-baked rice and creamy lobster rice.",
+          "Book online in under a minute: we only offer times with a genuinely free table, and you can pre-order your rice."
+        ],
+        "grupos": [
+          "Company lunches, birthdays and family gatherings: we join tables, cook several paellas at once and agree a menu with sharing starters, rice, dessert and drinks.",
+          "For groups of more than ten, send us a request with the day and time; we'll confirm as soon as we review it."
+        ]
+      }
+    },
+    "grupos": {
+      "texto": "For groups we set up the room by hand: we join tables, pre-order the rice and agree a menu that suits you.",
+      "boton": "Request a group table"
+    },
+    "terminos": {
+      "traduccion": "Translation"
+    },
+    "marca": {
+      "lema": "Rice with soul",
+      "bienvenidos": "Welcome to her home."
+    }
+  }
+}
