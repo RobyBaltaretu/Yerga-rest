@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "yerga",
+  "name": "arroceria-yerga",
   "main": "worker.ts",
   "compatibility_date": "2026-09-01",
   "compatibility_flags": ["nodejs_compat", "global_fetch_strictly_public"],
@@ -11,9 +11,13 @@
   "services": [
     {
       "binding": "WORKER_SELF_REFERENCE",
-      "service": "yerga"
+      "service": "arroceria-yerga"
     }
   ],
+  // Valores públicos de ejecución (los secretos van con `wrangler secret bulk`).
+  "vars": {
+    "NEXT_PUBLIC_SITE_URL": "https://arroceria-yerga.roberto-baltaretu.workers.dev"
+  },
   // Recordatorios, caducidad de retenciones y marcas "sin confirmar".
   "triggers": {
     "crons": ["*/5 * * * *"]

@@ -75,9 +75,11 @@ pnpm dev                            # http://localhost:3000/es
   `retener_mesa`, `confirmar_reserva` (atómica), gestión por código, operaciones del
   panel (`crear_reserva_personal`, `asignar_reserva`, `cambiar_estado`,
   `reorganizar_turno`…) y `tick` para tareas periódicas.
-- `supabase/seed.sql`: **único archivo de datos de ejemplo** (plano, turnos, carta,
-  textos, plantillas, usuarios y ~30 reservas de la semana en curso). Sustituirlo por los
-  datos reales es lo único necesario para pasar a producción.
+- `supabase/migrations/…_contenido_inicial.sql`: contenido de ejemplo (plano, turnos,
+  carta, textos, plantillas). Solo se carga si la base está vacía, también en producción;
+  después se cambia desde el panel.
+- `supabase/seed.sql`: datos de **demostración** solo para local y CI (usuarios de
+  ejemplo y ~30 reservas de la semana en curso). Nunca se carga en producción.
 
 Usuarios de ejemplo (contraseña a cambiar en el primer acceso):
 
@@ -112,33 +114,26 @@ tests/unit/, tests/e2e/       Vitest (permisos) y Playwright
 
 ## Puesta en producción de la base de datos
 
-1. Crea el proyecto en Supabase y enlázalo: `pnpm supabase link --project-ref <ref>`.
-2. Aplica las migraciones: `pnpm supabase db push`.
-3. Carga los datos reales (no la semilla de ejemplo): plano, turnos, carta y textos se
-   pueden introducir desde el panel. El primer administrador se crea en Supabase →
-   Authentication y después con
-   `insert into usuario (id, nombre, correo, rol) values ('<uuid>', 'Nombre', 'correo', 'administrador');`.
-4. En Supabase → Authentication, desactiva el alta pública de usuarios (en local ya lo está).
+La hace la CI en cada despliegue (`supabase db push`; nunca `db reset`). El contenido de
+ejemplo entra con su migración solo si la base está vacía, y el primer administrador lo
+crea `scripts/produccion/crear-admin.mjs` con el correo de `ADMIN_EMAIL`. Ese usuario
+entra por primera vez con «¿Has olvidado tu contraseña?» en `/panel/acceso`.
 
 ## Despliegue en Cloudflare Workers
 
-> El worker ocupa unos 5 MB comprimido: requiere el plan **Workers Paid** (límite de 10 MiB).
-> Ver `docs/DUDAS.md`.
+Producción: Worker `arroceria-yerga` en
+<https://arroceria-yerga.roberto-baltaretu.workers.dev>, con coste 0 €/mes (planes
+gratuitos de Cloudflare, Supabase y Resend; ver `docs/INFRA-COSTE-CERO.md`).
 
-1. `pnpm wrangler login` (o variables `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID`).
-2. Secretos del Worker:
-   ```bash
-   pnpm wrangler secret put SUPABASE_SERVICE_ROLE_KEY
-   pnpm wrangler secret put TURNSTILE_SECRET_KEY
-   pnpm wrangler secret put RESEND_API_KEY
-   pnpm wrangler secret put CRON_SECRET
-   ```
-3. Las variables `NEXT_PUBLIC_*` se fijan en el build: defínelas en el entorno antes de `pnpm cf:deploy`.
-4. El Cron Trigger (`*/5 * * * *`) está en `wrangler.jsonc` y llama a `/api/cron/tick`.
-
-En GitHub, el job `desplegar` de `.github/workflows/ci.yml` despliega desde `main` cuando
-existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las variables
-`NEXT_PUBLIC_*` del entorno `produccion`.
+- **Configuración inicial (una vez):** `bash scripts/infra/configurar-secretos.sh` en el
+  ordenador del propietario. Detalle en `SETUP.md`.
+- **Cada fusión en `main`** ejecuta el job `desplegar` de `.github/workflows/ci.yml`:
+  migraciones (`supabase db push`), primer administrador si no hay ninguno, build y
+  despliegue, secretos del Worker y verificación de la URL pública.
+- El Cron Trigger (`*/5 * * * *`) está en `wrangler.jsonc` y llama a `/api/cron/tick`.
+- Despliegue manual: `pnpm cf:deploy` con `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID`
+  y las `NEXT_PUBLIC_*` en el entorno.
+- Comprobar producción a mano: `CRON_SECRET=… node scripts/produccion/verificar.mjs <url>`.
 
 > Nota: `@opennextjs/cloudflare@1.20.9` lleva un parche (`patches/`) para que incluya el
 > manifiesto `preview-props.json` que genera Next.js 16.4. Se puede quitar cuando OpenNext

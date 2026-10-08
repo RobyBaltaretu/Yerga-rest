@@ -7,6 +7,8 @@ export const publicEnv = {
   siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
   // Vacía = Turnstile desactivado (desarrollo sin red). En producción es obligatoria.
   turnstileSiteKey: process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY ?? "",
+  // Cloudflare Web Analytics (token público del beacon). Vacío = sin analítica.
+  cfAnalyticsToken: process.env.NEXT_PUBLIC_CF_ANALYTICS_TOKEN ?? "",
 };
 
 export function serverEnv() {

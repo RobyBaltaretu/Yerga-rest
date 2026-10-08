@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { FormAcceso } from "./FormAcceso";
 import { CenefaAzulejo, LogoCompleto } from "@/components/marca/Marca";
 
@@ -23,9 +24,19 @@ export default async function AccesoPage({
             aviso={
               sp.error === "sin_permiso"
                 ? "Tu usuario no tiene acceso al panel."
-                : undefined
+                : sp.error === "enlace"
+                  ? "El enlace ha caducado o ya se ha usado. Pide otro."
+                  : undefined
             }
           />
+          <p className="mt-4 text-center text-sm">
+            <Link
+              href="/panel/acceso/recuperar"
+              className="font-semibold underline underline-offset-4"
+            >
+              ¿Has olvidado tu contraseña?
+            </Link>
+          </p>
         </div>
       </div>
     </main>
