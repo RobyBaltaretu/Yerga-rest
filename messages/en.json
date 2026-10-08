@@ -167,7 +167,23 @@
       "cambiada": "Booking updated.",
       "volver": "Back"
     },
-    "cuentaAtras": "{min}:{seg}"
+    "cuentaAtras": "{min}:{seg}",
+    "oferta": {
+      "titulo": "Your table from the waiting list",
+      "hola": "Hi {nombre}, we are holding this table for you.",
+      "detalle": "{n, plural, one {# person} other {# people}} · {fecha} at {hora}",
+      "plazo": "You have until {hasta} to accept it. After that it goes to the next person on the list.",
+      "aceptar": "Accept the table",
+      "aceptando": "Booking…",
+      "caducada": "This offer is no longer available",
+      "caducadaTexto": "The time to accept it has passed or the table went to someone else. You can look for another time or join the waiting list again.",
+      "buscar": "Find another time",
+      "aceptada": "Table booked!",
+      "aceptadaTexto": "We have emailed you the confirmation.",
+      "verReserva": "View my booking",
+      "error": "We could not book it. Please try again or call us on {telefono}.",
+      "noExiste": "This link is not valid."
+    }
   },
   "web": {
     "nav": {

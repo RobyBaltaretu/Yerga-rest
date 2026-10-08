@@ -173,3 +173,23 @@ borrar desde la pestaña Branches.
 - Verificado: lint, tipos, Vitest (65) y Playwright (36 pasan).
 - **Siguiente paso:** PR de D3 cuando se fusione el #8; después, D1 (criterios),
   D2 (accesibilidad) y D4 (idiomas).
+
+### 09/10 · E3.1: lista de espera con plazo de 15 minutos (rama `feat/lista-espera-15-minutos`)
+- Migración `20261009001000_lista_espera_plazo.sql`:
+  - `configuracion.espera_plazo_min` (15 por defecto, editable en el panel);
+  - columnas de oferta en `lista_espera`;
+  - `avisar_lista_espera` ahora **retiene** la mesa durante el plazo: primero la hora
+    liberada y, si no cabe, la libre más cercana a la que pidió;
+  - nuevas `oferta_espera`, `aceptar_oferta_espera` (atómica e idempotente) y
+    `caducar_ofertas_espera`;
+  - textos del correo con plazo y enlace; solo se cambian si la plantilla sigue siendo
+    la original.
+- Página `/[locale]/reservar/espera/[token]` en los tres idiomas: aceptar con un toque,
+  oferta caducada u oferta ya aceptada.
+- La tarea periódica (`/api/cron/tick`) caduca las ofertas sin respuesta y se las ofrece
+  al siguiente.
+- Panel: la lista muestra hasta qué hora está guardada la mesa y enlaza a la reserva.
+- Pruebas: 2 de Vitest (aceptar con un toque; caducar y pasar al siguiente) y 2 e2e
+  (cadena completa desde la cancelación del cliente hasta el correo y la aceptación;
+  oferta caducada en valenciano).
+- Fuera: aviso por WhatsApp o SMS (tiene coste).
