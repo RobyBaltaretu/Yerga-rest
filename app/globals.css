@@ -1,0 +1,51 @@
+@import "tailwindcss";
+
+/* Paleta de Yerga: brasa, azafrán, pimentón, arroz y huerta. */
+@theme {
+  --color-brasa: #1b110c;
+  --color-brasa-2: #2a1a12;
+  --color-tinta: #2b1f17;
+  --color-arroz: #f7efe1;
+  --color-arroz-2: #efe3cd;
+  --color-azafran: #e3a13a;
+  --color-azafran-oscuro: #9a5f0f;
+  --color-pimenton: #b23f1d;
+  --color-pimenton-oscuro: #8a2d12;
+  --color-huerta: #4f6a2c;
+  --color-huerta-claro: #dfe8cf;
+  --color-socarrat: #7a4515;
+  --color-niebla: #6f6259;
+
+  --font-display: var(--font-fraunces), Georgia, serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background: var(--color-arroz);
+  color: var(--color-tinta);
+  font-family: var(--font-sans);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-azafran-oscuro);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

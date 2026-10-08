@@ -1,0 +1,11 @@
+onlyBuiltDependencies:
+  - '@parcel/watcher'
+  - '@swc/core'
+  - esbuild
+  - supabase
+  - workerd
+  - sharp
+  - unrs-resolver
+
+patchedDependencies:
+  '@opennextjs/cloudflare@1.20.9': patches/@opennextjs__cloudflare@1.20.9.patch
