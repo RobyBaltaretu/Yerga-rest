@@ -2,13 +2,13 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useReducer, useRef, useState, useTransition } from "react";
 import { Copy, Link2, Redo2, Trash2, Undo2 } from "lucide-react";
 import type { Borrador } from "@/lib/panel/borrador";
 import { descartarBorrador, guardarBorrador, publicar, type ResultadoPublicar } from "@/app/panel/mapa-acciones";
 import { Dialogo } from "@/components/ui/Dialogo";
 import { Boton } from "@/components/ui/Boton";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 const LienzoEditor = dynamic(() => import("@/components/floorplan/LienzoEditor"), {
   ssr: false,
@@ -71,7 +71,7 @@ export function EditorDistribucion({
   pendiente: boolean;
   estado: "borrador" | "publicada";
 }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const [{ doc, pasado, futuro }, despachar] = useReducer(historial, { doc: inicial, pasado: [], futuro: [] });
   const [seleccion, setSeleccion] = useState<string[]>([]);
   const [multiple, setMultiple] = useState(false);
@@ -255,7 +255,7 @@ export function EditorDistribucion({
         setAviso(p.publicada ? "Publicada. La web y el servicio ya usan esta distribución." : "No se ha podido publicar.");
         if (p.publicada) {
           setCambiosSinPublicar(false);
-          router.refresh();
+          recargar();
         }
         return;
       }
@@ -269,7 +269,7 @@ export function EditorDistribucion({
       setAviso(p.publicada ? `Publicada. ${p.reasignadas ?? 0} reservas cambian de mesa.` : "No se ha podido publicar: hay reservas que no caben.");
       if (p.publicada) {
         setCambiosSinPublicar(false);
-        router.refresh();
+        recargar();
       }
     });
 
@@ -290,7 +290,7 @@ export function EditorDistribucion({
         </div>
         <div className="flex flex-wrap gap-2">
           {cambiosSinPublicar && estado === "publicada" ? (
-            <Boton variante="secundario" onClick={() => startTransition(async () => { await descartarBorrador(distId); router.refresh(); location.reload(); })}>Descartar cambios</Boton>
+            <Boton variante="secundario" onClick={() => startTransition(async () => { await descartarBorrador(distId); recargar(); location.reload(); })}>Descartar cambios</Boton>
           ) : null}
           <Boton onClick={pedirPublicar} cargando={publicando}>Publicar</Boton>
         </div>

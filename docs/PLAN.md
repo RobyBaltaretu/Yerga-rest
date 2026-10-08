@@ -56,9 +56,11 @@ aceptación están en `docs/INFRA-COSTE-CERO.md`.
   build y se revalidan bajo demanda al guardar desde el panel. Caché en Workers KV y
   etiquetas en D1 (`open-next.config.ts`); los recursos los crea la CI. La disponibilidad no se cachea nunca;
   el aviso de mesas libres se pide desde el navegador.
-- **Panel como aplicación de navegador**: las pantallas leen de Supabase con la sesión del
-  usuario (RLS y RPC); el servidor solo comprueba la sesión y atiende las escrituras que
-  requieren la clave de servicio.
+- **Panel como aplicación de navegador** (hecho, 9 oct): las pantallas leen de Supabase
+  con la sesión del usuario (RLS y RPC); el servidor solo comprueba la sesión en
+  `proxy.ts` y entrega carcasas estáticas. Pieza común: `components/panel/DatosPanel.tsx`
+  (sesión, `useDatos`, recarga tras acciones y Tiempo Real, control de rol). Las
+  escrituras siguen en Server Actions.
 - **Copia de seguridad diaria** cifrada en un repositorio privado.
 
 ### Despliegue y datos de producción (9 oct 2026)

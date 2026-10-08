@@ -117,3 +117,20 @@ borrar desde la pestaña Branches.
 - **Riesgo anotado:** KV gratuito permite 1000 escrituras al día. Cada despliegue escribe
   unas 50 entradas (páginas y sus RSC), así que el margen es amplio.
 - **Siguiente paso:** PR de C1; después, C2 (panel como aplicación de navegador).
+
+### 08/10 · C2: panel como aplicación de navegador (rama `perf/panel-en-navegador`)
+- PR #6 (C1) fusionado con la CI en verde.
+- `components/panel/DatosPanel.tsx`: `ProveedorSesion` (usuario y rol desde el navegador;
+  sin sesión vuelve al acceso), `useDatos` (consulta con el cliente del navegador y se
+  repite al recargar), `ProveedorRecarga`/`useRecargar` (Tiempo Real y las acciones piden
+  datos frescos), `RequiereRol` y utilidades.
+- `lib/panel/datos.ts` ya no es solo de servidor: cada consulta recibe el cliente.
+- Las 16 pantallas del panel pasan a `page.tsx` (metadatos y `Suspense`) + `vista.tsx`
+  (cliente). El layout ya no lee nada en el servidor. Resultado del build: 13 pantallas
+  estáticas (○); las de `[id]`, `acceso` y `clave` siguen dinámicas, pero sin consultas.
+- `router.refresh()` tras las acciones pasa a `recargar()` en 7 componentes.
+- Comprobación de rol: la interfaz redirige (`RequiereRol`), pero el permiso real sigue
+  en RLS (sin cambios en la base).
+- Verificado: tipos, lint, Vitest y Playwright completo (33 pasan).
+- **Pendiente de medir en producción (C4):** CPU por petición. Bloqueado por B-1.
+- **Siguiente paso:** PR de C2; después, C3 (copias de seguridad).

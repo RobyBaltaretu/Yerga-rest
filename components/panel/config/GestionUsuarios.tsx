@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { actualizarUsuario, crearUsuario, restablecerClave } from "@/app/panel/config-acciones";
 import { Boton } from "@/components/ui/Boton";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 type Rol = "administrador" | "encargado" | "sala";
 type Usuario = { id: string; nombre: string; correo: string; rol: Rol; activo: boolean; debe_cambiar_clave: boolean };
@@ -15,7 +15,7 @@ function claveProvisional() {
 }
 
 export function GestionUsuarios({ usuarios, yo }: { usuarios: Usuario[]; yo: string }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const [msg, setMsg] = useState<{ ok: boolean; texto: string } | null>(null);
   const [nuevo, setNuevo] = useState({ nombre: "", correo: "", rol: "sala" as Rol, clave: "" });
   const [pendiente, startTransition] = useTransition();
@@ -24,7 +24,7 @@ export function GestionUsuarios({ usuarios, yo }: { usuarios: Usuario[]; yo: str
     startTransition(async () => {
       const r = await fn();
       setMsg({ ok: r.ok, texto: r.ok ? ok : (r.error ?? "No se ha podido") });
-      router.refresh();
+      recargar();
     });
 
   const campo = "mt-1 block w-full rounded-xl border-0 bg-arroz px-3 py-2 ring-1 ring-tinta/15";

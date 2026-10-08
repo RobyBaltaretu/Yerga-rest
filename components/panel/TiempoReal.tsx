@@ -1,8 +1,8 @@
 "use client";
 
 import { createContext, useContext, useEffect, useRef, useState, useSyncExternalStore, type ReactNode } from "react";
-import { useRouter } from "next/navigation";
 import { getBrowserClient } from "@/lib/supabase/client";
+import { useRecargar } from "./DatosPanel";
 
 type Conexion = { enLinea: boolean; soloLectura: boolean; ultimaActualizacion: number };
 
@@ -13,11 +13,11 @@ type Novedad = { id: string; texto: string };
 
 /**
  * Mantiene el panel al día en todas las tabletas: escucha los cambios de reservas,
- * asignaciones, bloqueos y lista de espera y vuelve a pedir los datos al servidor.
+ * asignaciones, bloqueos y lista de espera y vuelve a pedir los datos de la pantalla.
  * Si se cae la conexión, el panel queda en modo lectura con la última situación.
  */
 export function TiempoReal({ children }: { children: ReactNode }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const enLinea = useSyncExternalStore(suscribirRed, () => navigator.onLine, () => true);
   const [canal, setCanal] = useState<"conectando" | "ok" | "caido">("conectando");
   const [ultima, setUltima] = useState(0);
@@ -37,7 +37,7 @@ export function TiempoReal({ children }: { children: ReactNode }) {
     const refrescar = () => {
       if (temporizador.current) clearTimeout(temporizador.current);
       temporizador.current = setTimeout(() => {
-        router.refresh();
+        recargar();
         setUltima(Date.now());
       }, 250);
     };
@@ -71,7 +71,7 @@ export function TiempoReal({ children }: { children: ReactNode }) {
     return () => {
       supabase.removeChannel(ch);
     };
-  }, [router]);
+  }, [recargar]);
 
   const soloLectura = !enLinea;
   const conexion = { enLinea: enLinea && canal !== "caido", soloLectura, ultimaActualizacion: ultima };

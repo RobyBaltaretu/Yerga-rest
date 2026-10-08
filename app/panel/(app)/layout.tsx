@@ -1,19 +1,22 @@
-import { redirect } from "next/navigation";
-import { getSesion } from "@/lib/panel/sesion";
 import { NavPanel } from "@/components/panel/NavPanel";
 import { TiempoReal } from "@/components/panel/TiempoReal";
+import { ProveedorRecarga, ProveedorSesion } from "@/components/panel/DatosPanel";
 
-export const dynamic = "force-dynamic";
-
-export default async function PanelLayout({ children }: LayoutProps<"/panel">) {
-  const sesion = await getSesion();
-  if (sesion.debe_cambiar_clave) redirect("/panel/clave");
+/**
+ * Carcasa del panel. No lee datos en el servidor: `proxy.ts` ya ha comprobado la sesión
+ * y cada pantalla pide lo suyo desde el navegador (ver components/panel/DatosPanel.tsx).
+ */
+export default function PanelLayout({ children }: LayoutProps<"/panel">) {
   return (
-    <div className="min-h-dvh lg:flex">
-      <NavPanel nombre={sesion.nombre} rol={sesion.rol} />
-      <div className="min-w-0 flex-1">
-        <TiempoReal>{children}</TiempoReal>
-      </div>
-    </div>
+    <ProveedorSesion>
+      <ProveedorRecarga>
+        <div className="min-h-dvh lg:flex">
+          <NavPanel />
+          <div className="min-w-0 flex-1">
+            <TiempoReal>{children}</TiempoReal>
+          </div>
+        </div>
+      </ProveedorRecarga>
+    </ProveedorSesion>
   );
 }

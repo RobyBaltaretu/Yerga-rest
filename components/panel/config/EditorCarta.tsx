@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { borrarPlato, borrarResena, guardarContenido, guardarPlato, guardarResena, type PlatoEditable } from "@/app/panel/config-acciones";
 import { Boton } from "@/components/ui/Boton";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 type Plato = PlatoEditable & { id: string };
 type Contenido = { clave: string; etiqueta: string; ayuda?: string; valor: { es: string; va: string; en: string } };
@@ -37,7 +37,7 @@ const nuevo = (categoria: string): Plato => ({
 const slugDe = (t: string) => t.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 60);
 
 export function EditorCarta({ platos, contenidos, resenas }: { platos: Plato[]; contenidos: Contenido[]; resenas: Resena[] }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const [editando, setEditando] = useState<Plato | null>(null);
   const [msg, setMsg] = useState<{ ok: boolean; texto: string } | null>(null);
   const [pendiente, startTransition] = useTransition();
@@ -47,7 +47,7 @@ export function EditorCarta({ platos, contenidos, resenas }: { platos: Plato[]; 
       const r = await fn();
       setMsg({ ok: r.ok, texto: r.ok ? ok : (r.error ?? "No se ha podido guardar") });
       if (r.ok) despues?.();
-      router.refresh();
+      recargar();
     });
 
   return (

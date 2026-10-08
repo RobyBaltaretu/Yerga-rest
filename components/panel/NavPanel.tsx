@@ -23,6 +23,7 @@ import {
 import type { Rol } from "@/lib/panel/sesion";
 import { cerrarSesion } from "@/app/panel/acciones-sesion";
 import { LogoHorizontal } from "@/components/marca/Marca";
+import { useSesion } from "./DatosPanel";
 
 type Item = { href: string; texto: string; icono: typeof Menu; roles?: Rol[] };
 
@@ -44,7 +45,8 @@ export const itemsPanel: Item[] = [
 
 const nombresRol: Record<Rol, string> = { administrador: "Administrador", encargado: "Encargado", sala: "Sala" };
 
-export function NavPanel({ nombre, rol }: { nombre: string; rol: Rol }) {
+export function NavPanel() {
+  const { nombre, rol } = useSesion();
   const ruta = usePathname();
   const [abierto, setAbierto] = useState(false);
   const items = itemsPanel.filter((i) => !i.roles || i.roles.includes(rol));
