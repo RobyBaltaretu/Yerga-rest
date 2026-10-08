@@ -1,4 +1,5 @@
-import { loadEnvConfig } from "@next/env";
+import { existsSync } from "node:fs";
 
-// Carga .env.local igual que Next.js para que las pruebas usen la misma base.
-loadEnvConfig(process.cwd());
+// Las pruebas usan la misma base que el desarrollo local (.env.local). En CI las
+// variables llegan por el entorno.
+if (existsSync(".env.local")) process.loadEnvFile(".env.local");
