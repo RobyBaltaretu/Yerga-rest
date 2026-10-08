@@ -53,6 +53,7 @@ test.describe("Recuperar la contraseña del panel", () => {
     try {
       await page.goto("/panel/acceso");
       await page.getByRole("link", { name: "¿Has olvidado tu contraseña?" }).click();
+      await page.waitForLoadState("networkidle"); // formulario ya hidratado
       await page.getByLabel("Correo").fill(CORREO);
       await page.getByRole("button", { name: "Enviar enlace" }).click();
       await expect(page.getByRole("status")).toContainText("recibirás el enlace");
@@ -65,7 +66,7 @@ test.describe("Recuperar la contraseña del panel", () => {
       await expect(page).toHaveURL(/\/panel$/);
 
       // La respuesta no revela si un correo existe.
-      await page.goto("/panel/acceso/recuperar");
+      await page.goto("/panel/acceso/recuperar", { waitUntil: "networkidle" });
       await page.getByLabel("Correo").fill("nadie@example.com");
       await page.getByRole("button", { name: "Enviar enlace" }).click();
       await expect(page.getByRole("status")).toContainText("recibirás el enlace");

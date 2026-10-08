@@ -16,7 +16,9 @@ import "../globals.css";
 // Modo ligero antes del primer pintado: ahorro de datos o equipos modestos.
 const scriptLigero = `try{var c=navigator.connection;if((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)){document.documentElement.classList.add('ligera')}}catch(e){}`;
 
-export const dynamic = "force-dynamic";
+// La web pública se prerenderiza en el build para los tres idiomas y se revalida al
+// guardar desde el panel (revalidatePath). Solo la reserva y la gestión por código son
+// dinámicas, y la disponibilidad se pide siempre al servidor sin caché.
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));

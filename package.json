@@ -17,7 +17,7 @@
     "db:types": "supabase gen types typescript --local > lib/supabase/types.ts",
     "cf:build": "opennextjs-cloudflare build",
     "preview": "opennextjs-cloudflare build && wrangler dev",
-    "cf:deploy": "opennextjs-cloudflare build && wrangler deploy",
+    "cf:deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts"
   },
   "dependencies": {

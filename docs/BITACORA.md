@@ -95,3 +95,25 @@ borrar desde la pestaña Branches.
 - Verificado en local: lint, tipos, Vitest 37/37, Playwright completo y `verificar.mjs`
   contra el build local.
 - **Siguiente paso:** PR del bloque A con la CI en verde; después, bloque C (C1).
+
+### 08/10 · C1: web pública prerenderizada (rama `perf/web-publica-prerenderizada`)
+- PR #5 (bloque A) fusionado con la CI en verde.
+- Quitado `force-dynamic` del layout público y añadidos `generateStaticParams` a las
+  páginas legales. El build prerenderiza las 24 páginas públicas (8 por idioma); solo
+  `/reservar` y `/reservar/gestion/[codigo]` siguen dinámicas. `/api/disponibilidad`
+  sigue con `no-store`.
+- `open-next.config.ts`: caché incremental en **KV**, etiquetas en **D1** y cola en
+  memoria. Sin R2. Sin los bindings (local, CI) todo se renderiza en cada petición.
+- `scripts/produccion/recursos-cloudflare.mjs` crea (o encuentra) el KV
+  `arroceria-yerga-cache` y la D1 `arroceria-yerga-etiquetas`, y añade sus ID a
+  `wrangler.jsonc` solo en la copia de la CI. Comprobado con `wrangler deploy --dry-run`
+  que los bindings se reconocen.
+- `cf:deploy` pasa a `opennextjs-cloudflare deploy`, que llena la caché y crea la tabla de
+  etiquetas antes de desplegar.
+- La revalidación ya existía: cada guardado de carta, textos, configuración, turnos o
+  bloqueos llama a `revalidatePath("/", "layout")`. La prueba «un cambio de precio se ve
+  en la web al momento» pasa con las páginas ya estáticas.
+- Tamaño del Worker sin cambios: 5,1 MB comprimido (`wrangler deploy --dry-run`).
+- **Riesgo anotado:** KV gratuito permite 1000 escrituras al día. Cada despliegue escribe
+  unas 50 entradas (páginas y sus RSC), así que el margen es amplio.
+- **Siguiente paso:** PR de C1; después, C2 (panel como aplicación de navegador).
