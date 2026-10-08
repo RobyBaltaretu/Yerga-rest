@@ -68,6 +68,9 @@ test.describe("Mapa de mesas: servicio (tableta)", () => {
     await entrarComo(page, "sala", "/panel");
     const deslizador = page.getByLabel(/Ahora|Sala a las/);
     await deslizador.focus();
+    // «Inicio» y luego dos pasos: mueve el deslizador a cualquier hora del día. Con solo
+    // «ArrowRight», pasado el turno el valor ya está en el máximo y no cambia.
+    await page.keyboard.press("Home");
     await page.keyboard.press("ArrowRight");
     await page.keyboard.press("ArrowRight");
     await expect(page.getByText(/Sala a las \d{2}:\d{2}/)).toBeVisible();
