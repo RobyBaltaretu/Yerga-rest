@@ -1,3 +1,4 @@
+import { alternos } from "@/lib/seo";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { setRequestLocale } from "next-intl/server";
@@ -15,7 +16,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/[legal]"
   const { locale, legal } = await params;
   if (!paginasLegales.includes(legal as PaginaLegal)) return {};
   const c = await getConfig();
-  return { title: textoLegal(legal as PaginaLegal, locale, c).titulo, robots: { index: true, follow: true } };
+  return { title: textoLegal(legal as PaginaLegal, locale, c).titulo, robots: { index: true, follow: true }, alternates: alternos(locale, `/${legal}`) };
 }
 
 /** Páginas legales: el texto editado en el panel o, si está vacío, la plantilla. */
