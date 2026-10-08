@@ -46,6 +46,20 @@ Cloudflare Cron Trigger (cada 5 min) ──► /api/cron/tick ──► caducar 
   solo lectura sobre filas visibles. Así un cambio de precio se ve al momento (las páginas
   de carta se renderizan dinámicamente o con revalidación por etiqueta al guardar).
 
+### Ajustes para el plan gratuito (8 oct 2026)
+
+Para no superar los 10 ms de CPU por petición de Cloudflare Workers gratuito, tres
+decisiones sustituyen a lo anterior donde haya conflicto. El detalle y los criterios de
+aceptación están en `docs/INFRA-COSTE-CERO.md`.
+
+- **Web pública prerenderizada**: las páginas de contenido se generan en el build y se
+  revalidan bajo demanda al guardar desde el panel. La disponibilidad no se cachea nunca;
+  el aviso de mesas libres se pide desde el navegador.
+- **Panel como aplicación de navegador**: las pantallas leen de Supabase con la sesión del
+  usuario (RLS y RPC); el servidor solo comprueba la sesión y atiende las escrituras que
+  requieren la clave de servicio.
+- **Copia de seguridad diaria** cifrada en un repositorio privado.
+
 ## 2. Modelo de datos (etapa 2)
 
 Nombres en castellano y singular, como en el documento.
