@@ -173,3 +173,15 @@ borrar desde la pestaña Branches.
 - Verificado: lint, tipos, Vitest (65) y Playwright (36 pasan).
 - **Siguiente paso:** PR de D3 cuando se fusione el #8; después, D1 (criterios),
   D2 (accesibilidad) y D4 (idiomas).
+
+### 09/10 · E1: dudas resueltas (rama `docs/dudas-decididas`)
+- `docs/DUDAS.md` reescrito. Las decisiones sin coste van marcadas «decidido por Code, a
+  confirmar»:
+  - LCP dado por bueno, con prueba automática;
+  - lista de espera con plazo de 15 min en la fase 1;
+  - clientes, arroces e informes se quedan en la fase 1;
+  - máximo online de 10, con combinaciones mayores definibles en el panel;
+  - el cierre del turno es el cierre de cocina.
+- Las de pago (plan de Workers y de Supabase) las decidió el propietario: gratuito.
+- Las preguntas para el restaurante siguen abiertas: son datos reales.
+- **Siguiente paso:** E3, lista de espera con plazo de 15 minutos.
