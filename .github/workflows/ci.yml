@@ -48,6 +48,11 @@ jobs:
       - name: Build
         run: pnpm build
 
+      - name: Ningún secreto en el código del navegador
+        run: |
+          set -a; . ./.env.local; set +a
+          node scripts/seguridad/sin-secretos.mjs
+
       - name: Playwright
         run: |
           pnpm exec playwright install --with-deps chromium
@@ -137,11 +142,19 @@ jobs:
         if: steps.creds.outputs.ok == 'true'
         run: node scripts/produccion/recursos-cloudflare.mjs
 
+      - name: Build del Worker
+        if: steps.creds.outputs.ok == 'true'
+        run: pnpm cf:build
+
+      - name: Ningún secreto en el código del navegador
+        if: steps.creds.outputs.ok == 'true'
+        run: node scripts/seguridad/sin-secretos.mjs
+
       # `opennextjs-cloudflare deploy` llena la caché (KV) con las páginas prerenderizadas,
       # crea la tabla de etiquetas (D1) y despliega.
-      - name: Build y despliegue del Worker
+      - name: Despliegue del Worker
         if: steps.creds.outputs.ok == 'true'
-        run: pnpm cf:deploy
+        run: pnpm exec opennextjs-cloudflare deploy
 
       - name: Secretos de ejecución del Worker
         if: steps.creds.outputs.ok == 'true'

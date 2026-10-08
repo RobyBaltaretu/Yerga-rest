@@ -12,6 +12,8 @@ disponibilidad que ve el cliente sale siempre del mapa de mesas: si no hay mesa,
 - Datos reales pendientes de sustituir: [`docs/PENDIENTES.md`](docs/PENDIENTES.md)
 - Dudas y decisiones a confirmar: [`docs/DUDAS.md`](docs/DUDAS.md)
 - Vista previa en Vercel con Supabase: [`docs/VISTA-PREVIA.md`](docs/VISTA-PREVIA.md)
+- Revisión de seguridad: [`docs/SEGURIDAD.md`](docs/SEGURIDAD.md)
+- Bitácora del trabajo autónomo: [`docs/BITACORA.md`](docs/BITACORA.md)
 
 ## Stack
 
