@@ -4,8 +4,13 @@ La vista previa sirve para revisar la web y el panel con los datos de ejemplo. N
 producción: usa los usuarios `*@yerga.test` y no envía correos de verdad (sin
 `RESEND_API_KEY` se guardan como «simulados» en la tabla `mensaje`).
 
-El proyecto de Vercel `yerga-rest` ya está creado y enlazado a GitHub. Despliega la rama
-`fase-1`. Falta la base de datos: hay que crearla una vez.
+El proyecto de Vercel `yerga-rest` ya está creado: <https://yerga-rest.vercel.app>,
+compilado desde la rama `fase-1`. Las funciones corren en París (`cdg1`) desde el siguiente
+despliegue. Falta la base de datos: hay que crearla una vez. Sin ella, las páginas dan error.
+
+El proyecto aún no está enlazado a GitHub para desplegar solo en cada `push`. Para eso:
+Settings → Git → Connect Git Repository → `robybaltaretu/yerga-rest`, con la rama de
+producción `fase-1`.
 
 ## 1. Crear la base de datos (unos 5 minutos)
 
