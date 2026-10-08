@@ -4,6 +4,8 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Para relanzar el despliegue a mano (lo usa scripts/infra/configurar-secretos.sh).
+  workflow_dispatch:
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -63,27 +65,53 @@ jobs:
 
   desplegar:
     needs: verificar
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'push' || github.event_name == 'workflow_dispatch')
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     environment: produccion
+    concurrency:
+      group: despliegue-produccion
+      cancel-in-progress: false
     env:
+      # Secretos (cifrados). Ver SETUP.md → «Variables: dónde va cada una».
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_PROJECT_REF: ${{ secrets.SUPABASE_PROJECT_REF }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      TURNSTILE_SECRET_KEY: ${{ secrets.TURNSTILE_SECRET_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      EMAIL_FROM: ${{ secrets.EMAIL_FROM }}
+      CRON_SECRET: ${{ secrets.CRON_SECRET }}
+      # Variables públicas: se incrustan en el build.
       NEXT_PUBLIC_SUPABASE_URL: ${{ vars.NEXT_PUBLIC_SUPABASE_URL }}
       NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ vars.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
       NEXT_PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.NEXT_PUBLIC_TURNSTILE_SITE_KEY }}
       NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL }}
+      NEXT_PUBLIC_CF_ANALYTICS_TOKEN: e86c3d3663134ae29ca9a69c4abb44f7
+      ADMIN_EMAIL: ${{ vars.ADMIN_EMAIL }}
     steps:
       - uses: actions/checkout@v4
-      - name: Comprobar credenciales
+
+      - name: Comprobar configuración
         id: creds
         run: |
-          if [ -z "$CLOUDFLARE_API_TOKEN" ]; then
-            echo "Sin credenciales de Cloudflare: se omite el despliegue."
+          [ -n "$ADMIN_EMAIL" ] && echo "::add-mask::$ADMIN_EMAIL"
+          faltan=""
+          for v in CLOUDFLARE_API_TOKEN CLOUDFLARE_ACCOUNT_ID SUPABASE_ACCESS_TOKEN SUPABASE_PROJECT_REF \
+                   SUPABASE_DB_PASSWORD SUPABASE_SERVICE_ROLE_KEY TURNSTILE_SECRET_KEY RESEND_API_KEY \
+                   EMAIL_FROM CRON_SECRET NEXT_PUBLIC_SUPABASE_URL NEXT_PUBLIC_SUPABASE_ANON_KEY \
+                   NEXT_PUBLIC_TURNSTILE_SITE_KEY NEXT_PUBLIC_SITE_URL ADMIN_EMAIL; do
+            [ -z "${!v}" ] && faltan="$faltan $v"
+          done
+          if [ -n "$faltan" ]; then
+            echo "::warning::Despliegue omitido. Faltan en GitHub (secretos o variables):$faltan. Ver SETUP.md."
             echo "ok=false" >> "$GITHUB_OUTPUT"
           else
             echo "ok=true" >> "$GITHUB_OUTPUT"
           fi
+
       - uses: pnpm/action-setup@v4
         if: steps.creds.outputs.ok == 'true'
       - uses: actions/setup-node@v4
@@ -92,4 +120,33 @@ jobs:
           node-version: 22
           cache: pnpm
       - if: steps.creds.outputs.ok == 'true'
-        run: pnpm install --frozen-lockfile && pnpm cf:deploy
+        run: pnpm install --frozen-lockfile
+
+      # Nunca `db reset` contra producción: solo se aplican migraciones nuevas.
+      - name: Migraciones de la base de datos
+        if: steps.creds.outputs.ok == 'true'
+        run: |
+          pnpm supabase link --project-ref "$SUPABASE_PROJECT_REF" --password "$SUPABASE_DB_PASSWORD"
+          pnpm supabase db push --password "$SUPABASE_DB_PASSWORD" --yes
+
+      - name: Primer administrador (solo si no hay ninguno)
+        if: steps.creds.outputs.ok == 'true'
+        run: node scripts/produccion/crear-admin.mjs
+
+      - name: Build y despliegue del Worker
+        if: steps.creds.outputs.ok == 'true'
+        run: pnpm cf:deploy
+
+      - name: Secretos de ejecución del Worker
+        if: steps.creds.outputs.ok == 'true'
+        run: |
+          node -e '
+            const n = ["SUPABASE_SERVICE_ROLE_KEY","TURNSTILE_SECRET_KEY","RESEND_API_KEY","EMAIL_FROM","CRON_SECRET"];
+            process.stdout.write(JSON.stringify(Object.fromEntries(n.map((k) => [k, process.env[k]]))));
+          ' > "$RUNNER_TEMP/secretos.json"
+          pnpm wrangler secret bulk "$RUNNER_TEMP/secretos.json"
+          rm -f "$RUNNER_TEMP/secretos.json"
+
+      - name: Verificar producción
+        if: steps.creds.outputs.ok == 'true'
+        run: node scripts/produccion/verificar.mjs "$NEXT_PUBLIC_SITE_URL"

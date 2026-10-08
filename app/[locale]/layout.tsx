@@ -10,6 +10,7 @@ import { Pie } from "@/components/web/Pie";
 import { BotonReservaFijo } from "@/components/web/CabeceraCliente";
 import { ScrollSuave } from "@/components/web/ScrollSuave";
 import { publicEnv } from "@/lib/env";
+import { Analitica } from "@/components/Analitica";
 import "../globals.css";
 
 // Modo ligero antes del primer pintado: ahorro de datos o equipos modestos.
@@ -60,6 +61,7 @@ export default async function LocaleLayout({
           <BotonReservaFijo locale={locale} />
           <ScrollSuave />
         </NextIntlClientProvider>
+        <Analitica />
       </body>
     </html>
   );

@@ -1,10 +1,12 @@
 "use server";
 
+import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { z } from "zod";
 import { createClient } from "@/lib/supabase/server";
 import { bloqueado, permitir } from "@/lib/rate-limit";
 import { ipCliente } from "@/lib/request";
+import { publicEnv } from "@/lib/env";
 
 export async function iniciarSesion(_: unknown, form: FormData): Promise<{ error?: string }> {
   const p = z
@@ -51,4 +53,27 @@ export async function cerrarSesion() {
   const supabase = await createClient();
   await supabase.auth.signOut();
   redirect("/panel/acceso");
+}
+
+/**
+ * «¿Has olvidado tu contraseña?»: Supabase envía un enlace de un solo uso que vuelve a
+ * `/panel/acceso/confirmar` y de ahí a elegir contraseña nueva. La respuesta es siempre
+ * la misma, exista o no el correo, para no revelar quién tiene acceso al panel.
+ */
+export async function pedirRecuperacion(_: unknown, form: FormData): Promise<{ enviado?: boolean; error?: string }> {
+  const p = z.object({ correo: z.email() }).safeParse(Object.fromEntries(form));
+  if (!p.success) return { error: "Escribe un correo válido." };
+  const ip = await ipCliente();
+  const claveCorreo = `recuperar:${p.data.correo.toLowerCase()}`;
+  if (!(await permitir(claveCorreo, 3, 3600)) || !(await permitir(`recuperar-ip:${ip}`, 10, 3600))) {
+    return { error: "Demasiadas peticiones. Prueba dentro de una hora." };
+  }
+  // Vuelve al mismo origen desde el que se pidió (Supabase solo acepta los de su lista).
+  const origen = (await headers()).get("origin") ?? publicEnv.siteUrl;
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(p.data.correo, {
+    redirectTo: `${origen}/panel/acceso/confirmar`,
+  });
+  if (error) console.error("recuperar contraseña", error.message);
+  return { enviado: true };
 }

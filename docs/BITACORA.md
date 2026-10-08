@@ -9,6 +9,10 @@ y seguir desde ahí. Nunca se escriben aquí valores secretos.
 
 **Hecho**
 - PR #3 (documentación de coste cero) fusionado en `main`.
+- PR #4: prueba del deslizador independiente de la hora (CI de `main` en verde).
+- Bloque A (código): Worker `arroceria-yerga`, CI coherente, migraciones en el despliegue,
+  contenido inicial idempotente, primer administrador, recuperación de contraseña,
+  Web Analytics y script de secretos para tu ordenador.
 
 **Pendiente**
 - Bloques A–E según el encargo.
@@ -17,6 +21,10 @@ y seguir desde ahí. Nunca se escriben aquí valores secretos.
 - Ejecutar la parte de secretos en tu ordenador (sección 0.1 de `docs/INFRA-COSTE-CERO.md`).
 
 **Siguiente paso exacto:** ver la última entrada del diario.
+
+**Para desbloquear el despliegue (tú, unos 5 minutos):** en tu ordenador, desde la raíz
+del repositorio actualizado, con `~/yerga-secrets.txt` en su sitio:
+`bash scripts/infra/configurar-secretos.sh`. Después, borra la clave temporal de Resend.
 
 ## Bloqueos
 
@@ -36,16 +44,30 @@ medición en producción de D2. Todo lo demás (código, flujos de CI, scripts y
 documentación) lo dejo hecho para que el despliegue funcione en cuanto estén los secretos.
 
 **Qué necesito de ti:** ejecutar en tu ordenador `scripts/infra/configurar-secretos.sh`
-(lo preparo en el bloque A) con `~/yerga-secrets.txt` presente, o abrir una sesión de
+con `~/yerga-secrets.txt` presente, o abrir una sesión de
 Claude Code en tu terminal y pedirle que siga esta bitácora. Alternativa en la nube:
 añadir esos dominios a «Allowed domains» del entorno y darme las credenciales como
 variables del entorno.
+
+### B-2. No puedo borrar ramas remotas
+
+El proxy de la sesión corta `git push --delete`, y la herramienta de GitHub no tiene
+borrado de ramas. Las ramas fusionadas quedan en el remoto. **Solución sin coste:**
+Settings → General → «Automatically delete head branches». Las ya fusionadas se pueden
+borrar desde la pestaña Branches.
 
 ## Decisiones
 
 | Fecha | Decisión | Motivo |
 |---|---|---|
 | 08/10 | Fusiono el PR #3 aunque «verificar» estaba en rojo | Pedido explícito; solo documentación. El fallo era una prueba dependiente de la hora, presente ya en `main` |
+| 08/10 | Contenido de ejemplo como migración idempotente, no como semilla aparte | `db push` la aplica sola en el primer despliegue y no pisa datos reales (solo actúa con la base vacía). Evita depender de la URL del pooler para ejecutar SQL desde la CI |
+| 08/10 | El administrador entra la primera vez por «¿Has olvidado tu contraseña?» | Así ninguna contraseña inicial pasa por la CI (sus registros son públicos), el chat ni el repositorio. De paso, el panel gana recuperación de contraseña |
+| 08/10 | `ADMIN_EMAIL` como variable de GitHub, no escrito en el repositorio | El repositorio es público: no publico tu correo |
+| 08/10 | Los secretos del Worker los carga la CI en cada despliegue | No hace falta ningún paso manual con `wrangler secret`; siempre coinciden con GitHub |
+| 08/10 | Token `yerga-deploy` sin R2 y con D1, KV y lectura de analítica | R2 pide tarjeta; D1 y KV hacen falta para la revalidación (C1); la analítica, para medir la CPU (C4) |
+| 08/10 | Web Analytics solo en la web pública | El panel es interno; no aporta medir al personal |
+| 08/10 | Verificación automática tras cada despliegue (`scripts/produccion/verificar.mjs`) | Cumple «tras cada despliegue verifica la URL» aunque yo no tenga red hacia workers.dev |
 
 ## Diario
 
@@ -56,3 +78,20 @@ variables del entorno.
   Reproducido en local a las 22:17 y arreglado: la prueba pulsa «Inicio» antes de avanzar.
 - **Siguiente paso:** fusionar `fix/prueba-deslizador-hora` con la CI en verde; después,
   bloque A desde A3.
+
+### 08/10 · Bloque A (rama `infra/despliegue-produccion`)
+- PR #4 fusionado con la CI en verde.
+- A3: `wrangler.jsonc` → `arroceria-yerga` (name y service) y `NEXT_PUBLIC_SITE_URL` en `vars`.
+- A4: job `desplegar` con secretos y variables separados, comprobación de que no falta
+  ninguno (si falta, aviso y no despliega), `workflow_dispatch` para relanzarlo.
+- A5: paso `supabase link` + `supabase db push --yes`. Nunca `db reset`.
+- A6: migración `20261009000900_contenido_inicial.sql`, `seed.sql` solo con demostración,
+  `scripts/produccion/crear-admin.mjs` (probado en local: crea y, la segunda vez, no hace
+  nada) y recuperación de contraseña con prueba e2e (correo leído de Mailpit).
+- A7: `components/Analitica.tsx`, solo con `NEXT_PUBLIC_CF_ANALYTICS_TOKEN` (producción).
+- A2: `scripts/infra/configurar-secretos.sh`, con rutas de API comprobadas en las
+  especificaciones OpenAPI oficiales de Supabase, Cloudflare y Resend (descargadas de
+  GitHub, porque las API no son accesibles desde aquí). **No ejecutado: bloqueo B-1.**
+- Verificado en local: lint, tipos, Vitest 37/37, Playwright completo y `verificar.mjs`
+  contra el build local.
+- **Siguiente paso:** PR del bloque A con la CI en verde; después, bloque C (C1).

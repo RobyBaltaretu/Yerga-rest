@@ -60,6 +60,16 @@ aceptación están en `docs/INFRA-COSTE-CERO.md`.
   requieren la clave de servicio.
 - **Copia de seguridad diaria** cifrada en un repositorio privado.
 
+### Despliegue y datos de producción (9 oct 2026)
+
+- Worker `arroceria-yerga`; el job `desplegar` de la CI aplica migraciones, crea el primer
+  administrador si falta, despliega, carga los secretos del Worker y verifica la URL.
+- Contenido de ejemplo en una migración idempotente (solo con la base vacía); los datos
+  de demostración (`seed.sql`) nunca llegan a producción.
+- Recuperación de contraseña del panel por correo (`/panel/acceso/recuperar`): es la vía
+  del primer acceso del administrador y de cualquier olvido.
+- Cloudflare Web Analytics en la web pública (sin cookies), no en el panel.
+
 ## 2. Modelo de datos (etapa 2)
 
 Nombres en castellano y singular, como en el documento.
