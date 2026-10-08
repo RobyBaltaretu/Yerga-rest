@@ -1,12 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import type { ReservaPanel } from "@/lib/panel/estados";
 import { cambiarEstado, modificarReserva } from "@/app/panel/acciones";
 import { Boton } from "@/components/ui/Boton";
 import { AreaTexto, Campo, Casilla } from "@/components/ui/Campo";
 import { textoEstado } from "@/components/panel/servicio/TarjetaReserva";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 const motivos: Record<string, string> = {
   fuera_de_horario: "fuera del horario de reservas",
@@ -28,7 +28,7 @@ const transiciones: Record<string, { estado: Parameters<typeof cambiarEstado>[1]
 };
 
 export function EditarReserva({ reserva: r, fecha: f0, hora: h0 }: { reserva: ReservaPanel; fecha: string; hora: string }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const [d, setD] = useState({
     fecha: f0,
     hora: h0,
@@ -52,7 +52,7 @@ export function EditarReserva({ reserva: r, fecha: f0, hora: h0 }: { reserva: Re
       const res = await modificarReserva(r.id, { ...d }, forzar);
       if (res.ok) {
         setMsg({ ok: true, texto: res.aviso === "sin_mesa" ? "Guardado (sin mesa asignada)" : "Guardado" });
-        router.refresh();
+        recargar();
       } else setMsg({ ok: false, texto: `No se ha guardado: ${motivos[res.motivo ?? ""] ?? res.motivo}`, forzar: res.puede_forzar });
     });
 
@@ -60,7 +60,7 @@ export function EditarReserva({ reserva: r, fecha: f0, hora: h0 }: { reserva: Re
     startTransition(async () => {
       const res = await cambiarEstado(r.id, e);
       setMsg(res.ok ? { ok: true, texto: `Estado: ${textoEstado[e]}` } : { ok: false, texto: motivos[res.motivo ?? ""] ?? "No se ha podido" });
-      router.refresh();
+      recargar();
     });
 
   return (

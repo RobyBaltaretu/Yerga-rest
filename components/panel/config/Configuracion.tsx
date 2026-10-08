@@ -1,10 +1,10 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { useRouter } from "next/navigation";
 import { borrarBloqueo, borrarTurno, crearBloqueo, guardarConfiguracion, guardarPlantilla, guardarTurno } from "@/app/panel/config-acciones";
 import { Boton } from "@/components/ui/Boton";
 import type { Tables } from "@/lib/supabase/types";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 type Config = Tables<"configuracion">;
 type Turno = Tables<"turno">;
@@ -54,7 +54,7 @@ const tiposPlantilla: Record<string, string> = {
 };
 
 export function Configuracion({ esAdmin, config, turnos, bloqueos, plantillas, zonas, mesas, hoy }: { esAdmin: boolean; config: Config; turnos: Turno[]; bloqueos: Bloqueo[]; plantillas: Plantilla[]; zonas: { id: string; nombre: string }[]; mesas: { id: string; nombre: string }[]; hoy: string }) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const [msg, setMsg] = useState<{ ok: boolean; texto: string } | null>(null);
   const [pendiente, startTransition] = useTransition();
   const [c, setC] = useState(config);
@@ -67,7 +67,7 @@ export function Configuracion({ esAdmin, config, turnos, bloqueos, plantillas, z
     startTransition(async () => {
       const r = await fn();
       setMsg({ ok: r.ok, texto: r.ok ? ok : (r.error ?? "No se ha podido guardar") });
-      router.refresh();
+      recargar();
     });
 
   const campo = "mt-1 block w-full rounded-xl border-0 bg-arroz px-3 py-2 ring-1 ring-tinta/15";

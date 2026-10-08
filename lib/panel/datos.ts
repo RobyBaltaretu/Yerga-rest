@@ -1,7 +1,11 @@
-import "server-only";
-import { createClient } from "@/lib/supabase/server";
+import type { SupabaseClient } from "@supabase/supabase-js";
+import type { Database } from "@/lib/supabase/types";
 import { tr } from "@/lib/i18n";
 import type { BloqueoPanel, MesaPanel, ReservaPanel } from "./estados";
+
+// Consultas del panel. Sirven en el navegador (el panel es una aplicación de cliente)
+// y en el servidor: reciben el cliente de Supabase con la sesión del usuario.
+type Db = SupabaseClient<Database>;
 
 type Fila = Record<string, unknown> & {
   asignacion: { mesa_id: string; activa: boolean; mesa: { nombre: string } | null }[];
@@ -25,8 +29,7 @@ const SELECT_RESERVA =
   "*, asignacion(mesa_id, activa, mesa(nombre)), encargo_arroz(raciones, plato(nombre))";
 
 /** Reservas de un día (por fecha local) con mesas, arroces y plantones previos. */
-export async function reservasDelDia(fecha: string): Promise<ReservaPanel[]> {
-  const supabase = await createClient();
+export async function reservasDelDia(supabase: Db, fecha: string): Promise<ReservaPanel[]> {
   const [{ data: desde }, { data: hasta }] = await Promise.all([
     supabase.rpc("hora_local", { p_fecha: fecha, p_hora: "00:00" }),
     supabase.rpc("hora_local", { p_fecha: fecha, p_hora: "23:59:59" }),
@@ -47,8 +50,7 @@ export async function reservasDelDia(fecha: string): Promise<ReservaPanel[]> {
   return filas.map((f) => aReservaPanel(f, plantones));
 }
 
-export async function reservaPorId(id: string): Promise<ReservaPanel | null> {
-  const supabase = await createClient();
+export async function reservaPorId(supabase: Db, id: string): Promise<ReservaPanel | null> {
   const { data } = await supabase.from("reserva").select(SELECT_RESERVA).eq("id", id).maybeSingle();
   if (!data) return null;
   return aReservaPanel(data as unknown as Fila, new Map());
@@ -59,8 +61,7 @@ export type ElementoFijo = { id: string; distribucion_id: string; tipo: string; 
 export type Combinacion = { id: string; nombre: string; mesas: string[]; capacidad_max: number };
 
 /** Mesas y elementos de las distribuciones activas de un día y turno, por zona. */
-export async function salaDelTurno(fecha: string, turno: string) {
-  const supabase = await createClient();
+export async function salaDelTurno(supabase: Db, fecha: string, turno: string) {
   const { data: zonas } = await supabase.from("zona").select("id, nombre, slug").eq("activa", true).order("orden");
   const distribuciones = await Promise.all(
     (zonas ?? []).map(async (z) => {
@@ -91,8 +92,7 @@ export async function salaDelTurno(fecha: string, turno: string) {
   };
 }
 
-export async function bloqueosDelDia(fecha: string): Promise<BloqueoPanel[]> {
-  const supabase = await createClient();
+export async function bloqueosDelDia(supabase: Db, fecha: string): Promise<BloqueoPanel[]> {
   const [{ data: desde }, { data: hasta }] = await Promise.all([
     supabase.rpc("hora_local", { p_fecha: fecha, p_hora: "00:00" }),
     supabase.rpc("hora_local", { p_fecha: fecha, p_hora: "23:59:59" }),
@@ -104,15 +104,13 @@ export async function bloqueosDelDia(fecha: string): Promise<BloqueoPanel[]> {
   });
 }
 
-export async function reglasPanel() {
-  const supabase = await createClient();
+export async function reglasPanel(supabase: Db) {
   const { data } = await supabase.from("configuracion").select("cortesia_min, aviso_conflicto_min, margen_min, max_comensales_online").eq("id", 1).single();
   return data!;
 }
 
 /** Turnos del día con sus horas, para elegir y para el deslizador. */
-export async function turnosDelDia(fecha: string) {
-  const supabase = await createClient();
+export async function turnosDelDia(supabase: Db, fecha: string) {
   const dow = new Date(`${fecha}T12:00:00Z`).getUTCDay();
   const { data } = await supabase.from("turno").select("nombre, inicio, fin, ultima_hora").eq("dia_semana", dow).eq("activo", true).order("inicio");
   return data ?? [];

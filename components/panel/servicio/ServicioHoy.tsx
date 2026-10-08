@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useRef, useState, useTransition } from "react";
 import { Printer, Shuffle } from "lucide-react";
 import {
@@ -24,6 +23,7 @@ import { asignarMesas, bloquearMesa, cambiarEstado, crearReserva, desbloquear, m
 import { useConexion } from "@/components/panel/TiempoReal";
 import { Dialogo } from "@/components/ui/Dialogo";
 import { TarjetaReserva } from "./TarjetaReserva";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 const PlanoServicio = dynamic(() => import("@/components/floorplan/PlanoServicio"), {
   ssr: false,
@@ -58,7 +58,7 @@ const motivos: Record<string, string> = {
 };
 
 export function ServicioHoy(p: Props) {
-  const router = useRouter();
+  const recargar = useRecargar();
   const { soloLectura } = useConexion();
   const [ahora, setAhora] = useState(p.ahoraServidor);
   const [instante, setInstante] = useState<number | null>(null);
@@ -119,7 +119,7 @@ export function ServicioHoy(p: Props) {
       const r = await fn();
       if (r.ok) {
         setMensaje({ texto: r.aviso === "sin_mesa" ? `${ok} (sin mesa asignada)` : ok, tipo: "ok" });
-        router.refresh();
+        recargar();
       } else {
         setMensaje({
           texto: `No se ha podido: ${motivos[r.motivo ?? ""] ?? r.motivo ?? "error"}${r.conflicto ? ` (${r.conflicto})` : ""}`,
@@ -129,7 +129,7 @@ export function ServicioHoy(p: Props) {
                 startTransition(async () => {
                   const f = await forzar();
                   setMensaje(f.ok ? { texto: `${ok} (forzado)`, tipo: "ok" } : { texto: "Tampoco forzando", tipo: "error" });
-                  router.refresh();
+                  recargar();
                 })
             : undefined,
         });

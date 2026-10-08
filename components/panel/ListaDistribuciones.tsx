@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState, useTransition } from "react";
 import { anadirProgramacion, borrarDistribucion, crearDistribucion, hacerPredeterminada, quitarProgramacion } from "@/app/panel/mapa-acciones";
 import { Boton } from "@/components/ui/Boton";
+import { useRecargar } from "@/components/panel/DatosPanel";
 
 export type DistribucionFila = {
   id: string;
@@ -26,6 +27,7 @@ function describir(r: DistribucionFila["programacion_distribucion"][number]) {
 
 export function ListaDistribuciones({ zonas, distribuciones }: { zonas: { id: string; nombre: string }[]; distribuciones: DistribucionFila[] }) {
   const router = useRouter();
+  const recargar = useRecargar();
   const [pendiente, startTransition] = useTransition();
   const [msg, setMsg] = useState<string | null>(null);
   const [nueva, setNueva] = useState<{ zona: string; nombre: string; copia: string } | null>(null);
@@ -35,7 +37,7 @@ export function ListaDistribuciones({ zonas, distribuciones }: { zonas: { id: st
     startTransition(async () => {
       const r = await fn();
       setMsg(r.ok ? (ok ?? null) : (r.motivo ?? "No se ha podido"));
-      router.refresh();
+      recargar();
     });
 
   return (

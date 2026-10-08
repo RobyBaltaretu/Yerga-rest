@@ -1,72 +1,16 @@
 import type { Metadata } from "next";
-import { getSesion } from "@/lib/panel/sesion";
-import { reservasDelDia, turnosDelDia } from "@/lib/panel/datos";
-import { ACTIVAS, hora } from "@/lib/panel/estados";
-import { fechaLocal, formatFecha } from "@/lib/format";
-import { BotonImprimir } from "./BotonImprimir";
+import { Suspense } from "react";
+import { Cargando, ProveedorSesion } from "@/components/panel/DatosPanel";
+import { VistaHoja } from "./vista";
 
 export const metadata: Metadata = { title: "Hoja del turno" };
-export const dynamic = "force-dynamic";
 
-/** Hoja del turno imprimible: respaldo en papel si se cae la conexión. */
-export default async function HojaPage({ searchParams }: PageProps<"/panel/hoja">) {
-  await getSesion();
-  const sp = await searchParams;
-  const fecha = typeof sp.fecha === "string" && /^\d{4}-\d{2}-\d{2}$/.test(sp.fecha) ? sp.fecha : fechaLocal();
-  const turnos = await turnosDelDia(fecha);
-  const turno = typeof sp.turno === "string" ? sp.turno : turnos[0]?.nombre;
-  const reservas = (await reservasDelDia(fecha)).filter((r) => (!turno || r.turno_nombre === turno) && ACTIVAS.includes(r.estado));
-  const arroces = new Map<string, { raciones: number; horas: string[] }>();
-  for (const r of reservas)
-    for (const a of r.arroces) {
-      const x = arroces.get(a.nombre) ?? { raciones: 0, horas: [] };
-      x.raciones += a.raciones;
-      x.horas.push(`${hora(r.inicio)} ${r.mesas.map((m) => m.nombre).join("+") || "s/m"} (${a.raciones})`);
-      arroces.set(a.nombre, x);
-    }
-  const total = reservas.reduce((s, r) => s + r.comensales, 0);
-
+export default function HojaPage() {
   return (
-    <main className="mx-auto max-w-4xl bg-white p-6 text-[13px] text-black print:p-0">
-      <div className="flex items-start justify-between">
-        <div>
-          <h1 className="font-display text-2xl">Hoja del turno · <span className="capitalize">{turno}</span></h1>
-          <p className="capitalize">{formatFecha(`${fecha}T12:00:00Z`, "es")} · {reservas.length} reservas · {total} comensales</p>
-          <p className="text-xs">Impresa a las {hora(new Date().toISOString())}</p>
-        </div>
-        <BotonImprimir />
-      </div>
-      <table className="mt-4 w-full border-collapse">
-        <thead>
-          <tr className="border-b-2 border-black text-left">
-            <th className="py-1 pr-2">Hora</th><th className="pr-2">Mesa</th><th className="pr-2">Pax</th><th className="pr-2">Nombre</th><th className="pr-2">Teléfono</th><th className="pr-2">Alergias / notas</th><th>Arroz</th><th className="w-10">✓</th>
-          </tr>
-        </thead>
-        <tbody>
-          {reservas.map((r) => (
-            <tr key={r.id} className="border-b border-black/30 align-top">
-              <td className="py-1 pr-2 font-bold">{hora(r.inicio)}</td>
-              <td className="pr-2 font-bold">{r.mesas.map((m) => m.nombre).join("+") || "—"}</td>
-              <td className="pr-2">{r.comensales}</td>
-              <td className="pr-2">{r.nombre}{r.estado === "sentada" ? " (sentada)" : ""}</td>
-              <td className="pr-2">{r.telefono}</td>
-              <td className="pr-2">{[r.alergias && `⚠ ${r.alergias}`, r.ocasion, r.tronas ? `${r.tronas} trona` : "", r.silla_ruedas ? "silla de ruedas" : "", r.notas].filter(Boolean).join(" · ")}</td>
-              <td>{r.arroces.map((a) => `${a.nombre} (${a.raciones})`).join(", ")}</td>
-              <td className="border border-black/40" />
-            </tr>
-          ))}
-        </tbody>
-      </table>
-      {arroces.size ? (
-        <section className="mt-6 break-inside-avoid">
-          <h2 className="font-display text-lg">Arroces encargados</h2>
-          <ul className="mt-1">
-            {[...arroces].map(([nombre, x]) => (
-              <li key={nombre}><strong>{nombre}: {x.raciones} raciones</strong> — {x.horas.join(" · ")}</li>
-            ))}
-          </ul>
-        </section>
-      ) : null}
-    </main>
+    <ProveedorSesion>
+      <Suspense fallback={<Cargando />}>
+        <VistaHoja />
+      </Suspense>
+    </ProveedorSesion>
   );
 }
