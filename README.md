@@ -117,3 +117,4 @@ existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las vari
 | 4. Reserva pública | ✅ |
 | 5. Acceso y estructura del panel | ✅ |
 | 6. Reservas en el panel | ✅ |
+| 7. Mapa de mesas: edición | ✅ |

@@ -107,7 +107,7 @@ export function TiempoReal({ children }: { children: ReactNode }) {
           }
           if (v) campanita();
         }}
-        className="fixed bottom-4 right-4 z-40 hidden min-h-10 rounded-full bg-white px-3 text-xs font-semibold shadow ring-1 ring-tinta/10 lg:block"
+        className="fixed bottom-28 left-4 z-40 hidden min-h-10 rounded-full bg-white/10 px-3 text-xs font-semibold text-arroz ring-1 ring-white/20 lg:block"
         aria-pressed={sonido}
       >
         {sonido ? "🔔 Sonido activado" : "🔕 Sonido desactivado"}

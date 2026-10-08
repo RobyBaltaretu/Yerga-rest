@@ -500,6 +500,9 @@ isOneToOne: false
 "avisar_lista_espera":
 { Args: { "p_reserva": string }; Returns: Json
                            },
+"borrador_de":
+{ Args: { "p_dist": string }; Returns: Json
+                           },
 "cambiar_estado":
 { Args: { "p_estado": Database["public"]['Enums']["estado_reserva"],"p_reserva": string }; Returns: Json
                            },
@@ -566,13 +569,22 @@ isOneToOne: false
 "consumir_intento":
 { Args: { "p_clave": string,"p_maximo": number,"p_ventana_seg": number }; Returns: boolean
                            },
+"crear_distribucion":
+{ Args: { "p_copiar_de"?: string,"p_nombre": string,"p_zona": string }; Returns: string
+                           },
 "crear_reserva_personal":
 { Args: { "p_datos": Json,"p_forzar"?: boolean }; Returns: Json
+                           },
+"descartar_borrador":
+{ Args: { "p_dist": string }; Returns: undefined
                            },
 "dias_disponibles":
 { Args: { "p_comensales": number,"p_desde": string,"p_hasta": string }; Returns: {
               "estado": string,"fecha": string
             }[]
+                           },
+"distribucion_a_json":
+{ Args: { "p_dist": string }; Returns: Json
                            },
 "distribucion_activa":
 { Args: { "p_fecha": string,"p_turno": string,"p_zona": string }; Returns: string
@@ -603,6 +615,12 @@ isOneToOne: false
                            },
 "guardar_arroces":
 { Args: { "p_arroces": Json,"p_reserva": string }; Returns: undefined
+                           },
+"guardar_borrador":
+{ Args: { "p_borrador": Json,"p_dist": string }; Returns: undefined
+                           },
+"hacer_predeterminada":
+{ Args: { "p_dist": string }; Returns: undefined
                            },
 "hhmm":
 { Args: { "p_instante": string }; Returns: string
@@ -655,6 +673,9 @@ isOneToOne: false
                            },
 "ocupacion_de":
 { Args: { "p_r": Omit<Database["public"]['Tables']["reserva"]['Row'], Database["public"]['Tables']["reserva"]['ComputedFields']> }; Returns: unknown
+                           },
+"publicar_distribucion":
+{ Args: { "p_aplicar"?: boolean,"p_dist": string }; Returns: Json
                            },
 "puede_gestionar":
 { Args: Record<PropertyKey, never>; Returns: boolean
