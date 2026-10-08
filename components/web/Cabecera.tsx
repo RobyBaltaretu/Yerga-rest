@@ -13,7 +13,7 @@ export async function Cabecera({ locale }: { locale: string }) {
     { href: "/#llegar", texto: t("llegar") },
   ];
   return (
-    <header className="fixed inset-x-0 top-0 z-40 bg-brasa/85 text-arroz backdrop-blur supports-[backdrop-filter]:bg-brasa/70">
+    <header className="fixed inset-x-0 top-0 z-40 bg-brasa/95 text-arroz backdrop-blur">
       <a href="#contenido" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:rounded-full focus:bg-arroz focus:px-4 focus:py-2 focus:text-tinta">
         {t("saltar")}
       </a>

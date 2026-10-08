@@ -7,6 +7,10 @@ disponibilidad que ve el cliente sale siempre del mapa de mesas: si no hay mesa,
 - Definición de producto: [`docs/definicion-producto.pdf`](docs/definicion-producto.pdf)
 - Plan de construcción: [`docs/PLAN.md`](docs/PLAN.md)
 - Revisión de la definición y decisiones tomadas: [`docs/REVISION.md`](docs/REVISION.md)
+- Criterios de aceptación y sus pruebas: [`docs/ACEPTACION.md`](docs/ACEPTACION.md)
+- Guía rápida del panel para la sala: [`docs/GUIA-PANEL.md`](docs/GUIA-PANEL.md)
+- Datos reales pendientes de sustituir: [`docs/PENDIENTES.md`](docs/PENDIENTES.md)
+- Dudas y decisiones a confirmar: [`docs/DUDAS.md`](docs/DUDAS.md)
 
 ## Stack
 
@@ -52,7 +56,7 @@ pnpm dev                            # http://localhost:3000/es
 |---|---|
 | `pnpm dev` | Next.js en desarrollo |
 | `pnpm lint` / `pnpm typecheck` | ESLint y TypeScript |
-| `pnpm test` | Vitest (motor de disponibilidad contra Supabase local) |
+| `pnpm test` | Vitest: motor de disponibilidad y permisos por rol (contra Supabase local) |
 | `pnpm build && pnpm test:e2e` | Playwright en móvil y tableta contra el build |
 | `pnpm db:reset` | Aplica migraciones y semilla desde cero |
 | `pnpm db:types` | Regenera `lib/supabase/types.ts` |
@@ -86,7 +90,39 @@ Las pruebas del motor (`lib/availability/motor.test.ts`) cubren cada regla de
 disponibilidad, la restricción contra solapes, la retención y una prueba de concurrencia
 con dos confirmaciones simultáneas sobre la última mesa: solo una gana.
 
+## Estructura
+
+```
+app/[locale]/                 web pública: portada, carta, páginas SEO y legales
+app/[locale]/reservar/        flujo de reserva, gestión por código y acciones del servidor
+app/panel/                    panel interno (protegido por sesión) y sus acciones
+app/api/                      cron (tareas programadas), disponibilidad, calendario .ics
+components/web/               portada «Del fuego al socarrat» y secciones
+components/reserva/           flujo de reserva del cliente
+components/panel/             servicio de hoy, editor de distribuciones, configuración
+components/floorplan/         dibujo del plano (Konva): servicio y editor
+lib/availability/             pruebas del motor (el motor vive en PostgreSQL)
+lib/email/, lib/notificaciones.ts   correos con plantillas editables (Resend)
+messages/                     textos es, va y en
+supabase/migrations/          esquema, permisos, motor, distribuciones, informes
+supabase/seed.sql             datos de ejemplo
+tests/unit/, tests/e2e/       Vitest (permisos) y Playwright
+```
+
+## Puesta en producción de la base de datos
+
+1. Crea el proyecto en Supabase y enlázalo: `pnpm supabase link --project-ref <ref>`.
+2. Aplica las migraciones: `pnpm supabase db push`.
+3. Carga los datos reales (no la semilla de ejemplo): plano, turnos, carta y textos se
+   pueden introducir desde el panel. El primer administrador se crea en Supabase →
+   Authentication y después con
+   `insert into usuario (id, nombre, correo, rol) values ('<uuid>', 'Nombre', 'correo', 'administrador');`.
+4. En Supabase → Authentication, desactiva el alta pública de usuarios (en local ya lo está).
+
 ## Despliegue en Cloudflare Workers
+
+> El worker ocupa unos 5 MB comprimido: requiere el plan **Workers Paid** (límite de 10 MiB).
+> Ver `docs/DUDAS.md`.
 
 1. `pnpm wrangler login` (o variables `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID`).
 2. Secretos del Worker:
@@ -121,3 +157,4 @@ existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las vari
 | 8. Mapa de mesas: servicio | ✅ |
 | 9. Web pública | ✅ (ver nota de rendimiento en docs/DUDAS.md) |
 | 10. Contenidos y configuración | ✅ |
+| 11. Recordatorios y cierre | ✅ |

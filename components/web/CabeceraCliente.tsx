@@ -19,7 +19,7 @@ export function SelectorIdioma({ locale, etiqueta }: { locale: string; etiqueta:
           lang={l === "va" ? "ca-ES-valencia" : l}
           aria-current={l === locale ? "true" : undefined}
           title={nombres[l]}
-          className={`grid h-9 min-w-9 place-items-center rounded-full px-2 uppercase ${l === locale ? "bg-arroz text-tinta" : "text-arroz/80 hover:text-arroz"}`}
+          className={`grid h-9 min-w-9 place-items-center rounded-full px-2 uppercase ${l === locale ? "bg-arroz text-tinta" : "text-arroz hover:bg-white/10"}`}
         >
           {l}
         </Link>
