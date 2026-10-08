@@ -120,3 +120,4 @@ existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las vari
 | 7. Mapa de mesas: edición | ✅ |
 | 8. Mapa de mesas: servicio | ✅ |
 | 9. Web pública | ✅ (ver nota de rendimiento en docs/DUDAS.md) |
+| 10. Contenidos y configuración | ✅ |

@@ -639,6 +639,9 @@ isOneToOne: false
 "incumple_reglas":
 { Args: { "p_comensales": number,"p_ignorar_reserva"?: string,"p_inicio": string }; Returns: string
                            },
+"informe":
+{ Args: { "p_desde": string,"p_hasta": string }; Returns: Json
+                           },
 "intentos_superados":
 { Args: { "p_clave": string,"p_maximo": number,"p_ventana_seg": number }; Returns: boolean
                            },
