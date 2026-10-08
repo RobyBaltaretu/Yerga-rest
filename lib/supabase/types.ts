@@ -689,6 +689,11 @@ isOneToOne: false
 "reserva_por_codigo":
 { Args: { "p_codigo": string }; Returns: Json
                            },
+"resumen_disponibilidad":
+{ Args: { "p_dias"?: number }; Returns: {
+              "fecha": string,"libres": number,"turno": string
+            }[]
+                           },
 "retener_mesa":
 { Args: { "p_comensales": number,"p_ignorar_reserva"?: string,"p_inicio": string,"p_token_anterior"?: string,"p_zona"?: string }; Returns: Json
                            },

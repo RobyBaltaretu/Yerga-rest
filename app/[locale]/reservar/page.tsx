@@ -43,7 +43,7 @@ export default async function ReservarPage({ params, searchParams }: PageProps<"
   const comensales = typeof sp.comensales === "string" ? Number(sp.comensales) || undefined : undefined;
 
   return (
-    <main id="contenido" className="px-4 pb-24 pt-10 sm:pt-16">
+    <main id="contenido" className="px-4 pb-24 pt-24 sm:pt-28">
       <div className="mx-auto max-w-xl">
         <h1 className="font-display text-4xl sm:text-5xl">{t("titulo")}</h1>
         <p className="mt-2 text-lg text-niebla">{t("subtitulo")}</p>

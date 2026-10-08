@@ -168,5 +168,177 @@
       "volver": "Volver"
     },
     "cuentaAtras": "{min}:{seg}"
+  },
+  "web": {
+    "nav": {
+      "arroces": "Arroces",
+      "carta": "Carta",
+      "producto": "Producto",
+      "casa": "La casa",
+      "llegar": "Cómo llegar",
+      "reservar": "Reservar mesa",
+      "idioma": "Idioma",
+      "menu": "Menú",
+      "cerrar": "Cerrar",
+      "saltar": "Saltar al contenido"
+    },
+    "portada": {
+      "escenas": [
+        "Fuego",
+        "Sofrito",
+        "Ingredientes",
+        "Caldo y arroz",
+        "Socarrat"
+      ],
+      "fuego": "Brasas de leña de naranjo.",
+      "sofrito": "Aceite, tomate y pimentón tiñen la paella.",
+      "ingredientes": "Pollo, conejo, garrofó y bajoqueta.",
+      "caldo": "Sube el caldo y el arroz se reparte en cruz, como manda la tradición.",
+      "socarrat": "El caldo se evapora y el borde se dora.",
+      "desliza": "Desliza para cocinar",
+      "sonido": "Sonido del caldo",
+      "sonidoOn": "Sonido activado",
+      "estatica": "Así se hace una paella en Yerga, paso a paso."
+    },
+    "disponibilidad": "Quedan {n, plural, one {# mesa} other {# mesas}} para {cuando}",
+    "cuando": {
+      "hoy": "hoy",
+      "manana": "mañana",
+      "comida": "a mediodía",
+      "cena": "por la noche"
+    },
+    "arroces": {
+      "titulo": "Nuestros arroces",
+      "intro": "Por encargo y a leña. Elige el tuyo al reservar y estará en su punto cuando llegues.",
+      "minimo": "Mínimo {n} personas",
+      "porPersona": "{precio} / persona",
+      "ingredientes": "Ingredientes",
+      "alergenos": "Alérgenos",
+      "sinAlergenos": "Sin alérgenos de declaración obligatoria",
+      "reservarCon": "Reservar con este arroz",
+      "verMas": "Ver detalle de {nombre}"
+    },
+    "entrantes": {
+      "titulo": "Para empezar",
+      "intro": "Lo que se pide mientras la paella reposa."
+    },
+    "producto": {
+      "titulo": "El producto",
+      "albufera": "L'Albufera",
+      "horta": "L'Horta",
+      "mar": "Mar Mediterráneo",
+      "valencia": "València",
+      "arroz": "Arroz D.O. Valencia",
+      "huerta": "Verdura de l'Horta",
+      "lonja": "Pescado de la lonja",
+      "lena": "Leña de naranjo"
+    },
+    "casa": {
+      "titulo": "La casa",
+      "historia": "Historia",
+      "equipo": "Equipo",
+      "sala": "Sala y terraza",
+      "salaTexto": "Una sala luminosa junto a la ventana y una terraza para las comidas largas de domingo."
+    },
+    "carta": {
+      "titulo": "Carta",
+      "intro": "Precios con IVA incluido. Pregunta por los alérgenos: te lo contamos todo.",
+      "verCompleta": "Ver la carta completa",
+      "arroces": "Arroces",
+      "entrantes": "Para empezar",
+      "postres": "Postres",
+      "grupos": "Menús de grupo",
+      "ejemplo": "ejemplo",
+      "avisoEjemplo": "Carta y precios de ejemplo: pendientes de sustituir por los reales.",
+      "temporada": "Temporada: {t}"
+    },
+    "alergenos": {
+      "gluten": "Gluten",
+      "crustaceos": "Crustáceos",
+      "huevo": "Huevo",
+      "pescado": "Pescado",
+      "cacahuetes": "Cacahuetes",
+      "soja": "Soja",
+      "lacteos": "Lácteos",
+      "frutos_cascara": "Frutos de cáscara",
+      "apio": "Apio",
+      "mostaza": "Mostaza",
+      "sesamo": "Sésamo",
+      "sulfitos": "Sulfitos",
+      "altramuces": "Altramuces",
+      "moluscos": "Moluscos"
+    },
+    "opiniones": {
+      "titulo": "Lo que dicen",
+      "ver": "Ver en {origen}"
+    },
+    "llegar": {
+      "titulo": "Cómo llegar",
+      "direccion": "Dirección",
+      "horario": "Horario",
+      "aparcamiento": "Aparcamiento",
+      "contacto": "Contacto",
+      "llamar": "Llamar",
+      "whatsapp": "WhatsApp",
+      "mapa": "Abrir en el mapa",
+      "cerrado": "Cerrado",
+      "dias": [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado"
+      ],
+      "comida": "Comida",
+      "cena": "Cena"
+    },
+    "pie": {
+      "legal": "Aviso legal",
+      "privacidad": "Privacidad",
+      "cookies": "Cookies",
+      "panel": "Acceso personal",
+      "derechos": "© {anio} {nombre}"
+    },
+    "cta": {
+      "titulo": "¿Te guardamos mesa?",
+      "texto": "El arroz bueno se hace por encargo y las mesas son limitadas."
+    },
+    "seo": {
+      "paella": {
+        "titulo": "Paella valenciana auténtica a leña",
+        "descripcion": "La paella valenciana de verdad: pollo, conejo, garrofó y bajoqueta, a fuego de leña de naranjo. Reserva y encárgala."
+      },
+      "arroceria": {
+        "titulo": "Arrocería en {localidad}",
+        "descripcion": "Arrocería en {localidad} con arroces valencianos a leña. Reserva online con disponibilidad real."
+      },
+      "grupos": {
+        "titulo": "Comidas de grupo y celebraciones",
+        "descripcion": "Comidas de grupo con paella valenciana a leña: menús cerrados, mesas para grupos y reserva por solicitud."
+      },
+      "cuerpos": {
+        "paella": [
+          "La paella valenciana se hace con pocos ingredientes y mucho oficio: pollo, conejo, garrofó, bajoqueta, tomate, pimentón, azafrán, agua, sal, aceite y arroz de la Denominación de Origen Valencia. En Yerga la cocinamos a fuego de leña de naranjo, que da un calor vivo y un aroma que no tiene el gas.",
+          "Se hace por encargo y para un mínimo de dos personas. Elige tu paella al reservar y estará en su punto, con su socarrat, cuando os sentéis a la mesa."
+        ],
+        "arroceria": [
+          "Arroces valencianos a leña: paella valenciana, arròs a banda, del senyoret, negre, fideuà, arròs al forn y meloso de bogavante.",
+          "Reserva online en menos de un minuto: solo te ofrecemos horas con una mesa libre de verdad, y puedes dejar elegido el arroz."
+        ],
+        "grupos": [
+          "Comidas de empresa, cumpleaños, peñas y familias: juntamos mesas, preparamos varias paellas a la vez y cerramos un menú con entrantes al centro, arroz, postre y bebida.",
+          "Para grupos de más de diez personas envíanos una solicitud con el día y la hora; te confirmamos la reserva en cuanto la revisamos."
+        ]
+      }
+    },
+    "grupos": {
+      "texto": "Para grupos preparamos la sala a mano: juntamos mesas, encargamos los arroces con antelación y cerramos un menú a vuestra medida.",
+      "boton": "Solicitar mesa para grupo"
+    },
+    "terminos": {
+      "traduccion": "Traducción"
+    }
   }
 }

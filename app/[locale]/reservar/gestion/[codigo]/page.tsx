@@ -22,7 +22,7 @@ export default async function GestionPage({ params, searchParams }: PageProps<"/
   const reserva = data as ReservaCliente | null;
 
   return (
-    <main id="contenido" className="px-4 pb-24 pt-10 sm:pt-16">
+    <main id="contenido" className="px-4 pb-24 pt-24 sm:pt-28">
       <div className="mx-auto max-w-xl">
         <h1 className="font-display text-4xl">{t("titulo")}</h1>
         {reserva ? (

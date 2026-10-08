@@ -60,3 +60,105 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* Brasas que titilan (CSS puro: funciona antes de cargar JavaScript). */
+@keyframes titilar {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+.p-brasa {
+  animation: titilar 1.8s ease-in-out infinite;
+}
+
+/* El nombre aparece con el resplandor de las brasas. */
+@keyframes resplandor {
+  from {
+    opacity: 0;
+    text-shadow: 0 0 0 rgba(255, 138, 42, 0);
+  }
+  to {
+    opacity: 1;
+    text-shadow: 0 0 40px rgba(255, 138, 42, 0.55);
+  }
+}
+.marca-resplandor {
+  animation: resplandor 1.2s ease-out both;
+}
+
+/* Cuchara de madera sobre las paellas (solo con ratón). */
+@media (pointer: fine) {
+  .cursor-cuchara {
+    cursor:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'%3E%3Cellipse cx='9' cy='9' rx='7' ry='5' transform='rotate(45 9 9)' fill='%23b07a43' stroke='%237a4515' stroke-width='1.5'/%3E%3Cpath d='M13 13 L33 33' stroke='%23b07a43' stroke-width='4' stroke-linecap='round'/%3E%3C/svg%3E")
+        6 6,
+      auto;
+  }
+}
+
+/* Carrusel de arroces: cada paella gira al pasar (si el navegador lo soporta). */
+@supports (animation-timeline: view()) {
+  @keyframes girar {
+    from {
+      transform: rotate(-35deg);
+    }
+    to {
+      transform: rotate(35deg);
+    }
+  }
+  .paella-gira {
+    animation: girar linear both;
+    animation-timeline: view(inline);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .p-brasa,
+  .marca-resplandor,
+  .paella-gira {
+    animation: none !important;
+  }
+}
+
+/* Portada: versión animada o estática (movimiento reducido, ahorro de datos). */
+.portada-estatica {
+  display: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .portada-animada {
+    display: none;
+  }
+  .portada-estatica {
+    display: block;
+  }
+}
+.ligera .portada-animada {
+  display: none;
+}
+.ligera .portada-estatica {
+  display: block;
+}
+
+/* Aparición escalonada al entrar en pantalla. */
+.aparece {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.6s ease,
+    transform 0.6s ease;
+  transition-delay: var(--retraso, 0ms);
+}
+.aparece.visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aparece {
+    opacity: 1;
+    transform: none;
+  }
+}

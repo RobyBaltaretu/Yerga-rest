@@ -5,7 +5,17 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { fraunces, inter } from "@/lib/fonts";
 import { htmlLang } from "@/lib/i18n";
+import { Cabecera } from "@/components/web/Cabecera";
+import { Pie } from "@/components/web/Pie";
+import { BotonReservaFijo } from "@/components/web/CabeceraCliente";
+import { ScrollSuave } from "@/components/web/ScrollSuave";
+import { publicEnv } from "@/lib/env";
 import "../globals.css";
+
+// Modo ligero antes del primer pintado: ahorro de datos o equipos modestos.
+const scriptLigero = `try{var c=navigator.connection;if((c&&c.saveData)||(navigator.deviceMemory&&navigator.deviceMemory<=2)){document.documentElement.classList.add('ligera')}}catch(e){}`;
+
+export const dynamic = "force-dynamic";
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -17,8 +27,11 @@ export async function generateMetadata({
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
   return {
+    metadataBase: new URL(publicEnv.siteUrl),
     title: { default: t("title"), template: `%s · Arrocería Yerga` },
     description: t("description"),
+    alternates: { languages: { es: "/es", "ca-ES-valencia": "/va", en: "/en", "x-default": "/es" } },
+    openGraph: { siteName: "Arrocería Yerga", locale: locale === "va" ? "ca_ES" : locale === "en" ? "en_GB" : "es_ES", type: "website" },
   };
 }
 
@@ -36,7 +49,14 @@ export default async function LocaleLayout({
       className={`${fraunces.variable} ${inter.variable} antialiased`}
     >
       <body className="min-h-dvh">
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <script dangerouslySetInnerHTML={{ __html: scriptLigero }} />
+        <NextIntlClientProvider>
+          <Cabecera locale={locale} />
+          {children}
+          <Pie />
+          <BotonReservaFijo locale={locale} />
+          <ScrollSuave />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

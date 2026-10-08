@@ -168,5 +168,177 @@
       "volver": "Back"
     },
     "cuentaAtras": "{min}:{seg}"
+  },
+  "web": {
+    "nav": {
+      "arroces": "Rice dishes",
+      "carta": "Menu",
+      "producto": "Produce",
+      "casa": "Our house",
+      "llegar": "Getting here",
+      "reservar": "Book a table",
+      "idioma": "Language",
+      "menu": "Menu",
+      "cerrar": "Close",
+      "saltar": "Skip to content"
+    },
+    "portada": {
+      "escenas": [
+        "Fire",
+        "Sofrito",
+        "Ingredients",
+        "Stock and rice",
+        "Socarrat"
+      ],
+      "fuego": "Embers of orange-tree wood.",
+      "sofrito": "Olive oil, tomato and paprika colour the pan.",
+      "ingredientes": "Chicken, rabbit, garrofó and bajoqueta.",
+      "caldo": "The stock rises and the rice is scattered in a cross, as tradition demands.",
+      "socarrat": "The stock evaporates and the edge turns golden.",
+      "desliza": "Scroll to cook",
+      "sonido": "Sound of the simmer",
+      "sonidoOn": "Sound on",
+      "estatica": "This is how a paella is made at Yerga, step by step."
+    },
+    "disponibilidad": "{n, plural, one {# table} other {# tables}} left for {cuando}",
+    "cuando": {
+      "hoy": "today",
+      "manana": "tomorrow",
+      "comida": "lunch",
+      "cena": "dinner"
+    },
+    "arroces": {
+      "titulo": "Our rice dishes",
+      "intro": "Cooked to order over wood fire. Choose yours when you book and it will be just right when you arrive.",
+      "minimo": "Minimum {n} people",
+      "porPersona": "{precio} / person",
+      "ingredientes": "Ingredients",
+      "alergenos": "Allergens",
+      "sinAlergenos": "No mandatory-declaration allergens",
+      "reservarCon": "Book with this rice",
+      "verMas": "See details of {nombre}"
+    },
+    "entrantes": {
+      "titulo": "To start",
+      "intro": "What we order while the paella rests."
+    },
+    "producto": {
+      "titulo": "Our produce",
+      "albufera": "L'Albufera",
+      "horta": "L'Horta",
+      "mar": "Mediterranean Sea",
+      "valencia": "Valencia",
+      "arroz": "D.O. Valencia rice",
+      "huerta": "Vegetables from l'Horta",
+      "lonja": "Fish from the market",
+      "lena": "Orange-tree firewood"
+    },
+    "casa": {
+      "titulo": "Our house",
+      "historia": "Story",
+      "equipo": "Team",
+      "sala": "Dining room and terrace",
+      "salaTexto": "A bright dining room by the window and a terrace for long Sunday lunches."
+    },
+    "carta": {
+      "titulo": "Menu",
+      "intro": "Prices include VAT. Ask us about allergens: we'll tell you everything.",
+      "verCompleta": "See the full menu",
+      "arroces": "Rice dishes",
+      "entrantes": "To start",
+      "postres": "Desserts",
+      "grupos": "Group menus",
+      "ejemplo": "sample",
+      "avisoEjemplo": "Sample menu and prices: to be replaced with the real ones.",
+      "temporada": "Season: {t}"
+    },
+    "alergenos": {
+      "gluten": "Gluten",
+      "crustaceos": "Crustaceans",
+      "huevo": "Egg",
+      "pescado": "Fish",
+      "cacahuetes": "Peanuts",
+      "soja": "Soy",
+      "lacteos": "Milk",
+      "frutos_cascara": "Tree nuts",
+      "apio": "Celery",
+      "mostaza": "Mustard",
+      "sesamo": "Sesame",
+      "sulfitos": "Sulphites",
+      "altramuces": "Lupin",
+      "moluscos": "Molluscs"
+    },
+    "opiniones": {
+      "titulo": "What people say",
+      "ver": "See on {origen}"
+    },
+    "llegar": {
+      "titulo": "Getting here",
+      "direccion": "Address",
+      "horario": "Opening hours",
+      "aparcamiento": "Parking",
+      "contacto": "Contact",
+      "llamar": "Call",
+      "whatsapp": "WhatsApp",
+      "mapa": "Open in maps",
+      "cerrado": "Closed",
+      "dias": [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ],
+      "comida": "Lunch",
+      "cena": "Dinner"
+    },
+    "pie": {
+      "legal": "Legal notice",
+      "privacidad": "Privacy",
+      "cookies": "Cookies",
+      "panel": "Staff login",
+      "derechos": "© {anio} {nombre}"
+    },
+    "cta": {
+      "titulo": "Shall we save you a table?",
+      "texto": "Good rice is cooked to order and tables are limited."
+    },
+    "seo": {
+      "paella": {
+        "titulo": "Authentic wood-fired Valencian paella",
+        "descripcion": "Real Valencian paella: chicken, rabbit, garrofó and bajoqueta, over orange-wood fire. Book and pre-order it."
+      },
+      "arroceria": {
+        "titulo": "Rice restaurant in {localidad}",
+        "descripcion": "Rice restaurant in {localidad} serving wood-fired Valencian rice dishes. Book online with real availability."
+      },
+      "grupos": {
+        "titulo": "Group meals and celebrations",
+        "descripcion": "Group meals with wood-fired Valencian paella: set menus, tables for groups and booking on request."
+      },
+      "cuerpos": {
+        "paella": [
+          "Valencian paella takes few ingredients and a lot of craft: chicken, rabbit, garrofó beans, bajoqueta, tomato, paprika, saffron, water, salt, olive oil and Valencia D.O. rice. At Yerga we cook it over orange-tree wood, which gives a lively heat and an aroma gas never will.",
+          "It is cooked to order for a minimum of two people. Choose your paella when you book and it will be just right, with its socarrat, when you sit down."
+        ],
+        "arroceria": [
+          "Wood-fired Valencian rice dishes: Valencian paella, arròs a banda, senyoret, black rice, fideuà, oven-baked rice and creamy lobster rice.",
+          "Book online in under a minute: we only offer times with a genuinely free table, and you can pre-order your rice."
+        ],
+        "grupos": [
+          "Company lunches, birthdays and family gatherings: we join tables, cook several paellas at once and agree a menu with sharing starters, rice, dessert and drinks.",
+          "For groups of more than ten, send us a request with the day and time; we'll confirm as soon as we review it."
+        ]
+      }
+    },
+    "grupos": {
+      "texto": "For groups we set up the room by hand: we join tables, pre-order the rice and agree a menu that suits you.",
+      "boton": "Request a group table"
+    },
+    "terminos": {
+      "traduccion": "Translation"
+    }
   }
 }
