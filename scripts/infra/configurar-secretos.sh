@@ -24,7 +24,10 @@
 #   5. Lo carga todo en GitHub Actions (secretos y variables, entorno `produccion`).
 #   6. Escribe .env.local y .dev.vars (ignorados por git).
 #   7. Exige el trabajo «verificar» en `main` y lanza el despliegue.
-#   8. Revoca el token temporal de Cloudflare y borra ~/yerga-secrets.txt.
+#   8. Copias de seguridad: crea el repositorio PRIVADO yerga-backups con el flujo diario,
+#      genera la clave de cifrado (la privada SOLO en ~/yerga-backup-key.txt) y le carga
+#      la conexión a la base. Necesita `age` (macOS: `brew install age`).
+#   9. Revoca el token temporal de Cloudflare y borra ~/yerga-secrets.txt.
 #
 # No imprime ningún valor secreto. Los valores solo pasan por un archivo temporal con
 # permisos 600 que se borra al terminar (también si el script falla).
@@ -218,7 +221,41 @@ gh workflow run ci.yml --repo "$REPO" --ref main >/dev/null
 ok "despliegue lanzado: https://github.com/$REPO/actions"
 
 # -----------------------------------------------------------------------------
-paso "8. Limpieza"
+paso "8. Copias de seguridad (repositorio privado yerga-backups)"
+BACKUPS="${REPO%%/*}/yerga-backups"
+CLAVE_COPIAS="$HOME/yerga-backup-key.txt"
+if ! command -v age-keygen >/dev/null; then
+  echo "  ! Falta «age» (macOS: brew install age). Instálalo y vuelve a ejecutar el script: es idempotente."
+else
+  [ -f "$CLAVE_COPIAS" ] || { age-keygen -o "$CLAVE_COPIAS" 2>/dev/null; chmod 600 "$CLAVE_COPIAS"; }
+  AGE_RECIPIENT="$(age-keygen -y "$CLAVE_COPIAS")"
+  ok "clave de cifrado en $CLAVE_COPIAS (guárdala también en tu gestor de contraseñas)"
+  if ! gh repo view "$BACKUPS" >/dev/null 2>&1; then
+    gh repo create "$BACKUPS" --private --description "Copias diarias cifradas de la base de Arrocería Yerga" >/dev/null
+    gh auth setup-git >/dev/null 2>&1 || true
+    PLANTILLA="$(mktemp -d)"
+    cp -R infra/yerga-backups/. "$PLANTILLA/"
+    (cd "$PLANTILLA" && git init -q -b main && git add -A && git commit -q -m "Copias diarias cifradas" \
+      && git remote add origin "https://github.com/$BACKUPS.git" && git push -q -u origin main)
+    rm -rf "$PLANTILLA"
+    ok "repositorio privado $BACKUPS creado"
+  fi
+  curl -fsS "https://api.supabase.com/v1/projects/$PROJECT_REF/config/database/pooler" \
+    -H "Authorization: Bearer $SUPABASE_ACCESS_TOKEN" > "$TMP.pool" || fallo "No se pudo leer la configuración del pooler."
+  POOL_USER="$(json '(d.find(p=>p.database_type==="PRIMARY")||d[0]).db_user' < "$TMP.pool")"
+  POOL_HOST="$(json '(d.find(p=>p.database_type==="PRIMARY")||d[0]).db_host' < "$TMP.pool")"
+  rm -f "$TMP.pool"
+  # Puerto 5432 = modo sesión (el que necesita pg_dump).
+  printf 'SUPABASE_DB_URL=postgresql://%s:%s@%s:5432/postgres\n' "$POOL_USER" "$SUPABASE_DB_PASSWORD" "$POOL_HOST" > "$TMP"
+  gh secret set -f "$TMP" --repo "$BACKUPS" >/dev/null
+  : > "$TMP"
+  gh variable set AGE_RECIPIENT --body "$AGE_RECIPIENT" --repo "$BACKUPS" >/dev/null
+  gh workflow run copia.yml --repo "$BACKUPS" --ref main >/dev/null 2>&1 || true
+  ok "secreto SUPABASE_DB_URL, variable AGE_RECIPIENT y primera copia lanzada"
+fi
+
+# -----------------------------------------------------------------------------
+paso "9. Limpieza"
 cf DELETE "/user/tokens/$CF_BOOT_ID" >/dev/null && ok "token temporal de Cloudflare revocado" \
   || echo "  ! Revoca tú el token temporal de Cloudflare en https://dash.cloudflare.com/profile/api-tokens"
 rm -f "$CREDENCIALES" && ok "$CREDENCIALES borrado"

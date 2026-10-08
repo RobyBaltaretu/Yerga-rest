@@ -102,6 +102,20 @@ de `ADMIN_EMAIL`. Supabase envía el enlace (su correo integrado solo entrega a 
 la organización de Supabase, que es el caso del propietario) y el panel pide elegir
 contraseña.
 
+## Copias de seguridad (0 €)
+
+Repositorio **privado** `RobyBaltaretu/yerga-backups`, creado por
+`scripts/infra/configurar-secretos.sh` a partir de la plantilla `infra/yerga-backups/`:
+
+- Flujo diario (03:17 UTC): `supabase db dump --data-only` de los esquemas `public` y
+  `auth`, comprimido y cifrado con `age`. Se borran del árbol las copias de más de 30 días.
+- En el repositorio solo está la clave **pública** (variable `AGE_RECIPIENT`). La
+  **privada** está únicamente en `~/yerga-backup-key.txt` del propietario: guárdala también
+  en un gestor de contraseñas. Sin ella no se puede restaurar.
+- **Restaurar:** pasos en `infra/yerga-backups/README.md` (migraciones con
+  `supabase db push`, descifrar y cargar los datos con `psql`). Procedimiento probado de
+  principio a fin contra una base de Supabase recién creada.
+
 ## Pendiente
 
 Ver el resumen de `docs/BITACORA.md`: es la lista viva de lo hecho, lo pendiente y lo que
