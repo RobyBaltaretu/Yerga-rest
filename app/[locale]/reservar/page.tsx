@@ -1,3 +1,4 @@
+import { alternos } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { FlujoReserva } from "@/components/reserva/FlujoReserva";
@@ -12,7 +13,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: PageProps<"/[locale]/reservar">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "reserva" });
-  return { title: t("titulo"), description: t("subtitulo"), alternates: { languages: { es: "/es/reservar", "ca-ES": "/va/reservar", en: "/en/reservar" } } };
+  return { title: t("titulo"), description: t("subtitulo"), alternates: alternos(locale, "/reservar") };
 }
 
 export default async function ReservarPage({ params, searchParams }: PageProps<"/[locale]/reservar">) {

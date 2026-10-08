@@ -33,7 +33,6 @@ export async function generateMetadata({
     metadataBase: new URL(publicEnv.siteUrl),
     title: { default: t("title"), template: `%s · Arrocería Yerga` },
     description: t("description"),
-    alternates: { languages: { es: "/es", "ca-ES": "/va", en: "/en", "x-default": "/es" } },
     openGraph: { siteName: "Arrocería Yerga", locale: locale === "va" ? "ca_ES" : locale === "en" ? "en_GB" : "es_ES", type: "website" },
   };
 }
