@@ -491,8 +491,14 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "asignar_reserva":
+            "apuntar_lista_espera":
+{ Args: { "p_datos": Json }; Returns: Json
+                           },
+"asignar_reserva":
 { Args: { "p_forzar"?: boolean,"p_mesas": (string)[],"p_reserva": string }; Returns: Json
+                           },
+"avisar_lista_espera":
+{ Args: { "p_reserva": string }; Returns: Json
                            },
 "cambiar_estado":
 { Args: { "p_estado": Database["public"]['Enums']["estado_reserva"],"p_reserva": string }; Returns: Json
@@ -664,6 +670,9 @@ isOneToOne: false
                            },
 "rol_actual":
 { Args: Record<PropertyKey, never>; Returns: Database["public"]['Enums']["rol_usuario"]
+                           },
+"solicitar_grupo":
+{ Args: { "p_datos": Json }; Returns: Json
                            },
 "tick":
 { Args: Record<PropertyKey, never>; Returns: Json

@@ -6,5 +6,167 @@
   "home": {
     "title": "El arroz no espera. Tu mesa, sí.",
     "subtitle": "Paellas a leña hechas al momento para tu mesa. Reserva y elige tu arroz."
+  },
+  "reserva": {
+    "titulo": "Reserva tu mesa",
+    "subtitulo": "Solo te ofrecemos horas con una mesa libre de verdad.",
+    "pasos": {
+      "comensales": "Personas y día",
+      "hora": "Hora",
+      "zona": "Zona",
+      "arroz": "Tu arroz",
+      "datos": "Tus datos",
+      "confirmacion": "Confirmada"
+    },
+    "paso": "Paso {actual} de {total}",
+    "atras": "Atrás",
+    "continuar": "Continuar",
+    "comensales": {
+      "titulo": "¿Cuántos sois?",
+      "persona": "{n, plural, one {# persona} other {# personas}}",
+      "mas": "Más de {max}",
+      "grupoAyuda": "Para grupos de más de {max} personas te preparamos la mesa a mano."
+    },
+    "calendario": {
+      "titulo": "¿Qué día?",
+      "anterior": "Mes anterior",
+      "siguiente": "Mes siguiente",
+      "cerrado": "Cerrado",
+      "completo": "Completo",
+      "disponible": "Hay mesa",
+      "cargando": "Buscando mesas…",
+      "leyenda": "Los días tachados están cerrados o completos."
+    },
+    "horas": {
+      "titulo": "¿A qué hora?",
+      "comida": "Comida",
+      "cena": "Cena",
+      "completa": "Completa",
+      "avisame": "Avísame si se libera",
+      "ninguna": "Ese día ya no queda mesa para {n, plural, one {# persona} other {# personas}}.",
+      "otroDia": "Elegir otro día",
+      "reteniendo": "Guardando tu mesa…",
+      "sinGrupo": "No tenemos mesa online para tantas personas. Envíanos una solicitud de grupo."
+    },
+    "zona": {
+      "titulo": "¿Dónde preferís?",
+      "ayuda": "A esa hora hay sitio en las dos zonas.",
+      "sala": "Sala",
+      "terraza": "Terraza"
+    },
+    "arroz": {
+      "titulo": "Elige tu arroz",
+      "ayuda": "El arroz bueno se hace por encargo. Si lo eliges ahora, estará en su punto cuando lleguéis.",
+      "minimo": "Mínimo {n} personas",
+      "raciones": "Para cuántos",
+      "porPersona": "{precio} por persona",
+      "saltar": "Prefiero decidir en la mesa",
+      "elegido": "Elegido",
+      "quitar": "Quitar",
+      "otro": "Añadir otro arroz",
+      "ninguno": "Para {n, plural, one {# persona} other {# personas}} no hay arroces por encargo; podréis elegir en mesa.",
+      "max": "Como mucho, tantas raciones como personas.",
+      "elegir": "Elegir"
+    },
+    "datos": {
+      "titulo": "Tus datos",
+      "nombre": "Nombre",
+      "telefono": "Teléfono",
+      "correo": "Correo electrónico",
+      "alergias": "Alergias o intolerancias",
+      "alergiasAyuda": "Opcional. La cocina lo tendrá en cuenta.",
+      "salud": "Acepto que se use esta información de salud solo para preparar mi reserva.",
+      "ocasion": "¿Celebráis algo?",
+      "ocasiones": {
+        "": "Nada en especial",
+        "cumpleanos": "Cumpleaños",
+        "aniversario": "Aniversario",
+        "negocios": "Comida de negocios",
+        "celebracion": "Celebración",
+        "otra": "Otra"
+      },
+      "tronas": "Tronas",
+      "sillaRuedas": "Alguien viene en silla de ruedas",
+      "notas": "Algo más que debamos saber",
+      "privacidad": "He leído y acepto la <link>política de privacidad</link>.",
+      "comercial": "Quiero recibir novedades y ofertas de Yerga (opcional).",
+      "reservar": "Confirmar reserva",
+      "enviando": "Confirmando…",
+      "retenida": "Te guardamos la mesa {tiempo}",
+      "caducada": "Ha pasado el tiempo de reserva, pero intentaremos mantenerte la mesa al confirmar."
+    },
+    "resumen": {
+      "comensales": "{n, plural, one {# persona} other {# personas}}",
+      "zona": "Zona",
+      "arroz": "Arroz"
+    },
+    "ok": {
+      "titulo": "¡Mesa reservada!",
+      "texto": "Te esperamos el {fecha} a las {hora}.",
+      "correo": "Te hemos enviado la confirmación a {correo}.",
+      "calendario": "Añadir al calendario",
+      "gestionar": "Ver, cambiar o cancelar mi reserva",
+      "volver": "Volver a la portada"
+    },
+    "fallo": {
+      "ocupada": "Vaya, alguien se ha adelantado y esa mesa ya no está libre.",
+      "alternativas": "Estas son las horas libres más cercanas:",
+      "general": "No hemos podido completar la reserva. Inténtalo de nuevo o llámanos al {telefono}.",
+      "limite": "Demasiados intentos seguidos. Espera unos minutos.",
+      "turnstile": "No hemos podido comprobar que no eres un robot. Recarga la página."
+    },
+    "errores": {
+      "nombre": "Escribe tu nombre.",
+      "telefono": "Revisa el teléfono.",
+      "correo": "Revisa el correo.",
+      "privacidad": "Necesitamos que aceptes la política de privacidad.",
+      "salud": "Para guardar alergias necesitamos tu consentimiento.",
+      "fecha": "Elige un día.",
+      "hora": "Elige una hora.",
+      "form": "Revisa los datos."
+    },
+    "grupo": {
+      "titulo": "Solicitud de grupo",
+      "texto": "Para {n, plural, one {# persona} other {# personas}} preparamos la mesa a mano. Dinos cuándo y te confirmamos en seguida.",
+      "personas": "Personas",
+      "fecha": "Día",
+      "hora": "Hora aproximada",
+      "enviar": "Enviar solicitud",
+      "ok": "¡Recibido! Te confirmaremos la reserva por correo o teléfono.",
+      "volverOnline": "Somos menos: reservar online"
+    },
+    "espera": {
+      "titulo": "Te avisamos si se libera",
+      "texto": "Si se libera una mesa para {n, plural, one {# persona} other {# personas}} el {fecha} ({turno}), te escribimos al momento.",
+      "enviar": "Apuntarme",
+      "ok": "Apuntado. Si se libera una mesa, te avisamos por correo.",
+      "cerrar": "Cerrar"
+    },
+    "gestion": {
+      "titulo": "Tu reserva",
+      "estado": {
+        "pendiente": "Pendiente de confirmar por el restaurante",
+        "confirmada": "Confirmada",
+        "reconfirmada": "Confirmada por ti",
+        "sentada": "En curso",
+        "finalizada": "Finalizada",
+        "cancelada": "Cancelada",
+        "no_presentada": "No presentada"
+      },
+      "cambiar": "Cambiar día, hora o personas",
+      "cancelar": "Cancelar reserva",
+      "cancelarSeguro": "¿Seguro que quieres cancelar? La mesa quedará libre para otra persona.",
+      "siCancelar": "Sí, cancelar",
+      "noCancelar": "No, mantenerla",
+      "cancelada": "Reserva cancelada. ¡Esperamos verte pronto!",
+      "fueraPlazo": "Faltan menos de {horas} horas: para cambios o cancelaciones llámanos al {telefono}.",
+      "confirmar": "Confirmo que vamos",
+      "reconfirmada": "¡Gracias! Te esperamos.",
+      "noEncontrada": "No encontramos esta reserva. Revisa el enlace del correo.",
+      "guardar": "Guardar cambios",
+      "cambiada": "Reserva actualizada.",
+      "volver": "Volver"
+    },
+    "cuentaAtras": "{min}:{seg}"
   }
 }

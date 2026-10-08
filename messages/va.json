@@ -6,5 +6,167 @@
   "home": {
     "title": "L'arròs no espera. La teua taula, sí.",
     "subtitle": "Paelles a llenya fetes al moment per a la teua taula. Reserva i tria el teu arròs."
+  },
+  "reserva": {
+    "titulo": "Reserva la teua taula",
+    "subtitulo": "Només t'oferim hores amb una taula lliure de veritat.",
+    "pasos": {
+      "comensales": "Persones i dia",
+      "hora": "Hora",
+      "zona": "Zona",
+      "arroz": "El teu arròs",
+      "datos": "Les teues dades",
+      "confirmacion": "Confirmada"
+    },
+    "paso": "Pas {actual} de {total}",
+    "atras": "Arrere",
+    "continuar": "Continuar",
+    "comensales": {
+      "titulo": "Quants sou?",
+      "persona": "{n, plural, one {# persona} other {# persones}}",
+      "mas": "Més de {max}",
+      "grupoAyuda": "Per a grups de més de {max} persones et preparem la taula a mà."
+    },
+    "calendario": {
+      "titulo": "Quin dia?",
+      "anterior": "Mes anterior",
+      "siguiente": "Mes següent",
+      "cerrado": "Tancat",
+      "completo": "Complet",
+      "disponible": "Hi ha taula",
+      "cargando": "Buscant taules…",
+      "leyenda": "Els dies ratllats estan tancats o complets."
+    },
+    "horas": {
+      "titulo": "A quina hora?",
+      "comida": "Dinar",
+      "cena": "Sopar",
+      "completa": "Completa",
+      "avisame": "Avisa'm si s'allibera",
+      "ninguna": "Eixe dia ja no queda taula per a {n, plural, one {# persona} other {# persones}}.",
+      "otroDia": "Triar un altre dia",
+      "reteniendo": "Guardant la teua taula…",
+      "sinGrupo": "No tenim taula en línia per a tantes persones. Envia'ns una sol·licitud de grup."
+    },
+    "zona": {
+      "titulo": "On preferiu?",
+      "ayuda": "A eixa hora hi ha lloc a les dues zones.",
+      "sala": "Sala",
+      "terraza": "Terrassa"
+    },
+    "arroz": {
+      "titulo": "Tria el teu arròs",
+      "ayuda": "L'arròs bo es fa per encàrrec. Si el tries ara, estarà en el seu punt quan arribeu.",
+      "minimo": "Mínim {n} persones",
+      "raciones": "Per a quants",
+      "porPersona": "{precio} per persona",
+      "saltar": "Preferisc decidir a la taula",
+      "elegido": "Triat",
+      "quitar": "Llevar",
+      "otro": "Afegir un altre arròs",
+      "ninguno": "Per a {n, plural, one {# persona} other {# persones}} no hi ha arrossos per encàrrec; podreu triar a la taula.",
+      "max": "Com a molt, tantes racions com persones.",
+      "elegir": "Triar"
+    },
+    "datos": {
+      "titulo": "Les teues dades",
+      "nombre": "Nom",
+      "telefono": "Telèfon",
+      "correo": "Correu electrònic",
+      "alergias": "Al·lèrgies o intoleràncies",
+      "alergiasAyuda": "Opcional. La cuina ho tindrà en compte.",
+      "salud": "Accepte que s'use aquesta informació de salut només per a preparar la meua reserva.",
+      "ocasion": "Celebreu alguna cosa?",
+      "ocasiones": {
+        "": "Res en especial",
+        "cumpleanos": "Aniversari de naixement",
+        "aniversario": "Aniversari",
+        "negocios": "Dinar de negocis",
+        "celebracion": "Celebració",
+        "otra": "Una altra"
+      },
+      "tronas": "Trones",
+      "sillaRuedas": "Algú ve en cadira de rodes",
+      "notas": "Alguna cosa més que hàgem de saber",
+      "privacidad": "He llegit i accepte la <link>política de privacitat</link>.",
+      "comercial": "Vull rebre novetats i ofertes de Yerga (opcional).",
+      "reservar": "Confirmar reserva",
+      "enviando": "Confirmant…",
+      "retenida": "Et guardem la taula {tiempo}",
+      "caducada": "Ha passat el temps de reserva, però intentarem mantindre't la taula en confirmar."
+    },
+    "resumen": {
+      "comensales": "{n, plural, one {# persona} other {# persones}}",
+      "zona": "Zona",
+      "arroz": "Arròs"
+    },
+    "ok": {
+      "titulo": "Taula reservada!",
+      "texto": "T'esperem el {fecha} a les {hora}.",
+      "correo": "T'hem enviat la confirmació a {correo}.",
+      "calendario": "Afegir al calendari",
+      "gestionar": "Veure, canviar o cancel·lar la meua reserva",
+      "volver": "Tornar a la portada"
+    },
+    "fallo": {
+      "ocupada": "Vaja, algú s'ha avançat i eixa taula ja no està lliure.",
+      "alternativas": "Aquestes són les hores lliures més pròximes:",
+      "general": "No hem pogut completar la reserva. Torna-ho a provar o telefona'ns al {telefono}.",
+      "limite": "Massa intents seguits. Espera uns minuts.",
+      "turnstile": "No hem pogut comprovar que no eres un robot. Recarrega la pàgina."
+    },
+    "errores": {
+      "nombre": "Escriu el teu nom.",
+      "telefono": "Revisa el telèfon.",
+      "correo": "Revisa el correu.",
+      "privacidad": "Necessitem que acceptes la política de privacitat.",
+      "salud": "Per a guardar al·lèrgies necessitem el teu consentiment.",
+      "fecha": "Tria un dia.",
+      "hora": "Tria una hora.",
+      "form": "Revisa les dades."
+    },
+    "grupo": {
+      "titulo": "Sol·licitud de grup",
+      "texto": "Per a {n, plural, one {# persona} other {# persones}} preparem la taula a mà. Digues-nos quan i et confirmem de seguida.",
+      "personas": "Persones",
+      "fecha": "Dia",
+      "hora": "Hora aproximada",
+      "enviar": "Enviar sol·licitud",
+      "ok": "Rebut! Et confirmarem la reserva per correu o telèfon.",
+      "volverOnline": "Som menys: reservar en línia"
+    },
+    "espera": {
+      "titulo": "T'avisem si s'allibera",
+      "texto": "Si s'allibera una taula per a {n, plural, one {# persona} other {# persones}} el {fecha} ({turno}), t'escrivim de seguida.",
+      "enviar": "Apuntar-me",
+      "ok": "Apuntat. Si s'allibera una taula, t'avisem per correu.",
+      "cerrar": "Tancar"
+    },
+    "gestion": {
+      "titulo": "La teua reserva",
+      "estado": {
+        "pendiente": "Pendent de confirmar pel restaurant",
+        "confirmada": "Confirmada",
+        "reconfirmada": "Confirmada per tu",
+        "sentada": "En curs",
+        "finalizada": "Finalitzada",
+        "cancelada": "Cancel·lada",
+        "no_presentada": "No presentada"
+      },
+      "cambiar": "Canviar dia, hora o persones",
+      "cancelar": "Cancel·lar reserva",
+      "cancelarSeguro": "Segur que vols cancel·lar? La taula quedarà lliure per a una altra persona.",
+      "siCancelar": "Sí, cancel·lar",
+      "noCancelar": "No, mantindre-la",
+      "cancelada": "Reserva cancel·lada. Esperem vore't prompte!",
+      "fueraPlazo": "Falten menys de {horas} hores: per a canvis o cancel·lacions telefona'ns al {telefono}.",
+      "confirmar": "Confirme que venim",
+      "reconfirmada": "Gràcies! T'esperem.",
+      "noEncontrada": "No trobem aquesta reserva. Revisa l'enllaç del correu.",
+      "guardar": "Guardar canvis",
+      "cambiada": "Reserva actualitzada.",
+      "volver": "Tornar"
+    },
+    "cuentaAtras": "{min}:{seg}"
   }
 }
