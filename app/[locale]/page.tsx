@@ -1,3 +1,4 @@
+import { alternos } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Portada } from "@/components/web/Portada";
@@ -9,7 +10,7 @@ import { JsonLd, jsonLdRestaurante } from "@/lib/jsonld";
 export async function generateMetadata({ params }: PageProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: { absolute: t("title") }, description: t("description"), alternates: { canonical: `/${locale}` } };
+  return { title: { absolute: t("title") }, description: t("description"), alternates: alternos(locale) };
 }
 
 export default async function InicioPage({ params }: PageProps<"/[locale]">) {

@@ -1,3 +1,4 @@
+import { alternos } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PaginaSeo } from "@/components/web/PaginaSeo";
@@ -8,7 +9,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/paella-v
   return {
     title: t("paella.titulo"),
     description: t("paella.descripcion"),
-    alternates: { canonical: `/${locale}/paella-valenciana`, languages: { es: "/es/paella-valenciana", "ca-ES": "/va/paella-valenciana", en: "/en/paella-valenciana" } },
+    alternates: alternos(locale, "/paella-valenciana"),
   };
 }
 

@@ -174,6 +174,28 @@ borrar desde la pestaña Branches.
 - **Siguiente paso:** PR de D3 cuando se fusione el #8; después, D1 (criterios),
   D2 (accesibilidad) y D4 (idiomas).
 
+### 08/10 · D1, D2 y D4 (rama `test/criterios-aceptacion`)
+- **D1:** los diez criterios tienen prueba y todas existen con el nombre de
+  `docs/ACEPTACION.md`. El criterio 9 pasa a ser automático:
+  `tests/e2e/rendimiento.spec.ts` mide el LCP de la portada con 4G lenta y CPU ×4
+  (mediana de 3). En local: 1816, 1852 y 1856 ms; mediana 1852 ms (< 2500).
+- **D2:** la auditoría axe pasa de 5 a 11 páginas públicas (tres idiomas, legales,
+  calendario) y de 7 a 18 pantallas del panel (también detalles, editor de mapa, registro
+  y usuarios). Un único error grave: contraste del botón «Sonido» del panel, que tenía el
+  fondo translúcido. Arreglado con fondo sólido. Lighthouse en producción: bloqueado (B-1).
+- **D4:** sin claves de traducción que falten. Los textos que coinciden con el castellano
+  son correctos (Hora, Carta, Gluten…). Los postres no tienen descripción en ningún
+  idioma, a propósito. Rastreo de las 27 páginas: sin enlaces rotos. Arreglado:
+  - las portadas no declaraban `hreflang`;
+  - las páginas legales heredaban un `hreflang` que apuntaba a las portadas y no tenían
+    `canonical`;
+  - la reserva no tenía `canonical`;
+  - faltaba `x-default`;
+  - el sitemap solo listaba las 9 URL en castellano.
+
+  Ahora `lib/seo.ts` lo genera todo, el sitemap tiene 27 URL y hay una prueba que lo
+  vigila.
+- **Siguiente paso:** PR de D1, D2 y D4 cuando se fusione el #9; después, bloque E.
 ### 09/10 · E1: dudas resueltas (rama `docs/dudas-decididas`)
 - `docs/DUDAS.md` reescrito. Las decisiones sin coste van marcadas «decidido por Code, a
   confirmar»:

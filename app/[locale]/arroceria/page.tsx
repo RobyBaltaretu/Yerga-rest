@@ -1,3 +1,4 @@
+import { alternos } from "@/lib/seo";
 import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PaginaSeo } from "@/components/web/PaginaSeo";
@@ -10,7 +11,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/arroceri
   return {
     title: t("arroceria.titulo", { localidad: config.localidad || "Valencia" }),
     description: t("arroceria.descripcion", { localidad: config.localidad || "Valencia" }),
-    alternates: { canonical: `/${locale}/arroceria`, languages: { es: "/es/arroceria", "ca-ES": "/va/arroceria", en: "/en/arroceria" } },
+    alternates: alternos(locale, "/arroceria"),
   };
 }
 

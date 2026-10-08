@@ -51,7 +51,20 @@ test.describe("Web pública", () => {
       expect(r?.status(), ruta).toBe(200);
       await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     }
-    const sitemap = await request.get("/sitemap.xml");
-    expect(await sitemap.text()).toContain("/va/carta");
+    const sitemap = await (await request.get("/sitemap.xml")).text();
+    expect(sitemap.match(/<loc>/g)?.length).toBe(27); // 9 páginas × 3 idiomas
+    expect(sitemap).toContain("/va/carta");
+  });
+
+  test("cada página declara su canonical y sus hreflang (con x-default)", async ({ request }) => {
+    for (const ruta of ["", "/carta", "/reservar", "/arroceria", "/aviso-legal"]) {
+      for (const l of ["es", "va", "en"]) {
+        const html = await (await request.get(`/${l}${ruta}`)).text();
+        const canonical = html.match(/<link rel="canonical" href="([^"]+)"/)?.[1];
+        expect(canonical && new URL(canonical).pathname, `${l}${ruta}`).toBe(`/${l}${ruta}`);
+        const alternos = Object.fromEntries([...html.matchAll(/<link rel="alternate" hrefLang="([^"]+)" href="([^"]+)"/g)].map((m) => [m[1], new URL(m[2]).pathname]));
+        expect(alternos, `${l}${ruta}`).toEqual({ es: `/es${ruta}`, "ca-ES": `/va${ruta}`, en: `/en${ruta}`, "x-default": `/es${ruta}` });
+      }
+    }
   });
 });
