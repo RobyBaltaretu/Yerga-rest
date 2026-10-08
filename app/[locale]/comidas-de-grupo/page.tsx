@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/comidas-
   return {
     title: t("grupos.titulo"),
     description: t("grupos.descripcion"),
-    alternates: { canonical: `/${locale}/comidas-de-grupo`, languages: { es: "/es/comidas-de-grupo", "ca-ES-valencia": "/va/comidas-de-grupo", en: "/en/comidas-de-grupo" } },
+    alternates: { canonical: `/${locale}/comidas-de-grupo`, languages: { es: "/es/comidas-de-grupo", "ca-ES": "/va/comidas-de-grupo", en: "/en/comidas-de-grupo" } },
   };
 }
 

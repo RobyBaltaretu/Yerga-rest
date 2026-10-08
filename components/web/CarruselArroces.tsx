@@ -36,7 +36,6 @@ export function CarruselArroces({
               type="button"
               onClick={() => setAbierto(a)}
               className="cursor-cuchara group w-full text-left"
-              aria-label={textos.verMas.replace("{nombre}", a.nombre)}
             >
               <PaellaMini slug={a.slug} nombre={a.nombre} className="paella-gira mx-auto w-full transition-transform duration-500 group-hover:rotate-12" />
               <p className="mt-4 font-display text-2xl">{a.nombre}</p>

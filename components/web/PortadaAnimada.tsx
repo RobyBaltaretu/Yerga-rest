@@ -1,37 +1,44 @@
 "use client";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 
 /**
  * Secuencia «Del fuego al socarrat» ligada al scroll. GSAP y ScrollTrigger se
  * cargan después del primer pintado; si fallan, la portada sigue siendo útil.
  */
-export function PortadaAnimada({
+export function ControlesPortada({
   escenas,
   textos,
-  final,
   sonido,
-  children,
 }: {
   escenas: string[];
   textos: string[];
-  final: ReactNode;
   sonido: { off: string; on: string };
-  children: ReactNode;
 }) {
-  const seccion = useRef<HTMLElement>(null);
+  const ancla = useRef<HTMLDivElement>(null);
+  const seccion = useRef<HTMLElement | null>(null);
   const [escena, setEscena] = useState(0);
   const [sonando, setSonando] = useState(false);
   const audio = useRef<{ parar: () => void } | null>(null);
 
   useEffect(() => {
-    const el = seccion.current;
+    const el = (seccion.current = ancla.current?.closest<HTMLElement>(".portada-animada") ?? null);
     if (!el) return;
     if (matchMedia("(prefers-reduced-motion: reduce)").matches || document.documentElement.classList.contains("ligera")) return;
     let cancelado = false;
     let limpiar: (() => void) | undefined;
 
+    // GSAP se carga al primer gesto o cuando el navegador queda libre: no compite
+    // con la carga inicial de la página.
+    const cuandoHaga = new Promise<void>((resolver) => {
+      const listo = () => resolver();
+      for (const ev of ["scroll", "pointerdown", "touchstart", "keydown", "wheel"]) addEventListener(ev, listo, { once: true, passive: true });
+      setTimeout(listo, 3500);
+    });
+
     (async () => {
+      await cuandoHaga;
+      if (cancelado) return;
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       if (cancelado) return;
       gsap.registerPlugin(ScrollTrigger);
@@ -109,26 +116,20 @@ export function PortadaAnimada({
   }, [sonando]);
 
   return (
-    <section ref={seccion} className="portada-animada relative h-[500vh] bg-brasa text-arroz" aria-label={escenas.join(" · ")}>
-      <div className="sticky top-0 flex h-dvh flex-col items-center justify-center overflow-hidden">
-        {children}
-        <div className="pointer-events-none absolute inset-x-0 bottom-24 flex flex-col items-center px-4 text-center sm:bottom-16">
-          <p className="text-xs font-semibold uppercase tracking-[0.35em] text-azafran">
-            {String(escena + 1).padStart(2, "0")} · {escenas[escena]}
-          </p>
-          <p className="mt-2 max-w-md font-display text-xl text-arroz/90 sm:text-2xl">{textos[escena]}</p>
-        <button
-          type="button"
-          onClick={() => setSonando(!sonando)}
-          aria-pressed={sonando}
-          className="pointer-events-auto mt-3 min-h-11 rounded-full bg-white/10 px-4 text-sm font-semibold text-arroz ring-1 ring-white/20 backdrop-blur hover:bg-white/20"
-        >
-          {sonando ? `🔊 ${sonido.on}` : `🔈 ${sonido.off}`}
-        </button>
-        </div>
-        <div className="portada-final absolute inset-x-0 top-[12%] flex flex-col items-center px-4 text-center opacity-0">{final}</div>
-      </div>
-    </section>
+    <div ref={ancla} className="pointer-events-none absolute inset-x-0 bottom-24 flex flex-col items-center px-4 text-center sm:bottom-16">
+      <p className="text-xs font-semibold uppercase tracking-[0.35em] text-azafran">
+        {String(escena + 1).padStart(2, "0")} · {escenas[escena]}
+      </p>
+      <p className="mt-2 max-w-md font-display text-xl text-arroz/90 sm:text-2xl">{textos[escena]}</p>
+      <button
+        type="button"
+        onClick={() => setSonando(!sonando)}
+        aria-pressed={sonando}
+        className="pointer-events-auto mt-3 min-h-11 rounded-full bg-white/10 px-4 text-sm font-semibold text-arroz ring-1 ring-white/20 backdrop-blur hover:bg-white/20"
+      >
+        {sonando ? `🔊 ${sonido.on}` : `🔈 ${sonido.off}`}
+      </button>
+    </div>
   );
 }
 

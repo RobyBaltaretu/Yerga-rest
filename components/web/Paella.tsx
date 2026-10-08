@@ -1,4 +1,4 @@
-import { brasas, granos, piezas, RADIO_PAELLA } from "./geometria";
+import { brasas, granos, piezas, r1, RADIO_PAELLA } from "./geometria";
 
 /**
  * Paella vista desde arriba, dibujada en SVG. `escena` fija un estado estático
@@ -78,7 +78,7 @@ export function Paella({
       <circle className="p-aceite" r={RADIO_PAELLA - 6} fill={`url(#${id}-aceite)`} opacity={e >= 1 ? 0.8 : 0} />
       <g className="p-tomate" opacity={e >= 1 ? 1 : 0}>
         {piezas(14, 61, RADIO_PAELLA - 80).map((p, i) => (
-          <ellipse key={i} cx={p.x} cy={p.y} rx={34 * p.escala} ry={24 * p.escala} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#c7361b" opacity="0.55" />
+          <ellipse key={i} cx={p.x} cy={p.y} rx={r1(34 * p.escala)} ry={r1(24 * p.escala)} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#c7361b" opacity="0.55" />
         ))}
       </g>
       <circle className="p-pimenton" r={RADIO_PAELLA - 6} fill="#a8401c" opacity={e >= 1 ? 0.28 : 0} />
@@ -89,7 +89,7 @@ export function Paella({
       {/* Arroz: en cruz y después repartido */}
       <g className="p-granos" fill={e >= 4 ? "#e9b44c" : "#f6ecd2"} opacity={visible(3)}>
         {lista.map((g, i) => (
-          <g key={i} className="p-grano" data-dx={g.cx - g.x} data-dy={g.cy - g.y} transform={cruz ? `translate(${g.cx - g.x} ${g.cy - g.y})` : undefined}>
+          <g key={i} className="p-grano" data-dx={r1(g.cx - g.x)} data-dy={r1(g.cy - g.y)} transform={cruz ? `translate(${r1(g.cx - g.x)} ${r1(g.cy - g.y)})` : undefined}>
             <ellipse cx={g.x} cy={g.y} rx={7} ry={3} transform={`rotate(${g.giro} ${g.x} ${g.y})`} />
           </g>
         ))}
@@ -114,12 +114,12 @@ export function Paella({
         </g>
         <g className="p-ing p-garrofo">
           {garrofo.map((p, i) => (
-            <ellipse key={i} cx={p.x} cy={p.y} rx={15 * p.escala} ry={11 * p.escala} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#efe6c8" stroke="#cbbf98" strokeWidth="2" />
+            <ellipse key={i} cx={p.x} cy={p.y} rx={r1(15 * p.escala)} ry={r1(11 * p.escala)} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#efe6c8" stroke="#cbbf98" strokeWidth="2" />
           ))}
         </g>
         <g className="p-ing p-bajoqueta">
           {bajoqueta.map((p, i) => (
-            <rect key={i} x={p.x - 30} y={p.y - 7} width={60} height={14} rx={7} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#5f8a2e" stroke="#3f6a1c" strokeWidth="2" />
+            <rect key={i} x={r1(p.x - 30)} y={r1(p.y - 7)} width={60} height={14} rx={7} transform={`rotate(${p.giro} ${p.x} ${p.y})`} fill="#5f8a2e" stroke="#3f6a1c" strokeWidth="2" />
           ))}
         </g>
       </g>

@@ -347,6 +347,8 @@ describe("Sin sobreventa", () => {
 
   it("una mesa sentada que se alarga deja de ofrecerse", () =>
     enTransaccion(db, async (c) => {
+      // S1 sin otras reservas (la semilla puede tener alguna hoy).
+      await c.query("update asignacion set activa = false where mesa_id = $1", [MESA("S1")]);
       // Reserva sentada que debía acabar hace 10 minutos y sigue en la mesa.
       const { rows } = await c.query<{ id: string }>(
         `insert into reserva (nombre, inicio, fin, comensales, duracion_min, estado, origen)

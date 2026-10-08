@@ -1,4 +1,4 @@
-import { aleatorio } from "./geometria";
+import { aleatorio, r1 } from "./geometria";
 
 // Paella cenital pequeña para el carrusel: el color del arroz y los tropezones
 // cambian según el plato.
@@ -18,13 +18,13 @@ export function PaellaMini({ slug, nombre, className }: { slug: string; nombre: 
   const puntos = Array.from({ length: 70 }, () => {
     const a = r() * Math.PI * 2;
     const d = Math.sqrt(r()) * 82;
-    return { x: Math.cos(a) * d, y: Math.sin(a) * d, g: r() * 180 };
+    return { x: r1(Math.cos(a) * d), y: r1(Math.sin(a) * d), g: Math.round(r() * 180) };
   });
   const tropezones = e.extras.flatMap((x, k) =>
     Array.from({ length: x.forma === "bogavante" ? 2 : 6 }, (_, i) => {
       const a = r() * Math.PI * 2;
       const d = 18 + Math.sqrt(r()) * 58;
-      return { ...x, x: Math.cos(a) * d, y: Math.sin(a) * d, g: r() * 360, k: `${k}-${i}` };
+      return { ...x, x: r1(Math.cos(a) * d), y: r1(Math.sin(a) * d), g: Math.round(r() * 360), k: `${k}-${i}` };
     }),
   );
   const cazuela = e.recipiente === "cazuela";
@@ -46,9 +46,9 @@ export function PaellaMini({ slug, nombre, className }: { slug: string; nombre: 
         t.forma === "gamba" ? (
           <path key={t.k} d="M-10 0 C-10 -10 8 -12 10 0 C8 6 2 8 -2 6" transform={`translate(${t.x} ${t.y}) rotate(${t.g})`} fill="none" stroke={t.color} strokeWidth={6} strokeLinecap="round" />
         ) : t.forma === "verde" ? (
-          <rect key={t.k} x={t.x - 12} y={t.y - 3} width={24} height={6} rx={3} transform={`rotate(${t.g} ${t.x} ${t.y})`} fill={t.color} />
+          <rect key={t.k} x={r1(t.x - 12)} y={r1(t.y - 3)} width={24} height={6} rx={3} transform={`rotate(${t.g} ${t.x} ${t.y})`} fill={t.color} />
         ) : t.forma === "fideo" ? (
-          <path key={t.k} d={`M${t.x - 14} ${t.y} q7 -6 14 0 t14 0`} stroke={t.color} strokeWidth={2.5} fill="none" />
+          <path key={t.k} d={`M${r1(t.x - 14)} ${t.y} q7 -6 14 0 t14 0`} stroke={t.color} strokeWidth={2.5} fill="none" />
         ) : t.forma === "bogavante" ? (
           <g key={t.k} transform={`translate(${t.x} ${t.y}) rotate(${t.g})`}>
             <ellipse rx={30} ry={12} fill={t.color} />

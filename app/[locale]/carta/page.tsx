@@ -10,7 +10,7 @@ import { Link } from "@/i18n/navigation";
 export async function generateMetadata({ params }: PageProps<"/[locale]/carta">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "web.carta" });
-  return { title: t("titulo"), description: t("intro"), alternates: { canonical: `/${locale}/carta`, languages: { es: "/es/carta", "ca-ES-valencia": "/va/carta", en: "/en/carta" } } };
+  return { title: t("titulo"), description: t("intro"), alternates: { canonical: `/${locale}/carta`, languages: { es: "/es/carta", "ca-ES": "/va/carta", en: "/en/carta" } } };
 }
 
 /** Carta completa: sin animación, para leer rápido. Precios y alérgenos desde el panel. */

@@ -8,7 +8,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/paella-v
   return {
     title: t("paella.titulo"),
     description: t("paella.descripcion"),
-    alternates: { canonical: `/${locale}/paella-valenciana`, languages: { es: "/es/paella-valenciana", "ca-ES-valencia": "/va/paella-valenciana", en: "/en/paella-valenciana" } },
+    alternates: { canonical: `/${locale}/paella-valenciana`, languages: { es: "/es/paella-valenciana", "ca-ES": "/va/paella-valenciana", en: "/en/paella-valenciana" } },
   };
 }
 

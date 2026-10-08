@@ -12,7 +12,7 @@ export const dynamic = "force-dynamic";
 export async function generateMetadata({ params }: PageProps<"/[locale]/reservar">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "reserva" });
-  return { title: t("titulo"), description: t("subtitulo"), alternates: { languages: { es: "/es/reservar", "ca-ES-valencia": "/va/reservar", en: "/en/reservar" } } };
+  return { title: t("titulo"), description: t("subtitulo"), alternates: { languages: { es: "/es/reservar", "ca-ES": "/va/reservar", en: "/en/reservar" } } };
 }
 
 export default async function ReservarPage({ params, searchParams }: PageProps<"/[locale]/reservar">) {

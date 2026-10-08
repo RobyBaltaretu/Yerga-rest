@@ -14,6 +14,9 @@ export function aleatorio(semilla: number) {
 
 export const RADIO_PAELLA = 300;
 
+/** Redondeo a un decimal: el SVG pesa mucho menos y se ve igual. */
+export const r1 = (v: number) => Math.round(v * 10) / 10;
+
 export type Grano = { x: number; y: number; cx: number; cy: number; giro: number };
 export type Pieza = { x: number; y: number; giro: number; escala: number };
 export type Brasa = { x: number; y: number; r: number; color: string; retraso: number };
@@ -29,11 +32,11 @@ export function granos(n: number, semilla = 7): Grano[] {
     const largo = (r() * 2 - 1) * (RADIO_PAELLA - 40);
     const ancho = (r() * 2 - 1) * 14;
     return {
-      x: Math.cos(ang) * rad,
-      y: Math.sin(ang) * rad,
-      cx: brazo ? largo : ancho,
-      cy: brazo ? ancho : largo,
-      giro: r() * 180,
+      x: r1(Math.cos(ang) * rad),
+      y: r1(Math.sin(ang) * rad),
+      cx: r1(brazo ? largo : ancho),
+      cy: r1(brazo ? ancho : largo),
+      giro: Math.round(r() * 180),
     };
   });
 }
@@ -43,7 +46,7 @@ export function piezas(n: number, semilla: number, radio = RADIO_PAELLA - 70): P
   return Array.from({ length: n }, () => {
     const ang = r() * Math.PI * 2;
     const rad = 30 + Math.sqrt(r()) * (radio - 30);
-    return { x: Math.cos(ang) * rad, y: Math.sin(ang) * rad, giro: r() * 360, escala: 0.85 + r() * 0.3 };
+    return { x: r1(Math.cos(ang) * rad), y: r1(Math.sin(ang) * rad), giro: Math.round(r() * 360), escala: Math.round((0.85 + r() * 0.3) * 100) / 100 };
   });
 }
 
@@ -55,11 +58,11 @@ export function brasas(n: number, semilla = 3): Brasa[] {
     const ang = r() * Math.PI * 2;
     const rad = 250 + r() * 160;
     return {
-      x: Math.cos(ang) * rad,
-      y: Math.sin(ang) * rad * 0.92 + 30,
-      r: 3 + r() * 9,
+      x: r1(Math.cos(ang) * rad),
+      y: r1(Math.sin(ang) * rad * 0.92 + 30),
+      r: r1(3 + r() * 9),
       color: coloresBrasa[Math.floor(r() * coloresBrasa.length)],
-      retraso: r() * 2,
+      retraso: r1(r() * 2),
     };
   });
 }

@@ -1,7 +1,8 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Paella } from "./Paella";
-import { PortadaAnimada } from "./PortadaAnimada";
+import { ControlesPortada } from "./PortadaAnimada";
+import { VinetasPortada } from "./VinetasPortada";
 import { Termino } from "./Termino";
 
 const ingredientes = [
@@ -29,7 +30,8 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
 
   return (
     <>
-      <PortadaAnimada escenas={escenas} textos={textos} final={final} sonido={{ off: t("portada.sonido"), on: t("portada.sonidoOn") }}>
+      <section className="portada-animada relative h-[500vh] bg-brasa text-arroz" aria-label={escenas.join(" · ")}>
+        <div className="sticky top-0 flex h-dvh flex-col items-center justify-center overflow-hidden">
         <div className="portada-marca absolute inset-x-0 top-[9%] z-10 text-center">
           <h1 className="marca-resplandor font-display text-arroz">
             <span className="block text-sm font-sans font-semibold uppercase tracking-[0.5em] text-azafran sm:text-base">Arrocería</span>
@@ -37,14 +39,17 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
           </h1>
           <p className="mt-2 text-sm text-arroz/70">{t("portada.desliza")} ↓</p>
         </div>
-        <Paella etiqueta={t("portada.estatica")} className="cursor-cuchara h-auto w-[min(92vw,76dvh)]" />
+        <Paella nGranos={150} nBrasas={34} etiqueta={t("portada.estatica")} className="cursor-cuchara h-auto w-[min(92vw,76dvh)]" />
         {ingredientes.map((i) => (
           <span key={i.va} className={`portada-etiqueta pointer-events-none absolute ${i.pos} rounded-full bg-brasa/80 px-3 py-1 font-display text-lg text-azafran opacity-0 ring-1 ring-azafran/40 sm:text-2xl`}>
             {i.va}
             {locale !== "va" ? <span className="ml-2 font-sans text-xs text-arroz/70">{locale === "en" ? i.en : i.es}</span> : null}
           </span>
         ))}
-      </PortadaAnimada>
+          <ControlesPortada escenas={escenas} textos={textos} sonido={{ off: t("portada.sonido"), on: t("portada.sonidoOn") }} />
+          <div className="portada-final absolute inset-x-0 top-[12%] flex flex-col items-center px-4 text-center opacity-0">{final}</div>
+        </div>
+      </section>
 
       <section className="portada-estatica bg-brasa px-4 pb-16 pt-24 text-arroz">
         <div className="mx-auto max-w-5xl text-center">
@@ -54,15 +59,7 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
           </h1>
           <div className="mt-8 flex flex-col items-center">{final}</div>
           <p className="mt-12 text-arroz/80">{t("portada.estatica")}</p>
-          <ol className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-5">
-            {escenas.map((nombre, i) => (
-              <li key={nombre} className="flex flex-col items-center">
-                <Paella escena={i} nGranos={70} nBrasas={18} id={`v${i}`} etiqueta={`${nombre}: ${textos[i]}`} className="w-full max-w-48" />
-                <p className="mt-2 text-xs font-semibold uppercase tracking-widest text-azafran">{String(i + 1).padStart(2, "0")} · {nombre}</p>
-                <p className="mt-1 text-sm text-arroz/80">{textos[i]}</p>
-              </li>
-            ))}
-          </ol>
+          <VinetasPortada escenas={escenas} textos={textos} />
           {locale !== "va" ? (
             <p className="mt-6 text-sm text-arroz/70">
               {ingredientes.map((i, n) => (

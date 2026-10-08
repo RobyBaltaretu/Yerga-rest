@@ -15,6 +15,11 @@ export function MapaProducto({ textos }: { textos: { albufera: string; horta: st
     let limpiar: (() => void) | undefined;
     let cancelado = false;
     (async () => {
+      await new Promise<void>((r) => {
+        for (const ev of ["scroll", "pointerdown", "touchstart", "keydown", "wheel"]) addEventListener(ev, () => r(), { once: true, passive: true });
+        setTimeout(r, 3500);
+      });
+      if (cancelado) return;
       const [{ gsap }, { ScrollTrigger }] = await Promise.all([import("gsap"), import("gsap/ScrollTrigger")]);
       if (cancelado) return;
       gsap.registerPlugin(ScrollTrigger);

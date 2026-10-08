@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { fraunces, inter } from "@/lib/fonts";
 import { htmlLang } from "@/lib/i18n";
@@ -30,7 +30,7 @@ export async function generateMetadata({
     metadataBase: new URL(publicEnv.siteUrl),
     title: { default: t("title"), template: `%s · Arrocería Yerga` },
     description: t("description"),
-    alternates: { languages: { es: "/es", "ca-ES-valencia": "/va", en: "/en", "x-default": "/es" } },
+    alternates: { languages: { es: "/es", "ca-ES": "/va", en: "/en", "x-default": "/es" } },
     openGraph: { siteName: "Arrocería Yerga", locale: locale === "va" ? "ca_ES" : locale === "en" ? "en_GB" : "es_ES", type: "website" },
   };
 }
@@ -42,6 +42,9 @@ export default async function LocaleLayout({
   const { locale } = await params;
   if (!hasLocale(routing.locales, locale)) notFound();
   setRequestLocale(locale);
+  // Al navegador solo viajan los textos que usan los componentes de cliente.
+  const mensajes = (await getMessages()) as { reserva: unknown; web: { nav: unknown } };
+  const cliente = { reserva: mensajes.reserva, web: { nav: mensajes.web.nav } };
 
   return (
     <html
@@ -50,7 +53,7 @@ export default async function LocaleLayout({
     >
       <body className="min-h-dvh">
         <script dangerouslySetInnerHTML={{ __html: scriptLigero }} />
-        <NextIntlClientProvider>
+        <NextIntlClientProvider messages={cliente as never}>
           <Cabecera locale={locale} />
           {children}
           <Pie />
