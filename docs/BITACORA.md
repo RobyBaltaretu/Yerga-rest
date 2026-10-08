@@ -134,3 +134,23 @@ borrar desde la pestaña Branches.
 - Verificado: tipos, lint, Vitest y Playwright completo (33 pasan).
 - **Pendiente de medir en producción (C4):** CPU por petición. Bloqueado por B-1.
 - **Siguiente paso:** PR de C2; después, C3 (copias de seguridad).
+
+### 08/10 · C3: copias de seguridad (rama `ops/copias-seguridad`)
+- No puedo crear repositorios desde esta sesión (la API de GitHub devuelve 403 al crear
+  `yerga-backups`). **Decisión:** dejar la plantilla en `infra/yerga-backups/` (flujo
+  diario, README de restauración y `vaciar.sql`) y que `configurar-secretos.sh` cree el
+  repositorio privado, genere la clave age en `~/yerga-backup-key.txt` (solo en tu
+  ordenador) y cargue `SUPABASE_DB_URL` y `AGE_RECIPIENT`.
+- Método: `supabase db dump --data-only -s public,auth` → tar.gz → `age`. El esquema no se
+  copia: lo reconstruyen las migraciones.
+- **Restauración probada en local de principio a fin:**
+  - volcado de la base con datos de demostración más un dato propio;
+  - `db reset --no-seed` (base nueva solo con migraciones);
+  - descifrado y carga con `vaciar.sql` y `session_replication_role = replica`;
+  - resultado: 29 reservas, 3 usuarios, el dato propio y las secuencias, y el inicio de
+    sesión con un usuario restaurado (200).
+  - Descartado el método de tres archivos de la guía de Supabase: `roles.sql` falla como
+    `postgres` y los datos de `storage` no se pueden escribir.
+- Retención de 30 días probada con fechas simuladas.
+- La conexión usa el pooler en modo sesión (puerto 5432); el host y el usuario se leen
+  de la Management API (`/config/database/pooler`, comprobada en la especificación).
