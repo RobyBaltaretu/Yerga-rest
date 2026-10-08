@@ -621,6 +621,9 @@ isOneToOne: false
 "incumple_reglas":
 { Args: { "p_comensales": number,"p_ignorar_reserva"?: string,"p_inicio": string }; Returns: string
                            },
+"intentos_superados":
+{ Args: { "p_clave": string,"p_maximo": number,"p_ventana_seg": number }; Returns: boolean
+                           },
 "liberar_retencion":
 { Args: { "p_token": string }; Returns: undefined
                            },

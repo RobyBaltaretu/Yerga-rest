@@ -51,3 +51,8 @@ export function formatPrecio(precio: number | null | undefined, locale: string) 
 export function capitalizar(texto: string) {
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
+
+/** Instante actual en milisegundos (en servidor, para pasar a componentes). */
+export function ahoraMs(): number {
+  return Date.now();
+}

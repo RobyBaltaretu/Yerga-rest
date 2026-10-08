@@ -76,8 +76,8 @@ export async function retener(input: {
     .object({
       inicio: instanteISO,
       comensales,
-      zona_id: z.uuid().nullish(),
-      token_anterior: z.uuid().nullish(),
+      zona_id: z.guid().nullish(),
+      token_anterior: z.guid().nullish(),
       codigo: z.string().max(64).optional(),
     })
     .safeParse(input);
@@ -100,7 +100,7 @@ export async function retener(input: {
 }
 
 export async function liberar(token: string): Promise<void> {
-  if (!z.uuid().safeParse(token).success) return;
+  if (!z.guid().safeParse(token).success) return;
   await createAdminClient().rpc("liberar_retencion", { p_token: token });
 }
 
@@ -205,10 +205,10 @@ export async function modificarReserva(input: {
   const p = z
     .object({
       codigo: z.string().min(10).max(64),
-      token: z.uuid().nullable(),
+      token: z.guid().nullable(),
       inicio: instanteISO,
       comensales,
-      arroces: z.array(z.object({ plato_id: z.uuid(), raciones: z.number().int().min(1) })).optional(),
+      arroces: z.array(z.object({ plato_id: z.guid(), raciones: z.number().int().min(1) })).optional(),
     })
     .safeParse(input);
   if (!p.success) return { ok: false, motivo: "validacion" };

@@ -44,3 +44,21 @@ export async function elegirPrimerDiaLibre(page: Page) {
   }
   throw new Error("No hay días libres");
 }
+
+const claves = {
+  administrador: ["administrador@yerga.test", "Yerga-Admin-2026"],
+  encargado: ["encargado@yerga.test", "Yerga-Encargado-2026"],
+  sala: ["sala@yerga.test", "Yerga-Sala-2026"],
+} as const;
+
+/** Entra en el panel con un rol (sin pasar por el cambio de contraseña inicial). */
+export async function entrarComo(page: Page, rol: keyof typeof claves, destino = "/panel") {
+  const [correo, clave] = claves[rol];
+  await sql("update usuario set debe_cambiar_clave = false where correo = $1", [correo]);
+  await sql("delete from limite_intentos where clave like 'acceso%'");
+  await page.goto(`/panel/acceso?siguiente=${encodeURIComponent(destino)}`);
+  await page.getByLabel("Correo").fill(correo);
+  await page.getByLabel("Contraseña").fill(clave);
+  await page.getByRole("button", { name: "Entrar" }).click();
+  await page.waitForURL((u) => !u.pathname.startsWith("/panel/acceso"));
+}

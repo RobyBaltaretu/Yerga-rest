@@ -111,7 +111,7 @@ export function NavPanel({ nombre, rol }: { nombre: string; rol: Rol }) {
       ) : null}
 
       {/* Barra lateral fija en tableta horizontal y escritorio */}
-      <aside className="sticky top-0 hidden h-dvh w-64 shrink-0 flex-col bg-brasa p-4 lg:flex">
+      <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 xl:w-64 flex-col bg-brasa p-4 lg:flex">
         <div className="mb-6 flex items-center justify-between">
           <span className="font-display text-2xl text-arroz">Yerga</span>
           <Link href="/panel/reservas/nueva" className="inline-flex min-h-10 items-center gap-1 rounded-full bg-pimenton px-3 text-sm font-semibold text-white">

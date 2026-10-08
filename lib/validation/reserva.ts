@@ -17,7 +17,7 @@ export const telefono = z
   .regex(/^\+?[0-9 ()-]{9,20}$/, "telefono");
 
 export const arrozEncargado = z.object({
-  plato_id: z.uuid(),
+  plato_id: z.guid(),
   raciones: z.coerce.number().int().min(1).max(40),
 });
 
@@ -45,10 +45,10 @@ export const datosCliente = z
 export type DatosCliente = z.infer<typeof datosCliente>;
 
 export const confirmacion = z.object({
-  token: z.uuid().nullable(),
+  token: z.guid().nullable(),
   inicio: instanteISO,
   comensales: z.coerce.number().int().min(1).max(40),
-  zona_id: z.uuid().nullable().optional(),
+  zona_id: z.guid().nullable().optional(),
   arroces: z.array(arrozEncargado).max(4).default([]),
   segundos: z.coerce.number().int().min(0).max(36_000).optional(),
   turnstile: z.string().optional(),

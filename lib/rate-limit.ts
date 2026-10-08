@@ -14,3 +14,13 @@ export async function permitir(clave: string, maximo: number, ventanaSeg: number
   }
   return data === true;
 }
+
+/** ¿Se ha superado el límite? (no consume intento). */
+export async function bloqueado(clave: string, maximo: number, ventanaSeg: number): Promise<boolean> {
+  const { data } = await createAdminClient().rpc("intentos_superados", {
+    p_clave: clave,
+    p_maximo: maximo,
+    p_ventana_seg: ventanaSeg,
+  });
+  return data === true;
+}

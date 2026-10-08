@@ -116,3 +116,4 @@ existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las vari
 | 3. Motor de disponibilidad | ✅ |
 | 4. Reserva pública | ✅ |
 | 5. Acceso y estructura del panel | ✅ |
+| 6. Reservas en el panel | ✅ |
