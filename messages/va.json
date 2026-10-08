@@ -1,0 +1,357 @@
+{
+  "meta": {
+    "title": "Arrossera Yerga · Paella valenciana a llenya",
+    "description": "Arrossos valencians a foc de llenya de taronger. Reserva la teua taula i tria el teu arròs."
+  },
+  "home": {
+    "title": "L'arròs no espera. La teua taula, sí.",
+    "subtitle": "Paelles a llenya fetes al moment per a la teua taula. Reserva i tria el teu arròs."
+  },
+  "reserva": {
+    "titulo": "Reserva la teua taula",
+    "subtitulo": "Només t'oferim hores amb una taula lliure de veritat.",
+    "pasos": {
+      "comensales": "Persones i dia",
+      "hora": "Hora",
+      "zona": "Zona",
+      "arroz": "El teu arròs",
+      "datos": "Les teues dades",
+      "confirmacion": "Confirmada"
+    },
+    "paso": "Pas {actual} de {total}",
+    "atras": "Arrere",
+    "continuar": "Continuar",
+    "comensales": {
+      "titulo": "Quants sou?",
+      "persona": "{n, plural, one {# persona} other {# persones}}",
+      "mas": "Més de {max}",
+      "grupoAyuda": "Per a grups de més de {max} persones et preparem la taula a mà."
+    },
+    "calendario": {
+      "titulo": "Quin dia?",
+      "anterior": "Mes anterior",
+      "siguiente": "Mes següent",
+      "cerrado": "Tancat",
+      "completo": "Complet",
+      "disponible": "Hi ha taula",
+      "cargando": "Buscant taules…",
+      "leyenda": "Els dies ratllats estan tancats o complets."
+    },
+    "horas": {
+      "titulo": "A quina hora?",
+      "comida": "Dinar",
+      "cena": "Sopar",
+      "completa": "Completa",
+      "avisame": "Avisa'm si s'allibera",
+      "ninguna": "Eixe dia ja no queda taula per a {n, plural, one {# persona} other {# persones}}.",
+      "otroDia": "Triar un altre dia",
+      "reteniendo": "Guardant la teua taula…",
+      "sinGrupo": "No tenim taula en línia per a tantes persones. Envia'ns una sol·licitud de grup."
+    },
+    "zona": {
+      "titulo": "On preferiu?",
+      "ayuda": "A eixa hora hi ha lloc a les dues zones.",
+      "sala": "Sala",
+      "terraza": "Terrassa"
+    },
+    "arroz": {
+      "titulo": "Tria el teu arròs",
+      "ayuda": "L'arròs bo es fa per encàrrec. Si el tries ara, estarà en el seu punt quan arribeu.",
+      "minimo": "Mínim {n} persones",
+      "raciones": "Per a quants",
+      "porPersona": "{precio} per persona",
+      "saltar": "Preferisc decidir a la taula",
+      "elegido": "Triat",
+      "quitar": "Llevar",
+      "otro": "Afegir un altre arròs",
+      "ninguno": "Per a {n, plural, one {# persona} other {# persones}} no hi ha arrossos per encàrrec; podreu triar a la taula.",
+      "max": "Com a molt, tantes racions com persones.",
+      "elegir": "Triar"
+    },
+    "datos": {
+      "titulo": "Les teues dades",
+      "nombre": "Nom",
+      "telefono": "Telèfon",
+      "correo": "Correu electrònic",
+      "alergias": "Al·lèrgies o intoleràncies",
+      "alergiasAyuda": "Opcional. La cuina ho tindrà en compte.",
+      "salud": "Accepte que s'use aquesta informació de salut només per a preparar la meua reserva.",
+      "ocasion": "Celebreu alguna cosa?",
+      "ocasiones": {
+        "": "Res en especial",
+        "cumpleanos": "Aniversari de naixement",
+        "aniversario": "Aniversari",
+        "negocios": "Dinar de negocis",
+        "celebracion": "Celebració",
+        "otra": "Una altra"
+      },
+      "tronas": "Trones",
+      "sillaRuedas": "Algú ve en cadira de rodes",
+      "notas": "Alguna cosa més que hàgem de saber",
+      "privacidad": "He llegit i accepte la <link>política de privacitat</link>.",
+      "comercial": "Vull rebre novetats i ofertes de Yerga (opcional).",
+      "reservar": "Confirmar reserva",
+      "enviando": "Confirmant…",
+      "retenida": "Et guardem la taula {tiempo}",
+      "caducada": "Ha passat el temps de reserva, però intentarem mantindre't la taula en confirmar."
+    },
+    "resumen": {
+      "comensales": "{n, plural, one {# persona} other {# persones}}",
+      "zona": "Zona",
+      "arroz": "Arròs"
+    },
+    "ok": {
+      "titulo": "Taula reservada!",
+      "texto": "T'esperem el {fecha} a les {hora}.",
+      "correo": "T'hem enviat la confirmació a {correo}.",
+      "calendario": "Afegir al calendari",
+      "gestionar": "Veure, canviar o cancel·lar la meua reserva",
+      "volver": "Tornar a la portada"
+    },
+    "fallo": {
+      "ocupada": "Vaja, algú s'ha avançat i eixa taula ja no està lliure.",
+      "alternativas": "Aquestes són les hores lliures més pròximes:",
+      "general": "No hem pogut completar la reserva. Torna-ho a provar o telefona'ns al {telefono}.",
+      "limite": "Massa intents seguits. Espera uns minuts.",
+      "turnstile": "No hem pogut comprovar que no eres un robot. Recarrega la pàgina."
+    },
+    "errores": {
+      "nombre": "Escriu el teu nom.",
+      "telefono": "Revisa el telèfon.",
+      "correo": "Revisa el correu.",
+      "privacidad": "Necessitem que acceptes la política de privacitat.",
+      "salud": "Per a guardar al·lèrgies necessitem el teu consentiment.",
+      "fecha": "Tria un dia.",
+      "hora": "Tria una hora.",
+      "form": "Revisa les dades."
+    },
+    "grupo": {
+      "titulo": "Sol·licitud de grup",
+      "texto": "Per a {n, plural, one {# persona} other {# persones}} preparem la taula a mà. Digues-nos quan i et confirmem de seguida.",
+      "personas": "Persones",
+      "fecha": "Dia",
+      "hora": "Hora aproximada",
+      "enviar": "Enviar sol·licitud",
+      "ok": "Rebut! Et confirmarem la reserva per correu o telèfon.",
+      "volverOnline": "Som menys: reservar en línia"
+    },
+    "espera": {
+      "titulo": "T'avisem si s'allibera",
+      "texto": "Si s'allibera una taula per a {n, plural, one {# persona} other {# persones}} el {fecha} ({turno}), t'escrivim de seguida.",
+      "enviar": "Apuntar-me",
+      "ok": "Apuntat. Si s'allibera una taula, t'avisem per correu.",
+      "cerrar": "Tancar"
+    },
+    "gestion": {
+      "titulo": "La teua reserva",
+      "estado": {
+        "pendiente": "Pendent de confirmar pel restaurant",
+        "confirmada": "Confirmada",
+        "reconfirmada": "Confirmada per tu",
+        "sentada": "En curs",
+        "finalizada": "Finalitzada",
+        "cancelada": "Cancel·lada",
+        "no_presentada": "No presentada"
+      },
+      "cambiar": "Canviar dia, hora o persones",
+      "cancelar": "Cancel·lar reserva",
+      "cancelarSeguro": "Segur que vols cancel·lar? La taula quedarà lliure per a una altra persona.",
+      "siCancelar": "Sí, cancel·lar",
+      "noCancelar": "No, mantindre-la",
+      "cancelada": "Reserva cancel·lada. Esperem vore't prompte!",
+      "fueraPlazo": "Falten menys de {horas} hores: per a canvis o cancel·lacions telefona'ns al {telefono}.",
+      "confirmar": "Confirme que venim",
+      "reconfirmada": "Gràcies! T'esperem.",
+      "noEncontrada": "No trobem aquesta reserva. Revisa l'enllaç del correu.",
+      "guardar": "Guardar canvis",
+      "cambiada": "Reserva actualitzada.",
+      "volver": "Tornar"
+    },
+    "cuentaAtras": "{min}:{seg}"
+  },
+  "web": {
+    "nav": {
+      "arroces": "Arrossos",
+      "carta": "Carta",
+      "producto": "Producte",
+      "casa": "La casa",
+      "llegar": "Com arribar",
+      "reservar": "Reservar taula",
+      "idioma": "Idioma",
+      "menu": "Menú",
+      "cerrar": "Tancar",
+      "saltar": "Saltar al contingut"
+    },
+    "portada": {
+      "escenas": [
+        "Foc",
+        "Sofregit",
+        "Ingredients",
+        "Brou i arròs",
+        "Socarrat"
+      ],
+      "fuego": "Brases de llenya de taronger.",
+      "sofrito": "Oli, tomaca i pimentó tenyixen la paella.",
+      "ingredientes": "Pollastre, conill, garrofó i bajoqueta.",
+      "caldo": "Puja el brou i l'arròs es reparteix en creu, com mana la tradició.",
+      "socarrat": "El brou s'evapora i la vora es daura.",
+      "desliza": "Llisca per a cuinar",
+      "sonido": "So del brou",
+      "sonidoOn": "So activat",
+      "estatica": "Així es fa una paella a Yerga, pas a pas."
+    },
+    "disponibilidad": "Queden {n, plural, one {# taula} other {# taules}} per a {cuando}",
+    "cuando": {
+      "hoy": "hui",
+      "manana": "demà",
+      "comida": "a migdia",
+      "cena": "per la nit"
+    },
+    "arroces": {
+      "titulo": "Els nostres arrossos",
+      "intro": "Per encàrrec i a llenya. Tria el teu en reservar i estarà en el seu punt quan arribes.",
+      "minimo": "Mínim {n} persones",
+      "porPersona": "{precio} / persona",
+      "ingredientes": "Ingredients",
+      "alergenos": "Al·lèrgens",
+      "sinAlergenos": "Sense al·lèrgens de declaració obligatòria",
+      "reservarCon": "Reservar amb este arròs",
+      "verMas": "Veure detall de {nombre}"
+    },
+    "entrantes": {
+      "titulo": "Per a començar",
+      "intro": "El que es demana mentre la paella reposa."
+    },
+    "producto": {
+      "titulo": "El producte",
+      "albufera": "L'Albufera",
+      "horta": "L'Horta",
+      "mar": "Mar Mediterrània",
+      "valencia": "València",
+      "arroz": "Arròs D.O. València",
+      "huerta": "Verdura de l'Horta",
+      "lonja": "Peix de la llotja",
+      "lena": "Llenya de taronger"
+    },
+    "casa": {
+      "titulo": "Una història que cuinem i que volem compartir",
+      "historia": "Història",
+      "equipo": "Equip",
+      "sala": "Sala i terrassa",
+      "salaTexto": "Una sala lluminosa al costat de la finestra i una terrassa per als dinars llargs de diumenge.",
+      "alma": "Eixa humilitat, eixa proximitat, eixe «on caben dos, caben tres» és l'ànima de Yerga.",
+      "foto": "L'àvia Yerga servint arròs a la família (fotografia provisional).",
+      "elementos": "Cada element té la seua història",
+      "arroz": "L'arròs, el nostre ingredient i la nostra terra.",
+      "paella": "La paella, símbol de compartir, de reunir i de cuidar.",
+      "casaElemento": "Sa casa, on sempre hi havia un plat calent per a tots.",
+      "almaElemento": "L'ànima, l'amor que ella posà en cada menjar i que hui seguim servint."
+    },
+    "carta": {
+      "titulo": "Carta",
+      "intro": "Preus amb IVA inclòs. Pregunta pels al·lèrgens: t'ho contem tot.",
+      "verCompleta": "Veure la carta completa",
+      "arroces": "Arrossos",
+      "entrantes": "Per a començar",
+      "postres": "Postres",
+      "grupos": "Menús de grup",
+      "ejemplo": "exemple",
+      "avisoEjemplo": "Carta i preus d'exemple: pendents de substituir pels reals.",
+      "temporada": "Temporada: {t}"
+    },
+    "alergenos": {
+      "gluten": "Gluten",
+      "crustaceos": "Crustacis",
+      "huevo": "Ou",
+      "pescado": "Peix",
+      "cacahuetes": "Cacauets",
+      "soja": "Soja",
+      "lacteos": "Lactis",
+      "frutos_cascara": "Fruits de closca",
+      "apio": "Api",
+      "mostaza": "Mostassa",
+      "sesamo": "Sèsam",
+      "sulfitos": "Sulfits",
+      "altramuces": "Tramussos",
+      "moluscos": "Mol·luscs"
+    },
+    "opiniones": {
+      "titulo": "El que diuen",
+      "ver": "Veure a {origen}"
+    },
+    "llegar": {
+      "titulo": "Com arribar",
+      "direccion": "Adreça",
+      "horario": "Horari",
+      "aparcamiento": "Aparcament",
+      "contacto": "Contacte",
+      "llamar": "Telefonar",
+      "whatsapp": "WhatsApp",
+      "mapa": "Obrir en el mapa",
+      "cerrado": "Tancat",
+      "dias": [
+        "Diumenge",
+        "Dilluns",
+        "Dimarts",
+        "Dimecres",
+        "Dijous",
+        "Divendres",
+        "Dissabte"
+      ],
+      "comida": "Dinar",
+      "cena": "Sopar",
+      "azulejo": "Busca el taulellet de la porta",
+      "azulejoAlt": "Placa de taulells valencians amb el nom «Yerga, arrosseria valenciana», barques de l'Albufera, una barraca i una mata d'arròs."
+    },
+    "pie": {
+      "legal": "Avís legal",
+      "privacidad": "Privacitat",
+      "cookies": "Galetes",
+      "panel": "Accés personal",
+      "derechos": "© {anio} {nombre}"
+    },
+    "cta": {
+      "titulo": "Et guardem taula?",
+      "texto": "L'arròs bo es fa per encàrrec i les taules són limitades."
+    },
+    "seo": {
+      "paella": {
+        "titulo": "Paella valenciana autèntica a llenya",
+        "descripcion": "La paella valenciana de veritat: pollastre, conill, garrofó i bajoqueta, a foc de llenya de taronger. Reserva i encarrega-la."
+      },
+      "arroceria": {
+        "titulo": "Arrossera a {localidad}",
+        "descripcion": "Arrossera a {localidad} amb arrossos valencians a llenya. Reserva en línia amb disponibilitat real."
+      },
+      "grupos": {
+        "titulo": "Dinars de grup i celebracions",
+        "descripcion": "Dinars de grup amb paella valenciana a llenya: menús tancats, taules per a grups i reserva per sol·licitud."
+      },
+      "cuerpos": {
+        "paella": [
+          "La paella valenciana es fa amb pocs ingredients i molt d'ofici: pollastre, conill, garrofó, bajoqueta, tomaca, pimentó, safrà, aigua, sal, oli i arròs de la Denominació d'Origen València. A Yerga la cuinem a foc de llenya de taronger, que dona una calor viva i una aroma que no té el gas.",
+          "Es fa per encàrrec i per a un mínim de dues persones. Tria la teua paella en reservar i estarà en el seu punt, amb el seu socarrat, quan vos asseguen a taula."
+        ],
+        "arroceria": [
+          "Arrossos valencians a llenya: paella valenciana, arròs a banda, del senyoret, negre, fideuà, arròs al forn i melós de llamàntol.",
+          "Reserva en línia en menys d'un minut: només t'oferim hores amb una taula lliure de veritat, i pots deixar triat l'arròs."
+        ],
+        "grupos": [
+          "Dinars d'empresa, aniversaris, penyes i famílies: ajuntem taules, preparem diverses paelles alhora i tanquem un menú amb entrants al mig, arròs, postre i beguda.",
+          "Per a grups de més de deu persones envia'ns una sol·licitud amb el dia i l'hora; et confirmem la reserva tan prompte com la revisem."
+        ]
+      }
+    },
+    "grupos": {
+      "texto": "Per a grups preparem la sala a mà: ajuntem taules, encarreguem els arrossos amb antelació i tanquem un menú a la vostra mida.",
+      "boton": "Sol·licitar taula per a grup"
+    },
+    "terminos": {
+      "traduccion": "Traducció"
+    },
+    "marca": {
+      "lema": "Arrossos amb ànima",
+      "bienvenidos": "Benvinguts a sa casa."
+    }
+  }
+}

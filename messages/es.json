@@ -1,0 +1,357 @@
+{
+  "meta": {
+    "title": "Arrocería Yerga · Paella valenciana a leña",
+    "description": "Arroces valencianos a fuego de leña de naranjo. Reserva tu mesa y elige tu arroz."
+  },
+  "home": {
+    "title": "El arroz no espera. Tu mesa, sí.",
+    "subtitle": "Paellas a leña hechas al momento para tu mesa. Reserva y elige tu arroz."
+  },
+  "reserva": {
+    "titulo": "Reserva tu mesa",
+    "subtitulo": "Solo te ofrecemos horas con una mesa libre de verdad.",
+    "pasos": {
+      "comensales": "Personas y día",
+      "hora": "Hora",
+      "zona": "Zona",
+      "arroz": "Tu arroz",
+      "datos": "Tus datos",
+      "confirmacion": "Confirmada"
+    },
+    "paso": "Paso {actual} de {total}",
+    "atras": "Atrás",
+    "continuar": "Continuar",
+    "comensales": {
+      "titulo": "¿Cuántos sois?",
+      "persona": "{n, plural, one {# persona} other {# personas}}",
+      "mas": "Más de {max}",
+      "grupoAyuda": "Para grupos de más de {max} personas te preparamos la mesa a mano."
+    },
+    "calendario": {
+      "titulo": "¿Qué día?",
+      "anterior": "Mes anterior",
+      "siguiente": "Mes siguiente",
+      "cerrado": "Cerrado",
+      "completo": "Completo",
+      "disponible": "Hay mesa",
+      "cargando": "Buscando mesas…",
+      "leyenda": "Los días tachados están cerrados o completos."
+    },
+    "horas": {
+      "titulo": "¿A qué hora?",
+      "comida": "Comida",
+      "cena": "Cena",
+      "completa": "Completa",
+      "avisame": "Avísame si se libera",
+      "ninguna": "Ese día ya no queda mesa para {n, plural, one {# persona} other {# personas}}.",
+      "otroDia": "Elegir otro día",
+      "reteniendo": "Guardando tu mesa…",
+      "sinGrupo": "No tenemos mesa online para tantas personas. Envíanos una solicitud de grupo."
+    },
+    "zona": {
+      "titulo": "¿Dónde preferís?",
+      "ayuda": "A esa hora hay sitio en las dos zonas.",
+      "sala": "Sala",
+      "terraza": "Terraza"
+    },
+    "arroz": {
+      "titulo": "Elige tu arroz",
+      "ayuda": "El arroz bueno se hace por encargo. Si lo eliges ahora, estará en su punto cuando lleguéis.",
+      "minimo": "Mínimo {n} personas",
+      "raciones": "Para cuántos",
+      "porPersona": "{precio} por persona",
+      "saltar": "Prefiero decidir en la mesa",
+      "elegido": "Elegido",
+      "quitar": "Quitar",
+      "otro": "Añadir otro arroz",
+      "ninguno": "Para {n, plural, one {# persona} other {# personas}} no hay arroces por encargo; podréis elegir en mesa.",
+      "max": "Como mucho, tantas raciones como personas.",
+      "elegir": "Elegir"
+    },
+    "datos": {
+      "titulo": "Tus datos",
+      "nombre": "Nombre",
+      "telefono": "Teléfono",
+      "correo": "Correo electrónico",
+      "alergias": "Alergias o intolerancias",
+      "alergiasAyuda": "Opcional. La cocina lo tendrá en cuenta.",
+      "salud": "Acepto que se use esta información de salud solo para preparar mi reserva.",
+      "ocasion": "¿Celebráis algo?",
+      "ocasiones": {
+        "": "Nada en especial",
+        "cumpleanos": "Cumpleaños",
+        "aniversario": "Aniversario",
+        "negocios": "Comida de negocios",
+        "celebracion": "Celebración",
+        "otra": "Otra"
+      },
+      "tronas": "Tronas",
+      "sillaRuedas": "Alguien viene en silla de ruedas",
+      "notas": "Algo más que debamos saber",
+      "privacidad": "He leído y acepto la <link>política de privacidad</link>.",
+      "comercial": "Quiero recibir novedades y ofertas de Yerga (opcional).",
+      "reservar": "Confirmar reserva",
+      "enviando": "Confirmando…",
+      "retenida": "Te guardamos la mesa {tiempo}",
+      "caducada": "Ha pasado el tiempo de reserva, pero intentaremos mantenerte la mesa al confirmar."
+    },
+    "resumen": {
+      "comensales": "{n, plural, one {# persona} other {# personas}}",
+      "zona": "Zona",
+      "arroz": "Arroz"
+    },
+    "ok": {
+      "titulo": "¡Mesa reservada!",
+      "texto": "Te esperamos el {fecha} a las {hora}.",
+      "correo": "Te hemos enviado la confirmación a {correo}.",
+      "calendario": "Añadir al calendario",
+      "gestionar": "Ver, cambiar o cancelar mi reserva",
+      "volver": "Volver a la portada"
+    },
+    "fallo": {
+      "ocupada": "Vaya, alguien se ha adelantado y esa mesa ya no está libre.",
+      "alternativas": "Estas son las horas libres más cercanas:",
+      "general": "No hemos podido completar la reserva. Inténtalo de nuevo o llámanos al {telefono}.",
+      "limite": "Demasiados intentos seguidos. Espera unos minutos.",
+      "turnstile": "No hemos podido comprobar que no eres un robot. Recarga la página."
+    },
+    "errores": {
+      "nombre": "Escribe tu nombre.",
+      "telefono": "Revisa el teléfono.",
+      "correo": "Revisa el correo.",
+      "privacidad": "Necesitamos que aceptes la política de privacidad.",
+      "salud": "Para guardar alergias necesitamos tu consentimiento.",
+      "fecha": "Elige un día.",
+      "hora": "Elige una hora.",
+      "form": "Revisa los datos."
+    },
+    "grupo": {
+      "titulo": "Solicitud de grupo",
+      "texto": "Para {n, plural, one {# persona} other {# personas}} preparamos la mesa a mano. Dinos cuándo y te confirmamos en seguida.",
+      "personas": "Personas",
+      "fecha": "Día",
+      "hora": "Hora aproximada",
+      "enviar": "Enviar solicitud",
+      "ok": "¡Recibido! Te confirmaremos la reserva por correo o teléfono.",
+      "volverOnline": "Somos menos: reservar online"
+    },
+    "espera": {
+      "titulo": "Te avisamos si se libera",
+      "texto": "Si se libera una mesa para {n, plural, one {# persona} other {# personas}} el {fecha} ({turno}), te escribimos al momento.",
+      "enviar": "Apuntarme",
+      "ok": "Apuntado. Si se libera una mesa, te avisamos por correo.",
+      "cerrar": "Cerrar"
+    },
+    "gestion": {
+      "titulo": "Tu reserva",
+      "estado": {
+        "pendiente": "Pendiente de confirmar por el restaurante",
+        "confirmada": "Confirmada",
+        "reconfirmada": "Confirmada por ti",
+        "sentada": "En curso",
+        "finalizada": "Finalizada",
+        "cancelada": "Cancelada",
+        "no_presentada": "No presentada"
+      },
+      "cambiar": "Cambiar día, hora o personas",
+      "cancelar": "Cancelar reserva",
+      "cancelarSeguro": "¿Seguro que quieres cancelar? La mesa quedará libre para otra persona.",
+      "siCancelar": "Sí, cancelar",
+      "noCancelar": "No, mantenerla",
+      "cancelada": "Reserva cancelada. ¡Esperamos verte pronto!",
+      "fueraPlazo": "Faltan menos de {horas} horas: para cambios o cancelaciones llámanos al {telefono}.",
+      "confirmar": "Confirmo que vamos",
+      "reconfirmada": "¡Gracias! Te esperamos.",
+      "noEncontrada": "No encontramos esta reserva. Revisa el enlace del correo.",
+      "guardar": "Guardar cambios",
+      "cambiada": "Reserva actualizada.",
+      "volver": "Volver"
+    },
+    "cuentaAtras": "{min}:{seg}"
+  },
+  "web": {
+    "nav": {
+      "arroces": "Arroces",
+      "carta": "Carta",
+      "producto": "Producto",
+      "casa": "La casa",
+      "llegar": "Cómo llegar",
+      "reservar": "Reservar mesa",
+      "idioma": "Idioma",
+      "menu": "Menú",
+      "cerrar": "Cerrar",
+      "saltar": "Saltar al contenido"
+    },
+    "portada": {
+      "escenas": [
+        "Fuego",
+        "Sofrito",
+        "Ingredientes",
+        "Caldo y arroz",
+        "Socarrat"
+      ],
+      "fuego": "Brasas de leña de naranjo.",
+      "sofrito": "Aceite, tomate y pimentón tiñen la paella.",
+      "ingredientes": "Pollo, conejo, garrofó y bajoqueta.",
+      "caldo": "Sube el caldo y el arroz se reparte en cruz, como manda la tradición.",
+      "socarrat": "El caldo se evapora y el borde se dora.",
+      "desliza": "Desliza para cocinar",
+      "sonido": "Sonido del caldo",
+      "sonidoOn": "Sonido activado",
+      "estatica": "Así se hace una paella en Yerga, paso a paso."
+    },
+    "disponibilidad": "Quedan {n, plural, one {# mesa} other {# mesas}} para {cuando}",
+    "cuando": {
+      "hoy": "hoy",
+      "manana": "mañana",
+      "comida": "a mediodía",
+      "cena": "por la noche"
+    },
+    "arroces": {
+      "titulo": "Nuestros arroces",
+      "intro": "Por encargo y a leña. Elige el tuyo al reservar y estará en su punto cuando llegues.",
+      "minimo": "Mínimo {n} personas",
+      "porPersona": "{precio} / persona",
+      "ingredientes": "Ingredientes",
+      "alergenos": "Alérgenos",
+      "sinAlergenos": "Sin alérgenos de declaración obligatoria",
+      "reservarCon": "Reservar con este arroz",
+      "verMas": "Ver detalle de {nombre}"
+    },
+    "entrantes": {
+      "titulo": "Para empezar",
+      "intro": "Lo que se pide mientras la paella reposa."
+    },
+    "producto": {
+      "titulo": "El producto",
+      "albufera": "L'Albufera",
+      "horta": "L'Horta",
+      "mar": "Mar Mediterráneo",
+      "valencia": "València",
+      "arroz": "Arroz D.O. Valencia",
+      "huerta": "Verdura de l'Horta",
+      "lonja": "Pescado de la lonja",
+      "lena": "Leña de naranjo"
+    },
+    "casa": {
+      "titulo": "Una historia que cocinamos y que queremos compartir",
+      "historia": "Historia",
+      "equipo": "Equipo",
+      "sala": "Sala y terraza",
+      "salaTexto": "Una sala luminosa junto a la ventana y una terraza para las comidas largas de domingo.",
+      "alma": "Esa humildad, esa cercanía, ese «donde caben dos, caben tres» es el alma de Yerga.",
+      "foto": "La abuela Yerga sirviendo arroz a la familia (fotografía provisional).",
+      "elementos": "Cada elemento tiene su historia",
+      "arroz": "El arroz, nuestro ingrediente y nuestra tierra.",
+      "paella": "La paella, símbolo de compartir, de reunir y de cuidar.",
+      "casaElemento": "Su casa, donde siempre había un plato caliente para todos.",
+      "almaElemento": "El alma, el amor que ella puso en cada comida y que hoy seguimos sirviendo."
+    },
+    "carta": {
+      "titulo": "Carta",
+      "intro": "Precios con IVA incluido. Pregunta por los alérgenos: te lo contamos todo.",
+      "verCompleta": "Ver la carta completa",
+      "arroces": "Arroces",
+      "entrantes": "Para empezar",
+      "postres": "Postres",
+      "grupos": "Menús de grupo",
+      "ejemplo": "ejemplo",
+      "avisoEjemplo": "Carta y precios de ejemplo: pendientes de sustituir por los reales.",
+      "temporada": "Temporada: {t}"
+    },
+    "alergenos": {
+      "gluten": "Gluten",
+      "crustaceos": "Crustáceos",
+      "huevo": "Huevo",
+      "pescado": "Pescado",
+      "cacahuetes": "Cacahuetes",
+      "soja": "Soja",
+      "lacteos": "Lácteos",
+      "frutos_cascara": "Frutos de cáscara",
+      "apio": "Apio",
+      "mostaza": "Mostaza",
+      "sesamo": "Sésamo",
+      "sulfitos": "Sulfitos",
+      "altramuces": "Altramuces",
+      "moluscos": "Moluscos"
+    },
+    "opiniones": {
+      "titulo": "Lo que dicen",
+      "ver": "Ver en {origen}"
+    },
+    "llegar": {
+      "titulo": "Cómo llegar",
+      "direccion": "Dirección",
+      "horario": "Horario",
+      "aparcamiento": "Aparcamiento",
+      "contacto": "Contacto",
+      "llamar": "Llamar",
+      "whatsapp": "WhatsApp",
+      "mapa": "Abrir en el mapa",
+      "cerrado": "Cerrado",
+      "dias": [
+        "Domingo",
+        "Lunes",
+        "Martes",
+        "Miércoles",
+        "Jueves",
+        "Viernes",
+        "Sábado"
+      ],
+      "comida": "Comida",
+      "cena": "Cena",
+      "azulejo": "Busca el azulejo de la puerta",
+      "azulejoAlt": "Placa de azulejos valencianos con el nombre «Yerga, arrocería valenciana», barcas de la Albufera, una barraca y una mata de arroz."
+    },
+    "pie": {
+      "legal": "Aviso legal",
+      "privacidad": "Privacidad",
+      "cookies": "Cookies",
+      "panel": "Acceso personal",
+      "derechos": "© {anio} {nombre}"
+    },
+    "cta": {
+      "titulo": "¿Te guardamos mesa?",
+      "texto": "El arroz bueno se hace por encargo y las mesas son limitadas."
+    },
+    "seo": {
+      "paella": {
+        "titulo": "Paella valenciana auténtica a leña",
+        "descripcion": "La paella valenciana de verdad: pollo, conejo, garrofó y bajoqueta, a fuego de leña de naranjo. Reserva y encárgala."
+      },
+      "arroceria": {
+        "titulo": "Arrocería en {localidad}",
+        "descripcion": "Arrocería en {localidad} con arroces valencianos a leña. Reserva online con disponibilidad real."
+      },
+      "grupos": {
+        "titulo": "Comidas de grupo y celebraciones",
+        "descripcion": "Comidas de grupo con paella valenciana a leña: menús cerrados, mesas para grupos y reserva por solicitud."
+      },
+      "cuerpos": {
+        "paella": [
+          "La paella valenciana se hace con pocos ingredientes y mucho oficio: pollo, conejo, garrofó, bajoqueta, tomate, pimentón, azafrán, agua, sal, aceite y arroz de la Denominación de Origen Valencia. En Yerga la cocinamos a fuego de leña de naranjo, que da un calor vivo y un aroma que no tiene el gas.",
+          "Se hace por encargo y para un mínimo de dos personas. Elige tu paella al reservar y estará en su punto, con su socarrat, cuando os sentéis a la mesa."
+        ],
+        "arroceria": [
+          "Arroces valencianos a leña: paella valenciana, arròs a banda, del senyoret, negre, fideuà, arròs al forn y meloso de bogavante.",
+          "Reserva online en menos de un minuto: solo te ofrecemos horas con una mesa libre de verdad, y puedes dejar elegido el arroz."
+        ],
+        "grupos": [
+          "Comidas de empresa, cumpleaños, peñas y familias: juntamos mesas, preparamos varias paellas a la vez y cerramos un menú con entrantes al centro, arroz, postre y bebida.",
+          "Para grupos de más de diez personas envíanos una solicitud con el día y la hora; te confirmamos la reserva en cuanto la revisamos."
+        ]
+      }
+    },
+    "grupos": {
+      "texto": "Para grupos preparamos la sala a mano: juntamos mesas, encargamos los arroces con antelación y cerramos un menú a vuestra medida.",
+      "boton": "Solicitar mesa para grupo"
+    },
+    "terminos": {
+      "traduccion": "Traducción"
+    },
+    "marca": {
+      "lema": "Arroces con alma",
+      "bienvenidos": "Bienvenidos a su casa."
+    }
+  }
+}
