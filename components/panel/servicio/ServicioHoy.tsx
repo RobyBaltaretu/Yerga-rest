@@ -382,7 +382,7 @@ export function ServicioHoy(p: Props) {
             </div>
           </div>
 
-          {seleccionada ? (
+          {seleccionada && !arrastre ? (
             <div className="mb-2 flex flex-wrap items-center justify-between gap-2 rounded-xl bg-azafran/25 px-3 py-2 text-sm font-semibold">
               <span>
                 Toca una mesa para {seleccionada.mesas.length ? "mover" : "sentar"} a {seleccionada.nombre} ({seleccionada.comensales} pax). Las válidas están resaltadas.

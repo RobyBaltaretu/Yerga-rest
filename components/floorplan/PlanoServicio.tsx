@@ -90,6 +90,9 @@ export default function PlanoServicio({
         className="w-full overflow-hidden rounded-2xl bg-[#fbf7f0] ring-1 ring-tinta/10"
         style={{ height: alto, touchAction: zoom > 1 ? "none" : "pan-y" }}
         data-testid="plano-servicio"
+        data-escala={escala}
+        data-origen-x={caja.x - desplazamiento.x / escala}
+        data-origen-y={caja.y - desplazamiento.y / escala}
       >
         <Stage
           ref={stage}
