@@ -37,26 +37,52 @@ pnpm wrangler whoami    # si falla: pnpm wrangler login
 pnpm supabase projects list   # si falla: pnpm supabase login
 ```
 
-### 0.2 Lo único que debe aportar el propietario
+### 0.2 Genera y coloca tú todos los secretos
 
-Cinco valores que solo se pueden crear o ver en los paneles. Los guarda en
-`~/.yerga-secrets.env` (fuera del repositorio, `chmod 600`), una línea `NOMBRE=valor` por
-secreto. Si el archivo no existe o falta alguno, para y pídelo indicando cuál.
+El propietario quiere que generes o recuperes **todos** los secretos y los dejes en su
+sitio sin que él copie nada a mano. Para cada uno, usa la vía indicada; guarda los valores
+solo en un archivo temporal fuera del repositorio (`~/.yerga-secrets.env`, `chmod 600`) y
+bórralo al terminar.
 
-| Variable | Dónde se crea |
+| Secreto | Cómo lo obtienes |
 |---|---|
-| `CLOUDFLARE_API_TOKEN` | Cloudflare → Manage account → Account API tokens → plantilla «Edit Cloudflare Workers», limitado a esta cuenta. Nombre: `yerga-deploy` |
-| `RESEND_API_KEY` | Resend → API Keys → permiso «Sending access». Nombre: `yerga-email` |
-| `SUPABASE_ACCESS_TOKEN` | Supabase → Account → Access Tokens. Nombre: `yerga-cli` |
-| `SUPABASE_DB_PASSWORD` | Supabase → proyecto `arroceria-yerga` → Database → Settings → Reset database password |
-| `TURNSTILE_SECRET_KEY` | Cloudflare → Turnstile → `yerga-reservas` → Settings |
+| `CRON_SECRET` | `openssl rand -hex 32` |
+| `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY` | `pnpm supabase projects api-keys --project-ref gudvwapcvoymmsgkmonc` |
+| `SUPABASE_DB_PASSWORD` | Genera una contraseña fuerte (`openssl rand -base64 32`, sin caracteres que rompan una URL) y establécela con la Management API de Supabase (actualización de la contraseña de la base de datos del proyecto). La que se generó al crear el proyecto no está guardada: hay que sustituirla |
+| `SUPABASE_ACCESS_TOKEN` | Token personal para la CI. Créalo con la Management API o la CLI si la versión actual lo permite; si no, reutiliza el que deja `supabase login` en este equipo |
+| `TURNSTILE_SECRET_KEY` | API de Cloudflare: lee el widget `yerga-reservas` (clave del sitio en `SETUP.md`), cuya respuesta incluye la clave secreta |
+| `CLOUDFLARE_API_TOKEN` | API de Cloudflare: crea un token `yerga-deploy` con los permisos de la plantilla «Edit Cloudflare Workers», limitado a esta cuenta |
+| `RESEND_API_KEY` | API de Resend: crea una clave `yerga-email` con permiso `sending_access` |
 
-El resto lo obtienes o generas tú:
+Comprueba cada vía en la documentación actual del proveedor antes de usarla; no inventes
+rutas de API.
 
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY` y `SUPABASE_SERVICE_ROLE_KEY`:
-  `pnpm supabase projects api-keys --project-ref gudvwapcvoymmsgkmonc`.
-- `CRON_SECRET`: `openssl rand -hex 32`.
-- Valores no secretos, ya conocidos: ver la tabla de variables de `SETUP.md`.
+**Dos límites que no dependen de ti.** Crear tokens por API exige una credencial previa
+con permiso para ello, y las sesiones de `wrangler login` y de Resend no lo traen:
+
+- **Cloudflare:** la sesión OAuth de `wrangler` no puede crear tokens de API ni leer
+  Turnstile. Si la API lo rechaza, pide al propietario **una sola cosa**: un token
+  temporal creado con la plantilla «Create Additional Tokens», más permiso de lectura de
+  Turnstile. Con él creas `yerga-deploy`, lees la clave de Turnstile y le avisas para que
+  lo revoque.
+- **Resend:** no tiene inicio de sesión por CLI. Pide al propietario una clave temporal
+  de acceso completo; con ella creas `yerga-email` (solo envío) y le avisas para que
+  borre la temporal.
+
+Pide esas credenciales temporales de una vez, al principio, por el canal que el
+propietario prefiera que no sea el repositorio (lo normal: que las escriba él en
+`~/.yerga-secrets.env`). No sigas con valores de relleno.
+
+**Dónde va cada uno** (detalle en la sección 2):
+
+- GitHub Actions: todos los secretos, con `gh secret set`; los `NEXT_PUBLIC_*`, además,
+  como variables.
+- Worker de Cloudflare: los de ejecución, con `pnpm wrangler secret bulk`.
+- `.env.local` y `.dev.vars` del equipo: los nueve de ejecución.
+
+Al terminar, verifica con `gh secret list`, `gh variable list` y
+`pnpm wrangler secret list` (muestran nombres, no valores) y anota en `SETUP.md` el nombre
+y el permiso de cada token creado.
 
 ## 1. Ajustes de arquitectura para caber en el plan gratuito
 
