@@ -59,6 +59,33 @@ pnpm dev                            # http://localhost:3000/es
 | `pnpm preview` | Build de OpenNext y `wrangler dev` (simula Cloudflare Workers) |
 | `pnpm cf:deploy` | Despliega a Cloudflare (requiere credenciales) |
 
+## Base de datos
+
+- `supabase/migrations/…_esquema.sql`: todas las entidades del modelo de datos y la
+  restricción `asignacion_sin_solape` (una mesa no admite dos intervalos solapados; el
+  intervalo incluye el margen de recogida).
+- `supabase/migrations/…_seguridad.sql`: permisos por rol (RLS), protección de datos
+  legales, auditoría (`registro_cambios`) y publicación de tiempo real.
+- `supabase/migrations/…_disponibilidad.sql`: el motor. `horas_disponibles`,
+  `retener_mesa`, `confirmar_reserva` (atómica), gestión por código, operaciones del
+  panel (`crear_reserva_personal`, `asignar_reserva`, `cambiar_estado`,
+  `reorganizar_turno`…) y `tick` para tareas periódicas.
+- `supabase/seed.sql`: **único archivo de datos de ejemplo** (plano, turnos, carta,
+  textos, plantillas, usuarios y ~30 reservas de la semana en curso). Sustituirlo por los
+  datos reales es lo único necesario para pasar a producción.
+
+Usuarios de ejemplo (contraseña a cambiar en el primer acceso):
+
+| Rol | Correo | Contraseña |
+|---|---|---|
+| Administrador | `administrador@yerga.test` | `Yerga-Admin-2026` |
+| Encargado | `encargado@yerga.test` | `Yerga-Encargado-2026` |
+| Sala | `sala@yerga.test` | `Yerga-Sala-2026` |
+
+Las pruebas del motor (`lib/availability/motor.test.ts`) cubren cada regla de
+disponibilidad, la restricción contra solapes, la retención y una prueba de concurrencia
+con dos confirmaciones simultáneas sobre la última mesa: solo una gana.
+
 ## Despliegue en Cloudflare Workers
 
 1. `pnpm wrangler login` (o variables `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID`).
@@ -85,3 +112,5 @@ existen los secretos `CLOUDFLARE_API_TOKEN` y `CLOUDFLARE_ACCOUNT_ID` y las vari
 | Etapa | Estado |
 |---|---|
 | 1. Base | ✅ |
+| 2. Datos | ✅ |
+| 3. Motor de disponibilidad | ✅ |
