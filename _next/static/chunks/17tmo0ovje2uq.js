@@ -1,0 +1,1 @@
+(globalThis.TURBOPACK||(globalThis.TURBOPACK=[])).push(["object"==typeof document?document.currentScript:void 0,32664,t=>{"use strict";var i=t.i(36405);t.s(["BotonImprimir",0,function(){return(0,i.jsx)("button",{type:"button",onClick:()=>window.print(),className:"min-h-11 rounded-full bg-black px-4 font-semibold text-white print:hidden",children:"Imprimir"})}])}]);
