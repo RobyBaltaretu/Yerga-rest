@@ -1,0 +1,22 @@
+# Secretos y entornos locales
+.env
+.env.local
+.env.*.local
+.dev.vars
+!.env.example
+
+# Dependencias y compilación
+node_modules/
+.next/
+.open-next/
+.wrangler/
+out/
+coverage/
+playwright-report/
+test-results/
+
+# Supabase local
+supabase/.temp/
+supabase/.branches/
+
+.DS_Store
