@@ -154,3 +154,22 @@ borrar desde la pestaña Branches.
 - Retención de 30 días probada con fechas simuladas.
 - La conexión usa el pooler en modo sesión (puerto 5432); el host y el usuario se leen
   de la Management API (`/config/database/pooler`, comprobada en la especificación).
+
+### 08/10 · D3: revisión de seguridad (rama `sec/revision-seguridad`)
+- `tests/unit/rls-matriz.test.ts`: matriz tabla × rol × operación con `select`, `update`
+  y `delete` reales (24 tablas × 4 roles × 3 operaciones, en transacciones que se
+  deshacen). Coincide con las políticas a la primera. Comprobé que la prueba falla si se
+  cambia una expectativa.
+- También fija qué RPC ejecuta el anónimo (solo las cinco auxiliares de rol) y qué
+  funciones `security definer` del personal no comprueban el rol: seis de solo lectura,
+  riesgo aceptado y anotado.
+- Cabeceras de seguridad y CSP en `next.config.ts`; `tests/e2e/seguridad.spec.ts`
+  comprueba las cabeceras y que la web y el panel no incumplen la CSP.
+- `scripts/seguridad/sin-secretos.mjs` en la CI (tras el build) y antes de cada
+  despliegue. Probado con una clave plantada.
+- Historial de git revisado en todas las ramas: sin secretos (solo la clave anónima
+  pública de demostración de Supabase local en `vista-estatica`).
+- Resumen en `docs/SEGURIDAD.md`.
+- Verificado: lint, tipos, Vitest (65) y Playwright (36 pasan).
+- **Siguiente paso:** PR de D3 cuando se fusione el #8; después, D1 (criterios),
+  D2 (accesibilidad) y D4 (idiomas).
