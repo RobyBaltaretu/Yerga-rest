@@ -5,6 +5,10 @@ import { getConfig, getContenidos } from "@/lib/datos-publicos";
 import { paginasLegales, textoLegal, type PaginaLegal } from "@/lib/legal";
 import { tr } from "@/lib/i18n";
 
+export function generateStaticParams() {
+  return paginasLegales.map((legal) => ({ legal }));
+}
+
 const claves: Record<PaginaLegal, string> = { "aviso-legal": "legal.aviso", privacidad: "legal.privacidad", cookies: "legal.cookies" };
 
 export async function generateMetadata({ params }: PageProps<"/[locale]/[legal]">): Promise<Metadata> {

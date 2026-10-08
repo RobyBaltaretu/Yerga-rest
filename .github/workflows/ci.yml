@@ -133,6 +133,12 @@ jobs:
         if: steps.creds.outputs.ok == 'true'
         run: node scripts/produccion/crear-admin.mjs
 
+      - name: Recursos de caché (KV y D1, gratuitos)
+        if: steps.creds.outputs.ok == 'true'
+        run: node scripts/produccion/recursos-cloudflare.mjs
+
+      # `opennextjs-cloudflare deploy` llena la caché (KV) con las páginas prerenderizadas,
+      # crea la tabla de etiquetas (D1) y despliega.
       - name: Build y despliegue del Worker
         if: steps.creds.outputs.ok == 'true'
         run: pnpm cf:deploy

@@ -52,8 +52,9 @@ Para no superar los 10 ms de CPU por petición de Cloudflare Workers gratuito, t
 decisiones sustituyen a lo anterior donde haya conflicto. El detalle y los criterios de
 aceptación están en `docs/INFRA-COSTE-CERO.md`.
 
-- **Web pública prerenderizada**: las páginas de contenido se generan en el build y se
-  revalidan bajo demanda al guardar desde el panel. La disponibilidad no se cachea nunca;
+- **Web pública prerenderizada** (hecho, 9 oct): las páginas de contenido se generan en el
+  build y se revalidan bajo demanda al guardar desde el panel. Caché en Workers KV y
+  etiquetas en D1 (`open-next.config.ts`); los recursos los crea la CI. La disponibilidad no se cachea nunca;
   el aviso de mesas libres se pide desde el navegador.
 - **Panel como aplicación de navegador**: las pantallas leen de Supabase con la sesión del
   usuario (RLS y RPC); el servidor solo comprueba la sesión y atiende las escrituras que
