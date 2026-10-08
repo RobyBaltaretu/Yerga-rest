@@ -234,11 +234,18 @@
       "lena": "Orange-tree firewood"
     },
     "casa": {
-      "titulo": "Our house",
+      "titulo": "A story we cook and want to share",
       "historia": "Story",
       "equipo": "Team",
       "sala": "Dining room and terrace",
-      "salaTexto": "A bright dining room by the window and a terrace for long Sunday lunches."
+      "salaTexto": "A bright dining room by the window and a terrace for long Sunday lunches.",
+      "alma": "That humility, that warmth, that “there's always room for one more” is the soul of Yerga.",
+      "foto": "Grandma Yerga serving rice to the family (placeholder photo).",
+      "elementos": "Every element has its story",
+      "arroz": "Rice, our ingredient and our land.",
+      "paella": "The paella, a symbol of sharing, gathering and caring.",
+      "casaElemento": "Her home, where there was always a hot meal for everyone.",
+      "almaElemento": "The soul, the love she put into every meal and that we keep serving today."
     },
     "carta": {
       "titulo": "Menu",
@@ -292,7 +299,9 @@
         "Saturday"
       ],
       "comida": "Lunch",
-      "cena": "Dinner"
+      "cena": "Dinner",
+      "azulejo": "Look for the tiles by the door",
+      "azulejoAlt": "Valencian tile plaque reading “Yerga, Valencian rice house”, with Albufera boats, a barraca cottage and a rice plant."
     },
     "pie": {
       "legal": "Legal notice",
@@ -339,6 +348,10 @@
     },
     "terminos": {
       "traduccion": "Translation"
+    },
+    "marca": {
+      "lema": "Rice with soul",
+      "bienvenidos": "Welcome to her home."
     }
   }
 }

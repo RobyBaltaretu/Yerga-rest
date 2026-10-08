@@ -1,5 +1,6 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { LogoHorizontal } from "@/components/marca/Marca";
 import { MenuMovil, SelectorIdioma, AvisoDisponibilidad } from "./CabeceraCliente";
 
 /** Cabecera de la web pública con el botón «Reservar mesa» siempre a mano. */
@@ -18,10 +19,10 @@ export async function Cabecera({ locale }: { locale: string }) {
         {t("saltar")}
       </a>
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href="/" className="font-display text-2xl tracking-tight" aria-label="Arrocería Yerga">Yerga</Link>
+        <Link href="/" aria-label="Arrocería Yerga"><LogoHorizontal /></Link>
         <nav aria-label="Principal" className="hidden items-center gap-6 text-sm font-semibold lg:flex">
           {enlaces.map((e) => (
-            <Link key={e.href} href={e.href} className="text-arroz/85 hover:text-azafran">{e.texto}</Link>
+            <Link key={e.href} href={e.href} className="text-arroz/85 transition-colors hover:text-azafran">{e.texto}</Link>
           ))}
         </nav>
         <div className="flex items-center gap-2">

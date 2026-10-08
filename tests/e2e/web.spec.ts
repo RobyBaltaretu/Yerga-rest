@@ -12,7 +12,8 @@ test.describe("Web pública", () => {
     await expect(page.locator(".portada-animada")).toBeHidden();
     const estatica = page.locator(".portada-estatica");
     await expect(estatica).toBeVisible();
-    await expect(estatica.getByRole("img")).toHaveCount(5);
+    await expect(estatica.getByRole("img", { name: "Yerga · Arroces con alma" })).toBeVisible();
+    await expect(estatica.locator("ol").getByRole("img")).toHaveCount(5);
     await estatica.getByRole("link", { name: "Reservar mesa" }).click();
     await expect(page).toHaveURL(/\/es\/reservar$/);
   });

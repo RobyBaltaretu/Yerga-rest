@@ -12,7 +12,8 @@ Todo lo de esta lista es configurable. Casi todo se cambia desde el panel; lo de
 | Carta con precios y alérgenos reales | Panel → Carta y contenidos | 7 arroces, 5 entrantes, 4 postres y 1 menú de grupo marcados como «ejemplo» |
 | Titular de la portada (elegir una de las tres propuestas) | Panel → Carta y contenidos → Textos | «El arroz no espera. Tu mesa, sí.» |
 | Historia, equipo y textos de la casa | Panel → Carta y contenidos → Textos | Textos de ejemplo |
-| Fotos y vídeo profesionales | Sección «La casa» y fotos de platos | Ilustraciones provisionales generadas en código |
+| Fotos y vídeo profesionales | Sección «La casa» y fotos de platos | Foto de la abuela recortada de la identidad (`public/marca/abuela.webp`); platos con ilustraciones en código |
+| Logotipo en vector y placa de azulejos real | `public/marca/` (logo, emblema, iconos, azulejo) | Recortes de las imágenes de la identidad, en WebP |
 | Reseñas reales enlazadas a su origen | Panel → Carta y contenidos → Opiniones | 3 reseñas de ejemplo |
 | Textos legales revisados por un asesor | Panel → Carta y contenidos → Textos (legal.*) | Plantillas en `lib/legal.ts` |
 | Revisión de los textos en valenciano por una persona nativa | `messages/va.json`, plantillas de correo y carta | Borrador propio |

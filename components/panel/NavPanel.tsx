@@ -22,6 +22,7 @@ import {
 } from "lucide-react";
 import type { Rol } from "@/lib/panel/sesion";
 import { cerrarSesion } from "@/app/panel/acciones-sesion";
+import { LogoHorizontal } from "@/components/marca/Marca";
 
 type Item = { href: string; texto: string; icono: typeof Menu; roles?: Rol[] };
 
@@ -99,7 +100,7 @@ export function NavPanel({ nombre, rol }: { nombre: string; rol: Rol }) {
           <button type="button" className="absolute inset-0 bg-black/50" onClick={() => setAbierto(false)} aria-label="Cerrar menú" />
           <div className="absolute inset-y-0 left-0 flex w-72 flex-col bg-brasa p-4">
             <div className="mb-4 flex items-center justify-between">
-              <span className="font-display text-xl text-arroz">Yerga</span>
+              <LogoHorizontal />
               <button type="button" onClick={() => setAbierto(false)} aria-label="Cerrar menú" className="grid size-11 place-items-center rounded-full text-arroz hover:bg-white/10">
                 <X className="size-6" />
               </button>
@@ -113,7 +114,7 @@ export function NavPanel({ nombre, rol }: { nombre: string; rol: Rol }) {
       {/* Barra lateral fija en tableta horizontal y escritorio */}
       <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 xl:w-64 flex-col bg-brasa p-4 lg:flex">
         <div className="mb-6 flex items-center justify-between">
-          <span className="font-display text-2xl text-arroz">Yerga</span>
+          <LogoHorizontal className="[&_span]:text-xl" />
           <Link href="/panel/reservas/nueva" className="inline-flex min-h-10 items-center gap-1 rounded-full bg-pimenton px-3 text-sm font-semibold text-white">
             <Plus className="size-4" aria-hidden /> Nueva
           </Link>

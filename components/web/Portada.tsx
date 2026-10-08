@@ -4,6 +4,7 @@ import { Paella } from "./Paella";
 import { ControlesPortada } from "./PortadaAnimada";
 import { VinetasPortada } from "./VinetasPortada";
 import { Termino } from "./Termino";
+import { CenefaAzulejo, LogoCompleto } from "@/components/marca/Marca";
 
 const ingredientes = [
   { va: "pollastre", es: "pollo", en: "chicken", pos: "left-[6%] top-[30%]" },
@@ -32,14 +33,13 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
     <>
       <section className="portada-animada relative h-[500vh] bg-brasa text-arroz" aria-label={escenas.join(" · ")}>
         <div className="sticky top-0 flex h-dvh flex-col items-center justify-center overflow-hidden">
-        <div className="portada-marca absolute inset-x-0 top-[9%] z-10 text-center">
-          <h1 className="marca-resplandor font-display text-arroz">
-            <span className="block text-sm font-sans font-semibold uppercase tracking-[0.5em] text-azafran sm:text-base">Arrocería</span>
-            <span className="block text-6xl sm:text-8xl">Yerga</span>
+        <div className="portada-marca absolute inset-x-0 top-[calc(4rem+2dvh)] z-10 flex flex-col items-center text-center">
+          <h1>
+            <LogoCompleto tono="claro" preload className="logo-brasa h-auto w-[min(56vw,250px)] sm:w-[220px]" />
           </h1>
-          <p className="mt-2 text-sm text-arroz/70">{t("portada.desliza")} ↓</p>
+          <p className="mt-1 text-sm text-arroz/70">{t("portada.desliza")} ↓</p>
         </div>
-        <Paella nGranos={150} nBrasas={34} etiqueta={t("portada.estatica")} className="cursor-cuchara h-auto w-[min(92vw,76dvh)]" />
+        <Paella nGranos={150} nBrasas={34} etiqueta={t("portada.estatica")} className="cursor-cuchara mt-[12dvh] h-auto w-[min(84vw,60dvh)] sm:mt-[20dvh] sm:w-[min(84vw,54dvh)]" />
         {ingredientes.map((i) => (
           <span key={i.va} className={`portada-etiqueta pointer-events-none absolute ${i.pos} rounded-full bg-brasa/80 px-3 py-1 font-display text-lg text-azafran opacity-0 ring-1 ring-azafran/40 sm:text-2xl`}>
             {i.va}
@@ -53,9 +53,8 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
 
       <section className="portada-estatica bg-brasa px-4 pb-16 pt-24 text-arroz">
         <div className="mx-auto max-w-5xl text-center">
-          <h1 className="font-display">
-            <span className="block text-sm font-sans font-semibold uppercase tracking-[0.5em] text-azafran">Arrocería</span>
-            <span className="block text-6xl">Yerga</span>
+          <h1 className="flex justify-center">
+            <LogoCompleto tono="claro" className="h-auto w-[min(70vw,320px)]" />
           </h1>
           <div className="mt-8 flex flex-col items-center">{final}</div>
           <p className="mt-12 text-arroz/80">{t("portada.estatica")}</p>
@@ -72,6 +71,7 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
           ) : null}
         </div>
       </section>
+      <CenefaAzulejo />
     </>
   );
 }

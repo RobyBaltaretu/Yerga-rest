@@ -234,11 +234,18 @@
       "lena": "Llenya de taronger"
     },
     "casa": {
-      "titulo": "La casa",
+      "titulo": "Una història que cuinem i que volem compartir",
       "historia": "Història",
       "equipo": "Equip",
       "sala": "Sala i terrassa",
-      "salaTexto": "Una sala lluminosa al costat de la finestra i una terrassa per als dinars llargs de diumenge."
+      "salaTexto": "Una sala lluminosa al costat de la finestra i una terrassa per als dinars llargs de diumenge.",
+      "alma": "Eixa humilitat, eixa proximitat, eixe «on caben dos, caben tres» és l'ànima de Yerga.",
+      "foto": "L'àvia Yerga servint arròs a la família (fotografia provisional).",
+      "elementos": "Cada element té la seua història",
+      "arroz": "L'arròs, el nostre ingredient i la nostra terra.",
+      "paella": "La paella, símbol de compartir, de reunir i de cuidar.",
+      "casaElemento": "Sa casa, on sempre hi havia un plat calent per a tots.",
+      "almaElemento": "L'ànima, l'amor que ella posà en cada menjar i que hui seguim servint."
     },
     "carta": {
       "titulo": "Carta",
@@ -292,7 +299,9 @@
         "Dissabte"
       ],
       "comida": "Dinar",
-      "cena": "Sopar"
+      "cena": "Sopar",
+      "azulejo": "Busca el taulellet de la porta",
+      "azulejoAlt": "Placa de taulells valencians amb el nom «Yerga, arrosseria valenciana», barques de l'Albufera, una barraca i una mata d'arròs."
     },
     "pie": {
       "legal": "Avís legal",
@@ -339,6 +348,10 @@
     },
     "terminos": {
       "traduccion": "Traducció"
+    },
+    "marca": {
+      "lema": "Arrossos amb ànima",
+      "bienvenidos": "Benvinguts a sa casa."
     }
   }
 }

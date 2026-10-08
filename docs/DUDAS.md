@@ -39,8 +39,12 @@ impacto.
 - ¿Hay fotos y vídeo profesionales, o hay que presupuestar una sesión?
 - ¿Se quiere garantía con tarjeta para grupos o días señalados (Fallas, Día de la Madre)?
   Ahora mismo es fase 2.
-- ¿Tienen identidad de marca (logo, colores, tipografía)? He creado una provisional:
-  tonos de brasa, azafrán y pimentón, con Fraunces e Inter.
+- Identidad de marca: aplicada la de «Yerga · Arroces con alma». Paleta tierra, cobre,
+  trigo, cal y oliva, con acentos de azulejo valenciano en cobalto y ocre. Tipografías
+  Marcellus, Inter y Allura para la firma. El logotipo, los iconos y la foto de la abuela
+  están recortados de las imágenes de la identidad: conviene pedir los originales en
+  vector (SVG o PDF) y la foto en alta resolución. ¿La foto de la abuela es real o una
+  recreación? Si es una recreación, en la web debería ir una foto real de la familia.
 - ¿Usan hoy algún sistema de reservas o TPV con el que haya que convivir?
 - Dominio: ¿existe ya o hay que registrarlo?
 - ¿Cuál de los tres titulares prefieren? Ahora está «El arroz no espera. Tu mesa, sí.»

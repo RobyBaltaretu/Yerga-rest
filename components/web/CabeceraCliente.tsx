@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { Menu, X } from "lucide-react";
+import { Adorno, LogoHorizontal } from "@/components/marca/Marca";
 
 const nombres: Record<string, string> = { es: "Castellano", va: "Valencià", en: "English" };
 
@@ -38,7 +39,7 @@ export function MenuMovil({ enlaces, textos }: { enlaces: { href: string; texto:
       {abierto ? (
         <div className="fixed inset-0 z-50 bg-brasa text-arroz" role="dialog" aria-modal="true" aria-label={textos.menu}>
           <div className="flex h-16 items-center justify-between px-4">
-            <span className="font-display text-2xl">Yerga</span>
+            <LogoHorizontal />
             <button type="button" onClick={() => setAbierto(false)} aria-label={textos.cerrar} className="grid size-11 place-items-center rounded-full hover:bg-white/10">
               <X className="size-6" />
             </button>
@@ -50,6 +51,7 @@ export function MenuMovil({ enlaces, textos }: { enlaces: { href: string; texto:
               </Link>
             ))}
           </nav>
+          <Adorno oscuro className="mt-10 justify-center" />
         </div>
       ) : null}
     </div>

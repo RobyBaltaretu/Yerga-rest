@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { fraunces, inter } from "@/lib/fonts";
+import { inter, marcellus } from "@/lib/fonts";
 import "../globals.css";
 
 export const metadata: Metadata = {
@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function PanelRootLayout({ children }: LayoutProps<"/panel">) {
   return (
-    <html lang="es" className={`${fraunces.variable} ${inter.variable} antialiased`}>
+    <html lang="es" className={`${marcellus.variable} ${inter.variable} antialiased`}>
       <body className="min-h-dvh bg-arroz">{children}</body>
     </html>
   );

@@ -234,11 +234,18 @@
       "lena": "Leña de naranjo"
     },
     "casa": {
-      "titulo": "La casa",
+      "titulo": "Una historia que cocinamos y que queremos compartir",
       "historia": "Historia",
       "equipo": "Equipo",
       "sala": "Sala y terraza",
-      "salaTexto": "Una sala luminosa junto a la ventana y una terraza para las comidas largas de domingo."
+      "salaTexto": "Una sala luminosa junto a la ventana y una terraza para las comidas largas de domingo.",
+      "alma": "Esa humildad, esa cercanía, ese «donde caben dos, caben tres» es el alma de Yerga.",
+      "foto": "La abuela Yerga sirviendo arroz a la familia (fotografía provisional).",
+      "elementos": "Cada elemento tiene su historia",
+      "arroz": "El arroz, nuestro ingrediente y nuestra tierra.",
+      "paella": "La paella, símbolo de compartir, de reunir y de cuidar.",
+      "casaElemento": "Su casa, donde siempre había un plato caliente para todos.",
+      "almaElemento": "El alma, el amor que ella puso en cada comida y que hoy seguimos sirviendo."
     },
     "carta": {
       "titulo": "Carta",
@@ -292,7 +299,9 @@
         "Sábado"
       ],
       "comida": "Comida",
-      "cena": "Cena"
+      "cena": "Cena",
+      "azulejo": "Busca el azulejo de la puerta",
+      "azulejoAlt": "Placa de azulejos valencianos con el nombre «Yerga, arrocería valenciana», barcas de la Albufera, una barraca y una mata de arroz."
     },
     "pie": {
       "legal": "Aviso legal",
@@ -339,6 +348,10 @@
     },
     "terminos": {
       "traduccion": "Traducción"
+    },
+    "marca": {
+      "lema": "Arroces con alma",
+      "bienvenidos": "Bienvenidos a su casa."
     }
   }
 }
