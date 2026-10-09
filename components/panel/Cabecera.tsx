@@ -8,7 +8,7 @@ export function Cabecera({ titulo, descripcion, acciones }: { titulo: string; de
         <h1 className="font-display text-3xl">{titulo}</h1>
         {descripcion ? <p className="mt-1 text-sm text-niebla">{descripcion}</p> : null}
       </div>
-      {acciones ? <div className="flex flex-wrap items-center gap-2">{acciones}</div> : null}
+      {acciones ? <div className="flex flex-wrap items-center gap-2 print:hidden">{acciones}</div> : null}
     </div>
   );
 }

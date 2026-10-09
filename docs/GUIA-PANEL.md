@@ -63,7 +63,10 @@ cambios. Imprime la **Hoja del turno** al empezar cada servicio (botón en el ma
 - **Lista de espera**: quién pidió aviso si se liberaba una mesa. Al cancelarse una
   reserva, el sistema avisa por correo al primero que ahora cabe.
 - **Clientes**: historial, alergias, preferencias, plantones y notas internas.
-- **Arroces del día**: resumen para cocina por hora y mesa, imprimible.
+- **Arroces del día**: resumen para cocina. Arriba, los totales de raciones de cada
+  arroz; debajo, cada media hora con su subtotal y el detalle por mesa (con alergias).
+  Se puede filtrar por turno (comida o cena) y el botón «Imprimir» saca solo el resumen,
+  sin el menú.
 - Solo encargado y administrador: **Mapa de mesas** (editar la distribución),
   **Carta y contenidos**, **Configuración**, **Informes** y **Registro de cambios**.
 - Solo administrador: **Usuarios** y datos legales.
