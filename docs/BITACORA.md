@@ -5,22 +5,41 @@ y seguir desde ahí. Nunca se escriben aquí valores secretos.
 
 ## Resumen (actualizado al final de cada bloque y de cada sesión)
 
-**Estado:** sesión 1 en curso (jueves 8 de octubre de 2026, noche).
+**Estado:** sesión 1 (8 y 9 de octubre de 2026). Bloques A, C, D y E3 terminados en
+código; despliegue a producción pendiente de ti.
 
-**Hecho**
-- PR #3 (documentación de coste cero) fusionado en `main`.
-- PR #4: prueba del deslizador independiente de la hora (CI de `main` en verde).
-- Bloque A (código): Worker `arroceria-yerga`, CI coherente, migraciones en el despliegue,
-  contenido inicial idempotente, primer administrador, recuperación de contraseña,
-  Web Analytics y script de secretos para tu ordenador.
+**Hecho (PR fusionados en `main`)**
+- #3 y #4: documentación de coste cero; prueba del deslizador independiente de la hora.
+- Bloque A: Worker `arroceria-yerga`, CI con despliegue, migraciones, primer
+  administrador, recuperación de contraseña, Web Analytics y script de secretos.
+- #6 a #11, bloques C y D:
+  - web pública prerenderizada;
+  - panel como aplicación de navegador;
+  - copias de seguridad cifradas;
+  - revisión de seguridad (matriz RLS, cabeceras, CSP);
+  - criterios de aceptación, accesibilidad e idiomas;
+  - dudas resueltas.
+- #12 a #18, bloque E:
+  - lista de espera con plazo de 15 minutos (#12);
+  - build de Vercel sin Supabase (#13);
+  - contraste de la etiqueta «reconfirmada» (#14);
+  - interbloqueo al reservar la última mesa (#15);
+  - resumen de arroces para cocina (#16);
+  - fichas de cliente y RGPD (#17);
+  - informes con comparación y CSV (#18).
 
-**Pendiente**
-- Bloques A–E según el encargo.
+**Pendiente (mío)**
+- E4: seguir buscando y arreglando defectos.
 
 **Bloqueado: necesito de ti** (detalle en «Bloqueos»)
-- Ejecutar la parte de secretos en tu ordenador (sección 0.1 de `docs/INFRA-COSTE-CERO.md`).
+- Ejecutar `scripts/infra/configurar-secretos.sh` en tu ordenador (B-1). Sin eso no
+  hay despliegue, ni Lighthouse en producción.
+- Borrar las ramas ya fusionadas (B-2).
+- Opcional: añadir `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` al
+  proyecto `yerga-rest` de Vercel para que su vista previa muestre contenido. Sin
+  ellas, el build pasa pero las páginas públicas dan error.
 
-**Siguiente paso exacto:** ver la última entrada del diario.
+**Siguiente paso exacto:** E4, revisión de defectos. Ver la última entrada del diario.
 
 **Para desbloquear el despliegue (tú, unos 5 minutos):** en tu ordenador, desde la raíz
 del repositorio actualizado, con `~/yerga-secrets.txt` en su sitio:
