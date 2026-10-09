@@ -207,3 +207,19 @@ borrar desde la pestaña Branches.
 - Las de pago (plan de Workers y de Supabase) las decidió el propietario: gratuito.
 - Las preguntas para el restaurante siguen abiertas: son datos reales.
 - **Siguiente paso:** E3, lista de espera con plazo de 15 minutos.
+### 09/10 · E4: interbloqueo al reservar la última mesa (rama `fix/bloqueo-retener-mesa`)
+- **Defecto:** la CI del #13 falló en la prueba «dos personas reservan la última mesa a
+  la vez» con `deadlock detected`. Dos inserciones simultáneas que chocan en una
+  restricción de exclusión (`retencion_sin_solape`, `asignacion_sin_solape`) pueden
+  esperarse la una a la otra. PostgreSQL aborta entonces una, y ese cliente recibía un
+  error en vez de las horas alternativas.
+  - Reproducido en local: 46 interbloqueos en 400 pares simultáneos.
+- **Arreglo:** migración `20261009000950_serializar_ocupacion.sql`. Antes de ocupar una
+  mesa (retención o asignación activa) se toma `pg_advisory_xact_lock` por día de
+  servicio. La segunda transacción espera a la primera y recibe una violación de
+  exclusión limpia, que `retener_mesa` ya trata: prueba otra mesa o devuelve
+  alternativas.
+  - Con el arreglo: 0 interbloqueos en 400 pares.
+  - El coste es irrelevante: un restaurante no tiene reservas simultáneas en volumen.
+- **Prueba nueva:** `tests/unit/concurrencia.test.ts`, 150 pares simultáneos y ningún
+  interbloqueo. Sin el arreglo falla (26 interbloqueos).
