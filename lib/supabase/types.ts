@@ -137,14 +137,14 @@ isOneToOne: false
                   ]
                 },"configuracion": {
                   Row: {
-                    "actualizada_en": string,"antelacion_max_dias": number,"antelacion_min_min": number,"aparcamiento": NonNullable<Json>,"aviso_conflicto_min": number,"cancelacion_libre_horas": number,"cif": string,"codigo_postal": string,"correo": string,"cortesia_min": number,"direccion": string,"domicilio_social": string,"duracion_desde_5": number,"duracion_hasta_4": number,"id": number,"intervalo_min": number,"latitud": number | null,"localidad": string,"longitud": number | null,"margen_min": number,"max_comensales_online": number,"nombre_local": string,"razon_social": string,"recordatorio_horas": number,"retencion_min": number,"sin_confirmar_horas": number,"telefono": string,"umbral_duracion_larga": number,"url_mapa": string,"url_resenas": string,"whatsapp": string
+                    "actualizada_en": string,"antelacion_max_dias": number,"antelacion_min_min": number,"aparcamiento": NonNullable<Json>,"aviso_conflicto_min": number,"cancelacion_libre_horas": number,"cif": string,"codigo_postal": string,"correo": string,"cortesia_min": number,"direccion": string,"domicilio_social": string,"duracion_desde_5": number,"duracion_hasta_4": number,"espera_plazo_min": number,"id": number,"intervalo_min": number,"latitud": number | null,"localidad": string,"longitud": number | null,"margen_min": number,"max_comensales_online": number,"nombre_local": string,"razon_social": string,"recordatorio_horas": number,"retencion_min": number,"sin_confirmar_horas": number,"telefono": string,"umbral_duracion_larga": number,"url_mapa": string,"url_resenas": string,"whatsapp": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "actualizada_en"?: string,"antelacion_max_dias"?: number,"antelacion_min_min"?: number,"aparcamiento"?: NonNullable<Json>,"aviso_conflicto_min"?: number,"cancelacion_libre_horas"?: number,"cif"?: string,"codigo_postal"?: string,"correo"?: string,"cortesia_min"?: number,"direccion"?: string,"domicilio_social"?: string,"duracion_desde_5"?: number,"duracion_hasta_4"?: number,"id"?: number,"intervalo_min"?: number,"latitud"?: number | null,"localidad"?: string,"longitud"?: number | null,"margen_min"?: number,"max_comensales_online"?: number,"nombre_local"?: string,"razon_social"?: string,"recordatorio_horas"?: number,"retencion_min"?: number,"sin_confirmar_horas"?: number,"telefono"?: string,"umbral_duracion_larga"?: number,"url_mapa"?: string,"url_resenas"?: string,"whatsapp"?: string
+                    "actualizada_en"?: string,"antelacion_max_dias"?: number,"antelacion_min_min"?: number,"aparcamiento"?: NonNullable<Json>,"aviso_conflicto_min"?: number,"cancelacion_libre_horas"?: number,"cif"?: string,"codigo_postal"?: string,"correo"?: string,"cortesia_min"?: number,"direccion"?: string,"domicilio_social"?: string,"duracion_desde_5"?: number,"duracion_hasta_4"?: number,"espera_plazo_min"?: number,"id"?: number,"intervalo_min"?: number,"latitud"?: number | null,"localidad"?: string,"longitud"?: number | null,"margen_min"?: number,"max_comensales_online"?: number,"nombre_local"?: string,"razon_social"?: string,"recordatorio_horas"?: number,"retencion_min"?: number,"sin_confirmar_horas"?: number,"telefono"?: string,"umbral_duracion_larga"?: number,"url_mapa"?: string,"url_resenas"?: string,"whatsapp"?: string
                   }
                   Update: {
-                    "actualizada_en"?: string,"antelacion_max_dias"?: number,"antelacion_min_min"?: number,"aparcamiento"?: NonNullable<Json>,"aviso_conflicto_min"?: number,"cancelacion_libre_horas"?: number,"cif"?: string,"codigo_postal"?: string,"correo"?: string,"cortesia_min"?: number,"direccion"?: string,"domicilio_social"?: string,"duracion_desde_5"?: number,"duracion_hasta_4"?: number,"id"?: number,"intervalo_min"?: number,"latitud"?: number | null,"localidad"?: string,"longitud"?: number | null,"margen_min"?: number,"max_comensales_online"?: number,"nombre_local"?: string,"razon_social"?: string,"recordatorio_horas"?: number,"retencion_min"?: number,"sin_confirmar_horas"?: number,"telefono"?: string,"umbral_duracion_larga"?: number,"url_mapa"?: string,"url_resenas"?: string,"whatsapp"?: string
+                    "actualizada_en"?: string,"antelacion_max_dias"?: number,"antelacion_min_min"?: number,"aparcamiento"?: NonNullable<Json>,"aviso_conflicto_min"?: number,"cancelacion_libre_horas"?: number,"cif"?: string,"codigo_postal"?: string,"correo"?: string,"cortesia_min"?: number,"direccion"?: string,"domicilio_social"?: string,"duracion_desde_5"?: number,"duracion_hasta_4"?: number,"espera_plazo_min"?: number,"id"?: number,"intervalo_min"?: number,"latitud"?: number | null,"localidad"?: string,"longitud"?: number | null,"margen_min"?: number,"max_comensales_online"?: number,"nombre_local"?: string,"razon_social"?: string,"recordatorio_horas"?: number,"retencion_min"?: number,"sin_confirmar_horas"?: number,"telefono"?: string,"umbral_duracion_larga"?: number,"url_mapa"?: string,"url_resenas"?: string,"whatsapp"?: string
                   }
                   Relationships: [
                     
@@ -245,14 +245,14 @@ isOneToOne: false
                   ]
                 },"lista_espera": {
                   Row: {
-                    "avisado_en": string | null,"cliente_id": string | null,"comensales": number,"correo": string | null,"creado_en": string,"estado": Database["public"]['Enums']["estado_espera"],"fecha": string,"hora_preferida": string | null,"id": string,"idioma": string,"nombre": string,"telefono": string,"turno_nombre": string
+                    "avisado_en": string | null,"cliente_id": string | null,"comensales": number,"correo": string | null,"creado_en": string,"estado": Database["public"]['Enums']["estado_espera"],"fecha": string,"hora_preferida": string | null,"id": string,"idioma": string,"nombre": string,"oferta_hasta": string | null,"oferta_inicio": string | null,"oferta_liberada_por": string | null,"oferta_token": string | null,"reserva_id": string | null,"telefono": string,"turno_nombre": string
                   }
                   ComputedFields: never
                   Insert: {
-                    "avisado_en"?: string | null,"cliente_id"?: string | null,"comensales": number,"correo"?: string | null,"creado_en"?: string,"estado"?: Database["public"]['Enums']["estado_espera"],"fecha": string,"hora_preferida"?: string | null,"id"?: string,"idioma"?: string,"nombre": string,"telefono": string,"turno_nombre": string
+                    "avisado_en"?: string | null,"cliente_id"?: string | null,"comensales": number,"correo"?: string | null,"creado_en"?: string,"estado"?: Database["public"]['Enums']["estado_espera"],"fecha": string,"hora_preferida"?: string | null,"id"?: string,"idioma"?: string,"nombre": string,"oferta_hasta"?: string | null,"oferta_inicio"?: string | null,"oferta_liberada_por"?: string | null,"oferta_token"?: string | null,"reserva_id"?: string | null,"telefono": string,"turno_nombre": string
                   }
                   Update: {
-                    "avisado_en"?: string | null,"cliente_id"?: string | null,"comensales"?: number,"correo"?: string | null,"creado_en"?: string,"estado"?: Database["public"]['Enums']["estado_espera"],"fecha"?: string,"hora_preferida"?: string | null,"id"?: string,"idioma"?: string,"nombre"?: string,"telefono"?: string,"turno_nombre"?: string
+                    "avisado_en"?: string | null,"cliente_id"?: string | null,"comensales"?: number,"correo"?: string | null,"creado_en"?: string,"estado"?: Database["public"]['Enums']["estado_espera"],"fecha"?: string,"hora_preferida"?: string | null,"id"?: string,"idioma"?: string,"nombre"?: string,"oferta_hasta"?: string | null,"oferta_inicio"?: string | null,"oferta_liberada_por"?: string | null,"oferta_token"?: string | null,"reserva_id"?: string | null,"telefono"?: string,"turno_nombre"?: string
                   }
                   Relationships: [
                     {
@@ -260,6 +260,18 @@ isOneToOne: false
       columns: ["cliente_id"]
 isOneToOne: false
       referencedRelation: "cliente"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "lista_espera_oferta_liberada_por_fkey"
+      columns: ["oferta_liberada_por"]
+isOneToOne: false
+      referencedRelation: "reserva"
+      referencedColumns: ["id"]
+    },{
+      foreignKeyName: "lista_espera_reserva_id_fkey"
+      columns: ["reserva_id"]
+isOneToOne: false
+      referencedRelation: "reserva"
       referencedColumns: ["id"]
     }
                   ]
@@ -491,7 +503,10 @@ isOneToOne: false
             [_ in never]: never
           }
           Functions: {
-            "apuntar_lista_espera":
+            "aceptar_oferta_espera":
+{ Args: { "p_token": string }; Returns: Json
+                           },
+"apuntar_lista_espera":
 { Args: { "p_datos": Json }; Returns: Json
                            },
 "asignar_reserva":
@@ -502,6 +517,9 @@ isOneToOne: false
                            },
 "borrador_de":
 { Args: { "p_dist": string }; Returns: Json
+                           },
+"caducar_ofertas_espera":
+{ Args: Record<PropertyKey, never>; Returns: (string)[]
                            },
 "cambiar_estado":
 { Args: { "p_estado": Database["public"]['Enums']["estado_reserva"],"p_reserva": string }; Returns: Json
@@ -533,6 +551,7 @@ isOneToOne: false
 "domicilio_social": string,
 "duracion_desde_5": number,
 "duracion_hasta_4": number,
+"espera_plazo_min": number,
 "id": number,
 "intervalo_min": number,
 "latitud": number | null,
@@ -676,6 +695,9 @@ isOneToOne: false
                            },
 "ocupacion_de":
 { Args: { "p_r": Omit<Database["public"]['Tables']["reserva"]['Row'], Database["public"]['Tables']["reserva"]['ComputedFields']> }; Returns: unknown
+                           },
+"oferta_espera":
+{ Args: { "p_token": string }; Returns: Json
                            },
 "publicar_distribucion":
 { Args: { "p_aplicar"?: boolean,"p_dist": string }; Returns: Json

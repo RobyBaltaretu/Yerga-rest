@@ -215,3 +215,22 @@ borrar desde la pestaña Branches.
 - **Arreglo:** `--color-huerta` pasa de `#66683a` a `#55572f` (5,79:1). Afecta a todos
   los avisos de «guardado» del panel, que usan la misma pareja de colores. Las
   ilustraciones de la web conservan el tono original, porque son decorativas.
+### 09/10 · E3.1: lista de espera con plazo de 15 minutos (rama `feat/lista-espera-15-minutos`)
+- Migración `20261009001000_lista_espera_plazo.sql`:
+  - `configuracion.espera_plazo_min` (15 por defecto, editable en el panel);
+  - columnas de oferta en `lista_espera`;
+  - `avisar_lista_espera` ahora **retiene** la mesa durante el plazo: primero la hora
+    liberada y, si no cabe, la libre más cercana a la que pidió;
+  - nuevas `oferta_espera`, `aceptar_oferta_espera` (atómica e idempotente) y
+    `caducar_ofertas_espera`;
+  - textos del correo con plazo y enlace; solo se cambian si la plantilla sigue siendo
+    la original.
+- Página `/[locale]/reservar/espera/[token]` en los tres idiomas: aceptar con un toque,
+  oferta caducada u oferta ya aceptada.
+- La tarea periódica (`/api/cron/tick`) caduca las ofertas sin respuesta y se las ofrece
+  al siguiente.
+- Panel: la lista muestra hasta qué hora está guardada la mesa y enlaza a la reserva.
+- Pruebas: 2 de Vitest (aceptar con un toque; caducar y pasar al siguiente) y 2 e2e
+  (cadena completa desde la cancelación del cliente hasta el correo y la aceptación;
+  oferta caducada en valenciano).
+- Fuera: aviso por WhatsApp o SMS (tiene coste).

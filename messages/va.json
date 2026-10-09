@@ -167,7 +167,23 @@
       "cambiada": "Reserva actualitzada.",
       "volver": "Tornar"
     },
-    "cuentaAtras": "{min}:{seg}"
+    "cuentaAtras": "{min}:{seg}",
+    "oferta": {
+      "titulo": "La teua taula de la llista d'espera",
+      "hola": "Hola, {nombre}: t'hem guardat esta taula.",
+      "detalle": "{n, plural, one {# persona} other {# persones}} · {fecha} a les {hora}",
+      "plazo": "Tens fins a les {hasta} per a acceptar-la. Després passa a la següent persona de la llista.",
+      "aceptar": "Acceptar la taula",
+      "aceptando": "Reservant…",
+      "caducada": "Esta oferta ja no està disponible",
+      "caducadaTexto": "Ha passat el termini per a acceptar-la o la taula s'ha donat a una altra persona. Pots buscar una altra hora o tornar a apuntar-te a la llista d'espera.",
+      "buscar": "Buscar una altra hora",
+      "aceptada": "Taula reservada!",
+      "aceptadaTexto": "T'hem enviat la confirmació per correu.",
+      "verReserva": "Veure la meua reserva",
+      "error": "No s'ha pogut reservar. Torna-ho a intentar o telefona'ns al {telefono}.",
+      "noExiste": "L'enllaç no és vàlid."
+    }
   },
   "web": {
     "nav": {

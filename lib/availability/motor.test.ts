@@ -554,3 +554,72 @@ describe("Distribuciones", () => {
       expect(aplicado.ok).toBe(true);
     }));
 });
+
+describe("Lista de espera con plazo para aceptar", () => {
+  type Oferta = { id: string; oferta_token: string; oferta_inicio: string; nombre: string } | null;
+
+  async function apuntar(c: Client, nombre: string) {
+    await c.query(
+      `insert into lista_espera (nombre, telefono, correo, fecha, turno_nombre, comensales, creado_en)
+       values ($1, '+34611111111', 'espera@example.com', $2::date, 'comida', 2, clock_timestamp())`,
+      [nombre, sabado],
+    );
+  }
+
+  /** Turno lleno salvo una mesa, reservada online; al cancelarla se libera. */
+  async function ultimaMesaCancelada(c: Client) {
+    await sinTope(c);
+    const inicio = await instante(c, sabado, "13:00");
+    await ocupar(c, inicio, [...SALA.filter((m) => m !== "S1"), ...TERRAZA]);
+    const r = await reservar(c, inicio, 2, ZONA.sala);
+    expect(r.ok).toBe(true);
+    const { rows } = await c.query<{ codigo_gestion: string }>("select codigo_gestion from reserva where id = $1", [r.reserva_id]);
+    expect((await rpc<Resultado>(c, "public.cancelar_por_codigo($1)", [rows[0].codigo_gestion])).ok).toBe(true);
+    return { inicio, reserva: r.reserva_id! };
+  }
+
+  it("al liberarse la mesa se guarda para el primero que cabe y la acepta con un toque", () =>
+    enTransaccion(db, async (c) => {
+      await apuntar(c, "Primera Espera");
+      const { inicio, reserva } = await ultimaMesaCancelada(c);
+      const oferta = await rpc<Oferta>(c, "public.avisar_lista_espera($1::uuid)", [reserva]);
+      expect(oferta?.nombre).toBe("Primera Espera");
+      expect(new Date(oferta!.oferta_inicio).toISOString()).toBe(new Date(inicio).toISOString());
+      // Mientras dura la oferta, la mesa no se ofrece a nadie más.
+      expect((await horas(c, sabado, 2)).find((h) => h.hora === "13:00")?.disponible).toBe(false);
+      const { rows: plazo } = await c.query<{ min: number }>("select round(extract(epoch from (oferta_hasta - now())) / 60)::int min from lista_espera where id = $1", [oferta!.id]);
+      expect(plazo[0].min).toBe(15);
+
+      const acepta = await rpc<Resultado & { codigo?: string }>(c, "public.aceptar_oferta_espera($1::uuid)", [oferta!.oferta_token]);
+      expect(acepta.ok).toBe(true);
+      expect(await mesasDe(c, acepta.reserva_id!)).toEqual(["S1"]);
+      const { rows } = await c.query<{ estado: string }>("select estado from lista_espera where id = $1", [oferta!.id]);
+      expect(rows[0].estado).toBe("atendido");
+      // Aceptar dos veces no crea otra reserva.
+      const otra = await rpc<{ ok: boolean; ya_aceptada?: boolean }>(c, "public.aceptar_oferta_espera($1::uuid)", [oferta!.oferta_token]);
+      expect(otra).toMatchObject({ ok: true, ya_aceptada: true });
+    }));
+
+  it("si no la acepta en el plazo, caduca, la mesa se libera y pasa al siguiente", () =>
+    enTransaccion(db, async (c) => {
+      await apuntar(c, "Primera Espera");
+      await apuntar(c, "Segunda Espera");
+      const { reserva } = await ultimaMesaCancelada(c);
+      const primera = await rpc<Oferta>(c, "public.avisar_lista_espera($1::uuid)", [reserva]);
+      expect(primera?.nombre).toBe("Primera Espera");
+
+      // Pasa el plazo.
+      await c.query("update lista_espera set oferta_hasta = now() - interval '1 second' where id = $1", [primera!.id]);
+      await c.query("update retencion set caduca_en = now() - interval '1 second' where token = $1", [primera!.oferta_token]);
+      const liberadas = await rpc<string[]>(c, "public.caducar_ofertas_espera()");
+      expect(liberadas).toEqual([reserva]);
+      const tarde = await rpc<{ ok: boolean; motivo?: string }>(c, "public.aceptar_oferta_espera($1::uuid)", [primera!.oferta_token]);
+      expect(tarde).toMatchObject({ ok: false, motivo: "caducada" });
+
+      // La tarea periódica vuelve a ofrecer la mesa: ahora a la segunda persona.
+      const segunda = await rpc<Oferta>(c, "public.avisar_lista_espera($1::uuid)", [reserva]);
+      expect(segunda?.nombre).toBe("Segunda Espera");
+      const { rows } = await c.query<{ estado: string }>("select estado from lista_espera where id = $1", [primera!.id]);
+      expect(rows[0].estado).toBe("caducado");
+    }));
+});
