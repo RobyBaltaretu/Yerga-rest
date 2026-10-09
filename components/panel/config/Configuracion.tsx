@@ -24,6 +24,7 @@ const reglas: { k: keyof Config; etiqueta: string; unidad: string; ayuda: string
   { k: "antelacion_max_dias", etiqueta: "Antelación máxima", unidad: "días", ayuda: "" },
   { k: "max_comensales_online", etiqueta: "Tamaño máximo online", unidad: "personas", ayuda: "Por encima, solicitud de grupo que confirma el restaurante." },
   { k: "retencion_min", etiqueta: "Retención de mesa mientras el cliente escribe", unidad: "min", ayuda: "" },
+  { k: "espera_plazo_min", etiqueta: "Plazo para aceptar una mesa de la lista de espera", unidad: "min", ayuda: "La mesa queda guardada; después pasa al siguiente." },
   { k: "cortesia_min", etiqueta: "Cortesía antes de proponer liberar", unidad: "min", ayuda: "" },
   { k: "cancelacion_libre_horas", etiqueta: "Cancelación libre hasta", unidad: "horas antes", ayuda: "Después, por teléfono." },
   { k: "recordatorio_horas", etiqueta: "Recordatorio", unidad: "horas antes", ayuda: "" },

@@ -61,7 +61,10 @@ cambios. Imprime la **Hoja del turno** al empezar cada servicio (botón en el ma
 - **Reservas**: buscar por nombre, teléfono o correo; vista de lista o **línea de tiempo**
   por mesa (se ven huecos y solapes).
 - **Lista de espera**: quién pidió aviso si se liberaba una mesa. Al cancelarse una
-  reserva, el sistema avisa por correo al primero que ahora cabe.
+  reserva, el sistema **le guarda la mesa** al primero que cabe y le avisa por correo. Tiene
+  15 minutos para aceptarla con un toque (el plazo se cambia en **Configuración**). Si no
+  la acepta, pasa sola al siguiente. En la lista se ve hasta qué hora está guardada y, si
+  la acepta, el enlace a su reserva.
 - **Clientes**: historial, alergias, preferencias, plantones y notas internas.
 - **Arroces del día**: resumen para cocina por hora y mesa, imprimible.
 - Solo encargado y administrador: **Mapa de mesas** (editar la distribución),

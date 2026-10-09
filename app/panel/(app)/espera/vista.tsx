@@ -6,6 +6,8 @@ import { ConDatos, sinError, useDatos } from "@/components/panel/DatosPanel";
 import { fechaLocal, formatFecha } from "@/lib/format";
 import { AccionesEspera } from "./AccionesEspera";
 
+const hhmm = (iso: string) => new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", timeStyle: "short" }).format(new Date(iso));
+
 const estados: Record<string, string> = { esperando: "Esperando", avisado: "Avisado", atendido: "Atendido", caducado: "Caducado", cancelado: "Cancelado" };
 
 export function VistaEspera() {
@@ -16,7 +18,7 @@ export function VistaEspera() {
   );
   return (
     <main className="pb-16">
-      <Cabecera titulo="Lista de espera" descripcion="Clientes que pidieron aviso si se libera una mesa. Al cancelarse una reserva se avisa por correo al primero que ahora cabe." />
+      <Cabecera titulo="Lista de espera" descripcion="Clientes que pidieron aviso si se libera una mesa. Al cancelarse una reserva se le guarda la mesa al primero que cabe y se le avisa por correo; si no la acepta en el plazo, pasa al siguiente." />
       <ConDatos estado={estado}>
         {(filas) => {
           const grupos = new Map<string, typeof filas>();
@@ -39,11 +41,15 @@ export function VistaEspera() {
                             <p className="font-semibold">{i + 1}. {e.nombre} · {e.comensales} pax{e.hora_preferida ? ` · hacia las ${e.hora_preferida.slice(0, 5)}` : ""}</p>
                             <p className="text-sm text-niebla">
                               <a href={`tel:${e.telefono}`} className="underline">{e.telefono}</a> · {e.correo} · {estados[e.estado]}
-                              {e.avisado_en ? ` ${new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", timeStyle: "short" }).format(new Date(e.avisado_en))}` : ""}
+                              {e.avisado_en ? ` ${hhmm(e.avisado_en)}` : ""}
+                              {e.estado === "avisado" && e.oferta_hasta ? ` · mesa guardada a las ${hhmm(e.oferta_inicio!)} hasta las ${hhmm(e.oferta_hasta)}` : ""}
                             </p>
                           </div>
                           <div className="flex flex-wrap gap-2">
                             <Link href={`/panel/reservas/nueva?fecha=${fecha}`} className="min-h-11 rounded-full bg-tinta px-4 py-2.5 text-sm font-semibold text-arroz">Reservar</Link>
+                            {e.reserva_id ? (
+                              <Link href={`/panel/reservas/${e.reserva_id}`} className="min-h-11 rounded-full bg-white px-4 py-2.5 text-sm font-semibold ring-1 ring-tinta/15">Ver reserva</Link>
+                            ) : null}
                             <AccionesEspera id={e.id} estado={e.estado} />
                           </div>
                         </li>

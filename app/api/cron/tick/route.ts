@@ -1,7 +1,7 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { serverEnv } from "@/lib/env";
-import { notificarReserva } from "@/lib/notificaciones";
+import { notificarReserva, rotarListaEspera } from "@/lib/notificaciones";
 import { fechaLocal, sumarDias } from "@/lib/format";
 
 export const dynamic = "force-dynamic";
@@ -9,6 +9,7 @@ export const dynamic = "force-dynamic";
 /**
  * Tareas periódicas (Cron Trigger de Cloudflare cada 5 minutos):
  *  - caduca retenciones y marca «sin confirmar» (función tick de la base),
+ *  - pasa al siguiente de la lista de espera las ofertas no aceptadas a tiempo,
  *  - envía el recordatorio 24 h antes con enlaces para confirmar o cancelar,
  *  - envía el agradecimiento al día siguiente con enlace para dejar reseña.
  */
@@ -19,6 +20,8 @@ export async function POST(request: NextRequest) {
   }
   const db = createAdminClient();
   const { data: tick } = await db.rpc("tick");
+  // Lista de espera: ofertas sin respuesta en plazo pasan al siguiente.
+  const esperaRotadas = await rotarListaEspera();
   const { data: c } = await db.from("configuracion").select("recordatorio_horas").eq("id", 1).single();
   const ahora = Date.now();
   const horas = c?.recordatorio_horas ?? 24;
@@ -65,5 +68,5 @@ export async function POST(request: NextRequest) {
     }
   }
 
-  return NextResponse.json({ ok: true, tick, recordatorios, agradecimientos });
+  return NextResponse.json({ ok: true, tick, recordatorios, agradecimientos, esperaRotadas });
 }
