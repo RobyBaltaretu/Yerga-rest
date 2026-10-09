@@ -506,6 +506,12 @@ isOneToOne: false
             "aceptar_oferta_espera":
 { Args: { "p_token": string }; Returns: Json
                            },
+"anonimizar_cliente":
+{ Args: { "p_cliente": string }; Returns: Json
+                           },
+"anonimizar_datos_cliente":
+{ Args: { "p_cliente": string }; Returns: undefined
+                           },
 "apuntar_lista_espera":
 { Args: { "p_datos": Json }; Returns: Json
                            },
@@ -628,6 +634,9 @@ isOneToOne: false
                            },
 "exigir_personal":
 { Args: Record<PropertyKey, never>; Returns: undefined
+                           },
+"exportar_cliente":
+{ Args: { "p_cliente": string }; Returns: Json
                            },
 "fecha_local":
 { Args: { "p_instante": string }; Returns: string
