@@ -228,3 +228,18 @@ export async function modificarReserva(input: {
   await notificarReserva(r.reserva_id, "modificacion");
   return { ok: true, codigo, inicio: datos.inicio, fin: datos.inicio, reserva_id: r.reserva_id };
 }
+
+/** Acepta la mesa ofrecida desde la lista de espera (enlace del correo). */
+export async function aceptarOfertaEspera(token: string): Promise<{ ok: boolean; codigo?: string; motivo?: string }> {
+  if (!z.guid().safeParse(token).success) return { ok: false, motivo: "no_existe" };
+  if (!(await permitir(`gestion:${await ipCliente()}`, 20, 600))) return { ok: false, motivo: "limite" };
+  const { data, error } = await createAdminClient().rpc("aceptar_oferta_espera", { p_token: token });
+  if (error) {
+    console.error("aceptar_oferta_espera", error.message);
+    return { ok: false, motivo: "error" };
+  }
+  const r = data as { ok: boolean; motivo?: string; reserva_id?: string; codigo?: string; ya_aceptada?: boolean };
+  if (r.ok && r.reserva_id && !r.ya_aceptada) await notificarReserva(r.reserva_id, "confirmacion");
+  return { ok: r.ok, codigo: r.codigo, motivo: r.motivo };
+}
+
