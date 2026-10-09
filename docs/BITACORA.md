@@ -269,3 +269,16 @@ borrar desde la pestaña Branches.
   (cadena completa desde la cancelación del cliente hasta el correo y la aceptación;
   oferta caducada en valenciano).
 - Fuera: aviso por WhatsApp o SMS (tiene coste).
+### 09/10 · E3.4: informes con comparación y CSV (rama `feat/informes-csv`)
+- Cada indicador se compara con el periodo anterior de la misma duración: «▲ 4,5 pts
+  frente al anterior», en verde si mejora y en rojo si empeora. Las «confirmadas futuras
+  sin mesa» no se comparan, porque son una foto de hoy.
+- Nuevas tarjetas de reservas y comensales atendidos.
+- Periodos rápidos: 7, 30 y 90 días, y este mes.
+- Exportación a CSV para Excel en castellano (separador «;», BOM y CRLF):
+  - reservas del periodo **sin datos de contacto** (minimización RGPD);
+  - ocupación por turno.
+- La lógica pura va en `lib/panel/informes.ts`, con Vitest (periodo anterior con cambio
+  de hora, variación, comillas del CSV). Prueba e2e `tests/e2e/informes.spec.ts`:
+  comparación y descarga, comprobando que el CSV no lleva nombre ni teléfono.
+- Fuera: informes por correo programados (fase 3).
