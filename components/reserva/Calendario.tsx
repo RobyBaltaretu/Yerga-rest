@@ -114,6 +114,7 @@ export function Calendario({ locale, comensales, hoy, maxDias, seleccion, onEleg
                 aria-pressed={elegido}
                 aria-label={`${fmtLargo.format(new Date(`${fecha}T12:00:00Z`))}${motivo ? ` · ${motivo}` : ""}`}
                 data-estado={estado ?? (fuera ? "fuera" : "cargando")}
+                data-fecha={fecha}
                 className={[
                   "relative grid aspect-square w-full min-h-11 place-items-center rounded-xl text-base tabular-nums transition-colors",
                   elegido

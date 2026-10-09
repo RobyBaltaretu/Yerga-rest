@@ -31,13 +31,21 @@ export async function limpiarPorCorreo(correo: string) {
   await sql("delete from lista_espera where correo = $1", [correo]);
 }
 
-/** Elige el primer día con mesa en el calendario (avanza meses si hace falta). */
+/**
+ * Elige el primer día con mesa a partir de mañana (avanza meses si hace falta). Hoy se
+ * evita a propósito: según la hora a la que corra la prueba, las horas de hoy pueden
+ * quedar a menos de 3 horas y la reserva ya no se podría cambiar ni cancelar en línea.
+ */
 export async function elegirPrimerDiaLibre(page: Page) {
+  const hoy = new Intl.DateTimeFormat("en-CA", { timeZone: "Europe/Madrid" }).format(new Date());
   for (let i = 0; i < 3; i++) {
-    const libre = page.locator('button[data-estado="disponible"]').first();
     await page.locator('button[data-estado="cargando"]').first().waitFor({ state: "detached", timeout: 15_000 }).catch(() => {});
-    if (await libre.count()) {
-      await libre.click();
+    const fechas = await page
+      .locator('button[data-estado="disponible"]')
+      .evaluateAll((botones) => botones.map((b) => b.getAttribute("data-fecha") ?? ""));
+    const fecha = fechas.find((f) => f > hoy);
+    if (fecha) {
+      await page.locator(`button[data-fecha="${fecha}"]`).click();
       return;
     }
     await page.getByRole("button", { name: /Mes siguiente/ }).click();
