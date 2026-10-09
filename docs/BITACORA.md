@@ -207,6 +207,14 @@ borrar desde la pestaña Branches.
 - Las de pago (plan de Workers y de Supabase) las decidió el propietario: gratuito.
 - Las preguntas para el restaurante siguen abiertas: son datos reales.
 - **Siguiente paso:** E3, lista de espera con plazo de 15 minutos.
+### 09/10 · E4: contraste de la etiqueta «reconfirmada» (rama `fix/contraste-huerta`)
+- **Defecto:** en el panel, la etiqueta verde de las reservas reconfirmadas (`text-huerta`
+  sobre `bg-huerta-claro`) tenía un contraste de 4,48:1, por debajo del mínimo de 4,5:1.
+  Solo aparece cuando hay reservas reconfirmadas, así que la auditoría axe fallaba o no
+  según los datos de la base local.
+- **Arreglo:** `--color-huerta` pasa de `#66683a` a `#55572f` (5,79:1). Afecta a todos
+  los avisos de «guardado» del panel, que usan la misma pareja de colores. Las
+  ilustraciones de la web conservan el tono original, porque son decorativas.
 ### 09/10 · E3.1: lista de espera con plazo de 15 minutos (rama `feat/lista-espera-15-minutos`)
 - Migración `20261009001000_lista_espera_plazo.sql`:
   - `configuracion.espera_plazo_min` (15 por defecto, editable en el panel);
