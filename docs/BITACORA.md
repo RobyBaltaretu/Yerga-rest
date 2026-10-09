@@ -196,6 +196,17 @@ borrar desde la pestaña Branches.
   Ahora `lib/seo.ts` lo genera todo, el sitemap tiene 27 URL y hay una prueba que lo
   vigila.
 - **Siguiente paso:** PR de D1, D2 y D4 cuando se fusione el #9; después, bloque E.
+### 09/10 · E1: dudas resueltas (rama `docs/dudas-decididas`)
+- `docs/DUDAS.md` reescrito. Las decisiones sin coste van marcadas «decidido por Code, a
+  confirmar»:
+  - LCP dado por bueno, con prueba automática;
+  - lista de espera con plazo de 15 min en la fase 1;
+  - clientes, arroces e informes se quedan en la fase 1;
+  - máximo online de 10, con combinaciones mayores definibles en el panel;
+  - el cierre del turno es el cierre de cocina.
+- Las de pago (plan de Workers y de Supabase) las decidió el propietario: gratuito.
+- Las preguntas para el restaurante siguen abiertas: son datos reales.
+- **Siguiente paso:** E3, lista de espera con plazo de 15 minutos.
 ### 09/10 · E3.1: lista de espera con plazo de 15 minutos (rama `feat/lista-espera-15-minutos`)
 - Migración `20261009001000_lista_espera_plazo.sql`:
   - `configuracion.espera_plazo_min` (15 por defecto, editable en el panel);

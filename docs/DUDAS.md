@@ -1,75 +1,70 @@
-# Dudas para el final
+# Dudas y decisiones
 
 Durante la construcción no he parado a preguntar: he aplicado el supuesto de partida y lo
-he dejado configurable. Estas son las decisiones que conviene confirmar, ordenadas por
-impacto.
+he dejado configurable. El 9 de octubre de 2026, en el trabajo autónomo, resolví las que
+no implican gasto con el supuesto más razonable. Van marcadas **«decidido por Code, a
+confirmar»**: si alguna no te encaja, se cambia sin coste.
 
-## 1. Decisiones que necesitan tu respuesta (propietario del proyecto)
+## 1. Decisiones de proyecto
 
-1. **Plan de Cloudflare Workers.** El worker ocupa **5,1 MB comprimido**. El plan gratuito
-   admite 3 MiB y el de pago 10 MiB (unos 5 USD al mes). Con el gratuito, el despliegue
-   fallará. ¿Contratamos el plan de pago? La alternativa sería Vercel, que ya figuraba como
-   segunda opción en la definición.
-2. **Plan de Supabase.** El plan gratuito no incluye copias de seguridad diarias
-   descargables, que pide el requisito de seguridad, y pausa el proyecto tras 7 días sin
-   actividad. ¿Supabase Pro (25 USD al mes) o montamos un volcado diario propio a R2?
-3. **Carga de la portada en móvil.** Con estrangulamiento real, el LCP es de 1,8 s y
-   cumple. La estimación simulada de Lighthouse da 2,6–3,1 s. ¿Damos por bueno el criterio
-   con la medición real, o quieres que siga recortando, por ejemplo con una versión aún
-   más ligera para móvil? Habría que volver a medir en producción con PageSpeed Insights.
-4. **Lista de espera.** La definición la pone en el flujo y en el panel de la fase 1, y
-   también en la fase 2. He construido la captura («Avísame si se libera»), la lista en el
-   panel y el aviso automático por correo al primero que cabe cuando se cancela una
-   reserva. Queda para la fase 2 el plazo de 15 minutos para aceptar y el aviso por
-   WhatsApp. ¿Te vale?
-5. **Clientes, Arroces del día e Informes** figuraban en la fase 2. Los he incluido en
-   versión básica, porque sin ellos no se pueden medir los objetivos. ¿De acuerdo?
-6. **Grupos de 9 y 10 personas.** El máximo online es 10, pero con el plano de ejemplo la
-   combinación más grande es de 8. Esos grupos van a la solicitud de grupo. ¿Definimos
-   combinaciones mayores en el plano real o bajamos el máximo online a 8?
-7. **Último turno y hora de salida.** Con una última hora de 15:30 y 105 minutos de
-   estancia, la mesa se libera a las 17:15, después del cierre de las 16:30. He
-   interpretado el cierre del turno como cierre de cocina. ¿Es así?
+1. **Plan de Cloudflare Workers.** Decidido por el propietario: **plan gratuito, 0 €/mes**
+   (`docs/INFRA-COSTE-CERO.md`). La web se prerenderiza y el panel corre en el navegador
+   para caber en los 10 ms de CPU por petición. El Worker ocupa 5,1 MB comprimido; la
+   documentación actual de Cloudflare ya no fija un límite comprimido en el plan
+   gratuito. Se confirmará con el primer despliegue (`docs/BITACORA.md`).
+2. **Plan de Supabase.** Decidido por el propietario: **gratuito**, con copia diaria
+   propia, cifrada y en un repositorio privado (`infra/yerga-backups/`). La pausa por
+   inactividad no afecta, porque el cron consulta la base cada 5 minutos.
+3. **Carga de la portada en móvil.** **Decidido por Code, a confirmar:** el criterio se da
+   por cumplido con la medición real. Una prueba automática lo repite en cada cambio
+   (`tests/e2e/rendimiento.spec.ts`, mediana local de 1,85 s con 4G lenta y CPU ×4) y se
+   confirmará con PageSpeed Insights sobre la URL de producción. No hace falta una versión
+   aún más ligera para móvil.
+4. **Lista de espera.** **Decidido por Code, a confirmar:** se completa en la fase 1 el
+   plazo de 15 minutos para aceptar el aviso. El aviso es por correo; WhatsApp queda
+   fuera porque tiene coste.
+5. **Clientes, Arroces del día e Informes.** **Decidido por Code, a confirmar:** se
+   quedan en la fase 1 en versión básica (hacen falta para medir los objetivos) y se
+   amplían con lo que pide la fase 2.
+6. **Grupos de 9 y 10 personas.** **Decidido por Code, a confirmar:** el máximo online
+   sigue en 10. Con el plano de ejemplo, 9 y 10 pasan a la solicitud de grupo. Cuando
+   esté el plano real, basta con definir combinaciones de mesas mayores en el panel para
+   que se reserven online. Si no, se baja el máximo a 8 en Configuración.
+7. **Último turno y hora de salida.** **Decidido por Code, a confirmar:** el cierre del
+   turno (16:30) es el cierre de cocina. La última hora de reserva es 15:30 y la mesa se
+   libera hacia las 17:15.
 
-## 2. Preguntas para el restaurante (de la definición, siguen abiertas)
+## 2. Preguntas para el restaurante (siguen abiertas: son datos que solo tiene él)
 
 - Dirección, horarios, días de cierre y vacaciones.
 - Número real de mesas, capacidades y cuáles se pueden juntar.
 - Carta actual, con precios y alérgenos.
-- ¿Hay fotos y vídeo profesionales, o hay que presupuestar una sesión?
-- ¿Se quiere garantía con tarjeta para grupos o días señalados (Fallas, Día de la Madre)?
-  Ahora mismo es fase 2.
-- Identidad de marca: aplicada la de «Yerga · Arroces con alma». Paleta tierra, cobre,
-  trigo, cal y oliva, con acentos de azulejo valenciano en cobalto y ocre. Tipografías
-  Marcellus, Inter y Allura para la firma. El logotipo, los iconos y la foto de la abuela
-  están recortados de las imágenes de la identidad: conviene pedir los originales en
-  vector (SVG o PDF) y la foto en alta resolución. ¿La foto de la abuela es real o una
-  recreación? Si es una recreación, en la web debería ir una foto real de la familia.
+- Fotos y vídeo profesionales, o presupuestar una sesión.
+- Garantía con tarjeta para grupos o días señalados: fuera de alcance mientras el coste
+  sea 0 €.
+- **Identidad de marca: aplicada** la de «Yerga · Arroces con alma». Paleta tierra,
+  cobre, trigo, cal y oliva, con acentos de azulejo en cobalto y ocre. Tipografías
+  Marcellus, Inter y Allura. Pendiente: el logotipo en vector (SVG o PDF) y la foto en
+  alta resolución. ¿La foto de la abuela es real o una recreación? Si es una
+  recreación, en la web debería ir una foto real de la familia.
 - ¿Usan hoy algún sistema de reservas o TPV con el que haya que convivir?
-- Dominio: ¿existe ya o hay que registrarlo?
-- ¿Cuál de los tres titulares prefieren? Ahora está «El arroz no espera. Tu mesa, sí.»
+- Dominio: por ahora no se registra (coste). La URL es la de workers.dev.
+- Titular de la portada: ahora está «El arroz no espera. Tu mesa, sí.». Se cambia desde
+  el panel.
 
-## 3. Cosas que no he podido verificar en este entorno
+## 3. Lo que solo se puede verificar con el despliegue
 
-- **Turnstile y Resend.** El entorno no tiene salida a `challenges.cloudflare.com` ni a
-  `api.resend.com`. El código está hecho y se activa con las claves. Sin ellas:
-  - Turnstile se desactiva.
-  - Los correos se guardan como «simulados» en la tabla `mensaje`.
+- **Turnstile y Resend** con claves reales: hay que hacer una reserva de prueba al
+  desplegar. Con el remitente `onboarding@resend.dev`, Resend solo entrega a la
+  dirección de la cuenta hasta verificar un dominio.
+- **Despliegue real en Cloudflare:** lo hace la CI en cuanto estén los secretos. La CI
+  verifica después la URL pública por sí sola (`scripts/produccion/verificar.mjs`).
+- **Integración continua en GitHub:** ya se ejecuta y está en verde en cada pull request.
 
-  Conviene hacer una reserva de prueba real en cuanto estén las claves.
-- **Despliegue real en Cloudflare.** He comprobado el worker con `wrangler dev`: rutas en
-  los tres idiomas, panel, API y Cron Trigger. No he desplegado porque faltan las
-  credenciales.
-- **Integración continua en GitHub.** El flujo `.github/workflows/ci.yml` está escrito
-  (lint, tipos, Vitest con Supabase, Playwright y build de OpenNext) pero aún no se ha
-  ejecutado en GitHub.
-
-## 4. Decisiones menores ya aplicadas (por si quieres cambiarlas)
+## 4. Decisiones menores ya aplicadas (decididas por Code, a confirmar)
 
 - Tope por franja: 20 comensales nuevos cada 15 minutos (configurable por turno).
-- Límite de intentos:
-  - reservas: 30 retenciones y 10 confirmaciones por IP cada 10 minutos;
-  - acceso al panel: 5 fallos por correo o 20 por IP cada 15 minutos.
+- Límite de intentos: ver `docs/SEGURIDAD.md`.
 - Recordatorio solo si la reserva se hizo con más de 12 horas de antelación. Si no hay
   respuesta, se marca «sin confirmar» 4 horas antes.
 - Agradecimiento con enlace a la reseña a partir de las 11:00 del día siguiente, solo
@@ -79,5 +74,8 @@ impacto.
 - Alergias con consentimiento explícito aparte, porque son un dato de salud.
 - Las mesas que se quitan de una distribución se desactivan, no se borran, para conservar
   el historial.
+- El primer administrador entra con «¿Has olvidado tu contraseña?». Ninguna contraseña
+  inicial pasa por la CI ni por el repositorio.
+- Cloudflare Web Analytics solo en la web pública, no en el panel.
 - `@opennextjs/cloudflare` lleva un parche pequeño (`patches/`) para Next.js 16.4. Se
   puede quitar cuando OpenNext lo incluya.
