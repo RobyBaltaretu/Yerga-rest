@@ -269,6 +269,27 @@ borrar desde la pestaña Branches.
   (cadena completa desde la cancelación del cliente hasta el correo y la aceptación;
   oferta caducada en valenciano).
 - Fuera: aviso por WhatsApp o SMS (tiene coste).
+### 09/10 · E3.2: fichas de cliente y RGPD (rama `feat/fichas-cliente`)
+- **Ficha del cliente** (`/panel/clientes/[id]`), con un resumen arriba:
+  - visitas, no presentadas, cancelaciones, comensales de media;
+  - última visita y próxima reserva;
+  - arroz favorito, sacado de sus encargos.
+
+  Debajo, notas, preferencias y alergias editables por todo el personal, y el historial
+  de reservas.
+- **Derechos RGPD, solo para el administrador:**
+  - *Exportar* (derecho de acceso): descarga un JSON con la ficha, las reservas con sus
+    arroces, la lista de espera y los correos enviados;
+  - *Anonimizar* (derecho de supresión): pide confirmación.
+- **Defecto arreglado:** la anonimización por inactividad (24 meses) solo vaciaba la
+  ficha. El nombre, el teléfono y el correo seguían en las reservas, en la lista de
+  espera, en los correos y en el registro de cambios. Ahora `anonimizar_datos_cliente`
+  lo limpia todo y la usan la tarea periódica y el botón. Las reservas se conservan sin
+  datos personales para los informes.
+- **Pruebas:**
+  - Vitest: sala y encargado reciben 42501 al exportar o anonimizar; el administrador
+    puede, y no queda rastro de los datos en ninguna tabla.
+  - e2e: resumen de la ficha y exportación.
 ### 09/10 · E3.4: informes con comparación y CSV (rama `feat/informes-csv`)
 - Cada indicador se compara con el periodo anterior de la misma duración: «▲ 4,5 pts
   frente al anterior», en verde si mejora y en rojo si empeora. Las «confirmadas futuras

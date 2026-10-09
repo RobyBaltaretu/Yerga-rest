@@ -140,10 +140,13 @@ export async function horasPersonal(fecha: string, comensales: number) {
   return (data ?? []).map((h) => ({ ...h, inicio: new Date(h.inicio).toISOString() }));
 }
 
-export async function guardarNotasCliente(clienteId: string, notas: string, preferencias: string): Promise<Resultado> {
+export async function guardarNotasCliente(clienteId: string, notas: string, preferencias: string, alergias: string): Promise<Resultado> {
   if (!uuid.safeParse(clienteId).success) return { ok: false };
   const supabase = await createClient();
-  const { error } = await supabase.from("cliente").update({ notas_internas: notas || null, preferencias: preferencias || null }).eq("id", clienteId);
+  const { error } = await supabase
+    .from("cliente")
+    .update({ notas_internas: notas.trim() || null, preferencias: preferencias.trim() || null, alergias: alergias.trim().slice(0, 500) || null })
+    .eq("id", clienteId);
   revalidatePath("/panel/clientes");
   return { ok: !error };
 }

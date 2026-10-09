@@ -143,3 +143,27 @@ describe("Rol administrador", () => {
     expect(data?.[0].usuario_id).toBe("00000000-0000-4000-e000-000000000001");
   });
 });
+
+describe("RGPD: exportar y anonimizar clientes", () => {
+  it("solo el administrador exporta y anonimiza; la anonimización borra los datos de todas partes", async () => {
+    const tel = `+3469${Date.now().toString().slice(-7)}`;
+    const { data: c, error } = await admin.from("cliente").insert({ nombre: "Borrar RGPD", telefono: tel, correo: "rgpd@example.com", alergias: "marisco" }).select("id").single();
+    expect(error).toBeNull();
+    await admin.from("reserva").insert({ cliente_id: c!.id, nombre: "Borrar RGPD", telefono: tel, correo: "rgpd@example.com", inicio: "2030-01-05T12:00:00Z", fin: "2030-01-05T14:00:00Z", comensales: 2, duracion_min: 120, estado: "cancelada" });
+
+    for (const quien of [sala, encargado]) {
+      expect((await quien.rpc("exportar_cliente", { p_cliente: c!.id })).error?.code).toBe("42501");
+      expect((await quien.rpc("anonimizar_cliente", { p_cliente: c!.id })).error?.code).toBe("42501");
+    }
+    const exp = await admin.rpc("exportar_cliente", { p_cliente: c!.id });
+    expect((exp.data as { cliente: { alergias: string }; reservas: unknown[] }).cliente.alergias).toBe("marisco");
+    expect((exp.data as { reservas: unknown[] }).reservas).toHaveLength(1);
+
+    expect((await admin.rpc("anonimizar_cliente", { p_cliente: c!.id })).data).toEqual({ ok: true });
+    const { data: r } = await admin.from("reserva").select("nombre, telefono, correo").eq("cliente_id", c!.id).single();
+    expect(r).toEqual({ nombre: "Cliente anonimizado", telefono: null, correo: null });
+    const { data: log } = await admin.from("registro_cambios").select("antes, despues").or(`entidad_id.eq.${c!.id}`);
+    expect(JSON.stringify(log)).not.toContain(tel);
+    expect(JSON.stringify(log)).not.toContain("Borrar RGPD");
+  });
+});
