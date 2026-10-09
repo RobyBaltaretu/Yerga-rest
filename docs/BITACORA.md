@@ -334,3 +334,12 @@ borrar desde la pestaña Branches.
   de hora, variación, comillas del CSV). Prueba e2e `tests/e2e/informes.spec.ts`:
   comparación y descarga, comprobando que el CSV no lleva nombre ni teléfono.
 - Fuera: informes por correo programados (fase 3).
+### 09/10 · E4: prueba de reserva dependiente de la hora (rama `fix/prueba-reserva-hora`)
+- **Síntoma:** la CI del #19, que solo cambiaba documentación, falló en `reserva.spec.ts`.
+  Tras reservar no aparecía «Cambiar día, hora o personas».
+- **Causa:** la prueba reservaba el primer día libre a su primera hora. Corriendo a las
+  10:06 de Madrid, eso era hoy a las 13:00, a menos de 3 horas. La web, con razón, ya no
+  deja cambiar la reserva y muestra «fuera de plazo». No era un fallo de la aplicación.
+- **Arreglo:** el calendario marca cada día con `data-fecha` y `elegirPrimerDiaLibre`
+  elige siempre a partir de mañana. Reproducido en local a la misma hora: sin el
+  arreglo falla; con él pasa.
