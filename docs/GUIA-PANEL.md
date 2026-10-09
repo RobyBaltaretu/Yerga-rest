@@ -66,7 +66,10 @@ cambios. Imprime la **Hoja del turno** al empezar cada servicio (botón en el ma
   la acepta, pasa sola al siguiente. En la lista se ve hasta qué hora está guardada y, si
   la acepta, el enlace a su reserva.
 - **Clientes**: historial, alergias, preferencias, plantones y notas internas.
-- **Arroces del día**: resumen para cocina por hora y mesa, imprimible.
+- **Arroces del día**: resumen para cocina. Arriba, los totales de raciones de cada
+  arroz; debajo, cada media hora con su subtotal y el detalle por mesa (con alergias).
+  Se puede filtrar por turno (comida o cena) y el botón «Imprimir» saca solo el resumen,
+  sin el menú.
 - Solo encargado y administrador: **Mapa de mesas** (editar la distribución),
   **Carta y contenidos**, **Configuración**, **Informes** y **Registro de cambios**.
 - Solo administrador: **Usuarios** y datos legales.

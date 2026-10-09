@@ -290,3 +290,15 @@ borrar desde la pestaña Branches.
   - Vitest: sala y encargado reciben 42501 al exportar o anonimizar; el administrador
     puede, y no queda rastro de los datos en ninguna tabla.
   - e2e: resumen de la ficha y exportación.
+### 09/10 · E3.3: resumen de arroces para cocina (rama `feat/resumen-arroces`)
+- `/panel/arroces` rehecho para cocina:
+  - totales del servicio, de mayor a menor;
+  - franjas de media hora, cada una con su subtotal y el detalle por mesa (alergias
+    destacadas);
+  - filtro por turno (comida, cena o todo el día) en la URL;
+  - «Imprimir» imprime la propia página: el menú lateral y los botones se ocultan al
+    imprimir.
+- La lógica va en `lib/panel/arroces.ts`, pura, con pruebas de Vitest (franjas con
+  horario de verano e invierno, cancelaciones excluidas, filtro por turno).
+- Prueba e2e `tests/e2e/arroces.spec.ts`: tres reservas en dos turnos, totales,
+  subtotales por franja y filtro.
