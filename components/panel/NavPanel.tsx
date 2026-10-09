@@ -87,7 +87,7 @@ export function NavPanel() {
   return (
     <>
       {/* Barra superior en móvil y tableta vertical */}
-      <header className="sticky top-0 z-30 flex h-14 items-center justify-between bg-brasa px-3 text-arroz lg:hidden">
+      <header className="sticky top-0 z-30 flex h-14 items-center justify-between bg-brasa px-3 text-arroz lg:hidden print:hidden">
         <button type="button" onClick={() => setAbierto(true)} aria-label="Abrir menú" className="grid size-11 place-items-center rounded-full hover:bg-white/10">
           <Menu className="size-6" />
         </button>
@@ -114,7 +114,7 @@ export function NavPanel() {
       ) : null}
 
       {/* Barra lateral fija en tableta horizontal y escritorio */}
-      <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 xl:w-64 flex-col bg-brasa p-4 lg:flex">
+      <aside className="sticky top-0 hidden h-dvh w-56 shrink-0 xl:w-64 flex-col bg-brasa p-4 lg:flex print:hidden">
         <div className="mb-6 flex items-center justify-between">
           <LogoHorizontal className="[&_span]:text-xl" />
           <Link href="/panel/reservas/nueva" className="inline-flex min-h-10 items-center gap-1 rounded-full bg-pimenton px-3 text-sm font-semibold text-white">
