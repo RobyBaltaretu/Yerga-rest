@@ -167,7 +167,23 @@
       "cambiada": "Reserva actualizada.",
       "volver": "Volver"
     },
-    "cuentaAtras": "{min}:{seg}"
+    "cuentaAtras": "{min}:{seg}",
+    "oferta": {
+      "titulo": "Tu mesa de la lista de espera",
+      "hola": "Hola, {nombre}: te hemos guardado esta mesa.",
+      "detalle": "{n, plural, one {# persona} other {# personas}} · {fecha} a las {hora}",
+      "plazo": "Tienes hasta las {hasta} para aceptarla. Después pasa a la siguiente persona de la lista.",
+      "aceptar": "Aceptar la mesa",
+      "aceptando": "Reservando…",
+      "caducada": "Esta oferta ya no está disponible",
+      "caducadaTexto": "Pasó el plazo para aceptarla o la mesa se dio a otra persona. Puedes buscar otra hora o volver a apuntarte a la lista de espera.",
+      "buscar": "Buscar otra hora",
+      "aceptada": "¡Mesa reservada!",
+      "aceptadaTexto": "Te hemos enviado la confirmación por correo.",
+      "verReserva": "Ver mi reserva",
+      "error": "No se ha podido reservar. Inténtalo de nuevo o llámanos al {telefono}.",
+      "noExiste": "El enlace no es válido."
+    }
   },
   "web": {
     "nav": {

@@ -215,6 +215,60 @@ borrar desde la pestaña Branches.
 - **Arreglo:** `--color-huerta` pasa de `#66683a` a `#55572f` (5,79:1). Afecta a todos
   los avisos de «guardado» del panel, que usan la misma pareja de colores. Las
   ilustraciones de la web conservan el tono original, porque son decorativas.
+### 09/10 · E4: interbloqueo al reservar la última mesa (rama `fix/bloqueo-retener-mesa`)
+- **Defecto:** la CI del #13 falló en la prueba «dos personas reservan la última mesa a
+  la vez» con `deadlock detected`. Dos inserciones simultáneas que chocan en una
+  restricción de exclusión (`retencion_sin_solape`, `asignacion_sin_solape`) pueden
+  esperarse la una a la otra. PostgreSQL aborta entonces una, y ese cliente recibía un
+  error en vez de las horas alternativas.
+  - Reproducido en local: 46 interbloqueos en 400 pares simultáneos.
+- **Arreglo:** migración `20261009000950_serializar_ocupacion.sql`. Antes de ocupar una
+  mesa (retención o asignación activa) se toma `pg_advisory_xact_lock` por día de
+  servicio. La segunda transacción espera a la primera y recibe una violación de
+  exclusión limpia, que `retener_mesa` ya trata: prueba otra mesa o devuelve
+  alternativas.
+  - Con el arreglo: 0 interbloqueos en 400 pares.
+  - El coste es irrelevante: un restaurante no tiene reservas simultáneas en volumen.
+- **Prueba nueva:** `tests/unit/concurrencia.test.ts`, 150 pares simultáneos y ningún
+  interbloqueo. Sin el arreglo falla (26 interbloqueos).
+### 09/10 · Build de Vercel roto (rama `fix/build-sin-supabase`)
+- **Síntoma:** desde el PR #6 (C1, web prerenderizada) los despliegues de vista previa del
+  proyecto `yerga-rest` en Vercel fallan con `Command "pnpm build" exited with 1`.
+- **Causa:** al prerenderizar, `next build` lee la configuración, la carta y los textos
+  de Supabase. Vercel no tiene las variables de Supabase: el cliente no se puede crear y
+  `getConfig` devolvía `null` con `data!`, lo que rompía el build. Reproducido en local
+  compilando sin las variables. No he podido leer los registros de Vercel (la conexión
+  no tiene permiso sobre ese equipo), pero el fallo es el mismo.
+- **Arreglo:** `lib/datos-publicos.ts` pasa todas las lecturas por `consultar()`. Si
+  Supabase falla o no está configurado, llama a `connection()`: la página sale del
+  prerenderizado y se renderiza en cada petición, en vez de romper el build. Si falla
+  también en la petición, lanza el error, porque antes las listas vacías lo ocultaban.
+  - Sin variables: el build termina y las páginas públicas quedan dinámicas.
+  - Con Supabase: siguen prerenderizadas, igual que antes.
+- **Para ver contenido en Vercel** hay que añadir `NEXT_PUBLIC_SUPABASE_URL` y
+  `NEXT_PUBLIC_SUPABASE_ANON_KEY` al proyecto. Sin ellas, la web compila pero las
+  páginas públicas darán error. El despliegue de referencia sigue siendo Cloudflare.
+- **Defecto visto de paso (E4):** con reservas reconfirmadas, la etiqueta verde del panel
+  tiene un contraste de 4,48:1, por debajo de 4,5. Va en su propio PR.
+### 09/10 · E3.1: lista de espera con plazo de 15 minutos (rama `feat/lista-espera-15-minutos`)
+- Migración `20261009001000_lista_espera_plazo.sql`:
+  - `configuracion.espera_plazo_min` (15 por defecto, editable en el panel);
+  - columnas de oferta en `lista_espera`;
+  - `avisar_lista_espera` ahora **retiene** la mesa durante el plazo: primero la hora
+    liberada y, si no cabe, la libre más cercana a la que pidió;
+  - nuevas `oferta_espera`, `aceptar_oferta_espera` (atómica e idempotente) y
+    `caducar_ofertas_espera`;
+  - textos del correo con plazo y enlace; solo se cambian si la plantilla sigue siendo
+    la original.
+- Página `/[locale]/reservar/espera/[token]` en los tres idiomas: aceptar con un toque,
+  oferta caducada u oferta ya aceptada.
+- La tarea periódica (`/api/cron/tick`) caduca las ofertas sin respuesta y se las ofrece
+  al siguiente.
+- Panel: la lista muestra hasta qué hora está guardada la mesa y enlaza a la reserva.
+- Pruebas: 2 de Vitest (aceptar con un toque; caducar y pasar al siguiente) y 2 e2e
+  (cadena completa desde la cancelación del cliente hasta el correo y la aceptación;
+  oferta caducada en valenciano).
+- Fuera: aviso por WhatsApp o SMS (tiene coste).
 ### 09/10 · E3.3: resumen de arroces para cocina (rama `feat/resumen-arroces`)
 - `/panel/arroces` rehecho para cocina:
   - totales del servicio, de mayor a menor;

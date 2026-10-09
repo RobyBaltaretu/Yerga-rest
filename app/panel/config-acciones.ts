@@ -107,6 +107,7 @@ const camposConfig = z
     antelacion_max_dias: z.number().int().min(1).max(365),
     max_comensales_online: z.number().int().min(1).max(40),
     retencion_min: z.number().int().min(1).max(30),
+    espera_plazo_min: z.number().int().min(5).max(120),
     cortesia_min: z.number().int().min(0).max(120),
     cancelacion_libre_horas: z.number().int().min(0).max(168),
     recordatorio_horas: z.number().int().min(1).max(96),

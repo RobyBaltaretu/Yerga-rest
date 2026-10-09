@@ -10,6 +10,7 @@ const botones: Record<string, Record<string, string>> = {
   confirmar: { es: "Confirmo que voy", va: "Confirme que vinc", en: "Yes, I'm coming" },
   resena: { es: "Dejar una reseña", va: "Deixar una ressenya", en: "Leave a review" },
   reservar: { es: "Reservar ahora", va: "Reservar ara", en: "Book now" },
+  aceptarMesa: { es: "Aceptar la mesa", va: "Acceptar la taula", en: "Accept the table" },
 };
 
 function comensalesTexto(n: number, idioma: string) {
@@ -75,14 +76,17 @@ export async function notificarReserva(reservaId: string, tipo: TipoMensaje): Pr
   return enviarCorreo({ tipo, destinatario: r.correo, idioma, variables, reservaId: r.id, boton, adjuntos });
 }
 
-/** Al liberarse una mesa, avisa al primero de la lista de espera que ahora cabe. */
+/**
+ * Al liberarse una mesa, se la ofrece al primero de la lista de espera que cabe: queda
+ * retenida durante el plazo configurado y le llega un enlace para aceptarla con un toque.
+ */
 export async function avisarListaEspera(reservaId: string): Promise<void> {
   const db = createAdminClient();
   const { data: entrada } = await db.rpc("avisar_lista_espera", { p_reserva: reservaId });
-  const e = entrada as { id: string; nombre: string; correo: string; idioma: string; fecha: string; comensales: number } | null;
-  if (!e?.correo) return;
-  const { data: c } = await db.from("configuracion").select("nombre_local, telefono").eq("id", 1).single();
-  const enlace = `${publicEnv.siteUrl}/${e.idioma}/reservar?fecha=${e.fecha}&comensales=${e.comensales}`;
+  const e = entrada as { id: string; nombre: string; correo: string; idioma: string; fecha: string; comensales: number; oferta_token: string; oferta_inicio: string } | null;
+  if (!e?.correo || !e.oferta_token) return;
+  const { data: c } = await db.from("configuracion").select("nombre_local, telefono, espera_plazo_min").eq("id", 1).single();
+  const enlace = `${publicEnv.siteUrl}/${e.idioma}/reservar/espera/${e.oferta_token}`;
   await enviarCorreo({
     tipo: "lista_espera",
     destinatario: e.correo,
@@ -90,12 +94,22 @@ export async function avisarListaEspera(reservaId: string): Promise<void> {
     listaEsperaId: e.id,
     variables: {
       nombre: e.nombre.split(" ")[0],
-      fecha: formatFecha(`${e.fecha}T12:00:00Z`, e.idioma),
+      fecha: formatFecha(e.oferta_inicio, e.idioma),
+      hora: formatHora(e.oferta_inicio),
       comensales: comensalesTexto(e.comensales, e.idioma),
+      plazo: String(c?.espera_plazo_min ?? 15),
       enlace,
       telefono: c?.telefono ?? "",
       restaurante: c?.nombre_local ?? "Arrocería Yerga",
     },
-    boton: { texto: botones.reservar[e.idioma] ?? botones.reservar.es, url: enlace },
+    boton: { texto: botones.aceptarMesa[e.idioma] ?? botones.aceptarMesa.es, url: enlace },
   });
+}
+
+/** Ofertas de la lista de espera sin respuesta: caducan y pasan al siguiente. */
+export async function rotarListaEspera(): Promise<number> {
+  const { data } = await createAdminClient().rpc("caducar_ofertas_espera");
+  const liberadas = (data ?? []) as string[];
+  for (const id of liberadas) await avisarListaEspera(id);
+  return liberadas.length;
 }
