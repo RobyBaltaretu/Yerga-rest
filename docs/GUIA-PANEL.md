@@ -74,6 +74,16 @@ cambios. Imprime la **Hoja del turno** al empezar cada servicio (botón en el ma
   **Carta y contenidos**, **Configuración**, **Informes** y **Registro de cambios**.
 - Solo administrador: **Usuarios** y datos legales.
 
+## Informes (encargado)
+
+Elige las fechas o un periodo rápido (7, 30 o 90 días, este mes). Cada indicador se
+compara con el periodo anterior de la misma duración. La flecha sale en verde si mejora y
+en rojo si empeora; los porcentajes se comparan en puntos. Dos botones descargan los datos
+para Excel:
+- **Reservas (CSV):** fecha, hora, turno, comensales, estado, origen, mesas y arroces. No
+  incluye nombres, teléfonos ni correos.
+- **Ocupación por turno (CSV).**
+
 ## Editar el mapa de mesas (encargado)
 
 **Mapa de mesas** → elige la distribución → **Editar**. Lo que cambies se guarda solo como

@@ -1,8 +1,12 @@
 "use client";
 
+import Link from "next/link";
 import { Cabecera } from "@/components/panel/Cabecera";
 import { ConDatos, RequiereRol, esFecha, sinError, useDatos, useParam } from "@/components/panel/DatosPanel";
+import { getBrowserClient } from "@/lib/supabase/client";
 import { fechaLocal, sumarDias } from "@/lib/format";
+import { hora } from "@/lib/panel/estados";
+import { aCsv, periodoAnterior, variacion } from "@/lib/panel/informes";
 
 type Informe = {
   total: number;
@@ -29,42 +33,144 @@ export function VistaInformes() {
   );
 }
 
+const boton = "inline-flex min-h-11 items-center rounded-full bg-white px-4 font-semibold ring-1 ring-tinta/15";
+
+type FilaReserva = {
+  inicio: string;
+  comensales: number;
+  estado: string;
+  origen: string;
+  turno_nombre: string | null;
+  creada_en: string;
+  encargo_arroz: { raciones: number; plato: { nombre: { es?: string } } | null }[];
+  asignacion: { activa: boolean; mesa: { nombre: string } | null }[];
+};
+
+function descargar(nombre: string, contenido: string) {
+  const url = URL.createObjectURL(new Blob([contenido], { type: "text/csv;charset=utf-8" }));
+  const a = Object.assign(document.createElement("a"), { href: url, download: nombre });
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+/** Reservas del periodo sin datos de contacto (minimización): para analizar en una hoja de cálculo. */
+async function descargarReservas(desde: string, hasta: string) {
+  const db = getBrowserClient();
+  const [ini, fin] = await Promise.all([
+    db.rpc("hora_local", { p_fecha: desde, p_hora: "00:00" }),
+    db.rpc("hora_local", { p_fecha: sumarDias(hasta, 1), p_hora: "00:00" }),
+  ]);
+  const filas = sinError(
+    await db
+      .from("reserva")
+      .select("inicio, comensales, estado, origen, turno_nombre, creada_en, encargo_arroz(raciones, plato(nombre)), asignacion(activa, mesa(nombre))")
+      .gte("inicio", sinError(ini) as string)
+      .lt("inicio", sinError(fin) as string)
+      .order("inicio"),
+  ) as unknown as FilaReserva[];
+  const csv = aCsv(filas, [
+    ["Fecha", (r) => fechaLocal(r.inicio)],
+    ["Hora", (r) => hora(r.inicio)],
+    ["Turno", (r) => r.turno_nombre],
+    ["Comensales", (r) => r.comensales],
+    ["Estado", (r) => r.estado],
+    ["Origen", (r) => r.origen],
+    ["Mesas", (r) => r.asignacion.filter((a) => a.activa).map((a) => a.mesa?.nombre).join("+")],
+    ["Arroces", (r) => r.encargo_arroz.map((e) => `${e.plato?.nombre.es ?? "?"} x${e.raciones}`).join(", ")],
+    ["Creada", (r) => `${fechaLocal(r.creada_en)} ${hora(r.creada_en)}`],
+  ]);
+  descargar(`reservas_${desde}_${hasta}.csv`, csv);
+}
+
 function Informes() {
-  const hasta = useParam("hasta", esFecha) ?? fechaLocal();
-  const desde = useParam("desde", esFecha) ?? sumarDias(hasta, -30);
-  const estado = useDatos(async (db) => sinError(await db.rpc("informe", { p_desde: desde, p_hasta: hasta })) as unknown as Informe, [desde, hasta]);
+  const hoy = fechaLocal();
+  const hasta = useParam("hasta", esFecha) ?? hoy;
+  const desde = useParam("desde", esFecha) ?? sumarDias(hasta, -29);
+  const anterior = periodoAnterior(desde, hasta);
+  const estado = useDatos(async (db) => {
+    const [actual, previo] = await Promise.all([
+      db.rpc("informe", { p_desde: desde, p_hasta: hasta }),
+      db.rpc("informe", { p_desde: anterior.desde, p_hasta: anterior.hasta }),
+    ]);
+    return { i: sinError(actual) as unknown as Informe, ant: sinError(previo) as unknown as Informe };
+  }, [desde, hasta]);
+  const rapidos = [
+    { texto: "7 días", desde: sumarDias(hoy, -6) },
+    { texto: "30 días", desde: sumarDias(hoy, -29) },
+    { texto: "90 días", desde: sumarDias(hoy, -89) },
+    { texto: "Este mes", desde: `${hoy.slice(0, 8)}01` },
+  ];
   return (
     <main className="pb-16">
       <Cabecera titulo="Informes" descripcion="Metas propuestas a 3 meses; se validan con el primer mes de datos reales." />
-      <form className="flex flex-wrap items-end gap-3 px-4 py-4 sm:px-6">
-        <label className="text-sm font-semibold">Desde<input type="date" name="desde" defaultValue={desde} key={`d${desde}`} className="mt-1 block min-h-11 rounded-full border-0 bg-white px-3 ring-1 ring-tinta/15" /></label>
-        <label className="text-sm font-semibold">Hasta<input type="date" name="hasta" defaultValue={hasta} key={`h${hasta}`} className="mt-1 block min-h-11 rounded-full border-0 bg-white px-3 ring-1 ring-tinta/15" /></label>
-        <button className="min-h-11 rounded-full bg-tinta px-4 font-semibold text-arroz">Ver</button>
-      </form>
-      <ConDatos estado={estado}>{(i) => <Resultados i={i} />}</ConDatos>
+      <div className="flex flex-wrap items-end gap-3 px-4 py-4 sm:px-6">
+        <form className="flex flex-wrap items-end gap-3">
+          <label className="text-sm font-semibold">Desde<input type="date" name="desde" defaultValue={desde} key={`d${desde}`} className="mt-1 block min-h-11 rounded-full border-0 bg-white px-3 ring-1 ring-tinta/15" /></label>
+          <label className="text-sm font-semibold">Hasta<input type="date" name="hasta" defaultValue={hasta} key={`h${hasta}`} className="mt-1 block min-h-11 rounded-full border-0 bg-white px-3 ring-1 ring-tinta/15" /></label>
+          <button className="min-h-11 rounded-full bg-tinta px-4 font-semibold text-arroz">Ver</button>
+        </form>
+        <nav aria-label="Periodos rápidos" className="flex flex-wrap gap-2">
+          {rapidos.map((r) => (
+            <Link key={r.texto} href={`/panel/informes?desde=${r.desde}&hasta=${hoy}`} aria-current={r.desde === desde && hasta === hoy ? "page" : undefined} className={`${boton} aria-[current=page]:bg-tinta aria-[current=page]:text-arroz`}>
+              {r.texto}
+            </Link>
+          ))}
+        </nav>
+      </div>
+      <p className="px-4 pb-4 text-sm text-niebla sm:px-6">
+        Comparado con el periodo anterior: del {anterior.desde} al {anterior.hasta}.
+      </p>
+      <ConDatos estado={estado}>{({ i, ant }) => <Resultados i={i} ant={ant} desde={desde} hasta={hasta} />}</ConDatos>
     </main>
   );
 }
 
-function Resultados({ i }: { i: Informe }) {
+/** «▲ 4,5 pts» frente al periodo anterior; el color dice si es a mejor. */
+function Variacion({ actual, anterior, unidad, mejorSiSube }: { actual: number | null; anterior: number | null; unidad: string; mejorSiSube: boolean | null }) {
+  const v = variacion(actual, anterior);
+  if (v == null) return null;
+  const texto = v === 0 ? "= que el periodo anterior" : `${v > 0 ? "▲" : "▼"} ${Math.abs(v).toLocaleString("es-ES")}${unidad === "%" ? " pts" : unidad ? ` ${unidad}` : ""} frente al anterior`;
+  const color = v === 0 || mejorSiSube == null ? "text-niebla" : (v > 0) === mejorSiSube ? "text-huerta" : "text-pimenton-oscuro";
+  return <p className={`mt-0.5 text-xs ${color}`}>{texto}</p>;
+}
+
+function Resultados({ i, ant, desde, hasta }: { i: Informe; ant: Informe; desde: string; hasta: string }) {
   const maxArroz = Math.max(1, ...i.arroces.map((a) => a.raciones));
 
   const tarjetas = [
-    { titulo: "Reservas online sobre el total", valor: i.online_sobre_total, unidad: "%", meta: "60 % o más", ok: (i.online_sobre_total ?? 0) >= 60 },
-    { titulo: "Plantones", valor: i.plantones_pct, unidad: "%", meta: "menos del 4 %", ok: (i.plantones_pct ?? 0) < 4 },
-    { titulo: "Reservas web con arroz elegido", valor: i.con_arroz_pct, unidad: "%", meta: "50 % o más", ok: (i.con_arroz_pct ?? 0) >= 50 },
-    { titulo: "Tiempo medio para reservar online", valor: i.segundos_reserva, unidad: "s", meta: "menos de 60 s", ok: i.segundos_reserva != null && i.segundos_reserva < 60 },
-    { titulo: "Confirmadas futuras sin mesa", valor: i.sin_mesa_futuras, unidad: "", meta: "0", ok: i.sin_mesa_futuras === 0 },
-    { titulo: "Antelación media", valor: i.antelacion_horas, unidad: "h", meta: "", ok: null },
+    { titulo: "Reservas online sobre el total", valor: i.online_sobre_total, previo: ant.online_sobre_total, sube: true, unidad: "%", meta: "60 % o más", ok: (i.online_sobre_total ?? 0) >= 60 },
+    { titulo: "Plantones", valor: i.plantones_pct, previo: ant.plantones_pct, sube: false, unidad: "%", meta: "menos del 4 %", ok: (i.plantones_pct ?? 0) < 4 },
+    { titulo: "Reservas web con arroz elegido", valor: i.con_arroz_pct, previo: ant.con_arroz_pct, sube: true, unidad: "%", meta: "50 % o más", ok: (i.con_arroz_pct ?? 0) >= 50 },
+    { titulo: "Tiempo medio para reservar online", valor: i.segundos_reserva, previo: ant.segundos_reserva, sube: false, unidad: "s", meta: "menos de 60 s", ok: i.segundos_reserva != null && i.segundos_reserva < 60 },
+    // Es una foto de hoy, no del periodo: no se compara.
+    { titulo: "Confirmadas futuras sin mesa", valor: i.sin_mesa_futuras, previo: null, sube: null, unidad: "", meta: "0", ok: i.sin_mesa_futuras === 0 },
+    { titulo: "Antelación media", valor: i.antelacion_horas, previo: ant.antelacion_horas, sube: null, unidad: "h", meta: "", ok: null },
+    { titulo: "Reservas", valor: i.total, previo: ant.total, sube: true, unidad: "", meta: "", ok: null },
+    { titulo: "Comensales atendidos", valor: i.comensales, previo: ant.comensales, sube: true, unidad: "", meta: "", ok: null },
   ];
+  const csvOcupacion = () =>
+    descargar(
+      `ocupacion_${desde}_${hasta}.csv`,
+      aCsv(i.por_turno, [
+        ["Fecha", (t) => t.fecha],
+        ["Turno", (t) => t.turno],
+        ["Comensales", (t) => t.comensales],
+        ["Ocupación %", (t) => t.ocupacion],
+      ]),
+    );
 
   return (
       <div className="space-y-10 px-4 sm:px-6">
+        <section aria-label="Exportar" className="flex flex-wrap gap-2">
+          <button type="button" onClick={() => descargarReservas(desde, hasta)} className={boton}>Descargar reservas (CSV)</button>
+          <button type="button" onClick={csvOcupacion} className={boton}>Descargar ocupación por turno (CSV)</button>
+        </section>
         <section aria-label="Resumen" className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {tarjetas.map((t) => (
             <div key={t.titulo} className="rounded-2xl bg-white p-4 ring-1 ring-tinta/10">
               <p className="text-sm text-niebla">{t.titulo}</p>
               <p className="mt-1 font-display text-4xl tabular-nums">{t.valor ?? "—"}<span className="text-xl">{t.valor != null ? t.unidad : ""}</span></p>
+              <Variacion actual={t.valor} anterior={t.previo} unidad={t.unidad} mejorSiSube={t.sube} />
               {t.meta ? <p className={`mt-1 text-xs font-semibold ${t.ok == null || t.valor == null ? "text-niebla" : t.ok ? "text-huerta" : "text-pimenton-oscuro"}`}>Meta: {t.meta}{t.valor != null && t.ok != null ? (t.ok ? " · cumplida" : " · por debajo") : ""}</p> : null}
             </div>
           ))}
