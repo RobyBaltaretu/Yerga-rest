@@ -21,8 +21,8 @@ export async function Portada({ locale, titular, subtitulo }: { locale: string; 
 
   const final = (
     <>
-      <h2 className="max-w-3xl font-display text-4xl leading-tight text-arroz drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)] sm:text-6xl">{titular}</h2>
-      <p className="mt-3 max-w-xl text-lg text-arroz/90 drop-shadow">{subtitulo}</p>
+      <h2 className="max-w-3xl text-balance font-display text-4xl leading-tight text-arroz drop-shadow-[0_2px_20px_rgba(0,0,0,0.6)] sm:text-6xl">{titular}</h2>
+      <p className="mt-3 max-w-xl text-balance text-lg text-arroz/90 drop-shadow">{subtitulo}</p>
       <Link href="/reservar" className="pointer-events-auto mt-6 inline-flex min-h-12 items-center rounded-full bg-pimenton px-7 text-lg font-semibold text-white shadow-xl hover:bg-pimenton-oscuro">
         {t("nav.reservar")}
       </Link>
