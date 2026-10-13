@@ -3,12 +3,12 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { allura, inter, marcellus } from "@/lib/fonts";
+import { geist, marcellus } from "@/lib/fonts";
 import { htmlLang } from "@/lib/i18n";
 import { Cabecera } from "@/components/web/Cabecera";
 import { Pie } from "@/components/web/Pie";
 import { BotonReservaFijo } from "@/components/web/CabeceraCliente";
-import { ScrollSuave } from "@/components/web/ScrollSuave";
+import { ProveedorMovimiento } from "@/components/web/movimiento";
 import { publicEnv } from "@/lib/env";
 import { Analitica } from "@/components/Analitica";
 import "../globals.css";
@@ -51,16 +51,17 @@ export default async function LocaleLayout({
   return (
     <html
       lang={htmlLang(locale)}
-      className={`${marcellus.variable} ${inter.variable} ${allura.variable} antialiased`}
+      className={`web ${geist.variable} ${marcellus.variable} antialiased`}
     >
       <body className="min-h-dvh">
         <script dangerouslySetInnerHTML={{ __html: scriptLigero }} />
         <NextIntlClientProvider messages={cliente as never}>
-          <Cabecera locale={locale} />
-          {children}
-          <Pie />
-          <BotonReservaFijo locale={locale} />
-          <ScrollSuave />
+          <ProveedorMovimiento>
+            <Cabecera locale={locale} />
+            {children}
+            <Pie />
+            <BotonReservaFijo locale={locale} />
+          </ProveedorMovimiento>
         </NextIntlClientProvider>
         <Analitica />
       </body>

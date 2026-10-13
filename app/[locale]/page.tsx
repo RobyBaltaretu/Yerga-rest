@@ -23,8 +23,8 @@ export default async function InicioPage({ params }: PageProps<"/[locale]">) {
   return (
     <main id="contenido">
       <JsonLd datos={jsonLdRestaurante(config, turnos, locale)} />
-      {aviso ? <p className="fixed inset-x-0 top-16 z-30 bg-azafran px-4 py-2 text-center text-sm font-semibold text-brasa">{aviso}</p> : null}
-      <Portada locale={locale} titular={tr(contenidos["portada.titular"], locale)} subtitulo={tr(contenidos["portada.subtitulo"], locale)} />
+      {aviso ? <p className="fixed inset-x-0 top-[4.75rem] z-30 mx-auto w-fit max-w-[calc(100%-2rem)] rounded-full bg-superficie px-4 py-2 text-center text-[13px] font-medium shadow-elevada">{aviso}</p> : null}
+      <Portada locale={locale} titular={tr(contenidos["portada.titular"], locale)} subtitulo={tr(contenidos["portada.subtitulo"], locale)} maximo={config.max_comensales_online} />
       <SeccionArroces locale={locale} platos={platos} />
       <SeccionEntrantes locale={locale} platos={platos} />
       <SeccionProducto texto={tr(contenidos["producto.texto"], locale)} />

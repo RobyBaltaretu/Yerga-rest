@@ -60,3 +60,8 @@ supabase/.temp
 # Vista previa estática generada en local (scripts/vista-previa/estatica.mjs)
 /out-vista/
 /_site/
+
+# Capturas de revisión de impeccable (locales)
+/.impeccable/review/
+/.impeccable/build/
+/.impeccable/mocks/

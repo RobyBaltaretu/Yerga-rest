@@ -4,7 +4,7 @@ import { useCallback, useId, useState, useTransition, type RefObject } from "rea
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { enviarSolicitudGrupo } from "@/app/[locale]/reservar/acciones";
-import { Boton } from "@/components/ui/Boton";
+import { Boton } from "@/components/web/movimiento";
 import { AreaTexto, Campo, Casilla, Selector } from "@/components/ui/Campo";
 import { Turnstile } from "./Turnstile";
 
@@ -40,8 +40,8 @@ export function FormGrupo({
 
   if (ok) {
     return (
-      <section className="rounded-3xl bg-white p-8 text-center ring-1 ring-tinta/10">
-        <h2 ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">{t("grupo.titulo")}</h2>
+      <section className="rounded-[28px] bg-superficie p-8 text-center shadow-elevada">
+        <h2 ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">{t("grupo.titulo")}</h2>
         <p className="mt-4 text-lg" role="status">{t("grupo.ok")}</p>
         <Link href="/" className="mt-6 inline-block underline underline-offset-4">{t("ok.volver")}</Link>
       </section>
@@ -50,7 +50,7 @@ export function FormGrupo({
 
   return (
     <section aria-labelledby={`${uid}-t`}>
-      <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">{t("grupo.titulo")}</h2>
+      <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">{t("grupo.titulo")}</h2>
       <p className="mt-2 text-niebla">{t("grupo.texto", { n })}</p>
       <form
         className="mt-6 space-y-5"

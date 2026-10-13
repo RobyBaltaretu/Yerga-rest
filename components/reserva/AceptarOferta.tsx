@@ -23,7 +23,7 @@ export function AceptarOferta({ token, telefono }: { token: string; telefono: st
             else setError(true);
           })
         }
-        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-pimenton px-6 text-lg font-semibold text-white hover:bg-pimenton-oscuro disabled:opacity-70"
+        className="inline-flex min-h-12 w-full items-center justify-center rounded-full bg-texto px-6 text-base font-medium text-invertido shadow-tarjeta transition-[background-color,transform] duration-150 hover:bg-texto/88 active:scale-[0.98] disabled:opacity-70"
       >
         {pendiente ? t("aceptando") : t("aceptar")}
       </button>

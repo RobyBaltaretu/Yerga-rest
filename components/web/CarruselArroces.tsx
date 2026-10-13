@@ -1,9 +1,11 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { Link } from "@/i18n/navigation";
+import { useCallback, useState } from "react";
+import { motion } from "motion/react";
+import { ArrowRight } from "lucide-react";
 import { PaellaMini } from "./PaellaMini";
-import { Dialogo } from "@/components/ui/Dialogo";
+import { Hoja } from "./Hoja";
+import { EnlaceBoton, muelle } from "./movimiento";
 
 export type ArrozWeb = {
   slug: string;
@@ -15,60 +17,79 @@ export type ArrozWeb = {
   minimo: string;
 };
 
-/** Carrusel de paellas cenitales que giran al pasar; cada una se abre con su detalle. */
+/** Escaparate de arroces: cada paella se eleva y gira con el muelle; al pulsar, su ficha. */
 export function CarruselArroces({
   arroces,
   textos,
 }: {
   arroces: ArrozWeb[];
-  textos: { ingredientes: string; alergenos: string; sinAlergenos: string; reservarCon: string; verMas: string; anterior: string; siguiente: string };
+  textos: { ingredientes: string; alergenos: string; sinAlergenos: string; reservarCon: string; verMas: string; cerrar: string };
 }) {
-  const pista = useRef<HTMLUListElement>(null);
   const [abierto, setAbierto] = useState<ArrozWeb | null>(null);
-  const mover = (dir: number) => pista.current?.scrollBy({ left: dir * pista.current.clientWidth * 0.8, behavior: "smooth" });
+  const cerrar = useCallback(() => setAbierto(null), []);
 
   return (
-    <div className="relative">
-      <ul ref={pista} className="flex snap-x snap-mandatory gap-6 overflow-x-auto px-4 pb-6 [scrollbar-width:none] sm:px-[max(1rem,calc((100vw-72rem)/2))]" aria-label="Arroces">
+    <>
+      <ul className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4" aria-label="Arroces">
         {arroces.map((a) => (
-          <li key={a.slug} className="w-[72vw] max-w-72 shrink-0 snap-center">
-            <button
+          <li key={a.slug}>
+            <motion.button
               type="button"
               onClick={() => setAbierto(a)}
-              className="cursor-cuchara group w-full text-left"
+              aria-label={textos.verMas.replace("{nombre}", a.nombre)}
+              initial="reposo"
+              whileHover="encima"
+              whileFocus="encima"
+              whileTap={{ scale: 0.98 }}
+              variants={{ reposo: { y: 0 }, encima: { y: -3 } }}
+              transition={muelle}
+              className="group flex h-full w-full flex-col rounded-3xl bg-superficie p-2 text-left shadow-tarjeta transition-shadow duration-300 hover:shadow-elevada"
             >
-              <PaellaMini slug={a.slug} nombre={a.nombre} className="paella-gira mx-auto w-full transition-transform duration-500 group-hover:rotate-12" />
-              <p className="mt-4 font-display text-2xl">{a.nombre}</p>
-              <p className="mt-1 text-sm text-niebla">{a.minimo} · {a.precio}</p>
-            </button>
+              <span className="grid aspect-square place-items-center rounded-[20px] bg-sutil p-[12%]">
+                <motion.span className="block w-full" variants={{ reposo: { rotate: 0, scale: 1 }, encima: { rotate: 8, scale: 1.03 } }} transition={muelle}>
+                  <PaellaMini slug={a.slug} nombre={a.nombre} className="w-full drop-shadow-[0_12px_14px_rgba(0,0,0,0.16)]" />
+                </motion.span>
+              </span>
+              <span className="flex flex-1 flex-col px-2.5 pb-2.5 pt-3.5">
+                <span className="text-[17px] font-semibold leading-snug tracking-[-0.015em]">{a.nombre}</span>
+                <span className="mt-1 text-[13px] text-suave">{a.precio}</span>
+                <span className="mt-auto pt-1 text-[13px] text-tenue">{a.minimo}</span>
+              </span>
+            </motion.button>
           </li>
         ))}
       </ul>
-      <div className="mx-auto hidden max-w-6xl justify-end gap-2 px-4 sm:flex">
-        <button type="button" onClick={() => mover(-1)} aria-label={textos.anterior} className="grid size-11 place-items-center rounded-full bg-white ring-1 ring-tinta/15">‹</button>
-        <button type="button" onClick={() => mover(1)} aria-label={textos.siguiente} className="grid size-11 place-items-center rounded-full bg-white ring-1 ring-tinta/15">›</button>
-      </div>
 
-      <Dialogo titulo={abierto?.nombre ?? ""} abierto={Boolean(abierto)} onCerrar={() => setAbierto(null)}>
+      <Hoja titulo={abierto?.nombre ?? ""} abierta={Boolean(abierto)} onCerrar={cerrar} cerrar={textos.cerrar}>
         {abierto ? (
-          <div className="space-y-4">
-            <PaellaMini slug={abierto.slug} nombre={abierto.nombre} className="mx-auto w-48" />
-            <p>{abierto.descripcion}</p>
-            {abierto.ingredientes.length ? (
-              <div>
-                <h3 className="text-sm font-semibold uppercase tracking-widest text-niebla">{textos.ingredientes}</h3>
-                <p className="mt-1">{abierto.ingredientes.join(" · ")}</p>
-              </div>
-            ) : null}
-            <div>
-              <h3 className="text-sm font-semibold uppercase tracking-widest text-niebla">{textos.alergenos}</h3>
-              <p className="mt-1">{abierto.alergenos.length ? abierto.alergenos.join(" · ") : textos.sinAlergenos}</p>
+          <div>
+            <div className="grid place-items-center rounded-[20px] bg-sutil py-6">
+              <PaellaMini slug={abierto.slug} nombre={abierto.nombre} className="w-44 drop-shadow-[0_12px_14px_rgba(0,0,0,0.16)]" />
             </div>
-            <p className="text-sm font-semibold">{abierto.minimo} · {abierto.precio}</p>
-            <Link href="/reservar" className="inline-flex min-h-12 items-center rounded-full bg-pimenton px-6 font-semibold text-white">{textos.reservarCon}</Link>
+            <p className="mt-5 leading-relaxed">{abierto.descripcion}</p>
+            <dl className="mt-5 divide-y divide-linea border-y border-linea text-[15px]">
+              {abierto.ingredientes.length ? (
+                <div className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr]">
+                  <dt className="text-suave">{textos.ingredientes}</dt>
+                  <dd>{abierto.ingredientes.join(", ")}</dd>
+                </div>
+              ) : null}
+              <div className="grid gap-1 py-3 sm:grid-cols-[8rem_1fr]">
+                <dt className="text-suave">{textos.alergenos}</dt>
+                <dd>{abierto.alergenos.length ? abierto.alergenos.join(", ") : textos.sinAlergenos}</dd>
+              </div>
+            </dl>
+            <p className="mt-4 flex items-baseline justify-between gap-4 text-[15px]">
+              <span className="text-suave">{abierto.minimo}</span>
+              <span className="font-semibold tabular-nums">{abierto.precio}</span>
+            </p>
+            <EnlaceBoton href="/reservar" tamano="lg" className="mt-6 w-full">
+              {textos.reservarCon}
+              <ArrowRight className="size-4" strokeWidth={2} aria-hidden />
+            </EnlaceBoton>
           </div>
         ) : null}
-      </Dialogo>
-    </div>
+      </Hoja>
+    </>
   );
 }

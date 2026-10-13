@@ -18,7 +18,7 @@ disponibilidad que ve el cliente sale siempre del mapa de mesas: si no hay mesa,
 ## Stack
 
 Next.js 16 (App Router, TypeScript estricto) · Tailwind CSS 4 · next-intl (`/es`, `/va`, `/en`)
-· Supabase (PostgreSQL, Auth, Realtime) · Zod · GSAP + Lenis · Konva · Resend + React Email
+· Supabase (PostgreSQL, Auth, Realtime) · Zod · Motion (Framer Motion) · Lucide · Konva · Resend + React Email
 · Cloudflare Turnstile · Cloudflare Workers con OpenNext · Vitest · Playwright.
 
 ## Requisitos

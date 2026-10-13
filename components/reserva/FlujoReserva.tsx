@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useId, useMemo, useRef, useState, useTransition } from "react";
 import { useTranslations } from "next-intl";
+import { Check, Timer } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { Link } from "@/i18n/navigation";
 import {
   apuntarListaEspera,
@@ -12,7 +14,7 @@ import {
   type HoraDisponible,
 } from "@/app/[locale]/reservar/acciones";
 import { fechaLocal, formatFecha, formatHora, formatPrecio } from "@/lib/format";
-import { Boton } from "@/components/ui/Boton";
+import { Boton } from "@/components/web/movimiento";
 import { AreaTexto, Campo, Casilla, Selector } from "@/components/ui/Campo";
 import { Calendario } from "./Calendario";
 import { Turnstile } from "./Turnstile";
@@ -200,9 +202,13 @@ export function FlujoReserva(props: Props) {
     <div ref={contenedor} className="mx-auto w-full max-w-xl scroll-mt-24">
       {paso !== "grupo" ? (
         <div className="mb-6">
-          <p className={`text-sm font-medium text-niebla ${paso === "ok" ? "invisible" : ""}`}>{t("paso", { actual: indice + 1, total: pasos.length })}</p>
-          <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-arroz-2" aria-hidden>
-            <div className="h-full rounded-full bg-azafran transition-[width] duration-500" style={{ width: `${((indice + 1) / pasos.length) * 100}%` }} />
+          <p className={`text-[13px] font-medium text-suave ${paso === "ok" ? "invisible" : ""}`}>{t("paso", { actual: indice + 1, total: pasos.length })}</p>
+          <div className="mt-2 grid gap-1.5" style={{ gridTemplateColumns: `repeat(${pasos.length}, minmax(0, 1fr))` }} aria-hidden>
+            {pasos.map((_, i) => (
+              <div key={i} className="h-1 overflow-hidden rounded-full bg-linea">
+                <motion.div className="h-full rounded-full bg-texto" initial={false} animate={{ scaleX: i <= indice ? 1 : 0 }} style={{ originX: 0 }} />
+              </div>
+            ))}
           </div>
         </div>
       ) : null}
@@ -219,10 +225,11 @@ export function FlujoReserva(props: Props) {
         />
       ) : null}
 
-      <div key={paso} className="animate-[aparecer_.35s_ease-out]">
+      <AnimatePresence initial={false}>
+      <motion.div key={paso} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
         {paso === "inicio" ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("comensales.titulo")}
             </h2>
             <div className="mt-4 grid grid-cols-5 gap-2" role="group" aria-label={t("comensales.titulo")}>
@@ -233,7 +240,7 @@ export function FlujoReserva(props: Props) {
                   onClick={() => elegirComensales(v)}
                   aria-pressed={n === v}
                   aria-label={t("comensales.persona", { n: v })}
-                  className={`min-h-12 rounded-xl text-lg font-semibold tabular-nums ring-1 transition ${n === v ? "bg-pimenton text-white ring-pimenton" : "bg-white ring-tinta/15 hover:ring-tinta/40"}`}
+                  className={`min-h-12 rounded-2xl text-lg font-medium tabular-nums transition-[background-color,box-shadow,color,transform] duration-150 active:scale-[0.96] ${n === v ? "bg-texto text-invertido shadow-tarjeta" : "bg-superficie shadow-tarjeta hover:shadow-elevada"}`}
                 >
                   {v}
                 </button>
@@ -242,7 +249,7 @@ export function FlujoReserva(props: Props) {
             <button
               type="button"
               onClick={() => elegirComensales(props.maxOnline + 1)}
-              className="mt-2 min-h-11 text-sm font-semibold text-pimenton-oscuro underline underline-offset-4"
+              className="enlace mt-3 min-h-11 text-[15px] font-medium text-texto"
             >
               {t("comensales.mas", { max: props.maxOnline })}
             </button>
@@ -252,7 +259,7 @@ export function FlujoReserva(props: Props) {
 
             {n && n <= props.capacidadMax ? (
               <div className="mt-8">
-                <h3 className="mb-3 font-display text-2xl">{t("calendario.titulo")}</h3>
+                <h3 className="mb-4 text-xl font-semibold tracking-[-0.02em]">{t("calendario.titulo")}</h3>
                 <Calendario
                   locale={locale}
                   comensales={n}
@@ -268,7 +275,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "hora" && n && fecha ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("horas.titulo")}
             </h2>
             {fallo ? <Fallo fallo={fallo} telefono={telefono} onAlternativa={(a) => {
@@ -287,7 +294,7 @@ export function FlujoReserva(props: Props) {
                   if (!lista.length) return null;
                   return (
                     <div key={turno} className="mt-6">
-                      <h3 className="text-sm font-semibold uppercase tracking-widest text-niebla">{t(`horas.${turno}`)}</h3>
+                      <h3 className="text-[13px] font-medium text-suave">{t(`horas.${turno}`)}</h3>
                       <ul className="mt-2 grid grid-cols-3 gap-2 sm:grid-cols-4" role="list">
                         {lista.map((h) => (
                           <li key={h.inicio}>
@@ -296,7 +303,7 @@ export function FlujoReserva(props: Props) {
                                 type="button"
                                 onClick={() => elegirHora(h)}
                                 disabled={pendiente}
-                                className="min-h-12 w-full rounded-xl bg-white text-lg font-semibold tabular-nums ring-1 ring-tinta/15 transition hover:bg-azafran/20 hover:ring-azafran-oscuro disabled:opacity-60"
+                                className="min-h-12 w-full rounded-2xl bg-superficie text-[17px] font-medium tabular-nums shadow-tarjeta transition-[box-shadow,transform] duration-150 hover:shadow-elevada active:scale-[0.96] disabled:opacity-60"
                               >
                                 {h.hora}
                               </button>
@@ -304,7 +311,7 @@ export function FlujoReserva(props: Props) {
                               <button
                                 type="button"
                                 onClick={() => setEspera(h)}
-                                className="min-h-12 w-full rounded-xl text-lg tabular-nums text-niebla line-through decoration-2 ring-1 ring-dashed ring-tinta/10"
+                                className="min-h-12 w-full rounded-2xl border border-dashed border-linea-fuerte text-[17px] tabular-nums text-tenue line-through decoration-1 transition-colors hover:text-suave"
                                 aria-label={`${h.hora} · ${t("horas.completa")} · ${t("horas.avisame")}`}
                               >
                                 {h.hora}
@@ -338,7 +345,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "zona" && hora ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("zona.titulo")}
             </h2>
             <p className="mt-2 text-niebla">{t("zona.ayuda")}</p>
@@ -352,9 +359,9 @@ export function FlujoReserva(props: Props) {
                     disabled={pendiente}
                     onClick={() => elegirZona(z.id)}
                     aria-pressed={retencion?.zona_id === z.id}
-                    className={`min-h-20 rounded-2xl p-5 text-left ring-1 transition ${retencion?.zona_id === z.id ? "bg-azafran/15 ring-2 ring-azafran-oscuro" : "bg-white ring-tinta/15 hover:ring-tinta/40"}`}
+                    className={`min-h-20 rounded-3xl p-5 text-left transition-[box-shadow,transform] duration-150 active:scale-[0.98] ${retencion?.zona_id === z.id ? "bg-superficie shadow-elevada ring-2 ring-texto" : "bg-superficie shadow-tarjeta hover:shadow-elevada"}`}
                   >
-                    <span className="font-display text-2xl">{zonaNombre(z.id)}</span>
+                    <span className="text-xl font-semibold tracking-[-0.02em]">{zonaNombre(z.id)}</span>
                   </button>
                 ))}
             </div>
@@ -366,7 +373,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "arroz" && n ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("arroz.titulo")}
             </h2>
             <p className="mt-2 text-niebla">{t("arroz.ayuda")}</p>
@@ -391,7 +398,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "datos" && hora && n ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="font-display text-3xl outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("datos.titulo")}
             </h2>
             {fallo ? <Fallo fallo={fallo} telefono={telefono} onAlternativa={elegirAlternativa} /> : null}
@@ -440,7 +447,7 @@ export function FlujoReserva(props: Props) {
               <Casilla id={`${uid}-comercial`} etiqueta={t("datos.comercial")} checked={datos.consiente_comercial} onChange={(e) => setDatos({ ...datos, consiente_comercial: e.target.checked })} />
               <Turnstile siteKey={props.turnstileSiteKey} onToken={setTurnstile} idioma={locale} />
               {Object.keys(errores).length && !errores.nombre && !errores.telefono && !errores.correo && !errores.acepta_privacidad && !errores.consiente_salud ? (
-                <p className="text-sm font-medium text-pimenton-oscuro" role="alert">{t("errores.form")}</p>
+                <p className="text-[14px] font-medium text-peligro" role="alert">{t("errores.form")}</p>
               ) : null}
               <div className="flex flex-wrap items-center gap-3 pt-2">
                 <Boton type="submit" cargando={pendiente} className="w-full sm:w-auto">
@@ -455,27 +462,29 @@ export function FlujoReserva(props: Props) {
         ) : null}
 
         {paso === "ok" && resultado && n ? (
-          <section aria-labelledby={`${uid}-t`} className="rounded-3xl bg-white p-6 text-center ring-1 ring-tinta/10 sm:p-10">
-            <div className="mx-auto grid size-16 place-items-center rounded-full bg-huerta-claro text-3xl" aria-hidden>✓</div>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="mt-4 font-display text-4xl outline-none">
+          <section aria-labelledby={`${uid}-t`} className="rounded-[28px] bg-superficie p-6 text-center shadow-elevada sm:p-10">
+            <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="mx-auto grid size-14 place-items-center rounded-full bg-huerta-claro text-exito" aria-hidden>
+              <Check className="size-6" strokeWidth={2.25} />
+            </motion.div>
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="mt-4 text-[2rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
               {t("ok.titulo")}
             </h2>
             <p className="mt-3 text-lg">
               {t("ok.texto", { fecha: formatFecha(resultado.inicio, locale), hora: formatHora(resultado.inicio) })}
             </p>
-            <p className="mt-1 text-niebla">{t("resumen.comensales", { n })}{retencion ? ` · ${zonaNombre(retencion.zona_id)}` : ""}</p>
+            <p className="mt-1 text-suave">{t("resumen.comensales", { n })}{retencion ? ` · ${zonaNombre(retencion.zona_id)}` : ""}</p>
             <p className="mt-4 text-sm text-niebla">{t("ok.correo", { correo: datos.correo })}</p>
             <div className="mt-6 flex flex-col items-center gap-3">
               <a
                 href={`/api/reserva/ics?codigo=${encodeURIComponent(resultado.codigo)}`}
-                className="inline-flex min-h-11 items-center rounded-full bg-pimenton px-5 font-semibold text-white"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-texto px-5 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]"
               >
                 {t("ok.calendario")}
               </a>
-              <Link href={`/reservar/gestion/${resultado.codigo}`} className="min-h-11 py-2 font-semibold underline underline-offset-4">
+              <Link href={`/reservar/gestion/${resultado.codigo}`} className="enlace min-h-11 py-2 font-medium">
                 {t("ok.gestionar")}
               </Link>
-              <Link href="/" className="text-sm text-niebla underline underline-offset-4">{t("ok.volver")}</Link>
+              <Link href="/" className="enlace text-[14px] text-suave">{t("ok.volver")}</Link>
             </div>
           </section>
         ) : null}
@@ -493,7 +502,8 @@ export function FlujoReserva(props: Props) {
             }}
           />
         ) : null}
-      </div>
+      </motion.div>
+      </AnimatePresence>
     </div>
   );
 }
@@ -517,7 +527,7 @@ function Resumen({
 }) {
   const t = useTranslations("reserva");
   return (
-    <div className="mb-6 flex flex-wrap items-center justify-between gap-2 rounded-2xl bg-arroz-2/70 px-4 py-3 text-sm">
+    <div className="mb-8 flex flex-wrap items-center justify-between gap-2 rounded-2xl border border-linea bg-sutil px-4 py-2.5 text-[14px]">
       <p className="font-medium">
         {t("resumen.comensales", { n })} · {formatFecha(hora ?? `${fecha}T12:00:00Z`, locale)}
         {hora ? ` · ${formatHora(hora)}` : ""}
@@ -525,7 +535,7 @@ function Resumen({
       </p>
       <div className="flex items-center gap-3">
         {caducaEn ? <CuentaAtras hasta={caducaEn} /> : null}
-        <button type="button" onClick={onCambiar} className="min-h-11 font-semibold underline underline-offset-4">
+        <button type="button" onClick={onCambiar} className="enlace min-h-11 font-medium">
           {t("pasos.comensales")}
         </button>
       </div>
@@ -543,9 +553,9 @@ function CuentaAtras({ hasta }: { hasta: string }) {
   const resto = Math.max(0, Math.floor((Date.parse(hasta) - ahora) / 1000));
   const tiempo = t("cuentaAtras", { min: Math.floor(resto / 60), seg: String(resto % 60).padStart(2, "0") });
   return (
-    <span className={`rounded-full px-3 py-1 font-semibold tabular-nums ${resto > 60 ? "bg-white" : "bg-pimenton text-white"}`} title={resto ? t("datos.retenida", { tiempo }) : t("datos.caducada")}>
+    <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[13px] font-medium tabular-nums ${resto > 60 ? "bg-superficie shadow-tarjeta" : "bg-peligro text-invertido"}`} title={resto ? t("datos.retenida", { tiempo }) : t("datos.caducada")}>
       <span className="sr-only">{resto ? t("datos.retenida", { tiempo }) : t("datos.caducada")}</span>
-      <span aria-hidden>⏱ {tiempo}</span>
+      <span aria-hidden className="inline-flex items-center gap-1"><Timer className="size-3.5" strokeWidth={2} />{tiempo}</span>
     </span>
   );
 }
@@ -553,7 +563,7 @@ function CuentaAtras({ hasta }: { hasta: string }) {
 function SinHoras({ n, onOtroDia }: { n: number; onOtroDia: () => void }) {
   const t = useTranslations("reserva.horas");
   return (
-    <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-tinta/10">
+    <div className="mt-6 rounded-3xl bg-superficie p-5 shadow-tarjeta">
       <p>{t("ninguna", { n })}</p>
       <Boton variante="secundario" className="mt-3" onClick={onOtroDia}>{t("otroDia")}</Boton>
     </div>
@@ -572,8 +582,8 @@ function Fallo({
   const t = useTranslations("reserva.fallo");
   const ocupada = fallo.motivo === "ocupada" || fallo.motivo === "no_disponible";
   return (
-    <div className="mt-4 rounded-2xl bg-pimenton/10 p-4 ring-1 ring-pimenton/30" role="alert">
-      <p className="font-semibold text-pimenton-oscuro">
+    <div className="mt-4 rounded-2xl border border-peligro/25 bg-peligro/[0.06] p-4" role="alert">
+      <p className="font-medium text-peligro">
         {ocupada ? t("ocupada") : fallo.motivo === "limite" ? t("limite") : fallo.motivo === "turnstile" ? t("turnstile") : t("general", { telefono })}
       </p>
       {fallo.alternativas?.length ? (
@@ -581,7 +591,7 @@ function Fallo({
           <p className="mt-2 text-sm">{t("alternativas")}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {fallo.alternativas.map((a) => (
-              <button key={a.inicio} type="button" onClick={() => onAlternativa(a)} className="min-h-11 rounded-full bg-white px-4 font-semibold tabular-nums ring-1 ring-tinta/20 hover:ring-tinta/50">
+              <button key={a.inicio} type="button" onClick={() => onAlternativa(a)} className="min-h-11 rounded-full bg-superficie px-4 font-medium tabular-nums shadow-tarjeta transition-shadow hover:shadow-elevada">
                 {a.hora}
               </button>
             ))}
@@ -616,18 +626,18 @@ function ElegirArroz({
         const maximo = (encargo?.raciones ?? 0) + restantes;
         const puede = encargo || restantes >= a.min_comensales;
         return (
-          <li key={a.id} className={`rounded-2xl p-4 ring-1 transition ${encargo ? "bg-azafran/15 ring-2 ring-azafran-oscuro" : "bg-white ring-tinta/10"}`}>
+          <li key={a.id} className={`rounded-3xl bg-superficie p-4 transition-shadow sm:p-5 ${encargo ? "shadow-elevada ring-2 ring-texto" : "shadow-tarjeta"}`}>
             <div className="flex items-start justify-between gap-3">
               <div>
-                <p className="font-display text-xl">{a.nombre}</p>
-                <p className="mt-1 text-sm text-niebla">{a.descripcion}</p>
-                <p className="mt-1 text-xs font-medium text-niebla">
+                <p className="text-[17px] font-semibold tracking-[-0.015em]">{a.nombre}</p>
+                <p className="mt-1 text-[14px] leading-relaxed text-suave">{a.descripcion}</p>
+                <p className="mt-1.5 text-[13px] text-tenue">
                   {t("minimo", { n: a.min_comensales })}
                   {a.precio != null ? ` · ${a.precio_por_persona ? t("porPersona", { precio: formatPrecio(a.precio, locale) }) : formatPrecio(a.precio, locale)}` : ""}
                 </p>
               </div>
               {encargo ? (
-                <button type="button" onClick={() => onCambiar(encargos.filter((e) => e.plato_id !== a.id))} className="min-h-11 shrink-0 rounded-full px-3 text-sm font-semibold underline">
+                <button type="button" onClick={() => onCambiar(encargos.filter((e) => e.plato_id !== a.id))} className="enlace min-h-11 shrink-0 rounded-full px-3 text-[14px] font-medium">
                   {t("quitar")}
                 </button>
               ) : (
@@ -645,9 +655,9 @@ function ElegirArroz({
             {encargo ? (
               <div className="mt-3 flex items-center gap-3">
                 <span className="text-sm font-semibold">{t("raciones")}</span>
-                <button type="button" aria-label="−" disabled={encargo.raciones <= a.min_comensales} onClick={() => onCambiar(encargos.map((e) => (e.plato_id === a.id ? { ...e, raciones: e.raciones - 1 } : e)))} className="grid size-11 place-items-center rounded-full bg-white text-xl ring-1 ring-tinta/20 disabled:opacity-40">−</button>
+                <button type="button" aria-label="−" disabled={encargo.raciones <= a.min_comensales} onClick={() => onCambiar(encargos.map((e) => (e.plato_id === a.id ? { ...e, raciones: e.raciones - 1 } : e)))} className="grid size-11 place-items-center rounded-full bg-sutil text-xl transition-[background-color,transform] hover:bg-linea-fuerte active:scale-[0.92] disabled:opacity-40">−</button>
                 <span className="w-8 text-center text-lg font-semibold tabular-nums" aria-live="polite">{encargo.raciones}</span>
-                <button type="button" aria-label="+" disabled={encargo.raciones >= maximo} onClick={() => onCambiar(encargos.map((e) => (e.plato_id === a.id ? { ...e, raciones: e.raciones + 1 } : e)))} className="grid size-11 place-items-center rounded-full bg-white text-xl ring-1 ring-tinta/20 disabled:opacity-40">+</button>
+                <button type="button" aria-label="+" disabled={encargo.raciones >= maximo} onClick={() => onCambiar(encargos.map((e) => (e.plato_id === a.id ? { ...e, raciones: e.raciones + 1 } : e)))} className="grid size-11 place-items-center rounded-full bg-sutil text-xl transition-[background-color,transform] hover:bg-linea-fuerte active:scale-[0.92] disabled:opacity-40">+</button>
               </div>
             ) : null}
           </li>
@@ -683,8 +693,8 @@ function ListaEspera({
   const onToken = useCallback((v: string) => setToken(v), []);
 
   return (
-    <div className="mt-6 rounded-2xl bg-white p-5 ring-1 ring-azafran-oscuro/40" role="dialog" aria-labelledby={`${uid}-t`}>
-      <h3 id={`${uid}-t`} className="font-display text-xl">{t("espera.titulo")}</h3>
+    <div className="mt-6 rounded-3xl bg-superficie p-5 shadow-elevada" role="dialog" aria-labelledby={`${uid}-t`}>
+      <h3 id={`${uid}-t`} className="text-[17px] font-semibold tracking-[-0.015em]">{t("espera.titulo")}</h3>
       {estado === "ok" ? (
         <p className="mt-2" role="status">{t("espera.ok")}</p>
       ) : (

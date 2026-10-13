@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useMemo, useState, useTransition } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { cargarDias, type DiaDisponible } from "@/app/[locale]/reservar/acciones";
 import { capitalizar, intlLocale, sumarDias } from "@/lib/format";
@@ -67,18 +68,18 @@ export function Calendario({ locale, comensales, hoy, maxDias, seleccion, onEleg
   const puedeAdelante = sumarMeses(mes, 1) <= ultimo;
 
   return (
-    <div className="rounded-2xl bg-white p-4 ring-1 ring-tinta/10" aria-busy={cargando}>
+    <div className="rounded-3xl bg-superficie p-4 shadow-tarjeta sm:p-5" aria-busy={cargando}>
       <div className="flex items-center justify-between">
         <button
           type="button"
           onClick={() => setMes(sumarMeses(mes, -1))}
           disabled={!puedeAtras}
           aria-label={t("anterior")}
-          className="grid size-11 place-items-center rounded-full hover:bg-arroz disabled:opacity-30"
+          className="grid size-11 place-items-center rounded-full text-suave transition-colors hover:bg-sutil hover:text-texto disabled:opacity-30"
         >
-          ‹
+          <ChevronLeft className="size-5" strokeWidth={1.75} />
         </button>
-        <p className="font-display text-lg" aria-live="polite">
+        <p className="text-[15px] font-semibold tracking-[-0.01em]" aria-live="polite">
           {capitalizar(fmtMes.format(new Date(`${mes}T12:00:00Z`)))}
         </p>
         <button
@@ -86,13 +87,13 @@ export function Calendario({ locale, comensales, hoy, maxDias, seleccion, onEleg
           onClick={() => setMes(sumarMeses(mes, 1))}
           disabled={!puedeAdelante}
           aria-label={t("siguiente")}
-          className="grid size-11 place-items-center rounded-full hover:bg-arroz disabled:opacity-30"
+          className="grid size-11 place-items-center rounded-full text-suave transition-colors hover:bg-sutil hover:text-texto disabled:opacity-30"
         >
-          ›
+          <ChevronRight className="size-5" strokeWidth={1.75} />
         </button>
       </div>
 
-      <div className="mt-2 grid grid-cols-7 gap-1 text-center text-xs font-semibold uppercase text-niebla" aria-hidden>
+      <div className="mt-3 grid grid-cols-7 gap-1 text-center text-[12px] font-medium uppercase text-tenue" aria-hidden>
         {cabecera.map((d, i) => (
           <span key={i}>{d}</span>
         ))}
@@ -116,12 +117,12 @@ export function Calendario({ locale, comensales, hoy, maxDias, seleccion, onEleg
                 data-estado={estado ?? (fuera ? "fuera" : "cargando")}
                 data-fecha={fecha}
                 className={[
-                  "relative grid aspect-square w-full min-h-11 place-items-center rounded-xl text-base tabular-nums transition-colors",
+                  "relative grid aspect-square w-full min-h-11 place-items-center rounded-full text-[15px] tabular-nums transition-[background-color,color,transform] duration-150 active:scale-[0.96]",
                   elegido
-                    ? "bg-pimenton font-bold text-white"
+                    ? "bg-texto font-semibold text-invertido"
                     : desactivado
-                      ? "text-niebla/60"
-                      : "bg-arroz font-semibold text-tinta hover:bg-azafran/30",
+                      ? "text-tenue/70"
+                      : "font-medium text-texto hover:bg-sutil",
                   !fuera && (estado === "cerrado" || estado === "completo") ? "line-through decoration-2" : "",
                   !estado && !fuera ? "animate-pulse" : "",
                 ].join(" ")}
@@ -132,7 +133,7 @@ export function Calendario({ locale, comensales, hoy, maxDias, seleccion, onEleg
           );
         })}
       </ul>
-      <p className="mt-3 text-xs text-niebla">{cargando ? t("cargando") : t("leyenda")}</p>
+      <p className="mt-3 text-[13px] text-suave">{cargando ? t("cargando") : t("leyenda")}</p>
     </div>
   );
 }

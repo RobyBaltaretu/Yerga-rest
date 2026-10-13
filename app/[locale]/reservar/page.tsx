@@ -7,6 +7,7 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { fechaLocal } from "@/lib/format";
 import { tr } from "@/lib/i18n";
 import { publicEnv } from "@/lib/env";
+import { CabeceraPagina } from "@/components/web/CabeceraPagina";
 
 export const dynamic = "force-dynamic";
 
@@ -44,12 +45,9 @@ export default async function ReservarPage({ params, searchParams }: PageProps<"
   const comensales = typeof sp.comensales === "string" ? Number(sp.comensales) || undefined : undefined;
 
   return (
-    <main id="contenido" className="px-4 pb-24 pt-24 sm:pt-28">
-      <div className="mx-auto max-w-xl">
-        <h1 className="font-display text-4xl sm:text-5xl">{t("titulo")}</h1>
-        <p className="mt-2 text-lg text-niebla">{t("subtitulo")}</p>
-      </div>
-      <div className="mt-8">
+    <main id="contenido" className="px-4 pb-24 pt-28 sm:px-6 sm:pt-36">
+      <CabeceraPagina titulo={t("titulo")} intro={t("subtitulo")} estrecha />
+      <div className="mt-10">
         <FlujoReserva
           locale={locale}
           hoy={fechaLocal()}

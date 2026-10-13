@@ -22,9 +22,9 @@ export default async function GestionPage({ params, searchParams }: PageProps<"/
   const reserva = data as ReservaCliente | null;
 
   return (
-    <main id="contenido" className="px-4 pb-24 pt-24 sm:pt-28">
+    <main id="contenido" className="px-4 pb-24 pt-28 sm:px-6 sm:pt-36">
       <div className="mx-auto max-w-xl">
-        <h1 className="font-display text-4xl">{t("titulo")}</h1>
+        <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">{t("titulo")}</h1>
         {reserva ? (
           <GestionReserva
             locale={locale}
@@ -36,9 +36,9 @@ export default async function GestionPage({ params, searchParams }: PageProps<"/
             destacarConfirmar={sp.accion === "confirmar"}
           />
         ) : (
-          <div className="mt-6 rounded-2xl bg-white p-6 ring-1 ring-tinta/10">
+          <div className="mt-6 rounded-3xl bg-superficie p-6 shadow-tarjeta">
             <p>{t("noEncontrada")}</p>
-            <Link href="/" className="mt-4 inline-block underline">{t("volver")}</Link>
+            <Link href="/" className="enlace mt-4 inline-block">{t("volver")}</Link>
           </div>
         )}
       </div>
