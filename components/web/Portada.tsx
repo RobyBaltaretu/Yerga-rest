@@ -1,3 +1,4 @@
+import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
 import { Flame, Timer, Wheat } from "lucide-react";
 import { PaellaMini } from "./PaellaMini";
@@ -21,12 +22,21 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
     <section aria-labelledby="t-portada" className="papel relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-36">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-8">
         <div className="relative z-10">
-          <h1 id="t-portada" className="max-w-[15ch] text-[clamp(2.75rem,6.6vw,5rem)] leading-[1.02]">
-            {titular}
+          <h1 id="t-portada" aria-label={titular} className="max-w-[15ch] text-[clamp(2.75rem,6.6vw,5rem)] leading-[1.02]">
+            {/* Cada palabra sube desde su línea (solo transformación: el texto nunca se oculta). */}
+            {titular.split(" ").map((palabra, i) => (
+              <Fragment key={i}>
+                <span aria-hidden className="entrada-palabra">
+                  <span style={{ ["--i" as string]: i }}>{palabra}</span>
+                </span>{" "}
+              </Fragment>
+            ))}
           </h1>
-          <Adorno className="mt-6" />
-          <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-suave sm:text-xl">{subtitulo}</p>
-          <div id="tarjeta-reserva" className="mt-10 max-w-md">
+          <div className="entrada-sube" style={{ ["--retraso" as string]: "520ms" }}>
+            <Adorno className="mt-6" />
+            <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-suave sm:text-xl">{subtitulo}</p>
+          </div>
+          <div id="tarjeta-reserva" className="entrada-sube mt-10 max-w-md" style={{ ["--retraso" as string]: "700ms" }}>
             <TarjetaReserva
               locale={locale}
               maximo={maximo}
@@ -45,8 +55,16 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
         </div>
 
         <div aria-hidden className="relative mx-auto w-[min(72vw,300px)] sm:w-[min(60vw,420px)] lg:-mr-10 lg:w-full lg:max-w-[520px]">
-          <div className="mesa-azulejo absolute inset-[6%] rotate-[-4deg] rounded-[28px]" />
-          <PaellaMini slug="paella-valenciana" nombre="" className="gira-lento relative w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
+          <div className="mesa-azulejo entrada-mesa absolute inset-[6%] rotate-[-4deg] rounded-[28px]" />
+          <div className="entrada-paella relative">
+            <PaellaMini slug="paella-valenciana" nombre="" className="gira-lento w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
+            {/* Vapor que sube de la paella recién hecha. */}
+            <svg viewBox="0 0 120 80" className="vapor pointer-events-none absolute -top-[12%] left-1/2 w-[34%] -translate-x-1/2 text-texto/25" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
+              <path d="M30 78c-8-12 8-18 0-30s6-18 0-30" />
+              <path d="M60 78c-8-12 8-18 0-30s6-18 0-30" />
+              <path d="M90 78c-8-12 8-18 0-30s6-18 0-30" />
+            </svg>
+          </div>
         </div>
       </div>
 

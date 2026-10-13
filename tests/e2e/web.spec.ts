@@ -30,6 +30,19 @@ test.describe("Web pública", () => {
     expect(await fondo()).not.toBe("rgb(250, 245, 236)");
   });
 
+  test("la historia de Yerga avanza con el scroll y, sin movimiento, se lee como lista", async ({ page }) => {
+    await page.goto("/es");
+    await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName(/\S+ \S+/);
+    const casa = page.locator("#casa");
+    await expect(casa.getByRole("heading", { level: 3, name: "La abuela Yerga" })).toBeAttached();
+    await casa.evaluate((el: HTMLElement) => window.scrollTo(0, el.offsetTop + (el.offsetHeight - window.innerHeight) * 0.5));
+    await expect(casa.locator("[aria-hidden]").getByText("La paella", { exact: true })).toBeVisible();
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/es");
+    await expect(page.locator("#casa ol > li")).toHaveCount(5);
+    await expect(page.locator("#casa").getByRole("heading", { level: 3, name: "El alma" })).toBeVisible();
+  });
+
   test("botón fijo de reservar en móvil y datos estructurados del restaurante", async ({ page }) => {
     await page.goto("/es");
     // En la portada aparece cuando la tarjeta de reserva sale de la pantalla.

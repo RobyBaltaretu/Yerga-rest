@@ -360,6 +360,17 @@
     "marca": {
       "lema": "Rice with soul",
       "bienvenidos": "Welcome to her home."
+    },
+    "historia": {
+      "capitulos": [
+        "Grandma Yerga",
+        "The rice",
+        "The paella",
+        "Her home",
+        "The soul"
+      ],
+      "desliza": "Scroll to discover her story",
+      "saltar": "Skip the story"
     }
   }
 }

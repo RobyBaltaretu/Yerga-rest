@@ -25,10 +25,10 @@ export default async function InicioPage({ params }: PageProps<"/[locale]">) {
       <JsonLd datos={jsonLdRestaurante(config, turnos, locale)} />
       {aviso ? <p className="fixed inset-x-0 top-[4.75rem] z-30 mx-auto w-fit max-w-[calc(100%-2rem)] rounded-full bg-superficie px-4 py-2 text-center text-[13px] font-medium shadow-elevada">{aviso}</p> : null}
       <Portada locale={locale} titular={tr(contenidos["portada.titular"], locale)} subtitulo={tr(contenidos["portada.subtitulo"], locale)} maximo={config.max_comensales_online} />
+      <SeccionCasa historia={tr(contenidos["casa.historia"], locale)} equipo={tr(contenidos["casa.equipo"], locale)} />
       <SeccionArroces locale={locale} platos={platos} />
       <SeccionEntrantes locale={locale} platos={platos} />
       <SeccionProducto texto={tr(contenidos["producto.texto"], locale)} />
-      <SeccionCasa historia={tr(contenidos["casa.historia"], locale)} equipo={tr(contenidos["casa.equipo"], locale)} />
       <SeccionCartaResumen locale={locale} platos={platos} ejemplo={ejemplo} />
       <SeccionOpiniones resenas={resenas} />
       <SeccionLlegar locale={locale} config={config} turnos={turnos} />

@@ -360,6 +360,17 @@
     "marca": {
       "lema": "Arroces con alma",
       "bienvenidos": "Bienvenidos a su casa."
+    },
+    "historia": {
+      "capitulos": [
+        "La abuela Yerga",
+        "El arroz",
+        "La paella",
+        "Su casa",
+        "El alma"
+      ],
+      "desliza": "Desliza y conoce su historia",
+      "saltar": "Saltar la historia"
     }
   }
 }

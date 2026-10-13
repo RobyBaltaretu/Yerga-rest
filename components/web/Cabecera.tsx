@@ -8,10 +8,10 @@ import { AvisoDisponibilidad, MenuMovil, SelectorIdioma } from "./CabeceraClient
 export async function Cabecera({ locale }: { locale: string }) {
   const t = await getTranslations("web.nav");
   const enlaces = [
+    { href: "/#casa", texto: t("casa") },
     { href: "/#arroces", texto: t("arroces") },
     { href: "/carta", texto: t("carta") },
     { href: "/#producto", texto: t("producto") },
-    { href: "/#casa", texto: t("casa") },
     { href: "/#llegar", texto: t("llegar") },
   ];
   return (
