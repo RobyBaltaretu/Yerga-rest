@@ -98,6 +98,15 @@ begin
     end loop;
   end loop;
 
+  -- Como en la realidad, cada reserva se hizo unos días antes (entre 1 y 6) y en la web
+  -- se tardó en torno a un minuto. Sin esto, los informes mostrarían una antelación
+  -- negativa (las reservas pasadas se crean «ahora»).
+  update public.reserva
+     set creada_en = least(now() - interval '5 minutes',
+                           inicio - interval '1 hour' * (24 + (abs(hashtext(id::text)) % 120))),
+         segundos_para_reservar = case when origen = 'web' then 35 + abs(hashtext(id::text)) % 50 end
+   where origen <> 'puerta';
+
   -- Lo ya pasado se cierra como en un servicio real: la mayoría finalizadas,
   -- alguna no presentada; lo que está en curso, sentado.
   update public.reserva set estado = 'finalizada', sentada_en = inicio, finalizada_en = fin
