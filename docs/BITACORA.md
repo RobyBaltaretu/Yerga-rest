@@ -24,6 +24,7 @@ cliente y la sala.
 | P7 | Vista navegable gratis en GitHub Pages a partir de la rama `vista-estatica` | Propietario | pendiente |
 | P8 | Cerrar en `docs/DUDAS.md` las decisiones «a confirmar» que no dependen del restaurante | Propietario | hecho |
 | P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
+| P10 | Etiqueta «Paso a cocina» del mapa cortada y casi invisible (elemento estrecho en la pared) | Sala | hecho (#29) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -405,3 +406,10 @@ borrar desde la pestaña Branches.
 - **Decisión:** el botón «Confirmo que vamos» se sigue mostrando también justo después
   de reservar. Es redundante pero inofensivo, y quitarlo cambiaría el flujo del
   recordatorio. Se revisará con datos reales.
+
+### 13/10 · P10: etiquetas de elementos estrechos en el mapa (rama `fix/etiqueta-vertical`)
+- Visto en las capturas: el paso a cocina (16 × 120 en la pared derecha) llevaba su
+  etiqueta en horizontal, de 160 px, centrada encima. Quedaba en color claro sobre el
+  suelo claro y cortada por el borde del lienzo.
+- Ahora los elementos estrechos y altos llevan la etiqueta a lo largo, dentro del propio
+  elemento. Los demás, igual que antes.
