@@ -3,6 +3,48 @@
 Memoria entre sesiones. Al arrancar o reanudar: leer el **Resumen** y el **Siguiente paso**,
 y seguir desde ahí. Nunca se escriben aquí valores secretos.
 
+## Lista única de pendientes (13/10)
+
+Sale de este diario (incluida E4, revisión de defectos), de `docs/DUDAS.md` y de
+`docs/PENDIENTES.md`, más un recorrido de la web como cliente en el móvil y del panel como
+camarero en la tableta, hecho con las capturas de `scripts/vista-previa/capturas.mjs`.
+Estados: **hecho**, **en curso**, **pendiente**, **bloqueado**. Orden: impacto para el
+cliente y la sala.
+
+### Lo hago yo
+
+| # | Tarea | Para quién | Estado |
+|---|---|---|---|
+| P1 | Reserva: el contador «Paso X de Y» cambia de total a mitad del flujo (de 5 a 6 si aparece la zona) y la confirmación cuenta como un paso más | Cliente | pendiente |
+| P2 | Reserva: al confirmar, la cabecera fija tapa el principio de la tarjeta de «¡Mesa reservada!» | Cliente | pendiente |
+| P3 | Panel: fechas y números en español correcto («13 De Octubre» en mayúsculas, fechas ISO `2026-10-13`, decimales con punto, «Telefono» sin tilde) en reservas, detalle, hoja e informes | Sala | pendiente |
+| P4 | Portada en escritorio: el titular deja «sí.» solo en la segunda línea | Cliente | pendiente |
+| P5 | Datos de ejemplo: fecha de creación realista en las reservas de la semilla (la «antelación media» de informes sale negativa) | Encargado | pendiente |
+| P6 | Galería de capturas en `docs/vista-previa/` (móvil, tableta y escritorio; tres idiomas; panel) | Propietario | en curso |
+| P7 | Vista navegable gratis en GitHub Pages a partir de la rama `vista-estatica` | Propietario | pendiente |
+| P8 | Cerrar en `docs/DUDAS.md` las decisiones «a confirmar» que no dependen del restaurante | Propietario | hecho |
+| P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
+
+### Necesita al restaurante (datos reales)
+
+Dirección, teléfono, horarios y vacaciones; plano real y mesas que se juntan (y con él,
+las reservas online de 9 y 10 personas); carta con precios y alérgenos; titular de la
+portada; historia y textos de la casa; fotos y logotipo en vector; reseñas reales; textos
+legales revisados; revisión nativa del valenciano; usuarios reales del personal; ficha de
+Google Business; cierre real de cocina (último turno); si usan otro sistema de reservas o
+TPV. Detalle en `docs/PENDIENTES.md` y `docs/DUDAS.md`, sección 2.
+
+### Tiene coste (fuera mientras el coste sea 0 €)
+
+Avisos por WhatsApp o SMS; garantía con tarjeta para grupos; dominio propio (y con él,
+verificar el remitente de Resend); sesión de fotos profesional.
+
+### Necesita al propietario
+
+Secretos de producción en GitHub (en curso por el propietario el 13/10) y primer
+despliegue; variables del proyecto `yerga-rest` de Vercel si se quiere esa vista previa;
+activar GitHub Pages si el flujo no puede hacerlo solo (ver P7).
+
 ## Resumen (actualizado al final de cada bloque y de cada sesión)
 
 **Estado:** sesión 1 (8 y 9 de octubre de 2026). Bloques A, C, D y E3 terminados en
@@ -352,3 +394,14 @@ borrar desde la pestaña Branches.
 - **Arreglo:** el calendario marca cada día con `data-fecha` y `elegirPrimerDiaLibre`
   elige siempre a partir de mañana. Reproducido en local a la misma hora: sin el
   arreglo falla; con él pasa.
+### 13/10 · Sesión 2: lista única de pendientes (rama `docs/lista-pendientes`)
+- Fusionado el #21 (B-2 resuelto).
+- Recorrido con capturas: web pública como cliente en el móvil (tres idiomas, flujo de
+  reserva completo) y panel como camarero en la tableta. Defectos encontrados: P1 a P5
+  de la lista del principio.
+- `docs/DUDAS.md`: cerradas las decisiones «a confirmar» que no dependen del restaurante
+  (3, 4, 5 y las menores de la sección 4). La 6 y la 7 esperan al plano y al horario
+  reales.
+- **Decisión:** el botón «Confirmo que vamos» se sigue mostrando también justo después
+  de reservar. Es redundante pero inofensivo, y quitarlo cambiaría el flujo del
+  recordatorio. Se revisará con datos reales.
