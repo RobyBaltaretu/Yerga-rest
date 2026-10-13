@@ -19,15 +19,15 @@ test.describe("Web pública", () => {
     await expect(page.getByRole("button", { name: "3 personas", exact: true })).toHaveAttribute("aria-pressed", "true");
   });
 
-  test("la web sigue el modo oscuro del sistema y el panel no cambia", async ({ page }) => {
+  test("la web va siempre en claro, también con el sistema en oscuro, y el panel no cambia", async ({ page }) => {
+    const fondo = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     await page.emulateMedia({ colorScheme: "dark" });
     await page.goto("/es");
-    const fondo = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    expect(await fondo()).toBe("rgb(13, 13, 13)");
+    expect(await fondo()).toBe("rgb(250, 245, 236)");
     await page.emulateMedia({ colorScheme: "light" });
-    expect(await fondo()).toBe("rgb(252, 252, 252)");
+    expect(await fondo()).toBe("rgb(250, 245, 236)");
     await page.goto("/panel/acceso");
-    expect(await fondo()).not.toBe("rgb(252, 252, 252)");
+    expect(await fondo()).not.toBe("rgb(250, 245, 236)");
   });
 
   test("botón fijo de reservar en móvil y datos estructurados del restaurante", async ({ page }) => {

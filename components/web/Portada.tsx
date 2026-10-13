@@ -2,6 +2,7 @@ import { getTranslations } from "next-intl/server";
 import { Flame, Timer, Wheat } from "lucide-react";
 import { PaellaMini } from "./PaellaMini";
 import { TarjetaReserva } from "./TarjetaReserva";
+import { Adorno, CenefaAzulejo } from "@/components/marca/Marca";
 
 /**
  * Portada: el titular del panel y, debajo, el primer paso real de la reserva. Todo es
@@ -16,17 +17,14 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
   ];
 
   return (
-    <section aria-labelledby="t-portada" className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36">
-      {/* Retícula de puntos muy tenue que se desvanece hacia los bordes. */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10 [background-image:radial-gradient(var(--w-linea-fuerte)_1px,transparent_1px)] [background-size:24px_24px] [mask-image:radial-gradient(ellipse_70%_60%_at_30%_30%,#000_20%,transparent_75%)]"
-      />
+    <>
+    <section aria-labelledby="t-portada" className="papel relative overflow-hidden pb-16 pt-28 sm:pb-20 sm:pt-36">
       <div className="mx-auto grid max-w-6xl items-center gap-12 px-4 sm:px-6 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-8">
         <div className="relative z-10">
-          <h1 id="t-portada" className="max-w-[14ch] text-[clamp(2.75rem,7vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.035em]">
+          <h1 id="t-portada" className="max-w-[15ch] text-[clamp(2.75rem,6.6vw,5rem)] leading-[1.02]">
             {titular}
           </h1>
+          <Adorno className="mt-6" />
           <p className="mt-6 max-w-[38ch] text-lg leading-relaxed text-suave sm:text-xl">{subtitulo}</p>
           <div id="tarjeta-reserva" className="mt-10 max-w-md">
             <TarjetaReserva
@@ -46,7 +44,8 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
           </div>
         </div>
 
-        <div aria-hidden className="relative mx-auto w-[min(72vw,300px)] sm:w-[min(60vw,420px)] lg:-mr-24 lg:w-full lg:max-w-[560px]">
+        <div aria-hidden className="relative mx-auto w-[min(72vw,300px)] sm:w-[min(60vw,420px)] lg:-mr-10 lg:w-full lg:max-w-[520px]">
+          <div className="mesa-azulejo absolute inset-[6%] rotate-[-4deg] rounded-[28px]" />
           <PaellaMini slug="paella-valenciana" nombre="" className="gira-lento relative w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
         </div>
       </div>
@@ -60,5 +59,7 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
         ))}
       </ul>
     </section>
+    <CenefaAzulejo />
+    </>
   );
 }

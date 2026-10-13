@@ -26,7 +26,7 @@ export default async function OfertaEsperaPage({ params }: PageProps<"/[locale]/
   return (
     <main id="contenido" className="px-4 pb-24 pt-28 sm:px-6 sm:pt-36">
       <div className="mx-auto max-w-xl">
-        <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">{t("titulo")}</h1>
+        <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.02]">{t("titulo")}</h1>
         <div className="mt-6 rounded-3xl bg-superficie p-6 shadow-tarjeta">
           {!o ? (
             <p>{t("noExiste")}</p>
@@ -34,14 +34,14 @@ export default async function OfertaEsperaPage({ params }: PageProps<"/[locale]/
             <>
               <p className="text-xl font-semibold tracking-[-0.02em]">{t("aceptada")}</p>
               {o.codigo ? (
-                <Link href={`/reservar/gestion/${o.codigo}`} className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-texto px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]">{t("verReserva")}</Link>
+                <Link href={`/reservar/gestion/${o.codigo}`} className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-cobre px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-cobre-oscuro active:scale-[0.98]">{t("verReserva")}</Link>
               ) : null}
             </>
           ) : o.estado === "caducada" ? (
             <>
               <p className="text-xl font-semibold tracking-[-0.02em]">{t("caducada")}</p>
               <p className="mt-2 text-niebla">{t("caducadaTexto")}</p>
-              <Link href="/reservar" className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-texto px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]">{t("buscar")}</Link>
+              <Link href="/reservar" className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-cobre px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-cobre-oscuro active:scale-[0.98]">{t("buscar")}</Link>
             </>
           ) : (
             <>

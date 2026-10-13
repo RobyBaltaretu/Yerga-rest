@@ -22,7 +22,7 @@ type Tamano = "sm" | "md" | "lg";
 const base =
   "inline-flex select-none items-center justify-center gap-2 rounded-full font-medium tracking-[-0.01em] transition-[background-color,box-shadow,color,opacity] duration-150 disabled:cursor-not-allowed disabled:opacity-50";
 const variantes: Record<Variante, string> = {
-  primario: "bg-texto text-invertido shadow-tarjeta hover:bg-texto/88",
+  primario: "bg-cobre text-invertido shadow-tarjeta hover:bg-cobre-oscuro",
   secundario: "bg-superficie text-texto shadow-tarjeta hover:shadow-elevada",
   fantasma: "text-texto hover:bg-sutil",
 };

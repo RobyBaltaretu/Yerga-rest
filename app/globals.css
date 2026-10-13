@@ -95,9 +95,10 @@ body {
 }
 
 /* =============================================================================
- * Web pública (rediseño de octubre de 2026): neutros, una sola nota cálida (azafrán),
- * bordes de 1px casi invisibles y sombras multicapa. Todo vive bajo `.web` (la clase
- * del <html> de app/[locale]); el panel no la lleva y no cambia.
+ * Web pública: cal, tierra y cobre del logotipo, con el cobalto y el ocre del azulejo de
+ * la puerta. Siempre en claro (no sigue el modo oscuro del sistema). Bordes finos,
+ * sombras suaves y movimiento con muelle. Todo vive bajo `.web` (la clase del <html> de
+ * app/[locale]); el panel no la lleva y no cambia.
  * ========================================================================== */
 @theme inline {
   --color-fondo: var(--w-fondo);
@@ -110,73 +111,63 @@ body {
   --color-linea-fuerte: var(--w-linea-fuerte);
   --color-acento: var(--w-acento);
   --color-acento-suave: var(--w-acento-suave);
+  --color-cobre: var(--w-cobre);
+  --color-cobre-oscuro: var(--w-cobre-oscuro);
+  --color-cobalto: var(--w-cobalto);
+  --color-ocre: var(--w-ocre);
+  --color-oliva: var(--w-oliva);
   --color-peligro: var(--w-peligro);
   --color-exito: var(--w-exito);
   --color-invertido: var(--w-invertido);
   --font-web: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
+  --font-romana: var(--font-marcellus), Georgia, serif;
+  --font-firma: var(--font-allura), cursive;
   --shadow-tarjeta: var(--w-sombra-1);
   --shadow-elevada: var(--w-sombra-2);
   --shadow-flotante: var(--w-sombra-3);
 }
 
 .web {
-  color-scheme: light dark;
-  --w-fondo: #fcfcfc;
-  --w-superficie: #ffffff;
-  --w-sutil: #f4f4f2;
-  --w-texto: #111111;
-  --w-suave: #63635e;
-  --w-tenue: #6f6f6a;
-  --w-linea: rgba(0, 0, 0, 0.08);
-  --w-linea-fuerte: rgba(0, 0, 0, 0.14);
-  --w-acento: #9a4d0c;
-  --w-acento-suave: rgba(217, 132, 47, 0.14);
+  color-scheme: light;
+  --w-fondo: #faf5ec;
+  --w-superficie: #fffdf8;
+  --w-sutil: #f2e9da;
+  --w-texto: #2a1b12;
+  --w-suave: #6a5444;
+  --w-tenue: #75604f;
+  --w-linea: rgba(59, 36, 22, 0.1);
+  --w-linea-fuerte: rgba(59, 36, 22, 0.18);
+  --w-cobre: #9a4322;
+  --w-cobre-oscuro: #7e3519;
+  --w-cobalto: #1f3f99;
+  --w-ocre: #e2a72e;
+  --w-oliva: #55572f;
+  --w-acento: var(--w-cobalto);
+  --w-acento-suave: rgba(31, 63, 153, 0.08);
   --w-peligro: #b42318;
-  --w-exito: #18794e;
-  --w-invertido: #ffffff;
-  --w-brillo: rgba(217, 132, 47, 0.16);
-  --w-sombra-1: 0 0 0 1px rgba(0, 0, 0, 0.04), 0 1px 1px -0.5px rgba(0, 0, 0, 0.04), 0 3px 3px -1.5px rgba(0, 0, 0, 0.04), 0 6px 6px -3px rgba(0, 0, 0, 0.04);
-  --w-sombra-2: 0 0 0 1px rgba(0, 0, 0, 0.05), 0 1px 1px -0.5px rgba(0, 0, 0, 0.04), 0 3px 3px -1.5px rgba(0, 0, 0, 0.04), 0 8px 8px -4px rgba(0, 0, 0, 0.04), 0 16px 16px -8px rgba(0, 0, 0, 0.05), 0 32px 32px -16px rgba(0, 0, 0, 0.05);
-  --w-sombra-3: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 12px 24px -6px rgba(0, 0, 0, 0.12), 0 32px 64px -12px rgba(0, 0, 0, 0.16);
+  --w-exito: #3f6212;
+  --w-invertido: #fffdf8;
+  --w-brillo: rgba(226, 167, 46, 0.18);
+  --w-sombra-1: 0 0 0 1px rgba(59, 36, 22, 0.06), 0 1px 1px -0.5px rgba(59, 36, 22, 0.05), 0 3px 3px -1.5px rgba(59, 36, 22, 0.05), 0 6px 6px -3px rgba(59, 36, 22, 0.05);
+  --w-sombra-2: 0 0 0 1px rgba(59, 36, 22, 0.07), 0 1px 1px -0.5px rgba(59, 36, 22, 0.05), 0 3px 3px -1.5px rgba(59, 36, 22, 0.05), 0 8px 8px -4px rgba(59, 36, 22, 0.05), 0 16px 16px -8px rgba(59, 36, 22, 0.06), 0 32px 32px -16px rgba(59, 36, 22, 0.06);
+  --w-sombra-3: 0 0 0 1px rgba(59, 36, 22, 0.08), 0 12px 24px -6px rgba(59, 36, 22, 0.16), 0 32px 64px -12px rgba(59, 36, 22, 0.2);
 
   /* Los componentes compartidos (formularios, diálogo, calendario) usan los tokens
-   * antiguos: aquí se reasignan a la paleta nueva. */
+   * antiguos: aquí se reasignan a la paleta de la web. */
   --color-arroz: var(--w-fondo);
   --color-arroz-2: var(--w-sutil);
   --color-tinta: var(--w-texto);
   --color-brasa: var(--w-texto);
   --color-niebla: var(--w-suave);
-  --color-pimenton: var(--w-texto);
+  --color-pimenton: var(--w-cobre);
   --color-pimenton-oscuro: var(--w-peligro);
-  --color-azafran: var(--w-acento);
-  --color-azafran-oscuro: var(--w-acento);
-  --color-huerta: var(--w-exito);
-  --color-huerta-claro: color-mix(in oklab, var(--w-exito) 14%, transparent);
+  --color-azafran: var(--w-ocre);
+  --color-azafran-oscuro: var(--w-cobalto);
+  --color-huerta: var(--w-oliva);
+  --color-huerta-claro: color-mix(in oklab, var(--w-oliva) 16%, transparent);
   --color-white: var(--w-superficie);
   --font-sans: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-geist), ui-sans-serif, system-ui, sans-serif;
-}
-
-@media (prefers-color-scheme: dark) {
-  .web {
-    --w-fondo: #0d0d0d;
-    --w-superficie: #161616;
-    --w-sutil: #1c1c1c;
-    --w-texto: #ededed;
-    --w-suave: #a1a1a1;
-    --w-tenue: #8a8a8a;
-    --w-linea: rgba(255, 255, 255, 0.08);
-    --w-linea-fuerte: rgba(255, 255, 255, 0.14);
-    --w-acento: #f0a24a;
-    --w-acento-suave: rgba(240, 162, 74, 0.14);
-    --w-peligro: #f97066;
-    --w-exito: #4cc38a;
-    --w-invertido: #0d0d0d;
-    --w-brillo: rgba(240, 162, 74, 0.12);
-    --w-sombra-1: 0 0 0 1px rgba(255, 255, 255, 0.06), inset 0 1px 0 rgba(255, 255, 255, 0.03), 0 4px 8px -2px rgba(0, 0, 0, 0.5);
-    --w-sombra-2: 0 0 0 1px rgba(255, 255, 255, 0.07), inset 0 1px 0 rgba(255, 255, 255, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.6), 0 24px 48px -12px rgba(0, 0, 0, 0.6);
-    --w-sombra-3: 0 0 0 1px rgba(255, 255, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 32px -8px rgba(0, 0, 0, 0.7), 0 40px 80px -16px rgba(0, 0, 0, 0.7);
-  }
+  --font-display: var(--font-marcellus), Georgia, serif;
 }
 
 .web body {
@@ -187,8 +178,14 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-.web :where(h1, h2, h3) {
-  letter-spacing: -0.02em;
+.web :where(h1, h2) {
+  font-family: var(--font-romana);
+  font-weight: 400;
+  letter-spacing: 0;
+  text-wrap: balance;
+}
+
+.web :where(h3) {
   text-wrap: balance;
 }
 
@@ -275,6 +272,18 @@ body {
 .web .gira-lento {
   animation: girar-lento 160s linear infinite;
 }
+
+/* Marco de fotografía antigua para la historia de la casa. */
+.web .foto-antigua {
+  padding: 10px;
+  background: var(--w-superficie);
+  box-shadow: var(--w-sombra-2);
+  border-radius: 6px;
+  transform: rotate(-1.2deg);
+}
+.web .foto-antigua img {
+  border-radius: 2px;
+}
 @media (prefers-reduced-motion: reduce) {
   .web .gira-lento {
     animation: none;
@@ -282,4 +291,17 @@ body {
 }
 .ligera .gira-lento {
   animation: none;
+}
+
+/* Mesa de azulejos bajo la paella de la portada (mismo patrón que la cenefa). */
+.web .mesa-azulejo {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E %3Crect width='56' height='56' fill='%23f5ebdd'/%3E %3Cpath d='M0 0h14a14 14 0 0 1-14 14zM56 0v14a14 14 0 0 1-14-14zM0 56v-14a14 14 0 0 1 14 14zM56 56h-14a14 14 0 0 1 14-14z' fill='%231f3f99'/%3E %3Cpath d='M0 0h9a9 9 0 0 1-9 9zM56 0v9a9 9 0 0 1-9-9zM0 56v-9a9 9 0 0 1 9 9zM56 56h-9a9 9 0 0 1 9-9z' fill='%23e2a72e'/%3E %3Cpath d='M28 5 51 28 28 51 5 28z' fill='none' stroke='%2366683a' stroke-width='1.4'/%3E %3Cg fill='%231f3f99'%3E%3Cellipse cx='28' cy='17' rx='5' ry='9'/%3E%3Cellipse cx='28' cy='39' rx='5' ry='9'/%3E%3Cellipse cx='17' cy='28' rx='9' ry='5'/%3E%3Cellipse cx='39' cy='28' rx='9' ry='5'/%3E%3C/g%3E %3Cg fill='%236f8fd6' transform='rotate%2845 28 28%29'%3E%3Cellipse cx='28' cy='19' rx='2.6' ry='5'/%3E%3Cellipse cx='28' cy='37' rx='2.6' ry='5'/%3E%3Cellipse cx='19' cy='28' rx='5' ry='2.6'/%3E%3Cellipse cx='37' cy='28' rx='5' ry='2.6'/%3E%3C/g%3E %3Ccircle cx='28' cy='28' r='4.5' fill='%23e2a72e'/%3E%3Ccircle cx='28' cy='28' r='1.8' fill='%231f3f99'/%3E %3Cpath d='M.5.5h55v55H.5z' fill='none' stroke='%23d8c8ae' stroke-width='1'/%3E %3C/svg%3E");
+  background-size: 64px 64px;
+  background-color: var(--w-fondo);
+  box-shadow: var(--w-sombra-2), inset 0 0 0 6px var(--w-cobalto), inset 0 0 0 9px var(--w-ocre);
+}
+
+/* Sobre la banda de cobre el foco va en cal, para que se vea. */
+.web .banda-cobre :focus-visible:not([tabindex="-1"]) {
+  outline-color: var(--w-invertido);
 }

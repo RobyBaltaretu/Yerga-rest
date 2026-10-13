@@ -47,7 +47,7 @@ export function Hoja({ titulo, abierta, onCerrar, cerrar, children }: { titulo: 
             tabIndex={-1}
             aria-label={cerrar}
             onClick={onCerrar}
-            className="absolute inset-0 bg-black/30 backdrop-blur-[2px] dark:bg-black/60"
+            className="absolute inset-0 bg-black/30 backdrop-blur-[2px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -63,7 +63,7 @@ export function Hoja({ titulo, abierta, onCerrar, cerrar, children }: { titulo: 
           >
             <div className="mx-auto mb-4 h-1 w-10 rounded-full bg-linea-fuerte sm:hidden" aria-hidden />
             <div className="flex items-start justify-between gap-4">
-              <h2 className="text-2xl font-semibold tracking-[-0.025em]">{titulo}</h2>
+              <h2 className="text-2xl">{titulo}</h2>
               <button type="button" onClick={onCerrar} aria-label={cerrar} className="-mr-2 -mt-1 grid size-11 shrink-0 place-items-center rounded-full text-suave transition-colors hover:bg-sutil hover:text-texto">
                 <X className="size-5" strokeWidth={1.75} />
               </button>

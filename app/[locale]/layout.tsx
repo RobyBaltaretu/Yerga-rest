@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getMessages, getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
-import { geist, marcellus } from "@/lib/fonts";
+import { allura, geist, marcellus } from "@/lib/fonts";
 import { htmlLang } from "@/lib/i18n";
 import { Cabecera } from "@/components/web/Cabecera";
 import { Pie } from "@/components/web/Pie";
@@ -51,7 +51,7 @@ export default async function LocaleLayout({
   return (
     <html
       lang={htmlLang(locale)}
-      className={`web ${geist.variable} ${marcellus.variable} antialiased`}
+      className={`web ${geist.variable} ${marcellus.variable} ${allura.variable} antialiased`}
     >
       <body className="min-h-dvh">
         <script dangerouslySetInnerHTML={{ __html: scriptLigero }} />
