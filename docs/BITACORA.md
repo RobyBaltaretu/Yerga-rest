@@ -27,7 +27,7 @@ cliente y la sala.
 | P10 | Etiqueta «Paso a cocina» del mapa cortada y casi invisible (elemento estrecho en la pared) | Sala | hecho (#29) |
 | P11 | Editor del mapa en tableta vertical: el lienzo desborda a lo ancho y corta el zoom y la ayuda | Encargado | hecho (#30) |
 | P12 | SQL de la vista previa de Vercel desfasado (le faltaban 3 migraciones) y guía que apuntaba a la rama `fase-1` | Propietario | hecho (#32) |
-| P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#33) |
+| P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#34) |
 
 ### Necesita al restaurante (datos reales)
 
