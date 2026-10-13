@@ -151,6 +151,8 @@ export function FormaElemento({ el }: { el: ElementoDibujo }) {
       </Group>
     );
   }
+  const colorEtiqueta = el.tipo === "barra" || el.tipo === "cocina" ? "#f7efe1" : "#2b1f17";
+  const vertical = el.ancho >= 12 && el.ancho < 40 && el.alto > el.ancho * 3;
   return (
     <Group>
       <Rect
@@ -165,9 +167,14 @@ export function FormaElemento({ el }: { el: ElementoDibujo }) {
         cornerRadius={el.tipo === "barra" ? 6 : 0}
       />
       {el.etiqueta && el.tipo !== "pared" ? (
-        <Group rotation={-el.giro}>
-          <Text text={el.etiqueta} fontSize={14} fill={el.tipo === "barra" || el.tipo === "cocina" ? "#f7efe1" : "#2b1f17"} width={160} x={-80} y={el.alto > 40 ? -7 : el.alto / 2 + 4} align="center" />
-        </Group>
+        vertical ? (
+          // Elemento estrecho y alto (un paso a cocina en la pared): la etiqueta va a lo largo.
+          <Text text={el.etiqueta} fontSize={Math.min(14, el.ancho - 2)} fill={colorEtiqueta} width={el.alto} x={-Math.min(14, el.ancho - 2) / 2} y={el.alto / 2} rotation={-90} align="center" />
+        ) : (
+          <Group rotation={-el.giro}>
+            <Text text={el.etiqueta} fontSize={14} fill={colorEtiqueta} width={160} x={-80} y={el.alto > 40 ? -7 : el.alto / 2 + 4} align="center" />
+          </Group>
+        )
       ) : null}
     </Group>
   );
