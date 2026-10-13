@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
 import { Flame, Timer, Wheat } from "lucide-react";
-import { PaellaMini } from "./PaellaMini";
+import { getImageProps } from "next/image";
 import { TarjetaReserva } from "./TarjetaReserva";
 import { Adorno, CenefaAzulejo } from "@/components/marca/Marca";
 
@@ -9,6 +9,8 @@ import { Adorno, CenefaAzulejo } from "@/components/marca/Marca";
  * Portada: el titular del panel y, debajo, el primer paso real de la reserva. Todo es
  * neutro; el único color es el de la paella.
  */
+const { props: foto } = getImageProps({ src: "/marca/paella-valenciana.webp", alt: "", width: 521, height: 521, loading: "eager", fetchPriority: "high" });
+
 export async function Portada({ locale, titular, subtitulo, maximo }: { locale: string; titular: string; subtitulo: string; maximo: number }) {
   const [t, tp] = await Promise.all([getTranslations("web.portada"), getTranslations("web.producto")]);
   const datos = [
@@ -57,7 +59,12 @@ export async function Portada({ locale, titular, subtitulo, maximo }: { locale: 
         <div aria-hidden className="relative mx-auto w-[min(72vw,300px)] sm:w-[min(60vw,420px)] lg:-mr-10 lg:w-full lg:max-w-[520px]">
           <div className="mesa-azulejo entrada-mesa absolute inset-[6%] rotate-[-4deg] rounded-[28px]" />
           <div className="entrada-paella relative">
-            <PaellaMini slug="paella-valenciana" nombre="" className="gira-lento w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.18)]" />
+            {/* Fotografía real de una paella valenciana, recortada sobre transparente. En móvil,
+                una versión ligera: es la imagen más grande de la primera pantalla (LCP). */}
+            <picture>
+              <source media="(max-width: 639px)" srcSet="/marca/paella-valenciana-movil.webp" />
+              <img {...foto} alt="" className="gira-lento h-auto w-full drop-shadow-[0_30px_40px_rgba(0,0,0,0.22)]" />
+            </picture>
             {/* Vapor que sube de la paella recién hecha. */}
             <svg viewBox="0 0 120 80" className="vapor pointer-events-none absolute -top-[12%] left-1/2 w-[34%] -translate-x-1/2 text-texto/25" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round">
               <path d="M30 78c-8-12 8-18 0-30s6-18 0-30" />
