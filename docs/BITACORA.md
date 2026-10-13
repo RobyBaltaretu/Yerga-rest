@@ -45,48 +45,56 @@ verificar el remitente de Resend); sesión de fotos profesional.
 
 Secretos de producción en GitHub (en curso por el propietario el 13/10) y primer
 despliegue; variables del proyecto `yerga-rest` de Vercel si se quiere esa vista previa;
-activar GitHub Pages si el flujo no puede hacerlo solo (ver P7).
+activar GitHub Pages: Settings → Pages → Source: «GitHub Actions» (ver P7; el flujo ya corre y solo falta ese paso).
 
 ## Resumen (actualizado al final de cada bloque y de cada sesión)
 
-**Estado:** sesión 1 (8 y 9 de octubre de 2026). Bloques A, C, D y E3 terminados en
-código; despliegue a producción pendiente de ti.
+**Estado:** sesión 2 (13 de octubre de 2026).
+- Terminado en código todo lo que no depende del restaurante, de pagar ni de los secretos de producción.
+- El despliegue sigue esperando a que el propietario termine de cargar los secretos (B-1).
 
-**Hecho (PR fusionados en `main`)**
-- #3 y #4: documentación de coste cero; prueba del deslizador independiente de la hora.
-- Bloque A: Worker `arroceria-yerga`, CI con despliegue, migraciones, primer
-  administrador, recuperación de contraseña, Web Analytics y script de secretos.
-- #6 a #11, bloques C y D:
-  - web pública prerenderizada;
-  - panel como aplicación de navegador;
-  - copias de seguridad cifradas;
-  - revisión de seguridad (matriz RLS, cabeceras, CSP);
-  - criterios de aceptación, accesibilidad e idiomas;
-  - dudas resueltas.
-- #12 a #18, bloque E:
-  - lista de espera con plazo de 15 minutos (#12);
-  - build de Vercel sin Supabase (#13);
-  - contraste de la etiqueta «reconfirmada» (#14);
-  - interbloqueo al reservar la última mesa (#15);
-  - resumen de arroces para cocina (#16);
-  - fichas de cliente y RGPD (#17);
-  - informes con comparación y CSV (#18).
+**Vistas previas**
+- Galería de capturas (móvil, tableta y escritorio; web en tres idiomas, reserva paso a paso y panel):
+  - en el repositorio: [`docs/vista-previa/index.html`](vista-previa/index.html); GitHub la muestra como código, así que hay que abrirla en una copia local o en Pages;
+  - publicada: https://robybaltaretu.github.io/Yerga-rest/galeria/ (cuando Pages esté activado).
+- Vista navegable estática: https://robybaltaretu.github.io/Yerga-rest/
+  - Se publica sola en cada push a `main` en cuanto el propietario active Pages (ver abajo).
+
+**Hecho en la sesión 2 (PR fusionados en `main`)**
+- #21: B-2 resuelto (ramas remotas borradas).
+- #22: lista única de pendientes y dudas «a confirmar» cerradas.
+- #23: contador de pasos estable y confirmación visible bajo la cabecera (P1, P2).
+- #24: fechas, números y orígenes del panel en español correcto (P3).
+- #25: titular de la portada equilibrado en dos líneas (P4).
+- #26: fechas de creación realistas en la semilla; la «antelación media» ya no sale negativa (P5).
+- #27: galería de capturas y sus scripts (P6).
+- #28: vista navegable en GitHub Pages; sustituye a la rama `vista-estatica` (P7).
+- #29: etiqueta legible del paso a cocina en el mapa (P10).
+- #30: el editor del mapa cabe en una tableta vertical y en el móvil (P11).
+- #31: este resumen y la galería regenerada con P10 y P11.
+
+**Hecho en la sesión 1:** #3 a #20 (bloques A, C, D y E). Detalle en el diario.
 
 **Pendiente (mío)**
-- E4: seguir buscando y arreglando defectos.
+- P9: capturas y Lighthouse contra producción cuando https://arroceria-yerga.roberto-baltaretu.workers.dev/es responda 200:
+  - `CAPTURAS_URL=<url> node scripts/vista-previa/capturas.mjs`;
+  - después, `node scripts/vista-previa/galeria.mjs`, y PR.
+  - Desde esta sesión en la nube no se puede: el proxy bloquea `workers.dev`. Se hará en la siguiente sesión que tenga acceso, o lo lanza el propietario con esos dos comandos.
+- E4: seguir buscando defectos en cada recorrido.
 
-**Bloqueado: necesito de ti** (detalle en «Bloqueos»)
-- Ejecutar `scripts/infra/configurar-secretos.sh` en tu ordenador (B-1). Sin eso no
-  hay despliegue, ni Lighthouse en producción.
-- Opcional: añadir `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` al
-  proyecto `yerga-rest` de Vercel para que su vista previa muestre contenido. Sin
-  ellas, el build pasa pero las páginas públicas dan error.
+**Necesita al restaurante:** ver «Necesita al restaurante» al principio (carta, plano, fotos, textos legales, dirección…).
 
-**Siguiente paso exacto:** E4, revisión de defectos. Ver la última entrada del diario.
+**Tiene coste (fuera):** WhatsApp o SMS, garantía con tarjeta, dominio propio, fotos profesionales.
 
-**Para desbloquear el despliegue (tú, unos 5 minutos):** en tu ordenador, desde la raíz
-del repositorio actualizado, con `~/yerga-secrets.txt` en su sitio:
-`bash scripts/infra/configurar-secretos.sh`. Después, borra la clave temporal de Resend.
+**Necesita al propietario**
+1. Terminar de cargar los secretos y variables de producción en GitHub (B-1).
+   - El siguiente push a `main`, o Actions → CI → Run workflow, despliega.
+2. Activar GitHub Pages, una sola vez:
+   - Settings → Pages → Build and deployment → Source: **GitHub Actions**;
+   - después, Actions → «Vista previa (GitHub Pages)» → Run workflow.
+3. Opcional: variables de Supabase en el proyecto `yerga-rest` de Vercel, si se quiere también esa vista previa.
+
+**Siguiente paso exacto:** cuando producción responda 200, P9 (capturas de producción y Lighthouse).
 
 ## Bloqueos
 
@@ -453,3 +461,13 @@ borrar desde la pestaña Branches.
 - Arreglo: `grid-cols-1` (columna `minmax(0, 1fr)`). Prueba nueva en Playwright a
   768 × 1024: falla sin el arreglo (824 > 768) y pasa con él. Las pruebas de tableta van
   en horizontal (más ancho que `lg`), por eso no lo veían.
+
+### 13/10 · Cierre de la sesión 2 (rama `docs/resumen-sesion-2`)
+- Galería regenerada con P10 y P11.
+- El flujo «Vista previa (GitHub Pages)» corrió en `main` tras el #28: genera el sitio y
+  omite la publicación porque Pages aún no está activado. Es el paso del propietario.
+- **Decisión:** no se añaden entradas de lista de espera a la semilla. Retendrían mesas
+  al cancelar reservas en otras pruebas y las harían depender unas de otras. La pantalla
+  de espera sale vacía en la galería.
+- P9 sigue bloqueado: desde la nube el proxy no deja llegar a `workers.dev` ni a
+  `github.io`.
