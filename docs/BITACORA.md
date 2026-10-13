@@ -27,6 +27,7 @@ cliente y la sala.
 | P10 | Etiqueta «Paso a cocina» del mapa cortada y casi invisible (elemento estrecho en la pared) | Sala | hecho (#29) |
 | P11 | Editor del mapa en tableta vertical: el lienzo desborda a lo ancho y corta el zoom y la ayuda | Encargado | hecho (#30) |
 | P12 | SQL de la vista previa de Vercel desfasado (le faltaban 3 migraciones) y guía que apuntaba a la rama `fase-1` | Propietario | hecho (#32) |
+| P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#33) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -481,3 +482,20 @@ borrar desde la pestaña Branches.
 - Paso nuevo en la CI: falla si el archivo no coincide con las migraciones.
 - `docs/VISTA-PREVIA.md`: la rama de producción de Vercel debe ser `main`, no `fase-1`.
   `fase-1` va 51 commits por detrás.
+
+### 13/10 · P13: habilidades de diseño en el repositorio (rama `chore/habilidades-diseno`)
+- A petición del propietario, copiadas en `.claude/` para que estén en cualquier sesión de
+  este proyecto (nube u ordenador):
+  - `.claude/skills/impeccable/` y `.claude/agents/impeccable-*.md`, de
+    `pbakaus/impeccable` (commit `245ad82`, versión 4.5.2, Apache 2.0, con su LICENSE y
+    NOTICE);
+  - 14 habilidades de `emilkowalski/skills` (commit `2d22863`, MIT, con su LICENSE en
+    cada carpeta).
+- **Decisión:** sin los hooks de impeccable. Ejecutarían su binario en cada edición y al
+  terminar cada turno, y lo descargarían de internet la primera vez. La habilidad
+  funciona sin ellos; el binario solo se descarga si se usa un comando que lo necesite.
+- **Decisión:** telemetría de impeccable desactivada para todo el proyecto
+  (`.impeccable/config.json`).
+- `.claude/` excluido del lint (es código de terceros).
+- Para actualizar: volver a copiar `plugin/skills/impeccable` y `plugin/agents` del
+  repositorio de impeccable, y `skills/*` del de Emil Kowalski.

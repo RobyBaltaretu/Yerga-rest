@@ -17,6 +17,8 @@ const eslintConfig = defineConfig([
     "lib/supabase/types.ts",
     "playwright-report/**",
     "test-results/**",
+    // Habilidades de terceros para Claude Code (impeccable, Emil Kowalski).
+    ".claude/**",
   ]),
 ]);
 
