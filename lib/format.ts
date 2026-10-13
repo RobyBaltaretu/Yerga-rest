@@ -52,6 +52,23 @@ export function capitalizar(texto: string) {
   return texto.charAt(0).toUpperCase() + texto.slice(1);
 }
 
+/** Fecha larga de un día YYYY-MM-DD con mayúscula inicial: «Martes, 13 de octubre». */
+export function fechaLarga(fecha: string, locale = "es") {
+  return capitalizar(formatFecha(`${fecha}T12:00:00Z`, locale));
+}
+
+/** Fecha corta de un día YYYY-MM-DD: «13 oct 2026». */
+export function fechaCorta(fecha: string, locale = "es") {
+  return new Intl.DateTimeFormat(intlLocale(locale), { timeZone: "UTC", day: "numeric", month: "short", year: "numeric" })
+    .format(new Date(`${fecha}T12:00:00Z`))
+    .replace(".", "");
+}
+
+/** Número con la coma decimal del idioma: «66,7». */
+export function formatNumero(n: number, locale = "es", decimales = 1) {
+  return new Intl.NumberFormat(intlLocale(locale), { maximumFractionDigits: decimales }).format(n);
+}
+
 /** Instante actual en milisegundos (en servidor, para pasar a componentes). */
 export function ahoraMs(): number {
   return Date.now();

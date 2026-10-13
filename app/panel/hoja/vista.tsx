@@ -3,7 +3,7 @@
 import { ConDatos, esFecha, useDatos, useParam } from "@/components/panel/DatosPanel";
 import { reservasDelDia, turnosDelDia } from "@/lib/panel/datos";
 import { ACTIVAS, hora } from "@/lib/panel/estados";
-import { fechaLocal, formatFecha } from "@/lib/format";
+import { fechaLarga, fechaLocal } from "@/lib/format";
 import { BotonImprimir } from "./BotonImprimir";
 
 /** Hoja del turno imprimible: respaldo en papel si se cae la conexión. */
@@ -35,7 +35,7 @@ function Hoja({ fecha, turno, reservas, impresa }: { fecha: string; turno: strin
       <div className="flex items-start justify-between">
         <div>
           <h1 className="font-display text-2xl">Hoja del turno · <span className="capitalize">{turno}</span></h1>
-          <p className="capitalize">{formatFecha(`${fecha}T12:00:00Z`, "es")} · {reservas.length} reservas · {total} comensales</p>
+          <p>{fechaLarga(fecha)} · {reservas.length} reservas · {total} comensales</p>
           <p className="text-xs">Impresa a las {hora(impresa)}</p>
         </div>
         <BotonImprimir />

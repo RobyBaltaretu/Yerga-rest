@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Cabecera } from "@/components/panel/Cabecera";
 import { ConDatos, sinError, useDatos } from "@/components/panel/DatosPanel";
-import { fechaLocal, formatFecha } from "@/lib/format";
+import { fechaLarga, fechaLocal } from "@/lib/format";
 import { AccionesEspera } from "./AccionesEspera";
 
 const hhmm = (iso: string) => new Intl.DateTimeFormat("es-ES", { timeZone: "Europe/Madrid", timeStyle: "short" }).format(new Date(iso));
@@ -33,7 +33,7 @@ export function VistaEspera() {
                 const [fecha, turno] = k.split("|");
                 return (
                   <section key={k}>
-                    <h2 className="font-display text-xl capitalize">{formatFecha(`${fecha}T12:00:00Z`, "es")} · {turno}</h2>
+                    <h2 className="font-display text-xl">{fechaLarga(fecha)} · {turno}</h2>
                     <ul className="mt-2 divide-y divide-tinta/10 rounded-2xl bg-white ring-1 ring-tinta/10">
                       {lista.map((e, i) => (
                         <li key={e.id} className="flex flex-wrap items-center justify-between gap-3 p-3">
