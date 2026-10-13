@@ -3,7 +3,8 @@
 Durante la construcción no he parado a preguntar: he aplicado el supuesto de partida y lo
 he dejado configurable. El 9 de octubre de 2026, en el trabajo autónomo, resolví las que
 no implican gasto con el supuesto más razonable. Van marcadas **«decidido por Code, a
-confirmar»**: si alguna no te encaja, se cambia sin coste.
+confirmar»**: si alguna no te encaja, se cambia sin coste. El 13 de octubre se cerraron
+las que no dependen del restaurante.
 
 ## 1. Decisiones de proyecto
 
@@ -15,22 +16,22 @@ confirmar»**: si alguna no te encaja, se cambia sin coste.
 2. **Plan de Supabase.** Decidido por el propietario: **gratuito**, con copia diaria
    propia, cifrada y en un repositorio privado (`infra/yerga-backups/`). La pausa por
    inactividad no afecta, porque el cron consulta la base cada 5 minutos.
-3. **Carga de la portada en móvil.** **Decidido por Code, a confirmar:** el criterio se da
+3. **Carga de la portada en móvil.** **Cerrado por Code el 13/10 (falta medir en producción):** el criterio se da
    por cumplido con la medición real. Una prueba automática lo repite en cada cambio
    (`tests/e2e/rendimiento.spec.ts`, mediana local de 1,85 s con 4G lenta y CPU ×4) y se
    confirmará con PageSpeed Insights sobre la URL de producción. No hace falta una versión
    aún más ligera para móvil.
-4. **Lista de espera.** **Decidido por Code, a confirmar:** se completa en la fase 1 el
+4. **Lista de espera.** **Cerrado por Code el 13/10, hecho en el #12:** se completa en la fase 1 el
    plazo de 15 minutos para aceptar el aviso. El aviso es por correo; WhatsApp queda
    fuera porque tiene coste.
-5. **Clientes, Arroces del día e Informes.** **Decidido por Code, a confirmar:** se
+5. **Clientes, Arroces del día e Informes.** **Cerrado por Code el 13/10, hecho en los #16, #17 y #18:** se
    quedan en la fase 1 en versión básica (hacen falta para medir los objetivos) y se
    amplían con lo que pide la fase 2.
-6. **Grupos de 9 y 10 personas.** **Decidido por Code, a confirmar:** el máximo online
+6. **Grupos de 9 y 10 personas.** **Decidido por Code; se cierra con el plano real del restaurante:** el máximo online
    sigue en 10. Con el plano de ejemplo, 9 y 10 pasan a la solicitud de grupo. Cuando
    esté el plano real, basta con definir combinaciones de mesas mayores en el panel para
    que se reserven online. Si no, se baja el máximo a 8 en Configuración.
-7. **Último turno y hora de salida.** **Decidido por Code, a confirmar:** el cierre del
+7. **Último turno y hora de salida.** **Decidido por Code; lo confirma el restaurante (cierre real de cocina):** el cierre del
    turno (16:30) es el cierre de cocina. La última hora de reserva es 15:30 y la mesa se
    libera hacia las 17:15.
 
@@ -61,7 +62,7 @@ confirmar»**: si alguna no te encaja, se cambia sin coste.
   verifica después la URL pública por sí sola (`scripts/produccion/verificar.mjs`).
 - **Integración continua en GitHub:** ya se ejecuta y está en verde en cada pull request.
 
-## 4. Decisiones menores ya aplicadas (decididas por Code, a confirmar)
+## 4. Decisiones menores ya aplicadas (cerradas por Code el 13/10; se cambian desde el panel o la configuración si no encajan)
 
 - Tope por franja: 20 comensales nuevos cada 15 minutos (configurable por turno).
 - Límite de intentos: ver `docs/SEGURIDAD.md`.
