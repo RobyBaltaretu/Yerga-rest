@@ -47,13 +47,14 @@ La vista previa sirve para revisar la web y el panel con los datos de ejemplo. N
 producción: usa los usuarios `*@yerga.test` y no envía correos de verdad (sin
 `RESEND_API_KEY` se guardan como «simulados» en la tabla `mensaje`).
 
-El proyecto de Vercel `yerga-rest` ya está creado: <https://yerga-rest.vercel.app>,
-compilado desde la rama `fase-1`. Las funciones corren en París (`cdg1`) desde el siguiente
-despliegue. Falta la base de datos: hay que crearla una vez. Sin ella, las páginas dan error.
+El proyecto de Vercel `yerga-rest` ya está creado: <https://yerga-rest.vercel.app>. Las
+funciones corren en París (`cdg1`). Falta la base de datos: hay que crearla una vez. Sin
+ella, las páginas dan error.
 
-El proyecto aún no está enlazado a GitHub para desplegar solo en cada `push`. Para eso:
-Settings → Git → Connect Git Repository → `robybaltaretu/yerga-rest`, con la rama de
-producción `fase-1`.
+La rama de producción del proyecto debe ser **`main`**. La rama `fase-1` ya no se
+actualiza y está muy por detrás. Para comprobarlo: Settings → Git →
+Connected Git Repository debe ser `robybaltaretu/yerga-rest`, y en
+Settings → Environments → Production, «Branch Tracking» debe ser `main`.
 
 ## 1. Crear la base de datos (unos 5 minutos)
 
@@ -80,7 +81,7 @@ y en **Data API** (la URL).
 Hay dos formas de cargarlas:
 
 - **Tú, en Vercel:** proyecto `yerga-rest` → Settings → Environment Variables. Márcalas
-  para *Preview*. Después, en Deployments, pulsa **Redeploy** en el último despliegue.
+  para *Production* y *Preview*. Después, en Deployments, pulsa **Redeploy** en el último despliegue.
 - **Yo:** pásame la URL y la clave `anon`. La clave `service_role` mejor ponla tú en Vercel
   como *Sensitive*, para que no pase por el chat. Yo cargo el resto y vuelvo a desplegar.
 
