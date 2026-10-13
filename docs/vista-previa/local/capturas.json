@@ -1,0 +1,1413 @@
+{
+  "origen": "local (Supabase local con los datos de ejemplo)",
+  "fecha": "2026-10-13T08:10:51.163Z",
+  "capturas": [
+    {
+      "seccion": "web-es",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "movil",
+      "archivo": "web-es/01-portada-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "movil",
+      "archivo": "web-es/02-portada-completa-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "movil",
+      "archivo": "web-es/03-arroces-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "movil",
+      "archivo": "web-es/05-la-casa-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "movil",
+      "archivo": "web-es/06-contacto-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "movil",
+      "archivo": "web-es/04-carta-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "movil",
+      "archivo": "web-es/07-paella-valenciana-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "movil",
+      "archivo": "web-es/08-grupos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "movil",
+      "archivo": "reserva-es/1-personas-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "movil",
+      "archivo": "reserva-es/2-dia-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "movil",
+      "archivo": "reserva-es/3-hora-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "movil",
+      "archivo": "reserva-es/4-zona-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "movil",
+      "archivo": "reserva-es/5-arroz-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "movil",
+      "archivo": "reserva-es/6-datos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "movil",
+      "archivo": "reserva-es/7-confirmada-movil.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "movil",
+      "archivo": "reserva-es/8-gestion-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "movil",
+      "archivo": "web-va/01-portada-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "movil",
+      "archivo": "web-va/02-portada-completa-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "movil",
+      "archivo": "web-va/03-arroces-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "movil",
+      "archivo": "web-va/05-la-casa-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "movil",
+      "archivo": "web-va/06-contacto-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "movil",
+      "archivo": "web-va/04-carta-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "movil",
+      "archivo": "web-va/07-paella-valenciana-movil.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "movil",
+      "archivo": "web-va/08-grupos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "movil",
+      "archivo": "reserva-va/1-personas-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "movil",
+      "archivo": "reserva-va/2-dia-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "movil",
+      "archivo": "reserva-va/3-hora-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "movil",
+      "archivo": "reserva-va/4-zona-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "movil",
+      "archivo": "reserva-va/5-arroz-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "movil",
+      "archivo": "reserva-va/6-datos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "movil",
+      "archivo": "reserva-va/7-confirmada-movil.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "movil",
+      "archivo": "reserva-va/8-gestion-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "movil",
+      "archivo": "web-en/01-portada-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "movil",
+      "archivo": "web-en/02-portada-completa-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "movil",
+      "archivo": "web-en/03-arroces-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "movil",
+      "archivo": "web-en/05-la-casa-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "movil",
+      "archivo": "web-en/06-contacto-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "movil",
+      "archivo": "web-en/04-carta-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "movil",
+      "archivo": "web-en/07-paella-valenciana-movil.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "movil",
+      "archivo": "web-en/08-grupos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "movil",
+      "archivo": "reserva-en/1-personas-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "movil",
+      "archivo": "reserva-en/2-dia-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "movil",
+      "archivo": "reserva-en/3-hora-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "movil",
+      "archivo": "reserva-en/4-zona-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "movil",
+      "archivo": "reserva-en/5-arroz-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "movil",
+      "archivo": "reserva-en/6-datos-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "movil",
+      "archivo": "reserva-en/7-confirmada-movil.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "movil",
+      "archivo": "reserva-en/8-gestion-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "00-acceso",
+      "titulo": "Acceso",
+      "tamano": "movil",
+      "archivo": "panel/00-acceso-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01-servicio-hoy",
+      "titulo": "Servicio de hoy (mapa y lista)",
+      "tamano": "movil",
+      "archivo": "panel/01-servicio-hoy-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02-reservas",
+      "titulo": "Reservas",
+      "tamano": "movil",
+      "archivo": "panel/02-reservas-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "03-reserva-detalle",
+      "titulo": "Detalle de una reserva",
+      "tamano": "movil",
+      "archivo": "panel/03-reserva-detalle-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "04-nueva-reserva",
+      "titulo": "Nueva reserva por teléfono",
+      "tamano": "movil",
+      "archivo": "panel/04-nueva-reserva-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "05-mapa",
+      "titulo": "Mapas de mesas (distribuciones)",
+      "tamano": "movil",
+      "archivo": "panel/05-mapa-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "06-mapa-edicion",
+      "titulo": "Editor del mapa de mesas",
+      "tamano": "movil",
+      "archivo": "panel/06-mapa-edicion-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "07-espera",
+      "titulo": "Lista de espera",
+      "tamano": "movil",
+      "archivo": "panel/07-espera-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "08-clientes",
+      "titulo": "Clientes",
+      "tamano": "movil",
+      "archivo": "panel/08-clientes-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "09-ficha-cliente",
+      "titulo": "Ficha de cliente",
+      "tamano": "movil",
+      "archivo": "panel/09-ficha-cliente-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "10-arroces",
+      "titulo": "Arroces del día",
+      "tamano": "movil",
+      "archivo": "panel/10-arroces-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "11-informes",
+      "titulo": "Informes",
+      "tamano": "movil",
+      "archivo": "panel/11-informes-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "12-configuracion",
+      "titulo": "Configuración",
+      "tamano": "movil",
+      "archivo": "panel/12-configuracion-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "13-carta",
+      "titulo": "Carta y contenidos",
+      "tamano": "movil",
+      "archivo": "panel/13-carta-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "14-usuarios",
+      "titulo": "Usuarios",
+      "tamano": "movil",
+      "archivo": "panel/14-usuarios-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "15-registro",
+      "titulo": "Registro de cambios",
+      "tamano": "movil",
+      "archivo": "panel/15-registro-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "16-hoja",
+      "titulo": "Hoja de servicio imprimible",
+      "tamano": "movil",
+      "archivo": "panel/16-hoja-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01b-mapa-servicio",
+      "titulo": "Mapa de mesas en servicio",
+      "tamano": "movil",
+      "archivo": "panel/01b-mapa-servicio-movil.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02b-linea-tiempo",
+      "titulo": "Reservas en línea de tiempo por mesa",
+      "tamano": "movil",
+      "archivo": "panel/02b-linea-tiempo-movil.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "tableta",
+      "archivo": "web-es/01-portada-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "tableta",
+      "archivo": "web-es/02-portada-completa-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "tableta",
+      "archivo": "web-es/03-arroces-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "tableta",
+      "archivo": "web-es/05-la-casa-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "tableta",
+      "archivo": "web-es/06-contacto-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "tableta",
+      "archivo": "web-es/04-carta-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "tableta",
+      "archivo": "web-es/07-paella-valenciana-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "tableta",
+      "archivo": "web-es/08-grupos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "tableta",
+      "archivo": "reserva-es/1-personas-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "tableta",
+      "archivo": "reserva-es/2-dia-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "tableta",
+      "archivo": "reserva-es/3-hora-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "tableta",
+      "archivo": "reserva-es/4-zona-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "tableta",
+      "archivo": "reserva-es/5-arroz-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "tableta",
+      "archivo": "reserva-es/6-datos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "tableta",
+      "archivo": "reserva-es/7-confirmada-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "tableta",
+      "archivo": "reserva-es/8-gestion-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "tableta",
+      "archivo": "web-va/01-portada-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "tableta",
+      "archivo": "web-va/02-portada-completa-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "tableta",
+      "archivo": "web-va/03-arroces-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "tableta",
+      "archivo": "web-va/05-la-casa-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "tableta",
+      "archivo": "web-va/06-contacto-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "tableta",
+      "archivo": "web-va/04-carta-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "tableta",
+      "archivo": "web-va/07-paella-valenciana-tableta.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "tableta",
+      "archivo": "web-va/08-grupos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "tableta",
+      "archivo": "reserva-va/1-personas-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "tableta",
+      "archivo": "reserva-va/2-dia-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "tableta",
+      "archivo": "reserva-va/3-hora-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "tableta",
+      "archivo": "reserva-va/4-zona-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "tableta",
+      "archivo": "reserva-va/5-arroz-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "tableta",
+      "archivo": "reserva-va/6-datos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "tableta",
+      "archivo": "reserva-va/7-confirmada-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "tableta",
+      "archivo": "reserva-va/8-gestion-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "tableta",
+      "archivo": "web-en/01-portada-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "tableta",
+      "archivo": "web-en/02-portada-completa-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "tableta",
+      "archivo": "web-en/03-arroces-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "tableta",
+      "archivo": "web-en/05-la-casa-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "tableta",
+      "archivo": "web-en/06-contacto-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "tableta",
+      "archivo": "web-en/04-carta-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "tableta",
+      "archivo": "web-en/07-paella-valenciana-tableta.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "tableta",
+      "archivo": "web-en/08-grupos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "tableta",
+      "archivo": "reserva-en/1-personas-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "tableta",
+      "archivo": "reserva-en/2-dia-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "tableta",
+      "archivo": "reserva-en/3-hora-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "tableta",
+      "archivo": "reserva-en/4-zona-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "tableta",
+      "archivo": "reserva-en/5-arroz-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "tableta",
+      "archivo": "reserva-en/6-datos-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "tableta",
+      "archivo": "reserva-en/7-confirmada-tableta.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "tableta",
+      "archivo": "reserva-en/8-gestion-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "00-acceso",
+      "titulo": "Acceso",
+      "tamano": "tableta",
+      "archivo": "panel/00-acceso-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01-servicio-hoy",
+      "titulo": "Servicio de hoy (mapa y lista)",
+      "tamano": "tableta",
+      "archivo": "panel/01-servicio-hoy-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02-reservas",
+      "titulo": "Reservas",
+      "tamano": "tableta",
+      "archivo": "panel/02-reservas-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "03-reserva-detalle",
+      "titulo": "Detalle de una reserva",
+      "tamano": "tableta",
+      "archivo": "panel/03-reserva-detalle-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "04-nueva-reserva",
+      "titulo": "Nueva reserva por teléfono",
+      "tamano": "tableta",
+      "archivo": "panel/04-nueva-reserva-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "05-mapa",
+      "titulo": "Mapas de mesas (distribuciones)",
+      "tamano": "tableta",
+      "archivo": "panel/05-mapa-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "06-mapa-edicion",
+      "titulo": "Editor del mapa de mesas",
+      "tamano": "tableta",
+      "archivo": "panel/06-mapa-edicion-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "07-espera",
+      "titulo": "Lista de espera",
+      "tamano": "tableta",
+      "archivo": "panel/07-espera-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "08-clientes",
+      "titulo": "Clientes",
+      "tamano": "tableta",
+      "archivo": "panel/08-clientes-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "09-ficha-cliente",
+      "titulo": "Ficha de cliente",
+      "tamano": "tableta",
+      "archivo": "panel/09-ficha-cliente-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "10-arroces",
+      "titulo": "Arroces del día",
+      "tamano": "tableta",
+      "archivo": "panel/10-arroces-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "11-informes",
+      "titulo": "Informes",
+      "tamano": "tableta",
+      "archivo": "panel/11-informes-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "12-configuracion",
+      "titulo": "Configuración",
+      "tamano": "tableta",
+      "archivo": "panel/12-configuracion-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "13-carta",
+      "titulo": "Carta y contenidos",
+      "tamano": "tableta",
+      "archivo": "panel/13-carta-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "14-usuarios",
+      "titulo": "Usuarios",
+      "tamano": "tableta",
+      "archivo": "panel/14-usuarios-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "15-registro",
+      "titulo": "Registro de cambios",
+      "tamano": "tableta",
+      "archivo": "panel/15-registro-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "16-hoja",
+      "titulo": "Hoja de servicio imprimible",
+      "tamano": "tableta",
+      "archivo": "panel/16-hoja-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01b-mapa-servicio",
+      "titulo": "Mapa de mesas en servicio",
+      "tamano": "tableta",
+      "archivo": "panel/01b-mapa-servicio-tableta.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02b-linea-tiempo",
+      "titulo": "Reservas en línea de tiempo por mesa",
+      "tamano": "tableta",
+      "archivo": "panel/02b-linea-tiempo-tableta.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "escritorio",
+      "archivo": "web-es/01-portada-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "escritorio",
+      "archivo": "web-es/02-portada-completa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "escritorio",
+      "archivo": "web-es/03-arroces-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "escritorio",
+      "archivo": "web-es/05-la-casa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "escritorio",
+      "archivo": "web-es/06-contacto-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "escritorio",
+      "archivo": "web-es/04-carta-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "escritorio",
+      "archivo": "web-es/07-paella-valenciana-escritorio.jpg"
+    },
+    {
+      "seccion": "web-es",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "escritorio",
+      "archivo": "web-es/08-grupos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/1-personas-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/2-dia-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/3-hora-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/4-zona-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/5-arroz-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/6-datos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/7-confirmada-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-es",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "escritorio",
+      "archivo": "reserva-es/8-gestion-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "escritorio",
+      "archivo": "web-va/01-portada-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "escritorio",
+      "archivo": "web-va/02-portada-completa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "escritorio",
+      "archivo": "web-va/03-arroces-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "escritorio",
+      "archivo": "web-va/05-la-casa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "escritorio",
+      "archivo": "web-va/06-contacto-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "escritorio",
+      "archivo": "web-va/04-carta-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "escritorio",
+      "archivo": "web-va/07-paella-valenciana-escritorio.jpg"
+    },
+    {
+      "seccion": "web-va",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "escritorio",
+      "archivo": "web-va/08-grupos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/1-personas-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/2-dia-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/3-hora-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/4-zona-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/5-arroz-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/6-datos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/7-confirmada-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-va",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "escritorio",
+      "archivo": "reserva-va/8-gestion-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "01-portada",
+      "titulo": "Portada (primera pantalla)",
+      "tamano": "escritorio",
+      "archivo": "web-en/01-portada-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "02-portada-completa",
+      "titulo": "Portada completa",
+      "tamano": "escritorio",
+      "archivo": "web-en/02-portada-completa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "03-arroces",
+      "titulo": "Arroces",
+      "tamano": "escritorio",
+      "archivo": "web-en/03-arroces-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "05-la-casa",
+      "titulo": "La casa",
+      "tamano": "escritorio",
+      "archivo": "web-en/05-la-casa-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "06-contacto",
+      "titulo": "Contacto y cómo llegar",
+      "tamano": "escritorio",
+      "archivo": "web-en/06-contacto-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "04-carta",
+      "titulo": "Carta",
+      "tamano": "escritorio",
+      "archivo": "web-en/04-carta-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "07-paella-valenciana",
+      "titulo": "Página «Paella valenciana»",
+      "tamano": "escritorio",
+      "archivo": "web-en/07-paella-valenciana-escritorio.jpg"
+    },
+    {
+      "seccion": "web-en",
+      "pagina": "08-grupos",
+      "titulo": "Página «Comidas de grupo»",
+      "tamano": "escritorio",
+      "archivo": "web-en/08-grupos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "1-personas",
+      "titulo": "Paso 1: personas",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/1-personas-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "2-dia",
+      "titulo": "Paso 1: elegir día",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/2-dia-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "3-hora",
+      "titulo": "Paso 2: hora",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/3-hora-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "4-zona",
+      "titulo": "Paso 3: zona",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/4-zona-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "5-arroz",
+      "titulo": "Paso 4: arroz por encargo",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/5-arroz-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "6-datos",
+      "titulo": "Paso 5: datos",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/6-datos-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "7-confirmada",
+      "titulo": "Reserva confirmada",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/7-confirmada-escritorio.jpg"
+    },
+    {
+      "seccion": "reserva-en",
+      "pagina": "8-gestion",
+      "titulo": "Ver, cambiar o cancelar (enlace del correo)",
+      "tamano": "escritorio",
+      "archivo": "reserva-en/8-gestion-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "00-acceso",
+      "titulo": "Acceso",
+      "tamano": "escritorio",
+      "archivo": "panel/00-acceso-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01-servicio-hoy",
+      "titulo": "Servicio de hoy (mapa y lista)",
+      "tamano": "escritorio",
+      "archivo": "panel/01-servicio-hoy-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02-reservas",
+      "titulo": "Reservas",
+      "tamano": "escritorio",
+      "archivo": "panel/02-reservas-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "03-reserva-detalle",
+      "titulo": "Detalle de una reserva",
+      "tamano": "escritorio",
+      "archivo": "panel/03-reserva-detalle-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "04-nueva-reserva",
+      "titulo": "Nueva reserva por teléfono",
+      "tamano": "escritorio",
+      "archivo": "panel/04-nueva-reserva-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "05-mapa",
+      "titulo": "Mapas de mesas (distribuciones)",
+      "tamano": "escritorio",
+      "archivo": "panel/05-mapa-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "06-mapa-edicion",
+      "titulo": "Editor del mapa de mesas",
+      "tamano": "escritorio",
+      "archivo": "panel/06-mapa-edicion-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "07-espera",
+      "titulo": "Lista de espera",
+      "tamano": "escritorio",
+      "archivo": "panel/07-espera-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "08-clientes",
+      "titulo": "Clientes",
+      "tamano": "escritorio",
+      "archivo": "panel/08-clientes-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "09-ficha-cliente",
+      "titulo": "Ficha de cliente",
+      "tamano": "escritorio",
+      "archivo": "panel/09-ficha-cliente-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "10-arroces",
+      "titulo": "Arroces del día",
+      "tamano": "escritorio",
+      "archivo": "panel/10-arroces-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "11-informes",
+      "titulo": "Informes",
+      "tamano": "escritorio",
+      "archivo": "panel/11-informes-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "12-configuracion",
+      "titulo": "Configuración",
+      "tamano": "escritorio",
+      "archivo": "panel/12-configuracion-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "13-carta",
+      "titulo": "Carta y contenidos",
+      "tamano": "escritorio",
+      "archivo": "panel/13-carta-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "14-usuarios",
+      "titulo": "Usuarios",
+      "tamano": "escritorio",
+      "archivo": "panel/14-usuarios-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "15-registro",
+      "titulo": "Registro de cambios",
+      "tamano": "escritorio",
+      "archivo": "panel/15-registro-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "16-hoja",
+      "titulo": "Hoja de servicio imprimible",
+      "tamano": "escritorio",
+      "archivo": "panel/16-hoja-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "01b-mapa-servicio",
+      "titulo": "Mapa de mesas en servicio",
+      "tamano": "escritorio",
+      "archivo": "panel/01b-mapa-servicio-escritorio.jpg"
+    },
+    {
+      "seccion": "panel",
+      "pagina": "02b-linea-tiempo",
+      "titulo": "Reservas en línea de tiempo por mesa",
+      "tamano": "escritorio",
+      "archivo": "panel/02b-linea-tiempo-escritorio.jpg"
+    }
+  ]
+}
