@@ -1,9 +1,10 @@
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { LogoHorizontal } from "@/components/marca/Marca";
-import { MenuMovil, SelectorIdioma, AvisoDisponibilidad } from "./CabeceraCliente";
+import { LogoWeb } from "./Logo";
+import { EnlaceBoton } from "./movimiento";
+import { AvisoDisponibilidad, MenuMovil, SelectorIdioma } from "./CabeceraCliente";
 
-/** Cabecera de la web pública con el botón «Reservar mesa» siempre a mano. */
+/** Cabecera de la web pública: barra fina translúcida con «Reservar mesa» siempre a mano. */
 export async function Cabecera({ locale }: { locale: string }) {
   const t = await getTranslations("web.nav");
   const enlaces = [
@@ -14,25 +15,32 @@ export async function Cabecera({ locale }: { locale: string }) {
     { href: "/#llegar", texto: t("llegar") },
   ];
   return (
-    <header className="fixed inset-x-0 top-0 z-40 bg-brasa/95 text-arroz backdrop-blur">
-      <a href="#contenido" className="sr-only focus:not-sr-only focus:absolute focus:left-2 focus:top-2 focus:rounded-full focus:bg-arroz focus:px-4 focus:py-2 focus:text-tinta">
+    <header className="fixed inset-x-0 top-0 z-40 border-b border-linea bg-fondo/80 backdrop-blur-xl backdrop-saturate-150">
+      <a
+        href="#contenido"
+        className="sr-only focus:not-sr-only focus:absolute focus:left-3 focus:top-3 focus:rounded-full focus:bg-superficie focus:px-4 focus:py-2 focus:text-sm focus:shadow-elevada"
+      >
         {t("saltar")}
       </a>
-      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4">
-        <Link href="/" aria-label="Arrocería Yerga"><LogoHorizontal /></Link>
-        <nav aria-label="Principal" className="hidden items-center gap-6 text-sm font-semibold lg:flex">
+      <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
+        <Link href="/" aria-label="Arrocería Yerga" className="-m-1 rounded-lg p-1">
+          <LogoWeb />
+        </Link>
+        <nav aria-label="Principal" className="hidden items-center gap-1 lg:flex">
           {enlaces.map((e) => (
-            <Link key={e.href} href={e.href} className="text-arroz/85 transition-colors hover:text-azafran">{e.texto}</Link>
+            <Link key={e.href} href={e.href} className="rounded-full px-3 py-2 text-[14px] font-medium text-suave transition-colors hover:bg-sutil hover:text-texto">
+              {e.texto}
+            </Link>
           ))}
         </nav>
         <div className="flex items-center gap-2">
           <SelectorIdioma locale={locale} etiqueta={t("idioma")} />
-          <div className="hidden flex-col items-end sm:flex">
-            <Link href="/reservar" className="inline-flex min-h-11 items-center rounded-full bg-pimenton px-5 font-semibold text-white hover:bg-pimenton-oscuro">
+          <span className="hidden sm:contents">
+            <EnlaceBoton href="/reservar" tamano="sm">
               {t("reservar")}
-            </Link>
-          </div>
-          <MenuMovil enlaces={enlaces} textos={{ menu: t("menu"), cerrar: t("cerrar") }} />
+            </EnlaceBoton>
+          </span>
+          <MenuMovil enlaces={enlaces} textos={{ menu: t("menu"), cerrar: t("cerrar"), reservar: t("reservar") }} />
         </div>
       </div>
       <AvisoDisponibilidad locale={locale} variante="cabecera" />

@@ -6,24 +6,28 @@ test.describe("Web pública", () => {
     test.skip(soloEn(testInfo, "movil"), "La web pública se prueba en móvil");
   });
 
-  test("la portada tiene alternativa sin movimiento y el botón de reservar funciona", async ({ page }) => {
+  test("desde la portada se elige el número de personas y se entra al flujo con él", async ({ page }) => {
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/es");
-    await expect(page.locator(".portada-animada")).toBeHidden();
-    const estatica = page.locator(".portada-estatica");
-    await expect(estatica).toBeVisible();
-    await expect(estatica.getByRole("img", { name: "Yerga · Arroces con alma" })).toBeVisible();
-    await expect(estatica.locator("ol").getByRole("img")).toHaveCount(5);
-    await estatica.getByRole("link", { name: "Reservar mesa" }).click();
-    await expect(page).toHaveURL(/\/es\/reservar$/);
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.getByRole("img", { name: "Yerga · Arroces con alma" }).first()).toBeAttached();
+    await page.getByRole("button", { name: "Una persona más" }).click();
+    const verHoras = page.getByRole("link", { name: "Ver horas libres" });
+    await expect(verHoras).toHaveAttribute("href", /\/es\/reservar\?comensales=3$/);
+    await verHoras.click();
+    await expect(page).toHaveURL(/\/es\/reservar\?comensales=3$/);
+    await expect(page.getByRole("button", { name: "3 personas", exact: true })).toHaveAttribute("aria-pressed", "true");
   });
 
-  test("con movimiento, la portada se cocina con el scroll", async ({ page }) => {
+  test("la web sigue el modo oscuro del sistema y el panel no cambia", async ({ page }) => {
+    await page.emulateMedia({ colorScheme: "dark" });
     await page.goto("/es");
-    await expect(page.locator(".portada-animada")).toBeVisible();
-    await expect(page.locator(".portada-animada").getByText("01 · Fuego")).toBeVisible();
-    await page.evaluate(() => window.scrollTo(0, document.querySelector<HTMLElement>(".portada-animada")!.offsetHeight * 0.95));
-    await expect(page.locator(".portada-animada").getByText("05 · Socarrat")).toBeVisible({ timeout: 10_000 });
+    const fondo = () => page.evaluate(() => getComputedStyle(document.body).backgroundColor);
+    expect(await fondo()).toBe("rgb(13, 13, 13)");
+    await page.emulateMedia({ colorScheme: "light" });
+    expect(await fondo()).toBe("rgb(252, 252, 252)");
+    await page.goto("/panel/acceso");
+    expect(await fondo()).not.toBe("rgb(252, 252, 252)");
   });
 
   test("botón fijo de reservar en móvil y datos estructurados del restaurante", async ({ page }) => {

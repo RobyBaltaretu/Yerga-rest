@@ -1,4 +1,4 @@
-import { Allura, Inter, Marcellus } from "next/font/google";
+import { Allura, Geist, Inter, Marcellus } from "next/font/google";
 
 // Marcellus: romana con remates de cincel, cercana al logotipo de Yerga.
 export const marcellus = Marcellus({
@@ -19,5 +19,12 @@ export const allura = Allura({
   subsets: ["latin"],
   weight: "400",
   variable: "--font-allura",
+  display: "swap",
+});
+
+// Web pública (rediseño de octubre de 2026): Geist, con tracking ajustado en títulos.
+export const geist = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist",
   display: "swap",
 });

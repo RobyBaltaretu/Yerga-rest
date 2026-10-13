@@ -199,22 +199,14 @@
       "saltar": "Skip to content"
     },
     "portada": {
-      "escenas": [
-        "Fire",
-        "Sofrito",
-        "Ingredients",
-        "Stock and rice",
-        "Socarrat"
-      ],
-      "fuego": "Embers of orange-tree wood.",
-      "sofrito": "Olive oil, tomato and paprika colour the pan.",
-      "ingredientes": "Chicken, rabbit, garrofó and bajoqueta.",
-      "caldo": "The stock rises and the rice is scattered in a cross, as tradition demands.",
-      "socarrat": "The stock evaporates and the edge turns golden.",
-      "desliza": "Scroll to cook",
-      "sonido": "Sound of the simmer",
-      "sonidoOn": "Sound on",
-      "estatica": "This is how a paella is made at Yerga, step by step."
+      "mesaPara": "Table for",
+      "personas": "{n, plural, one {person} other {people}}",
+      "menos": "One person fewer",
+      "mas": "One more person",
+      "verHoras": "See free times",
+      "grupo": "More than {max}? Group dining",
+      "nota": "Choose your rice when you book and it is ready when you arrive.",
+      "datos": "Live availability, to the minute"
     },
     "disponibilidad": "{n, plural, one {# table} other {# tables}} left for {cuando}",
     "cuando": {
@@ -256,12 +248,7 @@
       "sala": "Dining room and terrace",
       "salaTexto": "A bright dining room by the window and a terrace for long Sunday lunches.",
       "alma": "That humility, that warmth, that “there's always room for one more” is the soul of Yerga.",
-      "foto": "Grandma Yerga serving rice to the family (placeholder photo).",
-      "elementos": "Every element has its story",
-      "arroz": "Rice, our ingredient and our land.",
-      "paella": "The paella, a symbol of sharing, gathering and caring.",
-      "casaElemento": "Her home, where there was always a hot meal for everyone.",
-      "almaElemento": "The soul, the love she put into every meal and that we keep serving today."
+      "foto": "Grandma Yerga serving rice to the family (placeholder photo)."
     },
     "carta": {
       "titulo": "Menu",
@@ -315,9 +302,7 @@
         "Saturday"
       ],
       "comida": "Lunch",
-      "cena": "Dinner",
-      "azulejo": "Look for the tiles by the door",
-      "azulejoAlt": "Valencian tile plaque reading “Yerga, Valencian rice house”, with Albufera boats, a barraca cottage and a rice plant."
+      "cena": "Dinner"
     },
     "pie": {
       "legal": "Legal notice",

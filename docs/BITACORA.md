@@ -28,6 +28,7 @@ cliente y la sala.
 | P11 | Editor del mapa en tableta vertical: el lienzo desborda a lo ancho y corta el zoom y la ayuda | Encargado | hecho (#30) |
 | P12 | SQL de la vista previa de Vercel desfasado (le faltaban 3 migraciones) y guía que apuntaba a la rama `fase-1` | Propietario | hecho (#32) |
 | P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#34) |
+| P14 | Rediseño de la web pública y de la reserva (estética Emil Kowalski, Motion, modo claro y oscuro) | Cliente | hecho (#35) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -499,3 +500,22 @@ borrar desde la pestaña Branches.
 - `.claude/` excluido del lint (es código de terceros).
 - Para actualizar: volver a copiar `plugin/skills/impeccable` y `plugin/agents` del
   repositorio de impeccable, y `skills/*` del de Emil Kowalski.
+
+### 13/10 · P14: rediseño de la web pública (rama `feat/rediseno-web`)
+- Petición del propietario: estética Emil Kowalski (neutros, bordes de 1px casi
+  invisibles, sombras multicapa, Geist con tracking ajustado), microinteracciones con
+  Framer Motion (muelle 300/30, escala 0,98 al pulsar, brillo radial) y rigor de
+  accesibilidad. Respuestas del propietario: alcance web pública + reserva (panel fuera),
+  se conserva el logotipo y sale el resto de la identidad anterior, se añade `motion`.
+- Hecho con la habilidad impeccable: `PRODUCT.md`, contrato de dirección en
+  `.impeccable/surfaces/`, detector sin hallazgos y revisión final independiente.
+- **Decisión:** el sistema vive bajo la clase `.web` del `<html>` de `app/[locale]`, con
+  sus propios tokens (claro y oscuro según el sistema) y reasignando los antiguos, para
+  que los componentes compartidos con el panel cambien en la web sin tocar el panel.
+- **Decisión:** la portada abre con el primer paso real de la reserva («Mesa para − 2 +
+  personas» → `/reservar?comensales=n`); la única nota de color es la paella. Sale la
+  portada animada con el scroll (GSAP + Lenis desinstalados), el azulejo, la foto en
+  sepia enmarcada, la caligrafía y los iconos de la casa.
+- Accesibilidad: el gris terciario y el azafrán se oscurecieron hasta AA tras la
+  auditoría con axe. Pruebas de la portada reescritas (control de personas y modo
+  oscuro, comprobando que el panel no cambia).
