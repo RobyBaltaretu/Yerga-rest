@@ -15,8 +15,8 @@ cliente y la sala.
 
 | # | Tarea | Para quién | Estado |
 |---|---|---|---|
-| P1 | Reserva: el contador «Paso X de Y» cambia de total a mitad del flujo (de 5 a 6 si aparece la zona) y la confirmación cuenta como un paso más | Cliente | pendiente |
-| P2 | Reserva: al confirmar, la cabecera fija tapa el principio de la tarjeta de «¡Mesa reservada!» | Cliente | pendiente |
+| P1 | Reserva: el contador «Paso X de Y» cambia de total a mitad del flujo (de 5 a 6 si aparece la zona) y la confirmación cuenta como un paso más | Cliente | hecho (#23) |
+| P2 | Reserva: al confirmar, la cabecera fija tapa el principio de la tarjeta de «¡Mesa reservada!» | Cliente | hecho (#23) |
 | P3 | Panel: fechas y números en español correcto («13 De Octubre» en mayúsculas, fechas ISO `2026-10-13`, decimales con punto, «Telefono» sin tilde) en reservas, detalle, hoja e informes | Sala | hecho (#24) |
 | P4 | Portada en escritorio: el titular deja «sí.» solo en la segunda línea | Cliente | pendiente |
 | P5 | Datos de ejemplo: fecha de creación realista en las reservas de la semilla (la «antelación media» de informes sale negativa) | Encargado | pendiente |
