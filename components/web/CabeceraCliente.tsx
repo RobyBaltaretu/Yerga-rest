@@ -189,7 +189,7 @@ export function BotonReservaFijo({ locale }: { locale: string }) {
   const tapada = rutaTapada === ruta;
   if (ruta.startsWith("/reservar")) return null;
   return (
-    <AnimatePresence>
+    <AnimatePresence initial={false}>
       {!tapada ? (
         <motion.div
           key="fijo"
