@@ -55,8 +55,9 @@ disponibilidad real al minuto, en tres idiomas.
 
 - Carta, horarios y reseñas de ejemplo en la base (marcados como ejemplo). Datos reales
   pendientes: `docs/PENDIENTES.md`.
-- No hay fotografías reales del local ni de los platos; las paellas son ilustraciones
-  propias (`components/web/PaellaMini.tsx`). Una fotografía provisional de la familia
+- No hay fotografías reales del local; la portada usa una fotografía de paella valenciana
+  recortada (`public/marca/paella-valenciana.webp`, aportada por el propietario el 13/10) y
+  el resto de paellas son ilustraciones propias (`components/web/PaellaMini.tsx`). Una fotografía provisional de la familia
   (`public/marca/abuela.webp`).
 - No inventar reseñas, premios, cifras ni precios.
 

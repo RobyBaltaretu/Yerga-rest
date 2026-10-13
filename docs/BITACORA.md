@@ -31,6 +31,7 @@ cliente y la sala.
 | P14 | Rediseño de la web pública y de la reserva (estética Emil Kowalski, Motion, modo claro y oscuro) | Cliente | hecho (#35) |
 | P15 | Web pública con esencia valenciana: solo en claro, azulejo e historia de Yerga | Cliente | hecho (#37) |
 | P16 | Entrada con efecto y la historia de Yerga contada con el scroll | Cliente | hecho (#39) |
+| P17 | Prueba: fotografía real de paella, sin fondo, en la portada | Cliente | hecho (#40) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -565,3 +566,16 @@ borrar desde la pestaña Branches.
 - Verificado: lint, typecheck, Vitest (79), Playwright (46, con axe) y una prueba nueva que
   recorre la historia y comprueba la versión sin movimiento; `impeccable detect` sin
   avisos nuevos.
+
+### 13/10 · Paella real en la portada (rama `feat/paella-real`)
+- Prueba pedida por el propietario: la paella que gira en la portada pasa de ilustración a
+  la fotografía que aportó, sin fondo.
+- Recorte: se detecta el borde negro de la paellera, se ajusta un círculo (centro y radio
+  por mínimos cuadrados, descartando las asas) y se aplica una máscara con antialias. Fuera
+  quedan el fondo, las asas, el aceite y las judías. WebP con transparencia: 521 px
+  (70 KB) en escritorio y 360 px (35 KB) en móvil con `<picture>`.
+- La foto pasa a ser el LCP de la portada: con la versión de escritorio en móvil subía a
+  2,8 s (presupuesto 2,5 s en 4G lenta). Con la versión ligera y prioridad alta vuelve a
+  1,3 s. Las páginas para buscadores
+  siguen con la ilustración; si gusta, se extiende.
+- Verificado: lint, typecheck, Vitest, Playwright con axe y capturas en escritorio y móvil.
