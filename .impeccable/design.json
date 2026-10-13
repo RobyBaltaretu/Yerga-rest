@@ -1,0 +1,184 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-10-13T00:00:00Z",
+  "title": "Design System: Arrocería Yerga · web pública",
+  "extensions": {
+    "scope": "Solo la web pública y el flujo de reserva (app/[locale], clase .web en <html>). El panel /panel conserva su aspecto anterior y queda fuera.",
+    "colorMeta": {
+      "acento": { "role": "primary", "displayName": "Azafrán tostado", "canonical": "#9a4d0c", "darkCanonical": "#f0a24a", "tonalRamp": ["#2e1703", "#4a2506", "#6b3609", "#9a4d0c", "#c46a1c", "#e08a3a", "#f0b878", "#fbe6cc"] },
+      "acento-suave": { "role": "primary", "displayName": "Velo de azafrán", "canonical": "rgba(217, 132, 47, 0.14)", "darkCanonical": "rgba(240, 162, 74, 0.14)" },
+      "brillo": { "role": "primary", "displayName": "Brillo de azafrán", "canonical": "rgba(217, 132, 47, 0.16)", "darkCanonical": "rgba(240, 162, 74, 0.12)" },
+      "texto": { "role": "neutral", "displayName": "Tinta", "canonical": "#111111", "darkCanonical": "#ededed", "tonalRamp": ["#0d0d0d", "#111111", "#1c1c1c", "#63635e", "#6f6f6a", "#a1a1a1", "#ededed", "#fcfcfc"] },
+      "suave": { "role": "neutral", "displayName": "Gris piedra", "canonical": "#63635e", "darkCanonical": "#a1a1a1" },
+      "tenue": { "role": "neutral", "displayName": "Gris ceniza", "canonical": "#6f6f6a", "darkCanonical": "#8a8a8a" },
+      "fondo": { "role": "neutral", "displayName": "Blanco roto", "canonical": "#fcfcfc", "darkCanonical": "#0d0d0d" },
+      "superficie": { "role": "neutral", "displayName": "Superficie", "canonical": "#ffffff", "darkCanonical": "#161616" },
+      "sutil": { "role": "neutral", "displayName": "Gris hueso", "canonical": "#f4f4f2", "darkCanonical": "#1c1c1c" },
+      "linea": { "role": "neutral", "displayName": "Filete", "canonical": "rgba(0, 0, 0, 0.08)", "darkCanonical": "rgba(255, 255, 255, 0.08)" },
+      "linea-fuerte": { "role": "neutral", "displayName": "Filete marcado", "canonical": "rgba(0, 0, 0, 0.14)", "darkCanonical": "rgba(255, 255, 255, 0.14)" },
+      "invertido": { "role": "neutral", "displayName": "Invertido", "canonical": "#ffffff", "darkCanonical": "#0d0d0d" },
+      "peligro": { "role": "error", "displayName": "Peligro", "canonical": "#b42318", "darkCanonical": "#f97066", "tonalRamp": ["#3a0a06", "#5e120b", "#86190f", "#b42318", "#d9443a", "#f97066", "#fcaaa3", "#fee4e2"] },
+      "exito": { "role": "success", "displayName": "Éxito", "canonical": "#18794e", "darkCanonical": "#4cc38a", "tonalRamp": ["#05261a", "#0a3d29", "#11593b", "#18794e", "#2a9d68", "#4cc38a", "#94e0bb", "#dcf6e9"] }
+    },
+    "typographyMeta": {
+      "display": { "displayName": "Display", "purpose": "Titular de la portada, máximo 14ch." },
+      "headline-pagina": { "displayName": "Headline de página", "purpose": "Título de las páginas interiores (CabeceraPagina)." },
+      "headline": { "displayName": "Headline", "purpose": "Títulos de sección de la portada." },
+      "title-paso": { "displayName": "Title de paso", "purpose": "Título de cada paso del flujo de reserva." },
+      "title": { "displayName": "Title", "purpose": "Subtítulos dentro de tarjetas y filas de origen." },
+      "item": { "displayName": "Item", "purpose": "Nombres de plato, arroz y fila." },
+      "body-lg": { "displayName": "Body grande", "purpose": "Entradillas en gris, 38–52ch." },
+      "body": { "displayName": "Body", "purpose": "Descripciones en listas, hasta 60ch." },
+      "label": { "displayName": "Label", "purpose": "Avisos, pies, metadatos e indicador de paso." },
+      "numeral": { "displayName": "Numeral", "purpose": "Número de comensales que rueda en la tarjeta de reserva." },
+      "wordmark": { "displayName": "Wordmark", "purpose": "Solo la palabra YERGA del logotipo." }
+    },
+    "shadows": [
+      { "name": "tarjeta", "value": "0 0 0 1px rgba(0,0,0,0.04), 0 1px 1px -0.5px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 6px 6px -3px rgba(0,0,0,0.04)", "dark": "0 0 0 1px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.03), 0 4px 8px -2px rgba(0,0,0,0.5)", "purpose": "Reposo de botones, fichas y tarjetas que se pulsan." },
+      { "name": "elevada", "value": "0 0 0 1px rgba(0,0,0,0.05), 0 1px 1px -0.5px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 8px 8px -4px rgba(0,0,0,0.04), 0 16px 16px -8px rgba(0,0,0,0.05), 0 32px 32px -16px rgba(0,0,0,0.05)", "dark": "0 0 0 1px rgba(255,255,255,0.07), inset 0 1px 0 rgba(255,255,255,0.04), 0 8px 16px -4px rgba(0,0,0,0.6), 0 24px 48px -12px rgba(0,0,0,0.6)", "purpose": "Hover de lo que se pulsa; reposo de la tarjeta de reserva, el cierre, la foto de la casa y la confirmación." },
+      { "name": "flotante", "value": "0 0 0 1px rgba(0,0,0,0.06), 0 12px 24px -6px rgba(0,0,0,0.12), 0 32px 64px -12px rgba(0,0,0,0.16)", "dark": "0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.05), 0 16px 32px -8px rgba(0,0,0,0.7), 0 40px 80px -16px rgba(0,0,0,0.7)", "purpose": "Solo la hoja modal." },
+      { "name": "ilustracion", "value": "drop-shadow(0 12px 14px rgba(0,0,0,0.16))", "purpose": "Silueta de paella sobre su placa; 0 30px 40px rgba(0,0,0,0.18) en el hero." },
+      { "name": "foco", "value": "outline: 2px solid var(--w-acento); outline-offset: 2px", "purpose": "Foco visible global en .web." }
+    ],
+    "motion": [
+      { "name": "muelle", "value": "spring stiffness 300, damping 30", "purpose": "Transición por defecto de toda la web (MotionConfig)." },
+      { "name": "pulsar", "value": "scale 0.98", "purpose": "Botones y tarjetas de arroz al pulsar; 0.96 en fichas y días; 0.92 en botones de paso." },
+      { "name": "entrada", "value": "y 8px → 0, opacity 0 → 1, muelle", "purpose": "Cambio de paso del flujo y enlaces del menú móvil (escalonado 30ms)." },
+      { "name": "numero-rueda", "value": "y ±70%, opacity 0, blur 4px → 0, muelle", "purpose": "Número de comensales en la tarjeta de reserva, en la dirección del cambio." },
+      { "name": "arroz-encima", "value": "tarjeta y -3px; paella rotate 8°, scale 1.03; muelle", "purpose": "Hover y foco de las tarjetas de arroz." },
+      { "name": "hoja", "value": "y 40px, scale 0.98, opacity 0 → reposo; salida y 24px en 150ms; velo 200ms", "purpose": "Apertura de la hoja modal." },
+      { "name": "estado", "value": "150ms ease", "purpose": "Color, fondo y sombra en hover; subrayado de enlaces." },
+      { "name": "brillo", "value": "opacity 300ms ease", "purpose": "Aparición del halo que sigue al puntero." },
+      { "name": "gira-lento", "value": "rotate 360deg, 160s linear infinite", "purpose": "Paella del hero; anulada con prefers-reduced-motion y en modo .ligera." }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "hover-none", "value": "(hover: none)", "note": "Desactiva el brillo." }
+    ]
+  },
+  "components": [
+    {
+      "name": "Botón principal",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "Píldora de tinta para la acción principal; se invierte en modo oscuro.",
+      "html": "<button class=\"ds-btn-primario\">Ver horas libres <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" aria-hidden=\"true\"><path d=\"M5 12h14\"/><path d=\"m12 5 7 7-7 7\"/></svg></button>",
+      "css": ".ds-btn-primario { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border: 0; border-radius: 9999px; background: var(--w-texto, #111111); color: var(--w-invertido, #ffffff); font: 500 15px/1 var(--font-geist, ui-sans-serif), system-ui, sans-serif; letter-spacing: -0.01em; box-shadow: var(--w-sombra-1, 0 0 0 1px rgba(0,0,0,0.04), 0 1px 1px -0.5px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 6px 6px -3px rgba(0,0,0,0.04)); cursor: pointer; transition: background-color 150ms, box-shadow 150ms, transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-btn-primario:hover { background: color-mix(in oklab, var(--w-texto, #111111) 88%, transparent); } .ds-btn-primario:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-btn-primario:active { transform: scale(0.98); } .ds-btn-primario:disabled { opacity: 0.5; cursor: not-allowed; }"
+    },
+    {
+      "name": "Botón secundario",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Píldora en superficie con sombra tarjeta que sube a elevada en hover.",
+      "html": "<button class=\"ds-btn-secundario\">Atrás</button>",
+      "css": ".ds-btn-secundario { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border: 0; border-radius: 9999px; background: var(--w-superficie, #ffffff); color: var(--w-texto, #111111); font: 500 15px/1 var(--font-geist, ui-sans-serif), system-ui, sans-serif; letter-spacing: -0.01em; box-shadow: var(--w-sombra-1, 0 0 0 1px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 6px 6px -3px rgba(0,0,0,0.04)); cursor: pointer; transition: box-shadow 150ms, transform 200ms; } .ds-btn-secundario:hover { box-shadow: var(--w-sombra-2, 0 0 0 1px rgba(0,0,0,0.05), 0 8px 8px -4px rgba(0,0,0,0.04), 0 16px 16px -8px rgba(0,0,0,0.05), 0 32px 32px -16px rgba(0,0,0,0.05)); } .ds-btn-secundario:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-btn-secundario:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Botón fantasma",
+      "kind": "button",
+      "refersTo": "button-ghost",
+      "description": "Solo texto; fondo gris hueso en hover.",
+      "html": "<button class=\"ds-btn-fantasma\">Cambiar</button>",
+      "css": ".ds-btn-fantasma { display: inline-flex; align-items: center; min-height: 44px; padding: 0 20px; border: 0; border-radius: 9999px; background: transparent; color: var(--w-texto, #111111); font: 500 15px/1 var(--font-geist, ui-sans-serif), system-ui, sans-serif; letter-spacing: -0.01em; cursor: pointer; transition: background-color 150ms; } .ds-btn-fantasma:hover { background: var(--w-sutil, #f4f4f2); } .ds-btn-fantasma:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-btn-fantasma:active { transform: scale(0.98); }"
+    },
+    {
+      "name": "Campo de texto",
+      "kind": "input",
+      "refersTo": "campo",
+      "description": "Campo sin borde con anillo de 1px; el foco pasa a anillo azafrán de 2px.",
+      "html": "<label class=\"ds-campo\"><span class=\"ds-campo-etiqueta\">Nombre</span><input class=\"ds-campo-input\" placeholder=\"Nombre y apellido\"></label>",
+      "css": ".ds-campo { display: block; font-family: var(--font-geist, ui-sans-serif), system-ui, sans-serif; } .ds-campo-etiqueta { display: block; font-size: 14px; font-weight: 600; color: var(--w-texto, #111111); } .ds-campo-input { margin-top: 4px; display: block; width: 100%; padding: 12px 16px; border: 0; border-radius: 12px; background: var(--w-superficie, #ffffff); color: var(--w-texto, #111111); font-size: 16px; box-shadow: 0 0 0 1px color-mix(in oklab, var(--w-texto, #111111) 20%, transparent); caret-color: var(--w-acento, #9a4d0c); outline: none; transition: box-shadow 150ms; } .ds-campo-input::placeholder { color: var(--w-suave, #63635e); } .ds-campo-input:focus { box-shadow: 0 0 0 2px var(--w-acento, #9a4d0c); }"
+    },
+    {
+      "name": "Navegación de cabecera",
+      "kind": "nav",
+      "refersTo": "enlace-nav",
+      "description": "Enlaces en gris piedra dentro de la barra translúcida; píldora gris hueso en hover.",
+      "html": "<nav class=\"ds-nav\"><a class=\"ds-nav-enlace\" href=\"#\">Arroces</a><a class=\"ds-nav-enlace\" href=\"#\">Carta</a><a class=\"ds-nav-enlace\" href=\"#\">La casa</a><a class=\"ds-nav-enlace\" href=\"#\">Cómo llegar</a></nav>",
+      "css": ".ds-nav { display: flex; align-items: center; gap: 4px; padding: 12px 16px; border-bottom: 1px solid var(--w-linea, rgba(0,0,0,0.08)); background: color-mix(in oklab, var(--w-fondo, #fcfcfc) 80%, transparent); backdrop-filter: blur(24px) saturate(1.5); font-family: var(--font-geist, ui-sans-serif), system-ui, sans-serif; } .ds-nav-enlace { padding: 8px 12px; border-radius: 9999px; color: var(--w-suave, #63635e); font-size: 14px; font-weight: 500; text-decoration: none; transition: background-color 150ms, color 150ms; } .ds-nav-enlace:hover { background: var(--w-sutil, #f4f4f2); color: var(--w-texto, #111111); } .ds-nav-enlace:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Selector de idioma",
+      "kind": "chip",
+      "refersTo": "enlace-nav",
+      "description": "Control segmentado en gris hueso; la píldora activa en superficie se desliza con el muelle.",
+      "html": "<div class=\"ds-idioma\"><a class=\"ds-idioma-op ds-idioma-activo\" href=\"#\">es</a><a class=\"ds-idioma-op\" href=\"#\">va</a><a class=\"ds-idioma-op\" href=\"#\">en</a></div>",
+      "css": ".ds-idioma { display: inline-flex; padding: 2px; border-radius: 9999px; background: var(--w-sutil, #f4f4f2); font: 600 12px/1 var(--font-geist, ui-sans-serif), system-ui, sans-serif; text-transform: uppercase; } .ds-idioma-op { display: grid; place-items: center; height: 32px; min-width: 36px; padding: 0 8px; border-radius: 9999px; color: var(--w-suave, #63635e); text-decoration: none; transition: color 150ms; } .ds-idioma-op:hover { color: var(--w-texto, #111111); } .ds-idioma-activo { background: var(--w-superficie, #ffffff); color: var(--w-texto, #111111); box-shadow: var(--w-sombra-1, 0 0 0 1px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04)); } .ds-idioma-op:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Ficha de elección",
+      "kind": "chip",
+      "refersTo": "ficha-eleccion",
+      "description": "Comensales y horas: ficha de 16px que se invierte a tinta al elegirla.",
+      "html": "<div class=\"ds-fichas\"><button class=\"ds-ficha\">13:30</button><button class=\"ds-ficha ds-ficha-activa\" aria-pressed=\"true\">14:00</button><button class=\"ds-ficha ds-ficha-agotada\" disabled>14:30</button></div>",
+      "css": ".ds-fichas { display: grid; grid-template-columns: repeat(3, 96px); gap: 8px; } .ds-ficha { min-height: 48px; border: 0; border-radius: 16px; background: var(--w-superficie, #ffffff); color: var(--w-texto, #111111); font: 500 17px/1 var(--font-geist, ui-sans-serif), system-ui, sans-serif; font-variant-numeric: tabular-nums; box-shadow: var(--w-sombra-1, 0 0 0 1px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04)); cursor: pointer; transition: box-shadow 150ms, transform 150ms, background-color 150ms; } .ds-ficha:hover { box-shadow: var(--w-sombra-2, 0 0 0 1px rgba(0,0,0,0.05), 0 8px 8px -4px rgba(0,0,0,0.04), 0 16px 16px -8px rgba(0,0,0,0.05)); } .ds-ficha:active { transform: scale(0.96); } .ds-ficha:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-ficha-activa { background: var(--w-texto, #111111); color: var(--w-invertido, #ffffff); } .ds-ficha-agotada { background: transparent; box-shadow: none; border: 1px dashed var(--w-linea-fuerte, rgba(0,0,0,0.14)); color: var(--w-tenue, #6f6f6a); text-decoration: line-through; cursor: default; }"
+    },
+    {
+      "name": "Tarjeta de reserva",
+      "kind": "custom",
+      "refersTo": "tarjeta-reserva",
+      "description": "«Mesa para − 2 + personas»: marco de 6px, caja interior con filete, número que rueda y botón a todo el ancho.",
+      "html": "<div class=\"ds-reserva\"><div class=\"ds-reserva-int\"><div class=\"ds-reserva-fila\"><span class=\"ds-reserva-txt\">Mesa para</span><button class=\"ds-paso\" aria-label=\"Menos\">−</button><span class=\"ds-reserva-num\">2</span><button class=\"ds-paso\" aria-label=\"Más\">+</button><span class=\"ds-reserva-txt\">personas</span></div><button class=\"ds-reserva-btn\">Ver horas libres →</button><p class=\"ds-reserva-aviso\"><span class=\"ds-punto\"></span>Disponibilidad real, al minuto</p></div></div>",
+      "css": ".ds-reserva { max-width: 448px; padding: 6px; border-radius: 28px; background: var(--w-superficie, #ffffff); box-shadow: var(--w-sombra-2, 0 0 0 1px rgba(0,0,0,0.05), 0 1px 1px -0.5px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 8px 8px -4px rgba(0,0,0,0.04), 0 16px 16px -8px rgba(0,0,0,0.05), 0 32px 32px -16px rgba(0,0,0,0.05)); font-family: var(--font-geist, ui-sans-serif), system-ui, sans-serif; color: var(--w-texto, #111111); } .ds-reserva-int { padding: 16px 24px 20px; border: 1px solid var(--w-linea, rgba(0,0,0,0.08)); border-radius: 22px; } .ds-reserva-fila { display: flex; align-items: center; gap: 4px; } .ds-reserva-txt { font-size: 15px; font-weight: 500; color: var(--w-suave, #63635e); margin-right: auto; } .ds-reserva-txt:last-child { margin: 0 0 0 auto; } .ds-reserva-num { width: 64px; text-align: center; font-size: 48px; font-weight: 600; letter-spacing: -0.04em; font-variant-numeric: tabular-nums; } .ds-paso { width: 44px; height: 44px; border: 0; border-radius: 9999px; background: var(--w-sutil, #f4f4f2); color: var(--w-texto, #111111); font-size: 18px; cursor: pointer; transition: background-color 150ms, transform 150ms; } .ds-paso:hover { background: var(--w-linea-fuerte, rgba(0,0,0,0.14)); } .ds-paso:active { transform: scale(0.92); } .ds-paso:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-reserva-btn { margin-top: 16px; width: 100%; min-height: 48px; border: 0; border-radius: 9999px; background: var(--w-texto, #111111); color: var(--w-invertido, #ffffff); font: 500 16px/1 inherit; letter-spacing: -0.01em; cursor: pointer; transition: background-color 150ms, transform 200ms; } .ds-reserva-btn:hover { background: color-mix(in oklab, var(--w-texto, #111111) 88%, transparent); } .ds-reserva-btn:active { transform: scale(0.98); } .ds-reserva-btn:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-reserva-aviso { display: flex; align-items: center; gap: 8px; margin: 16px 0 0; font-size: 13px; font-weight: 500; color: var(--w-suave, #63635e); } .ds-punto { width: 8px; height: 8px; border-radius: 9999px; background: var(--w-acento, #9a4d0c); }"
+    },
+    {
+      "name": "Tarjeta de arroz",
+      "kind": "card",
+      "refersTo": "tarjeta",
+      "description": "Tarjeta de 24px con placa gris hueso; en hover sube 3px y pasa a sombra elevada.",
+      "html": "<button class=\"ds-arroz\"><span class=\"ds-arroz-placa\"><span class=\"ds-arroz-paella\"></span></span><span class=\"ds-arroz-nombre\">Paella valenciana</span><span class=\"ds-arroz-precio\">18 € por persona</span><span class=\"ds-arroz-min\">Mínimo 2 personas</span></button>",
+      "css": ".ds-arroz { display: flex; flex-direction: column; width: 220px; padding: 8px; border: 0; border-radius: 24px; background: var(--w-superficie, #ffffff); text-align: left; font-family: var(--font-geist, ui-sans-serif), system-ui, sans-serif; color: var(--w-texto, #111111); box-shadow: var(--w-sombra-1, 0 0 0 1px rgba(0,0,0,0.04), 0 3px 3px -1.5px rgba(0,0,0,0.04), 0 6px 6px -3px rgba(0,0,0,0.04)); cursor: pointer; transition: box-shadow 300ms, transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-arroz:hover, .ds-arroz:focus-visible { transform: translateY(-3px); box-shadow: var(--w-sombra-2, 0 0 0 1px rgba(0,0,0,0.05), 0 8px 8px -4px rgba(0,0,0,0.04), 0 16px 16px -8px rgba(0,0,0,0.05), 0 32px 32px -16px rgba(0,0,0,0.05)); } .ds-arroz:focus-visible { outline: 2px solid var(--w-acento, #9a4d0c); outline-offset: 2px; } .ds-arroz:active { transform: scale(0.98); } .ds-arroz-placa { display: grid; place-items: center; aspect-ratio: 1; padding: 12%; border-radius: 20px; background: var(--w-sutil, #f4f4f2); } .ds-arroz-paella { display: block; width: 100%; aspect-ratio: 1; border-radius: 9999px; background: radial-gradient(circle, #e8b54a 62%, #8a5a22 64%, #4a2f12 70%); filter: drop-shadow(0 12px 14px rgba(0,0,0,0.16)); transition: transform 300ms cubic-bezier(0.2, 0.8, 0.2, 1); } .ds-arroz:hover .ds-arroz-paella { transform: rotate(8deg) scale(1.03); } .ds-arroz-nombre { padding: 14px 10px 0; font-size: 17px; font-weight: 600; letter-spacing: -0.015em; } .ds-arroz-precio { padding: 4px 10px 0; font-size: 13px; color: var(--w-suave, #63635e); } .ds-arroz-min { padding: 4px 10px 10px; font-size: 13px; color: var(--w-tenue, #6f6f6a); }"
+    },
+    {
+      "name": "Pastilla de aviso",
+      "kind": "chip",
+      "refersTo": "pastilla-aviso",
+      "description": "Velo de azafrán con texto azafrán para avisos de estado (carta de ejemplo).",
+      "html": "<span class=\"ds-aviso\">Carta de ejemplo</span>",
+      "css": ".ds-aviso { display: inline-flex; padding: 4px 12px; border-radius: 9999px; background: var(--w-acento-suave, rgba(217,132,47,0.14)); color: var(--w-acento, #9a4d0c); font: 500 13px/1.5 var(--font-geist, ui-sans-serif), system-ui, sans-serif; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "El azafrán en el plato blanco",
+    "overview": "La web se comporta como una buena app de reservas: fondos neutros casi blancos (o casi negros en modo oscuro), tinta muy oscura, gris para todo lo secundario y una única nota cálida, el azafrán, que aparece solo donde algo está vivo, enfocado o seleccionado. El color de verdad lo pone la comida: las ilustraciones de paella son el único elemento saturado de la pantalla, y giran o se inclinan con el mismo muelle que mueve toda la interfaz.\n\nLa densidad es de producto, no de revista: un contenedor de 1152 px, títulos Geist seminegrita con tracking negativo que se aprieta con el tamaño, entradillas en gris de 18 px y listas separadas por filetes de 1 px en lugar de cuadrículas de tarjetas. La profundidad viene de sombras multicapa muy difusas cuyo primer anillo de 1 px hace de borde; las superficies elevadas son pocas y significan «aquí se actúa» (la tarjeta de reserva, la hoja de un arroz, el cierre). La reserva no es un enlace a otra parte, es un control que funciona en el primer viewport.\n\nEl mundo rechaza el hero de foto de comida a sangre, la caligrafía y el crema cálido de categoría. La única fotografía (la casa) vive enmarcada dentro de una tarjeta elevada, y la única letra con remates es la del logotipo.",
+    "keyCharacteristics": [
+      "Neutros fríos en dos modos (claro y oscuro por `prefers-color-scheme`), un solo acento: azafrán.",
+      "Acción principal en tinta: píldora negra en claro, píldora casi blanca en oscuro.",
+      "Geist con `ss01` y `cv11`, tracking de -0.01em a -0.04em según tamaño; cifras tabulares en precios, horas y cantidades.",
+      "Bordes invisibles: el filo de 1px forma parte de la sombra; las listas usan filetes `linea`.",
+      "Movimiento con un único muelle (stiffness 300, damping 30), pulsación a escala 0.98, todo anulado con movimiento reducido.",
+      "Iconos Lucide de trazo 1.75 (2 dentro de botones)."
+    ],
+    "rules": [
+      { "name": "The Pinch of Saffron Rule", "body": "El azafrán es una pizca: marca lo vivo, lo enfocado y lo seleccionado. Nunca rellena un botón, un titular ni un fondo de sección.", "section": "colors" },
+      { "name": "The Ink Action Rule", "body": "La acción principal es siempre una píldora de tinta (`texto` sobre `invertido`), y se invierte sola en modo oscuro. No hay botones de color.", "section": "colors" },
+      { "name": "The Food Is the Color Rule", "body": "Lo único saturado en pantalla son las ilustraciones de paella; la interfaz que las rodea se queda en gris.", "section": "colors" },
+      { "name": "The Tightening Rule", "body": "Cuanto más grande, más apretado: botones -0.01em, ítems -0.015em, títulos -0.02em, secciones -0.03em, titulares -0.035em, numeral -0.04em. Todo h1–h3 lleva al menos -0.02em y `text-wrap: balance`; los párrafos, `text-wrap: pretty`.", "section": "typography" },
+      { "name": "The Tabular Figures Rule", "body": "Precios, horas, teléfonos, días del calendario y cantidades van siempre en cifras tabulares.", "section": "typography" },
+      { "name": "The One Roman Rule", "body": "Marcellus (tracking 0.14em) existe solo en la palabra YERGA del logotipo. Ningún titular la usa.", "section": "typography" },
+      { "name": "The Border-in-the-Shadow Rule", "body": "Las superficies elevadas no llevan borde CSS; el filo es la primera capa de la sombra. El único borde visible de 1px es el interior de la tarjeta de reserva y los filetes de las listas.", "section": "elevation" },
+      { "name": "The Shadow-as-State Rule", "body": "El hover sube un nivel (tarjeta → elevada) con transición de 150–300ms; no hay desplazamiento salvo en las tarjetas de arroz (-3px con muelle).", "section": "elevation" }
+    ],
+    "dos": [
+      "**Do** usar el muelle único (stiffness 300, damping 30) para todo movimiento con física, escala 0.98 al pulsar y entradas de 8px con opacidad; respetar `prefers-reduced-motion` y el modo `.ligera` (ahorro de datos o equipos de ≤2 GB), que paran la rotación de la paella y el pulso del punto vivo.",
+      "**Do** dejar la acción principal en píldora de tinta y reservar el azafrán para foco, selección, cursor, disponibilidad viva y avisos.",
+      "**Do** separar listas con filetes `linea` de 1px y precios tabulares alineados a la derecha, en lugar de convertir cada fila en tarjeta.",
+      "**Do** subir la sombra un nivel (tarjeta → elevada) como respuesta al hover en lo que se pulsa.",
+      "**Do** usar iconos Lucide a 16–20px con trazo 1.75 (trazo 2 dentro de botones y pasos), en `suave` o `tenue`.",
+      "**Do** mantener objetivos táctiles de al menos 44px y el anillo de foco azafrán de 2px separado 2px.",
+      "**Do** consumir los tokens `.web` (`texto`, `suave`, `superficie`, `linea`, `acento`…) en código nuevo."
+    ],
+    "donts": [
+      "**Don't** abrir con una foto de comida a sangre; la fotografía va enmarcada dentro de una tarjeta elevada.",
+      "**Don't** usar caligrafía ni el crema cálido de categoría (`.papel`, `arroz`): son del panel, no de la web pública.",
+      "**Don't** usar Marcellus fuera de la palabra YERGA del logotipo.",
+      "**Don't** rellenar botones, titulares ni secciones de azafrán.",
+      "**Don't** poner bordes CSS a las tarjetas elevadas ni sombras duras desplazadas; el filo está en la sombra.",
+      "**Don't** poner antetítulos en mayúsculas (kickers) sobre los títulos de sección; el título va directo.",
+      "**Don't** usar glifos o emojis como iconos; solo SVG de Lucide.",
+      "**Don't** escribir código nuevo con los alias heredados (`tinta`, `niebla`, `pimenton`, `azafran-oscuro`, `huerta-claro`, `white`); existen solo para que los componentes compartidos tomen la paleta nueva."
+    ]
+  }
+}
