@@ -21,7 +21,7 @@ cliente y la sala.
 | P4 | Portada en escritorio: el titular deja «sí.» solo en la segunda línea | Cliente | hecho (#25) |
 | P5 | Datos de ejemplo: fecha de creación realista en las reservas de la semilla (la «antelación media» de informes sale negativa) | Encargado | hecho (#26) |
 | P6 | Galería de capturas en `docs/vista-previa/` (móvil, tableta y escritorio; tres idiomas; panel) | Propietario | en curso |
-| P7 | Vista navegable gratis en GitHub Pages a partir de la rama `vista-estatica` | Propietario | pendiente |
+| P7 | Vista navegable gratis en GitHub Pages a partir de la rama `vista-estatica` | Propietario | hecho (#28); falta activar Pages (propietario) |
 | P8 | Cerrar en `docs/DUDAS.md` las decisiones «a confirmar» que no dependen del restaurante | Propietario | hecho |
 | P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
 
@@ -405,3 +405,19 @@ borrar desde la pestaña Branches.
 - **Decisión:** el botón «Confirmo que vamos» se sigue mostrando también justo después
   de reservar. Es redundante pero inofensivo, y quitarlo cambiaría el flujo del
   recordatorio. Se revisará con datos reales.
+
+### 13/10 · P7: vista navegable en GitHub Pages (rama `feat/vista-pages`)
+- La rama `vista-estatica` estaba desfasada (anterior al panel en el navegador y a la
+  fase 2): no se puede actualizar sin rehacerla. **Decisión:** se sustituye por
+  `scripts/vista-previa/estatica.mjs`, que guarda el HTML ya pintado de 59 páginas
+  (web en tres idiomas y panel con reservas, clientes y mapas de la semilla), quita los
+  scripts, reescribe las rutas bajo `/Yerga-rest/` y convierte el mapa (canvas) en
+  imagen.
+- `.github/workflows/vista-previa.yml` la genera con Supabase local en cada push a `main`
+  (gratis, sin secretos), añade la galería en `/galeria/` y la publica con
+  `deploy-pages`. En los PR que tocan la vista solo la genera.
+- **Paso del propietario (único):** Settings → Pages → Build and deployment → Source:
+  «GitHub Actions», y después Actions → «Vista previa (GitHub Pages)» → Run workflow.
+  Mientras no se haga, el flujo genera el sitio, avisa y termina en verde.
+- Direcciones cuando esté activo: https://robybaltaretu.github.io/Yerga-rest/ y
+  https://robybaltaretu.github.io/Yerga-rest/galeria/.
