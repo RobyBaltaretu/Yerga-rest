@@ -11,10 +11,13 @@ test.describe("Reserva pública (móvil)", () => {
     try {
       const empieza = Date.now();
       await page.goto("/es/reservar");
+      // El total de pasos no cambia a mitad del flujo (la zona va con la hora).
+      await expect(page.getByText("Paso 1 de 4")).toBeVisible();
       await page.getByRole("button", { name: "2 personas", exact: true }).click();
       await elegirPrimerDiaLibre(page);
 
       await expect(page.getByRole("heading", { name: "¿A qué hora?" })).toBeVisible();
+      await expect(page.getByText("Paso 2 de 4")).toBeVisible();
       const hora = page.locator("ul >> button:not([aria-label*='Completa'])").first();
       await hora.click();
 
@@ -23,7 +26,10 @@ test.describe("Reserva pública (móvil)", () => {
       const arroz = page.getByRole("heading", { name: "Elige tu arroz" });
       const datos = page.getByRole("heading", { name: "Tus datos" });
       await expect(zona.or(arroz).or(datos)).toBeVisible();
-      if (await zona.isVisible()) await page.getByRole("button", { name: "Sala" }).click();
+      if (await zona.isVisible()) {
+        await expect(page.getByText("Paso 2 de 4")).toBeVisible();
+        await page.getByRole("button", { name: "Sala" }).click();
+      }
       await expect(arroz.or(datos)).toBeVisible();
       if (await arroz.isVisible()) {
         await page.getByRole("button", { name: /Elegir Paella valenciana/ }).click();
@@ -38,6 +44,15 @@ test.describe("Reserva pública (móvil)", () => {
       await page.getByRole("button", { name: "Confirmar reserva" }).click();
 
       await expect(page.getByRole("heading", { name: "¡Mesa reservada!" })).toBeVisible();
+      // La cabecera fija no tapa la tarjeta de confirmación (se espera a que acabe el
+      // desplazamiento suave).
+      const tarjeta = page.getByRole("heading", { name: "¡Mesa reservada!" }).locator("xpath=ancestor::section[1]");
+      await expect
+        .poll(async () => {
+          const [c, t] = await Promise.all([page.locator("header").first().boundingBox(), tarjeta.boundingBox()]);
+          return t!.y - (c!.y + c!.height);
+        })
+        .toBeGreaterThanOrEqual(0);
       expect(Date.now() - empieza).toBeLessThan(60_000);
 
       const [reserva] = await sql<{ id: string; codigo_gestion: string; estado: string }>(
