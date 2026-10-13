@@ -26,6 +26,7 @@ cliente y la sala.
 | P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
 | P10 | Etiqueta «Paso a cocina» del mapa cortada y casi invisible (elemento estrecho en la pared) | Sala | hecho (#29) |
 | P11 | Editor del mapa en tableta vertical: el lienzo desborda a lo ancho y corta el zoom y la ayuda | Encargado | hecho (#30) |
+| P12 | SQL de la vista previa de Vercel desfasado (le faltaban 3 migraciones) y guía que apuntaba a la rama `fase-1` | Propietario | hecho (#32) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -471,3 +472,12 @@ borrar desde la pestaña Branches.
   de espera sale vacía en la galería.
 - P9 sigue bloqueado: desde la nube el proxy no deja llegar a `workers.dev` ni a
   `github.io`.
+
+### 13/10 · P12: vista previa de Vercel (rama `fix/sql-vista-previa`)
+- `supabase/vista-previa.sql` (el archivo que se pega en Supabase para la vista previa
+  de Vercel) no incluía las migraciones `serializar_ocupacion`, `lista_espera_plazo` y
+  `rgpd_clientes`. Regenerado con `scripts/sql-vista-previa.sh`. Probado entero sobre una
+  base vacía: termina sin errores, con 27 reservas y 3 usuarios de ejemplo.
+- Paso nuevo en la CI: falla si el archivo no coincide con las migraciones.
+- `docs/VISTA-PREVIA.md`: la rama de producción de Vercel debe ser `main`, no `fase-1`.
+  `fase-1` va 51 commits por detrás.

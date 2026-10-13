@@ -29,6 +29,14 @@ jobs:
           pnpm lint
           pnpm typecheck
 
+      - name: SQL de la vista previa al día con las migraciones
+        run: |
+          bash scripts/sql-vista-previa.sh
+          git diff --exit-code supabase/vista-previa.sql || {
+            echo "::error::supabase/vista-previa.sql está desfasado: ejecuta scripts/sql-vista-previa.sh y súbelo."
+            exit 1
+          }
+
       - name: Supabase local
         run: |
           pnpm supabase start -x studio,edge-runtime,logflare,vector,imgproxy

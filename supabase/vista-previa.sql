@@ -3013,6 +3013,376 @@ begin
 end
 $contenido$;
 
+-- ===== supabase/migrations/20261009000950_serializar_ocupacion.sql =====
+-- =============================================================================
+-- Ocupación de mesas sin interbloqueos.
+--
+-- Dos inserciones simultáneas que chocan en una restricción de exclusión pueden esperarse
+-- la una a la otra: cada una ve la fila sin confirmar de la otra y PostgreSQL aborta una
+-- con «deadlock detected». Pasaba cuando dos clientes reservaban la última mesa a la vez:
+-- uno recibía un error en vez de las horas alternativas.
+--
+-- Antes de ocupar una mesa (retención o asignación activa) se toma un bloqueo de
+-- transacción por día de servicio. La segunda espera a que la primera termine y entonces
+-- ve su fila confirmada: la restricción falla de forma limpia (exclusion_violation) y
+-- `retener_mesa` prueba la siguiente mesa o devuelve alternativas.
+-- =============================================================================
+
+create function public.serializar_ocupacion()
+returns trigger
+language plpgsql
+set search_path = ''
+as $$
+begin
+  -- Las asignaciones inactivas no ocupan la mesa (y la retención no tiene esa columna).
+  if tg_table_name = 'asignacion' then
+    if not new.activa then
+      return new;
+    end if;
+  end if;
+  perform pg_advisory_xact_lock(
+    hashtext('yerga-ocupacion'),
+    public.fecha_local(lower(new.intervalo)) - date '2000-01-01');
+  return new;
+end $$;
+
+revoke execute on function public.serializar_ocupacion() from public, anon, authenticated;
+
+create trigger serializar_ocupacion
+  before insert or update of mesa_id, intervalo on public.retencion
+  for each row execute function public.serializar_ocupacion();
+
+create trigger serializar_ocupacion
+  before insert or update of mesa_id, intervalo, activa on public.asignacion
+  for each row execute function public.serializar_ocupacion();
+
+-- ===== supabase/migrations/20261009001000_lista_espera_plazo.sql =====
+-- =============================================================================
+-- Lista de espera con plazo para aceptar (fase 2 de la definición).
+--
+-- Al liberarse una mesa se retiene para el primero de la lista que cabe, durante
+-- `espera_plazo_min` minutos (15 por defecto). Recibe un correo con un enlace de un
+-- solo uso para aceptarla con un toque. Si no acepta a tiempo, la oferta caduca, la mesa
+-- se libera y el aviso pasa al siguiente (lo hace la tarea periódica).
+-- =============================================================================
+
+alter table public.configuracion
+  add column espera_plazo_min int not null default 15 check (espera_plazo_min between 5 and 120);
+
+alter table public.lista_espera
+  add column oferta_token uuid unique,
+  add column oferta_inicio timestamptz,
+  add column oferta_hasta timestamptz,
+  add column oferta_liberada_por uuid references public.reserva (id) on delete set null,
+  add column reserva_id uuid references public.reserva (id) on delete set null;
+
+-- -----------------------------------------------------------------------------
+-- Ofrece la mesa liberada al primero que cabe. Devuelve la entrada con la oferta (el
+-- correo lo envía la aplicación) o null si nadie cabe.
+-- -----------------------------------------------------------------------------
+create or replace function public.avisar_lista_espera(p_reserva uuid)
+returns jsonb
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+declare
+  c public.configuracion := public.cfg();
+  v_r public.reserva;
+  v_e public.lista_espera;
+  v_hora record;
+  v_ret jsonb;
+  v_token uuid;
+  v_hasta timestamptz := now() + public.minutos(c.espera_plazo_min);
+begin
+  perform public.exigir_personal();
+  select * into v_r from public.reserva where id = p_reserva;
+  if not found then return null; end if;
+  for v_e in
+    select * from public.lista_espera
+     where fecha = public.fecha_local(v_r.inicio) and turno_nombre = v_r.turno_nombre
+       and estado = 'esperando' and correo is not null
+     order by creado_en
+  loop
+    -- La hora que se libera si le vale; si no, la libre más cercana a la que pidió.
+    for v_hora in
+      select h.inicio from public.horas_disponibles(v_e.fecha, v_e.comensales) h
+       where h.disponible and h.turno = v_e.turno_nombre
+       order by (h.inicio = v_r.inicio) desc,
+                abs(extract(epoch from (h.inicio - public.hora_local(v_e.fecha, coalesce(v_e.hora_preferida, (v_r.inicio at time zone 'Europe/Madrid')::time)))))
+       limit 3
+    loop
+      v_ret := public.retener_mesa(v_hora.inicio, v_e.comensales);
+      if (v_ret ->> 'ok')::boolean then
+        v_token := (v_ret ->> 'token')::uuid;
+        update public.retencion set caduca_en = v_hasta where token = v_token;
+        update public.lista_espera
+           set estado = 'avisado', avisado_en = now(), oferta_token = v_token,
+               oferta_inicio = v_hora.inicio, oferta_hasta = v_hasta, oferta_liberada_por = p_reserva
+         where id = v_e.id
+        returning * into v_e;
+        return to_jsonb(v_e);
+      end if;
+    end loop;
+  end loop;
+  return null;
+end $$;
+
+-- -----------------------------------------------------------------------------
+-- Datos de una oferta para la página de aceptación (solo el servidor la llama).
+-- -----------------------------------------------------------------------------
+create function public.oferta_espera(p_token uuid)
+returns jsonb
+language sql stable security definer
+set search_path = ''
+as $$
+  select jsonb_build_object(
+    'nombre', split_part(e.nombre, ' ', 1), 'idioma', e.idioma, 'comensales', e.comensales,
+    'inicio', e.oferta_inicio, 'hasta', e.oferta_hasta,
+    'estado', case
+      when e.reserva_id is not null then 'aceptada'
+      when e.estado <> 'avisado' or e.oferta_hasta <= now() then 'caducada'
+      else 'vigente' end,
+    'codigo', (select r.codigo_gestion from public.reserva r where r.id = e.reserva_id))
+  from public.lista_espera e
+  where e.oferta_token = p_token
+$$;
+
+-- -----------------------------------------------------------------------------
+-- Aceptar la oferta: crea la reserva con los datos de la lista de espera sobre la
+-- mesa retenida. Atómico; si caducó o ya se usó, no hace nada.
+-- -----------------------------------------------------------------------------
+create function public.aceptar_oferta_espera(p_token uuid)
+returns jsonb
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+declare
+  v_e public.lista_espera;
+  v_res jsonb;
+begin
+  select * into v_e from public.lista_espera where oferta_token = p_token for update;
+  if not found then
+    return jsonb_build_object('ok', false, 'motivo', 'no_existe');
+  end if;
+  if v_e.reserva_id is not null then
+    return jsonb_build_object('ok', true, 'reserva_id', v_e.reserva_id,
+      'codigo', (select codigo_gestion from public.reserva where id = v_e.reserva_id), 'ya_aceptada', true);
+  end if;
+  if v_e.estado <> 'avisado' or v_e.oferta_hasta <= now() then
+    return jsonb_build_object('ok', false, 'motivo', 'caducada');
+  end if;
+
+  v_res := public.confirmar_reserva(p_token, jsonb_build_object(
+    'inicio', v_e.oferta_inicio, 'comensales', v_e.comensales, 'nombre', v_e.nombre,
+    'telefono', v_e.telefono, 'correo', v_e.correo, 'idioma', v_e.idioma,
+    'acepta_privacidad', true, 'notas', 'Desde la lista de espera'));
+  if (v_res ->> 'ok')::boolean then
+    update public.lista_espera
+       set estado = 'atendido', reserva_id = (v_res ->> 'reserva_id')::uuid
+     where id = v_e.id;
+  end if;
+  return v_res;
+end $$;
+
+-- -----------------------------------------------------------------------------
+-- Ofertas sin respuesta: caducan y la mesa vuelve a quedar libre. Devuelve las
+-- reservas cuya mesa hay que ofrecer al siguiente de la lista.
+-- -----------------------------------------------------------------------------
+create function public.caducar_ofertas_espera()
+returns uuid[]
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+declare
+  v_liberadas uuid[];
+begin
+  with caducadas as (
+    update public.lista_espera
+       set estado = 'caducado'
+     where estado = 'avisado' and reserva_id is null and oferta_hasta <= now()
+    returning oferta_token, oferta_liberada_por
+  ), borradas as (
+    delete from public.retencion t using caducadas c where t.token = c.oferta_token
+  )
+  select array_agg(distinct oferta_liberada_por) filter (where oferta_liberada_por is not null)
+    into v_liberadas from caducadas;
+  return coalesce(v_liberadas, '{}');
+end $$;
+
+revoke execute on function public.oferta_espera(uuid), public.aceptar_oferta_espera(uuid),
+  public.caducar_ofertas_espera() from public, anon, authenticated;
+
+-- -----------------------------------------------------------------------------
+-- El correo de aviso ahora lleva el plazo y el enlace para aceptar. Solo se cambia la
+-- plantilla si sigue siendo la original (no pisa textos editados en el panel).
+-- -----------------------------------------------------------------------------
+update public.plantilla_mensaje set
+  asunto = 'Tienes mesa en {restaurante}: acéptala en {plazo} minutos',
+  cuerpo = E'Hola, {nombre}:\n\nSe ha liberado una mesa para {comensales} el {fecha} a las {hora} y te la hemos guardado.\n\nAcéptala con un toque antes de {plazo} minutos: {enlace}\n\nSi no te viene bien, no hagas nada: pasará a la siguiente persona de la lista.'
+where tipo = 'lista_espera' and idioma = 'es' and asunto = 'Se ha liberado una mesa en {restaurante}';
+
+update public.plantilla_mensaje set
+  asunto = 'Tens taula a {restaurante}: accepta-la en {plazo} minuts',
+  cuerpo = E'Hola, {nombre}:\n\nS''ha alliberat una taula per a {comensales} el {fecha} a les {hora} i te l''hem guardada.\n\nAccepta-la amb un toc abans de {plazo} minuts: {enlace}\n\nSi no et va bé, no faces res: passarà a la següent persona de la llista.'
+where tipo = 'lista_espera' and idioma = 'va' and asunto = 'S''ha alliberat una taula a {restaurante}';
+
+update public.plantilla_mensaje set
+  asunto = 'A table is yours at {restaurante}: accept it within {plazo} minutes',
+  cuerpo = E'Hi {nombre},\n\nA table for {comensales} has opened up on {fecha} at {hora} and we are holding it for you.\n\nAccept it with one tap within {plazo} minutes: {enlace}\n\nIf it does not suit you, do nothing: it will go to the next person on the list.'
+where tipo = 'lista_espera' and idioma = 'en' and asunto = 'A table has opened up at {restaurante}';
+
+-- ===== supabase/migrations/20261009001100_rgpd_clientes.sql =====
+-- =============================================================================
+-- RGPD de clientes: anonimización completa y exportación de datos.
+--
+-- Hasta ahora la anonimización por inactividad (24 meses) solo vaciaba la ficha del
+-- cliente: sus reservas, la lista de espera, los correos y el registro de cambios
+-- conservaban nombre, teléfono y correo. Ahora una sola función lo borra todo y la usan
+-- tanto la tarea periódica como el botón «Anonimizar» del administrador (derecho de
+-- supresión). Las reservas se conservan sin datos personales para los informes.
+-- =============================================================================
+
+create function public.anonimizar_datos_cliente(p_cliente uuid)
+returns void
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+declare
+  v_reservas uuid[];
+  v_esperas uuid[];
+  v_campos text[] := array['nombre', 'telefono', 'correo', 'alergias', 'notas', 'ocasion',
+                           'preferencias', 'notas_internas', 'destinatario', 'cuerpo_texto'];
+begin
+  select coalesce(array_agg(id), '{}') into v_reservas from public.reserva where cliente_id = p_cliente;
+  select coalesce(array_agg(id), '{}') into v_esperas from public.lista_espera where cliente_id = p_cliente;
+
+  update public.cliente
+     set nombre = 'Cliente anonimizado', telefono = 'anon-' || id::text, correo = null,
+         alergias = null, preferencias = null, notas_internas = null,
+         consiente_comercial = false, anonimizado = true
+   where id = p_cliente;
+
+  update public.reserva
+     set nombre = 'Cliente anonimizado', telefono = null, correo = null, alergias = null,
+         notas = null, ocasion = null
+   where id = any (v_reservas);
+
+  update public.lista_espera
+     set nombre = 'Cliente anonimizado', telefono = 'anonimizado', correo = null
+   where id = any (v_esperas);
+
+  update public.mensaje
+     set destinatario = 'anonimizado', cuerpo_texto = ''
+   where reserva_id = any (v_reservas) or lista_espera_id = any (v_esperas);
+
+  -- El registro de cambios guarda copias de las filas: se les quitan los datos personales
+  -- (incluidas las que acaban de generar las actualizaciones de arriba).
+  update public.registro_cambios
+     set antes = antes - v_campos, despues = despues - v_campos
+   where (entidad = 'cliente' and entidad_id = p_cliente::text)
+      or (entidad = 'reserva' and entidad_id = any (select r::text from unnest(v_reservas) r))
+      or (entidad = 'lista_espera' and entidad_id = any (select e::text from unnest(v_esperas) e));
+end $$;
+
+revoke execute on function public.anonimizar_datos_cliente(uuid) from public, anon, authenticated;
+
+-- Derecho de supresión, a petición del cliente: solo el administrador.
+create function public.anonimizar_cliente(p_cliente uuid)
+returns jsonb
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+begin
+  if not public.es_admin() and not public.es_servicio() then
+    raise exception 'Solo el administrador' using errcode = '42501';
+  end if;
+  if not exists (select 1 from public.cliente where id = p_cliente and not anonimizado) then
+    return jsonb_build_object('ok', false, 'motivo', 'no_existe');
+  end if;
+  perform public.anonimizar_datos_cliente(p_cliente);
+  return jsonb_build_object('ok', true);
+end $$;
+
+revoke execute on function public.anonimizar_cliente(uuid) from public, anon;
+grant execute on function public.anonimizar_cliente(uuid) to authenticated;
+
+-- Derecho de acceso: todos los datos de un cliente en un solo documento. Administrador.
+create function public.exportar_cliente(p_cliente uuid)
+returns jsonb
+language plpgsql stable security definer
+set search_path = ''
+as $$
+begin
+  if not public.es_admin() and not public.es_servicio() then
+    raise exception 'Solo el administrador' using errcode = '42501';
+  end if;
+  return (
+    select jsonb_build_object(
+      'generado_en', now(),
+      'cliente', to_jsonb(c),
+      'reservas', coalesce((
+        select jsonb_agg(jsonb_build_object(
+          'inicio', r.inicio, 'comensales', r.comensales, 'estado', r.estado, 'origen', r.origen,
+          'nombre', r.nombre, 'telefono', r.telefono, 'correo', r.correo, 'alergias', r.alergias,
+          'ocasion', r.ocasion, 'notas', r.notas, 'creada_en', r.creada_en,
+          'arroces', (select coalesce(jsonb_agg(jsonb_build_object('plato', p.nombre ->> 'es', 'raciones', e.raciones)), '[]')
+                        from public.encargo_arroz e join public.plato p on p.id = e.plato_id where e.reserva_id = r.id))
+          order by r.inicio)
+        from public.reserva r where r.cliente_id = c.id), '[]'),
+      'lista_espera', coalesce((
+        select jsonb_agg(jsonb_build_object('fecha', e.fecha, 'turno', e.turno_nombre, 'comensales', e.comensales,
+                                            'estado', e.estado, 'creado_en', e.creado_en) order by e.creado_en)
+        from public.lista_espera e where e.cliente_id = c.id), '[]'),
+      'correos', coalesce((
+        select jsonb_agg(jsonb_build_object('tipo', m.tipo, 'asunto', m.asunto, 'estado', m.estado, 'creado_en', m.creado_en) order by m.creado_en)
+        from public.mensaje m
+       where m.reserva_id in (select id from public.reserva where cliente_id = c.id)
+          or m.lista_espera_id in (select id from public.lista_espera where cliente_id = c.id)), '[]'))
+    from public.cliente c where c.id = p_cliente
+  );
+end $$;
+
+revoke execute on function public.exportar_cliente(uuid) from public, anon;
+grant execute on function public.exportar_cliente(uuid) to authenticated;
+
+-- La tarea periódica usa la misma anonimización completa para los inactivos.
+create or replace function public.tick()
+returns jsonb
+language plpgsql volatile security definer
+set search_path = ''
+as $$
+declare
+  c public.configuracion := public.cfg();
+  v_ret int;
+  v_sin int;
+  v_anon int := 0;
+  v_cliente uuid;
+begin
+  delete from public.retencion where caduca_en <= now();
+  get diagnostics v_ret = row_count;
+
+  -- Sin respuesta al recordatorio: la sala debe llamar.
+  update public.reserva
+     set sin_confirmar = true
+   where estado = 'confirmada' and not sin_confirmar
+     and recordatorio_enviado_en is not null and reconfirmada_en is null
+     and inicio - now() <= make_interval(hours => c.sin_confirmar_horas)
+     and inicio > now();
+  get diagnostics v_sin = row_count;
+
+  -- RGPD: clientes inactivos durante 24 meses se anonimizan (ficha y todo lo asociado).
+  for v_cliente in
+    select id from public.cliente
+     where not anonimizado and ultima_actividad_en < now() - interval '24 months'
+  loop
+    perform public.anonimizar_datos_cliente(v_cliente);
+    v_anon := v_anon + 1;
+  end loop;
+
+  return jsonb_build_object('retenciones_caducadas', v_ret, 'sin_confirmar', v_sin,
+                            'clientes_anonimizados', v_anon);
+end $$;
+
 -- ===== supabase/seed.sql =====
 -- =============================================================================
 -- Semilla de DEMOSTRACIÓN (solo local y CI; nunca en producción)
@@ -3113,6 +3483,15 @@ begin
       end if;
     end loop;
   end loop;
+
+  -- Como en la realidad, cada reserva se hizo unos días antes (entre 1 y 6) y en la web
+  -- se tardó en torno a un minuto. Sin esto, los informes mostrarían una antelación
+  -- negativa (las reservas pasadas se crean «ahora»).
+  update public.reserva
+     set creada_en = least(now() - interval '5 minutes',
+                           inicio - interval '1 hour' * (24 + (abs(hashtext(id::text)) % 120))),
+         segundos_para_reservar = case when origen = 'web' then 35 + abs(hashtext(id::text)) % 50 end
+   where origen <> 'puerta';
 
   -- Lo ya pasado se cierra como en un servicio real: la mayoría finalizadas,
   -- alguna no presentada; lo que está en curso, sentado.
