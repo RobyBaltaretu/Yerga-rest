@@ -89,8 +89,19 @@ export function FlujoReserva(props: Props) {
   };
 
   // Al cambiar de paso, el foco va al título: el lector de pantalla anuncia dónde está.
+  // El scroll lo hace el contenedor (con margen para la cabecera fija), para que cada paso
+  // empiece arriba con su progreso a la vista y la cabecera no tape nada.
+  const contenedor = useRef<HTMLDivElement>(null);
+  const primerPaso = useRef(true);
   useEffect(() => {
-    titulo.current?.focus();
+    titulo.current?.focus({ preventScroll: true });
+    if (primerPaso.current) {
+      primerPaso.current = false;
+      return;
+    }
+    if ((contenedor.current?.getBoundingClientRect().top ?? 0) < 0 || paso === "ok") {
+      contenedor.current?.scrollIntoView({ block: "start" });
+    }
   }, [paso]);
 
   // Abre el paso de horas del día elegido y las carga.
@@ -179,14 +190,17 @@ export function FlujoReserva(props: Props) {
       setFallo({ motivo: r.motivo, alternativas: r.alternativas });
     });
 
-  const pasos: Paso[] = ["inicio", "hora", ...(hora && hora.zonas.length > 1 ? (["zona"] as Paso[]) : []), ...(arrocesPosibles.length ? (["arroz"] as Paso[]) : []), "datos", "ok"];
-  const indice = Math.max(0, pasos.indexOf(paso));
+  // Pasos numerados: la zona va con la hora (solo aparece si a esa hora hay sitio en las
+  // dos), el arroz cuenta si hay arroces en la carta (aunque para pocos comensales se salte)
+  // y la confirmación no cuenta. Así el total no cambia a mitad del flujo.
+  const pasos: Paso[] = ["inicio", "hora", ...(arroces.length ? (["arroz"] as Paso[]) : []), "datos"];
+  const indice = paso === "zona" ? 1 : paso === "ok" ? pasos.length - 1 : Math.max(0, pasos.indexOf(paso));
 
   return (
-    <div className="mx-auto w-full max-w-xl">
+    <div ref={contenedor} className="mx-auto w-full max-w-xl scroll-mt-24">
       {paso !== "grupo" ? (
         <div className="mb-6">
-          <p className="text-sm font-medium text-niebla">{t("paso", { actual: indice + 1, total: pasos.length })}</p>
+          <p className={`text-sm font-medium text-niebla ${paso === "ok" ? "invisible" : ""}`}>{t("paso", { actual: indice + 1, total: pasos.length })}</p>
           <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-arroz-2" aria-hidden>
             <div className="h-full rounded-full bg-azafran transition-[width] duration-500" style={{ width: `${((indice + 1) / pasos.length) * 100}%` }} />
           </div>
