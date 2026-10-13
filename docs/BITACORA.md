@@ -25,6 +25,7 @@ cliente y la sala.
 | P8 | Cerrar en `docs/DUDAS.md` las decisiones «a confirmar» que no dependen del restaurante | Propietario | hecho |
 | P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
 | P10 | Etiqueta «Paso a cocina» del mapa cortada y casi invisible (elemento estrecho en la pared) | Sala | hecho (#29) |
+| P11 | Editor del mapa en tableta vertical: el lienzo desborda a lo ancho y corta el zoom y la ayuda | Encargado | hecho (#30) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -443,3 +444,12 @@ borrar desde la pestaña Branches.
   suelo claro y cortada por el borde del lienzo.
 - Ahora los elementos estrechos y altos llevan la etiqueta a lo largo, dentro del propio
   elemento. Los demás, igual que antes.
+
+### 13/10 · P11: editor del mapa en tableta vertical (rama `fix/editor-mapa-ancho`)
+- Visto en la galería a 768 px: el lienzo del editor medía 824 px y cortaba los botones
+  de zoom y el texto de ayuda. Debajo de `lg` la rejilla tenía una columna implícita
+  `auto`. El lienzo (800 px al arrancar) la ensanchaba y el observador de tamaño daba
+  por buena esa anchura.
+- Arreglo: `grid-cols-1` (columna `minmax(0, 1fr)`). Prueba nueva en Playwright a
+  768 × 1024: falla sin el arreglo (824 > 768) y pasa con él. Las pruebas de tableta van
+  en horizontal (más ancho que `lg`), por eso no lo veían.
