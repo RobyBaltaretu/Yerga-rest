@@ -519,3 +519,10 @@ borrar desde la pestaña Branches.
 - Accesibilidad: el gris terciario y el azafrán se oscurecieron hasta AA tras la
   auditoría con axe. Pruebas de la portada reescritas (control de personas y modo
   oscuro, comprobando que el panel no cambia).
+
+### 13/10 · Galería con el rediseño (rama `docs/galeria-rediseno`)
+- Galería de `docs/vista-previa/` regenerada sobre `main` tras el #35, con la semilla
+  recién cargada: 201 capturas de la web nueva (tres idiomas, reserva paso a paso) y del
+  panel, que no cambia.
+- El #35 pasó la CI al segundo intento. El primero falló porque axe medía el botón fijo
+  móvil a media aparición (opacidad); ahora no se anima en la primera pintura.
