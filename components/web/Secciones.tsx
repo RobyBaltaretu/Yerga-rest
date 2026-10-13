@@ -208,7 +208,7 @@ export async function SeccionOpiniones({ resenas }: { resenas: { id: string; aut
           {resenas.map((r) => (
             <li key={r.id} className="flex flex-col border-t border-linea pt-6">
               {r.puntuacion ? (
-                <p className="flex gap-0.5 text-ocre" role="img" aria-label={`${r.puntuacion}/5`}>
+                <p className="flex gap-0.5 text-cobre" role="img" aria-label={`${r.puntuacion}/5`}>
                   {Array.from({ length: r.puntuacion }, (_, i) => (
                     <Star key={i} className="size-3.5 fill-current" strokeWidth={0} aria-hidden />
                   ))}
@@ -325,7 +325,7 @@ export async function SeccionLlegar({
 export async function SeccionReservar() {
   const t = await getTranslations("web");
   return (
-    <section aria-labelledby="t-cierre" className="bg-cobre px-4 py-24 text-center text-invertido sm:px-6 sm:py-28">
+    <section aria-labelledby="t-cierre" className="banda-cobre bg-cobre px-4 py-24 text-center text-invertido sm:px-6 sm:py-28">
       <div className="mx-auto flex max-w-3xl flex-col items-center">
         <Monograma className="size-20 text-invertido/90" />
         <h2 id="t-cierre" className="mt-6 text-[clamp(2.2rem,5vw,3.5rem)] leading-[1.05]">

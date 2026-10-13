@@ -298,6 +298,10 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='56' viewBox='0 0 56 56'%3E %3Crect width='56' height='56' fill='%23f5ebdd'/%3E %3Cpath d='M0 0h14a14 14 0 0 1-14 14zM56 0v14a14 14 0 0 1-14-14zM0 56v-14a14 14 0 0 1 14 14zM56 56h-14a14 14 0 0 1 14-14z' fill='%231f3f99'/%3E %3Cpath d='M0 0h9a9 9 0 0 1-9 9zM56 0v9a9 9 0 0 1-9-9zM0 56v-9a9 9 0 0 1 9 9zM56 56h-9a9 9 0 0 1 9-9z' fill='%23e2a72e'/%3E %3Cpath d='M28 5 51 28 28 51 5 28z' fill='none' stroke='%2366683a' stroke-width='1.4'/%3E %3Cg fill='%231f3f99'%3E%3Cellipse cx='28' cy='17' rx='5' ry='9'/%3E%3Cellipse cx='28' cy='39' rx='5' ry='9'/%3E%3Cellipse cx='17' cy='28' rx='9' ry='5'/%3E%3Cellipse cx='39' cy='28' rx='9' ry='5'/%3E%3C/g%3E %3Cg fill='%236f8fd6' transform='rotate%2845 28 28%29'%3E%3Cellipse cx='28' cy='19' rx='2.6' ry='5'/%3E%3Cellipse cx='28' cy='37' rx='2.6' ry='5'/%3E%3Cellipse cx='19' cy='28' rx='5' ry='2.6'/%3E%3Cellipse cx='37' cy='28' rx='5' ry='2.6'/%3E%3C/g%3E %3Ccircle cx='28' cy='28' r='4.5' fill='%23e2a72e'/%3E%3Ccircle cx='28' cy='28' r='1.8' fill='%231f3f99'/%3E %3Cpath d='M.5.5h55v55H.5z' fill='none' stroke='%23d8c8ae' stroke-width='1'/%3E %3C/svg%3E");
   background-size: 64px 64px;
   background-color: var(--w-fondo);
-  box-shadow: var(--w-sombra-2), inset 0 0 0 6px #1f3f99, inset 0 0 0 9px #e2a72e;
+  box-shadow: var(--w-sombra-2), inset 0 0 0 6px var(--w-cobalto), inset 0 0 0 9px var(--w-ocre);
 }
 
+/* Sobre la banda de cobre el foco va en cal, para que se vea. */
+.web .banda-cobre :focus-visible:not([tabindex="-1"]) {
+  outline-color: var(--w-invertido);
+}

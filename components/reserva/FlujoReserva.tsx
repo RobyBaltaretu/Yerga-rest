@@ -477,7 +477,7 @@ export function FlujoReserva(props: Props) {
             <div className="mt-6 flex flex-col items-center gap-3">
               <a
                 href={`/api/reserva/ics?codigo=${encodeURIComponent(resultado.codigo)}`}
-                className="inline-flex min-h-11 items-center justify-center rounded-full bg-texto px-5 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]"
+                className="inline-flex min-h-11 items-center justify-center rounded-full bg-cobre px-5 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-cobre-oscuro active:scale-[0.98]"
               >
                 {t("ok.calendario")}
               </a>

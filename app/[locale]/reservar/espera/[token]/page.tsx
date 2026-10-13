@@ -34,14 +34,14 @@ export default async function OfertaEsperaPage({ params }: PageProps<"/[locale]/
             <>
               <p className="text-xl font-semibold tracking-[-0.02em]">{t("aceptada")}</p>
               {o.codigo ? (
-                <Link href={`/reservar/gestion/${o.codigo}`} className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-texto px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]">{t("verReserva")}</Link>
+                <Link href={`/reservar/gestion/${o.codigo}`} className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-cobre px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-cobre-oscuro active:scale-[0.98]">{t("verReserva")}</Link>
               ) : null}
             </>
           ) : o.estado === "caducada" ? (
             <>
               <p className="text-xl font-semibold tracking-[-0.02em]">{t("caducada")}</p>
               <p className="mt-2 text-niebla">{t("caducadaTexto")}</p>
-              <Link href="/reservar" className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-texto px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-texto/88 active:scale-[0.98]">{t("buscar")}</Link>
+              <Link href="/reservar" className="mt-4 inline-flex min-h-12 items-center justify-center rounded-full bg-cobre px-6 font-medium text-invertido shadow-tarjeta transition-colors hover:bg-cobre-oscuro active:scale-[0.98]">{t("buscar")}</Link>
             </>
           ) : (
             <>
