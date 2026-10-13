@@ -1,0 +1,96 @@
+name: Vista previa (GitHub Pages)
+
+# Publica en GitHub Pages una vista navegable estática de la web y del panel (con los
+# datos de ejemplo de supabase/seed.sql) y la galería de capturas de docs/vista-previa.
+# Gratis y sin secretos: usa Supabase local, igual que la CI.
+#
+# Requisito único (lo hace el propietario): Settings → Pages → Build and deployment →
+# Source: «GitHub Actions». Mientras no esté activado, el flujo genera el sitio pero no
+# lo publica (avisa y termina en verde).
+
+on:
+  push:
+    branches: [main]
+  # En los PR que tocan la vista solo se genera (comprueba que funciona), no se publica.
+  pull_request:
+    paths:
+      - scripts/vista-previa/**
+      - .github/workflows/vista-previa.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: vista-previa-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  generar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: Supabase local con los datos de ejemplo
+        run: |
+          pnpm supabase start -x studio,edge-runtime,logflare,vector,imgproxy
+          pnpm supabase status -o env \
+            --override-name api.url=NEXT_PUBLIC_SUPABASE_URL \
+            --override-name auth.anon_key=NEXT_PUBLIC_SUPABASE_ANON_KEY \
+            --override-name auth.service_role_key=SUPABASE_SERVICE_ROLE_KEY \
+            --override-name db.url=DATABASE_URL \
+            | grep -E '^(NEXT_PUBLIC_SUPABASE_URL|NEXT_PUBLIC_SUPABASE_ANON_KEY|SUPABASE_SERVICE_ROLE_KEY|DATABASE_URL)=' \
+            | sed 's/"//g' >> .env.local
+          echo "NEXT_PUBLIC_SITE_URL=http://localhost:3100" >> .env.local
+
+      - name: Build y servidor
+        run: |
+          pnpm build
+          nohup pnpm start --port 3100 > servidor.log 2>&1 &
+          for i in $(seq 1 60); do curl -sf http://localhost:3100/es > /dev/null && break; sleep 2; done
+
+      - name: Páginas estáticas y galería
+        run: |
+          pnpm exec playwright install --with-deps chromium
+          set -a; . ./.env.local; set +a
+          VISTA_BASE="/${GITHUB_REPOSITORY#*/}" node scripts/vista-previa/estatica.mjs _site
+          if [ -f docs/vista-previa/index.html ]; then
+            mkdir -p _site/galeria
+            cp -r docs/vista-previa/. _site/galeria/
+          fi
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  publicar:
+    needs: generar
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.despliegue.outputs.page_url }}
+    steps:
+      - name: ¿GitHub Pages activado?
+        id: pages
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if gh api "repos/${GITHUB_REPOSITORY}/pages" > /dev/null 2>&1; then
+            echo "activo=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "activo=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::GitHub Pages no está activado. Settings → Pages → Source: «GitHub Actions» y vuelve a lanzar este flujo."
+          fi
+      - if: steps.pages.outputs.activo == 'true'
+        id: despliegue
+        uses: actions/deploy-pages@v4
