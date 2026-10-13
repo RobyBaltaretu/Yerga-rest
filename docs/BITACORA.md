@@ -545,3 +545,7 @@ borrar desde la pestaña Branches.
   hoja de cada arroz.
 - Prueba del modo oscuro cambiada: ahora comprueba que la web sigue en claro con el
   sistema en oscuro y que el panel no cambia.
+
+### 13/10 · Galería con la web valenciana (rama `docs/galeria-valenciana`)
+- Galería de `docs/vista-previa/` regenerada sobre `main` tras el #37: 201 capturas con la
+  paleta del azulejo, la cenefa, la historia de la casa y el azulejo de la puerta.
