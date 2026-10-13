@@ -9,6 +9,16 @@ test.describe("Mapa de mesas: edición (tableta)", () => {
     test.skip(soloEn(testInfo, "tableta"), "El editor se prueba en tableta");
   });
 
+  test("en tableta vertical el lienzo cabe en la pantalla (sin desbordar a lo ancho)", async ({ page }) => {
+    await page.setViewportSize({ width: 768, height: 1024 });
+    await entrarComo(page, "encargado", `/panel/mapa/${TERRAZA_DIARIO}`);
+    const lienzo = page.getByTestId("lienzo-editor");
+    await expect(lienzo.locator("canvas").first()).toBeVisible();
+    const caja = await lienzo.boundingBox();
+    expect(caja!.x + caja!.width).toBeLessThanOrEqual(768);
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(768);
+  });
+
   test("se crea y publica una distribución nueva", async ({ page }) => {
     await sql("delete from distribucion where nombre = 'E2E Verano'");
     try {

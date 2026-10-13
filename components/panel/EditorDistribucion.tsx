@@ -320,7 +320,7 @@ export function EditorDistribucion({
         <label className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold"><input type="checkbox" checked={ajustar} onChange={(e) => setAjustar(e.target.checked)} className="size-5 accent-pimenton" /> Ajustar a rejilla y mesas</label>
       </div>
 
-      <div className="mt-4 grid gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
+      <div className="mt-4 grid grid-cols-1 gap-6 lg:grid-cols-[minmax(0,1fr)_300px]">
         <LienzoEditor doc={doc} seleccion={seleccion} combinacionResaltada={combiResaltada} ajustar={ajustar} onSeleccionar={onSeleccionar} onCambiar={onCambiarPieza} />
 
         <aside className="space-y-5" aria-label="Propiedades">
