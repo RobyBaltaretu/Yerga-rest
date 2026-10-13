@@ -1,14 +1,14 @@
 import { getTranslations } from "next-intl/server";
 import Image from "next/image";
 import { ArrowRight, Clock, MapPin, MessageCircle, Phone, Star } from "lucide-react";
-import { Link } from "@/i18n/navigation";
 import { tr } from "@/lib/i18n";
 import { formatPrecio } from "@/lib/format";
 import type { Multilingue, Plato } from "@/lib/datos-publicos";
 import { CarruselArroces } from "./CarruselArroces";
 import { Termino } from "./Termino";
 import { LogoCompletoWeb } from "./Logo";
-import { ConBrillo, EnlaceBoton } from "./movimiento";
+import { Adorno, Monograma } from "@/components/marca/Marca";
+import { EnlaceBoton } from "./movimiento";
 
 type Turno = { nombre: string; dia_semana: number; inicio: string; fin: string; ultima_hora: string };
 
@@ -16,10 +16,11 @@ type Turno = { nombre: string; dia_semana: number; inicio: string; fin: string; 
 function Titulo({ id, titulo, intro, centrado = false }: { id: string; titulo: string; intro?: string; centrado?: boolean }) {
   return (
     <div className={centrado ? "mx-auto max-w-2xl text-center" : "max-w-2xl"}>
-      <h2 id={id} className="text-[clamp(2rem,4vw,2.75rem)] font-semibold leading-[1.05] tracking-[-0.03em]">
+      <h2 id={id} className="text-[clamp(2.1rem,4.2vw,3rem)] leading-[1.08] text-texto">
         {titulo}
       </h2>
-      {intro ? <p className="mt-4 text-lg leading-relaxed text-suave">{intro}</p> : null}
+      <Adorno className={`mt-4 ${centrado ? "justify-center" : ""}`} />
+      {intro ? <p className="mt-5 text-lg leading-relaxed text-suave">{intro}</p> : null}
     </div>
   );
 }
@@ -124,28 +125,46 @@ export async function SeccionProducto({ texto }: { texto: string }) {
 
 export async function SeccionCasa({ historia, equipo }: { historia: string; equipo: string }) {
   const [t, tm] = await Promise.all([getTranslations("web.casa"), getTranslations("web.marca")]);
+  const elementos = [
+    { icono: "/marca/icono-arroz.webp", ancho: 120, alto: 114, texto: t("arroz") },
+    { icono: "/marca/icono-paella.webp", ancho: 164, alto: 78, texto: t("paella") },
+    { icono: "/marca/icono-casa.webp", ancho: 120, alto: 108, texto: t("casaElemento") },
+    { icono: "/marca/icono-alma.webp", ancho: 80, alto: 70, texto: t("almaElemento") },
+  ];
   return (
-    <section id="casa" aria-labelledby="t-casa" className="scroll-mt-24 bg-sutil py-24 sm:py-36">
-      <div className={`${contenedor} grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20`}>
-        <figure className="order-last lg:order-first">
-          <div className="overflow-hidden rounded-3xl bg-superficie p-1.5 shadow-elevada">
+    <section id="casa" aria-labelledby="t-casa" className="papel scroll-mt-24 overflow-hidden py-24 sm:py-32">
+      <div className={`${contenedor} grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-20`}>
+        <figure className="mx-auto w-full max-w-xl">
+          <div className="foto-antigua">
             {/* Fotografía provisional de la identidad: sustituir por una foto real de la familia. */}
-            <Image src="/marca/abuela.webp" alt={t("foto")} width={550} height={302} sizes="(min-width: 1024px) 540px, 92vw" className="h-auto w-full rounded-[22px]" />
+            <Image src="/marca/abuela.webp" alt={t("foto")} width={550} height={302} sizes="(min-width: 1024px) 540px, 92vw" className="h-auto w-full" />
           </div>
-          <figcaption className="mt-3 px-1 text-[13px] text-tenue">{t("foto")}</figcaption>
+          <figcaption className="mt-5 text-center text-[13px] text-tenue">{t("foto")}</figcaption>
         </figure>
         <div>
-          <LogoCompletoWeb className="h-auto w-36" sizes="144px" />
-          <h2 id="t-casa" className="mt-8 text-[clamp(1.75rem,3.4vw,2.5rem)] font-semibold leading-[1.1] tracking-[-0.03em]">
+          <LogoCompletoWeb className="h-auto w-40" sizes="160px" />
+          <h2 id="t-casa" className="mt-8 text-[clamp(1.9rem,3.6vw,2.6rem)] uppercase leading-[1.15] tracking-[0.04em]">
             {t("titulo")}
           </h2>
-          <p className="mt-6 text-lg leading-relaxed text-suave">{historia}</p>
-          <p className="mt-4 text-lg leading-relaxed">{t("alma")}</p>
+          <Adorno className="mt-5" />
+          <p className="mt-6 text-lg leading-relaxed">{historia}</p>
+          <p className="mt-4 text-lg font-medium leading-relaxed">{t("alma")}</p>
           {equipo ? <p className="mt-4 leading-relaxed text-suave">{equipo}</p> : null}
-          <p className="mt-8 text-[15px] font-medium text-suave">
-            {tm("lema")} · {tm("bienvenidos")}
-          </p>
+          <p className="mt-8 font-firma text-[2.6rem] leading-none text-cobre sm:text-5xl">{tm("bienvenidos")}</p>
         </div>
+      </div>
+
+      <div className={`${contenedor} mt-24`}>
+        <h3 className="text-center font-romana text-2xl">{t("elementos")}</h3>
+        <Adorno className="mt-4 justify-center" />
+        <ul className="mt-12 grid grid-cols-2 gap-y-12 md:grid-cols-4 md:divide-x md:divide-linea">
+          {elementos.map((e) => (
+            <li key={e.icono} className="flex flex-col items-center px-5 text-center">
+              <Image src={e.icono} alt="" width={e.ancho} height={e.alto} className="h-16 w-auto" />
+              <p className="mt-5 max-w-56 text-[15px] leading-relaxed text-suave">{e.texto}</p>
+            </li>
+          ))}
+        </ul>
       </div>
     </section>
   );
@@ -189,7 +208,7 @@ export async function SeccionOpiniones({ resenas }: { resenas: { id: string; aut
           {resenas.map((r) => (
             <li key={r.id} className="flex flex-col border-t border-linea pt-6">
               {r.puntuacion ? (
-                <p className="flex gap-0.5 text-texto" role="img" aria-label={`${r.puntuacion}/5`}>
+                <p className="flex gap-0.5 text-ocre" role="img" aria-label={`${r.puntuacion}/5`}>
                   {Array.from({ length: r.puntuacion }, (_, i) => (
                     <Star key={i} className="size-3.5 fill-current" strokeWidth={0} aria-hidden />
                   ))}
@@ -268,30 +287,36 @@ export async function SeccionLlegar({
               </dd>
             </div>
           </dl>
+          <div className="mt-10 rounded-3xl bg-superficie p-6 shadow-tarjeta sm:p-8">
+            <h3 className="flex items-center gap-2 font-romana text-2xl">
+              <Clock className="size-5 text-suave" strokeWidth={1.75} aria-hidden />
+              {t("horario")}
+            </h3>
+            <table className="mt-6 w-full text-left text-[15px]">
+              <tbody className="divide-y divide-linea">
+                {orden.map((d) => {
+                  const del = turnos.filter((x) => x.dia_semana === d);
+                  return (
+                    <tr key={d}>
+                      <th scope="row" className="py-3 pr-4 font-medium">
+                        {dias[d]}
+                      </th>
+                      <td className="py-3 text-right tabular-nums text-suave">
+                        {del.length ? del.map((x) => `${t(x.nombre as "comida")} ${x.inicio.slice(0, 5)}–${x.fin.slice(0, 5)}`).join(" · ") : <span className="text-tenue">{t("cerrado")}</span>}
+                      </td>
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
         </div>
-        <div className="rounded-3xl bg-superficie p-6 shadow-tarjeta sm:p-8">
-          <h3 className="flex items-center gap-2 text-xl font-semibold tracking-[-0.02em]">
-            <Clock className="size-5 text-suave" strokeWidth={1.75} aria-hidden />
-            {t("horario")}
-          </h3>
-          <table className="mt-6 w-full text-left text-[15px]">
-            <tbody className="divide-y divide-linea">
-              {orden.map((d) => {
-                const del = turnos.filter((x) => x.dia_semana === d);
-                return (
-                  <tr key={d}>
-                    <th scope="row" className="py-3 pr-4 font-medium">
-                      {dias[d]}
-                    </th>
-                    <td className="py-3 text-right tabular-nums text-suave">
-                      {del.length ? del.map((x) => `${t(x.nombre as "comida")} ${x.inicio.slice(0, 5)}–${x.fin.slice(0, 5)}`).join(" · ") : <span className="text-tenue">{t("cerrado")}</span>}
-                    </td>
-                  </tr>
-                );
-              })}
-            </tbody>
-          </table>
-        </div>
+        <figure className="lg:pt-16">
+          <div className="overflow-hidden rounded-2xl bg-superficie p-1.5 shadow-elevada ring-1 ring-cobalto/25">
+            <Image src="/marca/azulejo.webp" alt={t("azulejoAlt")} width={1200} height={647} sizes="(min-width: 1024px) 560px, 92vw" className="h-auto w-full rounded-xl" />
+          </div>
+          <figcaption className="mt-4 text-center font-firma text-4xl text-cobalto">{t("azulejo")}</figcaption>
+        </figure>
       </div>
     </section>
   );
@@ -300,24 +325,19 @@ export async function SeccionLlegar({
 export async function SeccionReservar() {
   const t = await getTranslations("web");
   return (
-    <section aria-labelledby="t-cierre" className="px-4 pb-28 pt-8 sm:px-6 sm:pb-32">
-      <ConBrillo as="div" className="mx-auto max-w-6xl overflow-hidden rounded-[32px] bg-superficie shadow-elevada">
-        <div className="relative px-6 py-16 text-center sm:py-24">
-          <h2 id="t-cierre" className="relative text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
-            {t("cta.titulo")}
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-[42ch] text-lg text-suave">{t("cta.texto")}</p>
-          <EnlaceBoton href="/reservar" tamano="lg" className="relative mt-10">
-            {t("nav.reservar")}
-            <ArrowRight className="size-4" strokeWidth={2} aria-hidden />
-          </EnlaceBoton>
-          <p className="relative mt-8 text-[13px] text-tenue">
-            <Link href="/carta" className="enlace">
-              {t("carta.verCompleta")}
-            </Link>
-          </p>
-        </div>
-      </ConBrillo>
+    <section aria-labelledby="t-cierre" className="bg-cobre px-4 py-24 text-center text-invertido sm:px-6 sm:py-28">
+      <div className="mx-auto flex max-w-3xl flex-col items-center">
+        <Monograma className="size-20 text-invertido/90" />
+        <h2 id="t-cierre" className="mt-6 text-[clamp(2.2rem,5vw,3.5rem)] leading-[1.05]">
+          {t("cta.titulo")}
+        </h2>
+        <p className="mt-4 max-w-[42ch] text-lg text-invertido/90">{t("cta.texto")}</p>
+        <EnlaceBoton href="/reservar" tamano="lg" variante="secundario" className="mt-10 text-cobre-oscuro!">
+          {t("nav.reservar")}
+          <ArrowRight className="size-4" strokeWidth={2} aria-hidden />
+        </EnlaceBoton>
+        <p className="mt-8 font-firma text-4xl text-invertido">{t("marca.bienvenidos")}</p>
+      </div>
     </section>
   );
 }

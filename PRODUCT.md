@@ -44,9 +44,12 @@ disponibilidad real al minuto, en tres idiomas.
 ## Brand Commitments
 
 - Nombre: Arrocería Yerga. Lema: «Arroces con alma».
-- Se conserva el **logotipo** (emblema con espiga, casa y paella, y la palabra YERGA).
-- Decidido por el propietario el 13/10: el resto de la identidad anterior (azulejo,
-  fondos de color, tipografías decorativas) sale en el rediseño de la web pública.
+- Se conservan el **logotipo** (emblema con espiga, casa y paella, y la palabra YERGA con
+  su letra romana), el **azulejo** de la puerta («Yerga · Arrocería valenciana», cobalto,
+  ocre y verde sobre cal), su cenefa y la **historia de la casa** (la abuela Yerga, «donde
+  caben dos, caben tres», «Bienvenidos a su casa»).
+- Decidido por el propietario el 13/10: aire tradicional y valenciano; la web va siempre
+  en claro (no cambia a negro con el modo oscuro del sistema).
 
 ## Evidence on Hand
 

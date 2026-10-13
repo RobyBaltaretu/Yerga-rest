@@ -29,6 +29,7 @@ cliente y la sala.
 | P12 | SQL de la vista previa de Vercel desfasado (le faltaban 3 migraciones) y guía que apuntaba a la rama `fase-1` | Propietario | hecho (#32) |
 | P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#34) |
 | P14 | Rediseño de la web pública y de la reserva (estética Emil Kowalski, Motion, modo claro y oscuro) | Cliente | hecho (#35) |
+| P15 | Web pública con esencia valenciana: solo en claro, azulejo e historia de Yerga | Cliente | hecho (#37) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -526,3 +527,21 @@ borrar desde la pestaña Branches.
   panel, que no cambia.
 - El #35 pasó la CI al segundo intento. El primero falló porque axe medía el botón fijo
   móvil a media aparición (opacidad); ahora no se anima en la primera pintura.
+
+### 13/10 · P15: vuelta a la esencia de Yerga (rama `feat/web-valenciana`)
+- Petición del propietario tras ver el #35: quitar el cambio de negro a blanco (modo
+  oscuro), darle un aire más tradicional y valenciano y mantener el azulejo y la historia.
+- **Decisión:** la web va siempre en claro. Paleta sacada del azulejo de la puerta y del
+  logotipo: cal (#faf5ec), tierra (#2a1b12), cobre (#9a4322) para la acción principal,
+  cobalto (#1f3f99) para enlaces, foco y el punto de disponibilidad, ocre y oliva en
+  detalles. Todos los textos cumplen AA.
+- **Decisión:** títulos con Marcellus (la letra romana del logotipo) y el adorno
+  línea–corazón–línea; cuerpo en Geist; la firma «Bienvenidos a su casa» en Allura.
+- Vuelven la cenefa de azulejo (bajo la portada y sobre el pie), la foto del azulejo en
+  «Cómo llegar» («Busca el azulejo de la puerta»), la historia completa de la casa con la
+  foto enmarcada, los cuatro elementos y la firma, y el cierre en banda de cobre con el
+  monograma. La paella de la portada se sirve sobre una mesa de azulejos.
+- Se mantienen la tarjeta de reserva de la portada, los muelles, las sombras suaves y la
+  hoja de cada arroz.
+- Prueba del modo oscuro cambiada: ahora comprueba que la web sigue en claro con el
+  sistema en oscuro y que el panel no cambia.

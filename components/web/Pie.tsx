@@ -2,17 +2,20 @@ import { getTranslations } from "next-intl/server";
 import NextLink from "next/link";
 import { Link } from "@/i18n/navigation";
 import { getConfig } from "@/lib/datos-publicos";
-import { LogoWeb } from "./Logo";
+import { LogoCompletoWeb } from "./Logo";
+import { CenefaAzulejo } from "@/components/marca/Marca";
 
 export async function Pie() {
   const [t, c] = await Promise.all([getTranslations("web"), getConfig()]);
   const enlace = "text-suave transition-colors hover:text-texto";
   return (
-    <footer className="border-t border-linea pb-32 pt-14 text-[14px] sm:pb-14">
+    <footer className="text-[14px]">
+      <CenefaAzulejo />
+      <div className="papel pb-32 pt-14 sm:pb-14">
       <div className="mx-auto grid max-w-6xl gap-10 px-4 sm:grid-cols-[1.4fr_1fr_1fr] sm:px-6">
         <div>
-          <LogoWeb />
-          <p className="mt-4 text-suave">{t("marca.lema")}</p>
+          <LogoCompletoWeb className="h-auto w-44" sizes="176px" />
+          <p className="mt-4 font-firma text-3xl text-cobre">{t("marca.bienvenidos")}</p>
           <p className="mt-4 text-suave">
             {c.direccion}, {c.codigo_postal} {c.localidad}
           </p>
@@ -35,6 +38,7 @@ export async function Pie() {
         </div>
       </div>
       <p className="mx-auto mt-12 max-w-6xl px-4 text-[13px] text-tenue sm:px-6">{t("pie.derechos", { anio: 2026, nombre: c.nombre_local })}</p>
+      </div>
     </footer>
   );
 }

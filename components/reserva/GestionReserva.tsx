@@ -208,7 +208,7 @@ function Cambiar({
   return (
     <div className="space-y-6 rounded-3xl bg-superficie p-5 shadow-tarjeta">
       <div>
-        <h2 className="text-xl font-semibold tracking-[-0.02em]">{t("comensales.titulo")}</h2>
+        <h2 className="text-xl">{t("comensales.titulo")}</h2>
         <div className="mt-3 grid grid-cols-5 gap-2">
           {Array.from({ length: maxOnline }, (_, i) => i + 1).map((v) => (
             <button key={v} type="button" onClick={() => {
@@ -226,7 +226,7 @@ function Cambiar({
       }} />
       {fecha ? (
         <div>
-          <h2 className="text-xl font-semibold tracking-[-0.02em]">{t("horas.titulo")}</h2>
+          <h2 className="text-xl">{t("horas.titulo")}</h2>
           {!horas ? (
             <p className="mt-2 animate-pulse text-niebla">{t("calendario.cargando")}</p>
           ) : horas.filter((h) => h.disponible).length === 0 ? (

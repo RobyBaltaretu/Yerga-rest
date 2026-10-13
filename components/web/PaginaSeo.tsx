@@ -13,7 +13,7 @@ export async function PaginaSeo({ locale, titulo, descripcion, cuerpo, slugPaell
       <JsonLd datos={jsonLdRestaurante(config, turnos, locale)} />
       <article className="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[minmax(0,1.3fr)_minmax(0,1fr)] lg:gap-20">
         <div>
-          <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">{titulo}</h1>
+          <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.02]">{titulo}</h1>
           <p className="mt-5 text-xl leading-relaxed text-suave">{descripcion}</p>
           <div className="mt-8 space-y-5 text-[17px] leading-relaxed">
             {cuerpo.map((p, i) => (

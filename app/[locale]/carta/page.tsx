@@ -44,7 +44,7 @@ export default async function CartaPage({ params }: PageProps<"/[locale]/carta">
           if (!lista.length) return null;
           return (
             <section key={cat} aria-labelledby={`c-${cat}`} className="mt-16 scroll-mt-28">
-              <h2 id={`c-${cat}`} className="text-2xl font-semibold tracking-[-0.025em]">{nombre}</h2>
+              <h2 id={`c-${cat}`} className="text-2xl">{nombre}</h2>
               <ul className="mt-4 divide-y divide-linea border-y border-linea">
                 {lista.map((p) => (
                   <li key={p.id} className="py-5">

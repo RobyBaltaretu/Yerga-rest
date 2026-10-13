@@ -26,7 +26,7 @@ export default async function OfertaEsperaPage({ params }: PageProps<"/[locale]/
   return (
     <main id="contenido" className="px-4 pb-24 pt-28 sm:px-6 sm:pt-36">
       <div className="mx-auto max-w-xl">
-        <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.035em]">{t("titulo")}</h1>
+        <h1 className="text-[clamp(2.25rem,5vw,3.5rem)] leading-[1.02]">{t("titulo")}</h1>
         <div className="mt-6 rounded-3xl bg-superficie p-6 shadow-tarjeta">
           {!o ? (
             <p>{t("noExiste")}</p>

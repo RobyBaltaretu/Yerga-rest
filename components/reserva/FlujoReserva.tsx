@@ -229,7 +229,7 @@ export function FlujoReserva(props: Props) {
       <motion.div key={paso} initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }}>
         {paso === "inicio" ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] leading-tight outline-none">
               {t("comensales.titulo")}
             </h2>
             <div className="mt-4 grid grid-cols-5 gap-2" role="group" aria-label={t("comensales.titulo")}>
@@ -275,7 +275,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "hora" && n && fecha ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] leading-tight outline-none">
               {t("horas.titulo")}
             </h2>
             {fallo ? <Fallo fallo={fallo} telefono={telefono} onAlternativa={(a) => {
@@ -345,7 +345,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "zona" && hora ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] leading-tight outline-none">
               {t("zona.titulo")}
             </h2>
             <p className="mt-2 text-niebla">{t("zona.ayuda")}</p>
@@ -373,7 +373,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "arroz" && n ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] leading-tight outline-none">
               {t("arroz.titulo")}
             </h2>
             <p className="mt-2 text-niebla">{t("arroz.ayuda")}</p>
@@ -398,7 +398,7 @@ export function FlujoReserva(props: Props) {
 
         {paso === "datos" && hora && n ? (
           <section aria-labelledby={`${uid}-t`}>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="text-[1.75rem] leading-tight outline-none">
               {t("datos.titulo")}
             </h2>
             {fallo ? <Fallo fallo={fallo} telefono={telefono} onAlternativa={elegirAlternativa} /> : null}
@@ -466,7 +466,7 @@ export function FlujoReserva(props: Props) {
             <motion.div initial={{ scale: 0.6, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} className="mx-auto grid size-14 place-items-center rounded-full bg-huerta-claro text-exito" aria-hidden>
               <Check className="size-6" strokeWidth={2.25} />
             </motion.div>
-            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="mt-4 text-[2rem] font-semibold leading-tight tracking-[-0.03em] outline-none">
+            <h2 id={`${uid}-t`} ref={titulo} tabIndex={-1} className="mt-4 text-[2rem] leading-tight outline-none">
               {t("ok.titulo")}
             </h2>
             <p className="mt-3 text-lg">
