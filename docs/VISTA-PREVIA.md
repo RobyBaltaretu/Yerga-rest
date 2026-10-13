@@ -1,3 +1,46 @@
+# Vistas previas
+
+Hay tres formas de ver la web y el panel antes del despliegue de producción:
+
+| Qué | Dónde | Funciona | Coste |
+|---|---|---|---|
+| Galería de capturas (móvil, tableta y escritorio; reserva paso a paso) | [`docs/vista-previa/`](vista-previa/index.html) y, publicada, `https://robybaltaretu.github.io/Yerga-rest/galeria/` | Solo imágenes | 0 € |
+| Vista navegable estática | `https://robybaltaretu.github.io/Yerga-rest/` (GitHub Pages) | Se navega entre páginas; nada más | 0 € |
+| Vista previa en Vercel con Supabase | Proyecto de Vercel `yerga-rest` (abajo) | Completa, con los datos de ejemplo | 0 € (plan gratuito) |
+
+## Galería de capturas
+
+Con Supabase local y la app en marcha (`pnpm build && pnpm start --port 3100`):
+
+```bash
+node scripts/vista-previa/capturas.mjs     # capturas en docs/vista-previa/local/
+node scripts/vista-previa/galeria.mjs      # docs/vista-previa/index.html
+```
+
+Contra producción, cuando responda (solo web pública y acceso al panel; no crea reservas ni
+inicia sesión):
+
+```bash
+CAPTURAS_URL=https://arroceria-yerga.roberto-baltaretu.workers.dev node scripts/vista-previa/capturas.mjs
+node scripts/vista-previa/galeria.mjs
+```
+
+## Vista navegable en GitHub Pages
+
+El flujo `.github/workflows/vista-previa.yml` se ejecuta en cada cambio de `main`:
+- monta Supabase local con los datos de ejemplo;
+- compila la app y guarda el HTML ya pintado de cada página, sin scripts
+  (`scripts/vista-previa/estatica.mjs`);
+- publica ese HTML junto con la galería.
+
+Se navega por la web en los tres idiomas y por las pantallas del panel; los botones no
+hacen nada. Sustituye a la antigua rama `vista-estatica`, que se quedó en una versión
+anterior del panel.
+
+**Paso único que hace el propietario:** Settings → Pages → Build and deployment →
+Source: **GitHub Actions**. Después, en Actions → «Vista previa (GitHub Pages)» → Run
+workflow. Mientras no esté activado, el flujo termina en verde con un aviso y no publica.
+
 # Vista previa en Vercel con Supabase
 
 La vista previa sirve para revisar la web y el panel con los datos de ejemplo. No es

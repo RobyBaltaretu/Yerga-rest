@@ -56,3 +56,7 @@ cloudflare-env.d.ts
 # supabase
 supabase/.branches
 supabase/.temp
+
+# Vista previa estática generada en local (scripts/vista-previa/estatica.mjs)
+/out-vista/
+/_site/
