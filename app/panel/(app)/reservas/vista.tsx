@@ -4,9 +4,9 @@ import Link from "next/link";
 import { Plus } from "lucide-react";
 import { Cabecera } from "@/components/panel/Cabecera";
 import { aReservaPanel, reservasDelDia, salaDelTurno, turnosDelDia } from "@/lib/panel/datos";
-import { ACTIVAS, hora, type ReservaPanel } from "@/lib/panel/estados";
+import { ACTIVAS, ORIGENES, hora, type ReservaPanel } from "@/lib/panel/estados";
 import { ConDatos, esFecha, useDatos, useParam, type Db } from "@/components/panel/DatosPanel";
-import { fechaLocal, formatFecha, sumarDias } from "@/lib/format";
+import { fechaLarga, fechaLocal, sumarDias } from "@/lib/format";
 import { textoEstado } from "@/components/panel/servicio/TarjetaReserva";
 
 const colorBarra: Record<string, string> = {
@@ -65,7 +65,7 @@ export function VistaReservas() {
     <main className="pb-16">
       <Cabecera
         titulo="Reservas"
-        descripcion={q ? `Resultados para «${q}»` : <span className="capitalize">{formatFecha(`${fecha}T12:00:00Z`, "es")}</span>}
+        descripcion={q ? `Resultados para «${q}»` : fechaLarga(fecha)}
         acciones={
           <Link href={`/panel/reservas/nueva?fecha=${fecha}`} className="inline-flex min-h-11 items-center gap-1 rounded-full bg-pimenton px-4 font-semibold text-white">
             <Plus className="size-4" aria-hidden /> Nueva reserva
@@ -128,7 +128,7 @@ function Lista({ reservas, conFecha }: { reservas: ReservaPanel[]; conFecha: boo
               <td className="py-2 pr-3 tabular-nums">{r.comensales}</td>
               <td className="py-2 pr-3">{r.mesas.map((m) => m.nombre).join("+") || <span className="font-semibold text-pimenton-oscuro">Sin mesa</span>}</td>
               <td className="py-2 pr-3">{textoEstado[r.estado]}{r.sin_confirmar ? " · sin confirmar" : ""}</td>
-              <td className="py-2 pr-3 capitalize">{r.origen === "puerta" ? "sin reserva" : r.origen}</td>
+              <td className="py-2 pr-3">{ORIGENES[r.origen] ?? r.origen}</td>
               <td className="py-2 text-xs">
                 {[r.alergias && `⚕ ${r.alergias}`, r.ocasion, r.arroces.map((a) => `${a.nombre} (${a.raciones})`).join(", "), r.notas].filter(Boolean).join(" · ")}
               </td>

@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Accessibility, Baby, CakeSlice, ChefHat, GripVertical, PhoneCall, ShieldAlert, TriangleAlert } from "lucide-react";
 import type { ReservaPanel } from "@/lib/panel/estados";
-import { hora } from "@/lib/panel/estados";
+import { ORIGENES, hora } from "@/lib/panel/estados";
 
 export const textoEstado: Record<string, string> = {
   pendiente: "Pendiente",
@@ -25,7 +25,7 @@ const colorEstado: Record<string, string> = {
   no_presentada: "bg-brasa text-arroz",
 };
 
-const origenes: Record<string, string> = { web: "Web", telefono: "Teléfono", puerta: "Sin reserva" };
+const origenes = ORIGENES;
 
 type Props = {
   r: ReservaPanel;
