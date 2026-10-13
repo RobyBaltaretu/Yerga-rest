@@ -35,7 +35,7 @@ test.describe("Web pública", () => {
     await expect(page.getByRole("heading", { level: 1 })).toHaveAccessibleName(/\S+ \S+/);
     const casa = page.locator("#casa");
     await expect(casa.getByRole("heading", { level: 3, name: "La abuela Yerga" })).toBeAttached();
-    await casa.evaluate((el) => window.scrollTo(0, el.offsetTop + (el.offsetHeight - window.innerHeight) * 0.5));
+    await casa.evaluate((el: HTMLElement) => window.scrollTo(0, el.offsetTop + (el.offsetHeight - window.innerHeight) * 0.5));
     await expect(casa.locator("[aria-hidden]").getByText("La paella", { exact: true })).toBeVisible();
     await page.emulateMedia({ reducedMotion: "reduce" });
     await page.goto("/es");
