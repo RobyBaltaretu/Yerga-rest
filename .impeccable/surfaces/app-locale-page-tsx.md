@@ -19,7 +19,7 @@ STORY: El visitante entiende en una frase qué es Yerga, ve que hay mesa, elige 
 
 FIRST VIEWPORT: Logotipo y navegación en barra translúcida fina. Titular del panel a 56–88 px, subtítulo en gris. Bajo él, la tarjeta de reserva elevada con un selector de personas en forma de frase («Mesa para − 2 + personas») cuyo número rueda con un spring, el aviso real de disponibilidad y el botón «Ver horas» que abre /reservar?comensales=n. Brillo radial que sigue al puntero sobre la tarjeta. En móvil, la tarjeta ocupa el ancho bajo el titular y el botón fijo inferior se mantiene.
 
-FORM: Brief fijado por el usuario (estética Emil Kowalski, animations.dev, rigor impeccable); sin tirada de dirección. Lista propia: 1) app de reservas con control en frase, 2) carta como documento tipográfico, 3) tablero de horas. seed: none (unavailable)
+FORM: Brief fijado por el usuario (estética Emil Kowalski, animations.dev, rigor impeccable); sin tirada de dirección. Lista propia: 1) app de reservas con control en frase, 2) carta como documento tipográfico, 3) tablero de horas. seed: none (unavailable) — comprobado con `impeccable concept-seed --check-seed none` (salida 0, servicio de tirada inaccesible: modo degradado sin aspirantes)
 
 Motion grammar: springs stiffness 300, damping 30; scale 0.98 al pulsar; entradas cortas de 8 px con opacidad desde estado visible; el número de personas rueda; las tarjetas de arroz se elevan y la paella gira 8° con spring; reduced-motion lo anula.
 

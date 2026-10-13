@@ -169,19 +169,43 @@ export function AvisoDisponibilidad({ locale, variante }: { locale: string; vari
   );
 }
 
-/** Botón fijo abajo en móvil: siempre visible menos en el propio flujo de reserva. */
+/**
+ * Botón fijo abajo en móvil: siempre a mano menos en el propio flujo de reserva. En la
+ * portada aparece cuando la tarjeta de reserva sale de la pantalla, para no repetir la
+ * misma acción dos veces a la vista.
+ */
 export function BotonReservaFijo({ locale }: { locale: string }) {
   const t = useTranslations("web.nav");
   const ruta = usePathname();
+  // Ruta en la que la tarjeta de reserva está a la vista (el botón fijo se oculta solo ahí).
+  const [rutaTapada, setRutaTapada] = useState<string | null>(() => (ruta === "/" ? "/" : null));
+  useEffect(() => {
+    const tarjeta = document.getElementById("tarjeta-reserva");
+    if (!tarjeta) return;
+    const io = new IntersectionObserver(([e]) => setRutaTapada(e.isIntersecting ? ruta : null));
+    io.observe(tarjeta);
+    return () => io.disconnect();
+  }, [ruta]);
+  const tapada = rutaTapada === ruta;
   if (ruta.startsWith("/reservar")) return null;
   return (
-    <div className="fixed inset-x-0 bottom-0 z-40 border-t border-linea bg-fondo/85 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl sm:hidden">
-      <EnlaceBoton href="/reservar" tamano="lg" className="w-full">
-        {t("reservar")}
-      </EnlaceBoton>
-      <div className="mt-2 empty:hidden">
-        <AvisoDisponibilidad locale={locale} variante="fijo" />
-      </div>
-    </div>
+    <AnimatePresence>
+      {!tapada ? (
+        <motion.div
+          key="fijo"
+          initial={{ y: 24, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          exit={{ y: 24, opacity: 0 }}
+          className="fixed inset-x-0 bottom-0 z-40 border-t border-linea bg-fondo/85 px-4 pb-[calc(env(safe-area-inset-bottom)+0.75rem)] pt-3 backdrop-blur-xl sm:hidden"
+        >
+          <EnlaceBoton href="/reservar" tamano="lg" className="w-full">
+            {t("reservar")}
+          </EnlaceBoton>
+          <div className="mt-2 empty:hidden">
+            <AvisoDisponibilidad locale={locale} variante="fijo" />
+          </div>
+        </motion.div>
+      ) : null}
+    </AnimatePresence>
   );
 }

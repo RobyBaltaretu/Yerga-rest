@@ -32,11 +32,16 @@ test.describe("Web pública", () => {
 
   test("botón fijo de reservar en móvil y datos estructurados del restaurante", async ({ page }) => {
     await page.goto("/es");
+    // En la portada aparece cuando la tarjeta de reserva sale de la pantalla.
+    await expect(page.locator(".fixed.bottom-0").getByRole("link", { name: "Reservar mesa" })).toHaveCount(0);
+    await page.locator("#arroces").scrollIntoViewIfNeeded();
     await expect(page.locator(".fixed.bottom-0").getByRole("link", { name: "Reservar mesa" })).toBeVisible();
     const ld = await page.locator('script[type="application/ld+json"]').first().textContent();
     const datos = JSON.parse(ld!);
     expect(datos["@type"]).toBe("Restaurant");
     expect(datos.potentialAction["@type"]).toBe("ReserveAction");
+    await page.goto("/es/carta");
+    await expect(page.locator(".fixed.bottom-0").getByRole("link", { name: "Reservar mesa" })).toBeVisible();
   });
 
   test("la carta muestra precios y alérgenos, y cambia de idioma", async ({ page }) => {

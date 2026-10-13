@@ -65,7 +65,7 @@ export async function SeccionEntrantes({ locale, platos }: { locale: string; pla
   const t = await getTranslations("web");
   const entrantes = platos.filter((p) => p.categoria === "entrante");
   return (
-    <section aria-labelledby="t-entrantes" className="border-t border-linea py-20 sm:py-28">
+    <section aria-labelledby="t-entrantes" className="py-16 sm:py-20">
       <div className={`${contenedor} grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16`}>
         <Titulo id="t-entrantes" titulo={t("entrantes.titulo")} intro={t("entrantes.intro")} />
         <ul className="divide-y divide-linea border-y border-linea">
@@ -100,17 +100,17 @@ export async function SeccionProducto({ texto }: { texto: string }) {
     { que: t("lena"), donde: t("valencia") },
   ];
   return (
-    <section id="producto" aria-labelledby="t-producto" className="scroll-mt-24 border-t border-linea py-20 sm:py-28">
+    <section id="producto" aria-labelledby="t-producto" className="scroll-mt-24 border-t border-linea py-16 sm:py-20">
       <div className={`${contenedor} grid gap-12 lg:grid-cols-2 lg:gap-16`}>
         <div>
           <Titulo id="t-producto" titulo={t("titulo")} />
           <p className="mt-6 max-w-[52ch] text-lg leading-relaxed text-suave">{texto}</p>
         </div>
-        <dl className="grid grid-cols-1 gap-px overflow-hidden rounded-3xl bg-linea shadow-tarjeta sm:grid-cols-2">
+        <dl className="divide-y divide-linea border-y border-linea">
           {origenes.map((o) => (
-            <div key={o.que} className="flex min-h-36 flex-col-reverse justify-between gap-6 bg-superficie p-6">
+            <div key={o.que} className="flex items-baseline justify-between gap-6 py-5">
               <dt className="text-xl font-semibold tracking-[-0.02em]">{o.que}</dt>
-              <dd className="flex items-center gap-2 text-[13px] text-suave">
+              <dd className="flex shrink-0 items-center gap-1.5 text-[15px] text-suave">
                 <MapPin className="size-3.5" strokeWidth={1.75} aria-hidden />
                 {o.donde}
               </dd>
@@ -125,7 +125,7 @@ export async function SeccionProducto({ texto }: { texto: string }) {
 export async function SeccionCasa({ historia, equipo }: { historia: string; equipo: string }) {
   const [t, tm] = await Promise.all([getTranslations("web.casa"), getTranslations("web.marca")]);
   return (
-    <section id="casa" aria-labelledby="t-casa" className="scroll-mt-24 border-t border-linea py-20 sm:py-28">
+    <section id="casa" aria-labelledby="t-casa" className="scroll-mt-24 bg-sutil py-24 sm:py-36">
       <div className={`${contenedor} grid items-center gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-20`}>
         <figure className="order-last lg:order-first">
           <div className="overflow-hidden rounded-3xl bg-superficie p-1.5 shadow-elevada">
@@ -155,7 +155,7 @@ export async function SeccionCartaResumen({ locale, platos, ejemplo }: { locale:
   const t = await getTranslations("web.carta");
   const destacados = platos.filter((p) => p.destacado || p.categoria === "postre").slice(0, 6);
   return (
-    <section aria-labelledby="t-carta" className="border-t border-linea py-20 sm:py-28">
+    <section aria-labelledby="t-carta" className="py-16 sm:py-24">
       <div className={`${contenedor} grid gap-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.6fr)] lg:gap-16`}>
         <div>
           <Titulo id="t-carta" titulo={t("titulo")} intro={t("intro")} />
@@ -182,21 +182,21 @@ export async function SeccionOpiniones({ resenas }: { resenas: { id: string; aut
   const t = await getTranslations("web.opiniones");
   if (!resenas.length) return null;
   return (
-    <section aria-labelledby="t-opiniones" className="border-t border-linea py-20 sm:py-28">
+    <section aria-labelledby="t-opiniones" className="border-t border-linea py-16 sm:py-20">
       <div className={contenedor}>
         <Titulo id="t-opiniones" titulo={t("titulo")} />
-        <ul className="mt-12 grid gap-4 md:grid-cols-3">
+        <ul className="mt-12 grid gap-x-12 gap-y-10 md:grid-cols-3">
           {resenas.map((r) => (
-            <li key={r.id} className="flex flex-col rounded-3xl bg-superficie p-6 shadow-tarjeta">
+            <li key={r.id} className="flex flex-col border-t border-linea pt-6">
               {r.puntuacion ? (
-                <p className="flex gap-0.5 text-acento" role="img" aria-label={`${r.puntuacion}/5`}>
+                <p className="flex gap-0.5 text-texto" role="img" aria-label={`${r.puntuacion}/5`}>
                   {Array.from({ length: r.puntuacion }, (_, i) => (
-                    <Star key={i} className="size-4 fill-current" strokeWidth={0} aria-hidden />
+                    <Star key={i} className="size-3.5 fill-current" strokeWidth={0} aria-hidden />
                   ))}
                 </p>
               ) : null}
-              <blockquote className="mt-4 text-[17px] leading-relaxed tracking-[-0.01em]">«{r.texto}»</blockquote>
-              <p className="mt-auto pt-6 text-[13px] text-suave">
+              <blockquote className="mt-4 text-xl leading-snug tracking-[-0.02em]">«{r.texto}»</blockquote>
+              <p className="mt-auto pt-5 text-[13px] text-suave">
                 {r.autor} ·{" "}
                 {r.url ? (
                   <a href={r.url} target="_blank" rel="noopener noreferrer" className="enlace">
@@ -230,7 +230,7 @@ export async function SeccionLlegar({
   const enlaceContacto =
     "inline-flex min-h-11 items-center gap-2 rounded-full bg-superficie px-4 text-[15px] font-medium shadow-tarjeta transition-shadow hover:shadow-elevada";
   return (
-    <section id="llegar" aria-labelledby="t-llegar" className="scroll-mt-24 border-t border-linea py-20 sm:py-28">
+    <section id="llegar" aria-labelledby="t-llegar" className="scroll-mt-24 py-16 sm:py-24">
       <div className={`${contenedor} grid gap-12 lg:grid-cols-2 lg:gap-16`}>
         <div>
           <Titulo id="t-llegar" titulo={t("titulo")} />
@@ -303,7 +303,6 @@ export async function SeccionReservar() {
     <section aria-labelledby="t-cierre" className="px-4 pb-28 pt-8 sm:px-6 sm:pb-32">
       <ConBrillo as="div" className="mx-auto max-w-6xl overflow-hidden rounded-[32px] bg-superficie shadow-elevada">
         <div className="relative px-6 py-16 text-center sm:py-24">
-          <div aria-hidden className="pointer-events-none absolute inset-x-0 top-0 h-48 bg-[radial-gradient(60%_100%_at_50%_0%,var(--w-acento-suave),transparent)]" />
           <h2 id="t-cierre" className="relative text-[clamp(2rem,5vw,3.5rem)] font-semibold leading-[1.02] tracking-[-0.04em]">
             {t("cta.titulo")}
           </h2>
