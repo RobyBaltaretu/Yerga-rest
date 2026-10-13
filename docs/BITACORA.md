@@ -34,7 +34,6 @@ código; despliegue a producción pendiente de ti.
 **Bloqueado: necesito de ti** (detalle en «Bloqueos»)
 - Ejecutar `scripts/infra/configurar-secretos.sh` en tu ordenador (B-1). Sin eso no
   hay despliegue, ni Lighthouse en producción.
-- Borrar las ramas ya fusionadas (B-2).
 - Opcional: añadir `NEXT_PUBLIC_SUPABASE_URL` y `NEXT_PUBLIC_SUPABASE_ANON_KEY` al
   proyecto `yerga-rest` de Vercel para que su vista previa muestre contenido. Sin
   ellas, el build pasa pero las páginas públicas dan error.
@@ -68,7 +67,11 @@ Claude Code en tu terminal y pedirle que siga esta bitácora. Alternativa en la 
 añadir esos dominios a «Allowed domains» del entorno y darme las credenciales como
 variables del entorno.
 
-### B-2. No puedo borrar ramas remotas
+### B-2. No puedo borrar ramas remotas — **resuelto el 13/10**
+
+Resuelto: el 13 de octubre se borraron desde la web de GitHub las 19 ramas con PR
+fusionado. Quedan `main`, `fase-1` (posible rama de producción del proyecto de Vercel; no
+se toca hasta confirmarlo) y `vista-estatica` (sin PR fusionado).
 
 El proxy de la sesión corta `git push --delete`, y la herramienta de GitHub no tiene
 borrado de ramas. Las ramas fusionadas quedan en el remoto. **Solución sin coste:**
@@ -89,6 +92,12 @@ borrar desde la pestaña Branches.
 | 08/10 | Verificación automática tras cada despliegue (`scripts/produccion/verificar.mjs`) | Cumple «tras cada despliegue verifica la URL» aunque yo no tenga red hacia workers.dev |
 
 ## Diario
+
+### 13/10 · Limpieza de ramas
+- Borradas en GitHub las 19 ramas remotas cuyo PR estaba fusionado (B-2 resuelto).
+- Se conservan `main`, `fase-1` y `vista-estatica`.
+- B-1 sigue abierto: el despliegue requiere ejecutar `scripts/infra/configurar-secretos.sh`
+  en el ordenador del propietario.
 
 ### 08/10 · Arranque
 - Fusionado el PR #3 (squash). Leídos los documentos en el orden pedido.
