@@ -30,6 +30,7 @@ cliente y la sala.
 | P13 | Habilidades de diseño para Claude Code en el repositorio (impeccable y Emil Kowalski) | Propietario | hecho (#34) |
 | P14 | Rediseño de la web pública y de la reserva (estética Emil Kowalski, Motion, modo claro y oscuro) | Cliente | hecho (#35) |
 | P15 | Web pública con esencia valenciana: solo en claro, azulejo e historia de Yerga | Cliente | hecho (#37) |
+| P16 | Entrada con efecto y la historia de Yerga contada con el scroll | Cliente | hecho (#39) |
 
 ### Necesita al restaurante (datos reales)
 
@@ -549,3 +550,18 @@ borrar desde la pestaña Branches.
 ### 13/10 · Galería con la web valenciana (rama `docs/galeria-valenciana`)
 - Galería de `docs/vista-previa/` regenerada sobre `main` tras el #37: 201 capturas con la
   paleta del azulejo, la cenefa, la historia de la casa y el azulejo de la puerta.
+
+### 13/10 · Entrada con efecto e historia de Yerga (rama `feat/historia-yerga`)
+- Pedido del propietario: «un efecto WOW al acceder… ¿quizá contar una historia sobre Yerga?».
+- Entrada de la portada solo con CSS (sin coste de JavaScript en el prerender): el titular
+  sube palabra a palabra, la mesa de azulejo se asienta, la paella cae sobre ella con vapor
+  y la tarjeta de reserva aparece la última. Curvas suaves, sin rebote.
+- «La casa» pasa a ir justo después de la portada y se cuenta en cinco capítulos al hacer
+  scroll (la abuela Yerga, el arroz, la paella, su casa y el alma), con un escenario fijo,
+  el medallón de azulejo y una barra de progreso por capítulo. Se puede saltar.
+- Accesibilidad: el texto completo está siempre en el documento (oculto a la vista, no al
+  lector); con «reducir movimiento» la historia se muestra como lista y las animaciones de
+  entrada se desactivan, igual que en el modo ligero.
+- Verificado: lint, typecheck, Vitest (79), Playwright (46, con axe) y una prueba nueva que
+  recorre la historia y comprueba la versión sin movimiento; `impeccable detect` sin
+  avisos nuevos.

@@ -6,9 +6,9 @@ import { formatPrecio } from "@/lib/format";
 import type { Multilingue, Plato } from "@/lib/datos-publicos";
 import { CarruselArroces } from "./CarruselArroces";
 import { Termino } from "./Termino";
-import { LogoCompletoWeb } from "./Logo";
 import { Adorno, Monograma } from "@/components/marca/Marca";
 import { EnlaceBoton } from "./movimiento";
+import { HistoriaYerga } from "./HistoriaYerga";
 
 type Turno = { nombre: string; dia_semana: number; inicio: string; fin: string; ultima_hora: string };
 
@@ -124,49 +124,26 @@ export async function SeccionProducto({ texto }: { texto: string }) {
 }
 
 export async function SeccionCasa({ historia, equipo }: { historia: string; equipo: string }) {
-  const [t, tm] = await Promise.all([getTranslations("web.casa"), getTranslations("web.marca")]);
-  const elementos = [
-    { icono: "/marca/icono-arroz.webp", ancho: 120, alto: 114, texto: t("arroz") },
-    { icono: "/marca/icono-paella.webp", ancho: 164, alto: 78, texto: t("paella") },
-    { icono: "/marca/icono-casa.webp", ancho: 120, alto: 108, texto: t("casaElemento") },
-    { icono: "/marca/icono-alma.webp", ancho: 80, alto: 70, texto: t("almaElemento") },
-  ];
+  const [t, tm, th] = await Promise.all([getTranslations("web.casa"), getTranslations("web.marca"), getTranslations("web.historia")]);
+  const nombres = th.raw("capitulos") as string[];
   return (
-    <section id="casa" aria-labelledby="t-casa" className="papel scroll-mt-24 overflow-hidden py-24 sm:py-32">
-      <div className={`${contenedor} grid items-center gap-14 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1fr)] lg:gap-20`}>
-        <figure className="mx-auto w-full max-w-xl">
-          <div className="foto-antigua">
-            {/* Fotografía provisional de la identidad: sustituir por una foto real de la familia. */}
-            <Image src="/marca/abuela.webp" alt={t("foto")} width={550} height={302} sizes="(min-width: 1024px) 540px, 92vw" className="h-auto w-full" />
-          </div>
-          <figcaption className="mt-5 text-center text-[13px] text-tenue">{t("foto")}</figcaption>
-        </figure>
-        <div>
-          <LogoCompletoWeb className="h-auto w-40" sizes="160px" />
-          <h2 id="t-casa" className="mt-8 text-[clamp(1.9rem,3.6vw,2.6rem)] uppercase leading-[1.15] tracking-[0.04em]">
-            {t("titulo")}
-          </h2>
-          <Adorno className="mt-5" />
-          <p className="mt-6 text-lg leading-relaxed">{historia}</p>
-          <p className="mt-4 text-lg font-medium leading-relaxed">{t("alma")}</p>
-          {equipo ? <p className="mt-4 leading-relaxed text-suave">{equipo}</p> : null}
-          <p className="mt-8 font-firma text-[2.6rem] leading-none text-cobre sm:text-5xl">{tm("bienvenidos")}</p>
-        </div>
-      </div>
-
-      <div className={`${contenedor} mt-24`}>
-        <h3 className="text-center font-romana text-2xl">{t("elementos")}</h3>
-        <Adorno className="mt-4 justify-center" />
-        <ul className="mt-12 grid grid-cols-2 gap-y-12 md:grid-cols-4 md:divide-x md:divide-linea">
-          {elementos.map((e) => (
-            <li key={e.icono} className="flex flex-col items-center px-5 text-center">
-              <Image src={e.icono} alt="" width={e.ancho} height={e.alto} className="h-16 w-auto" />
-              <p className="mt-5 max-w-56 text-[15px] leading-relaxed text-suave">{e.texto}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-    </section>
+    <HistoriaYerga
+      titulo={t("titulo")}
+      alma={t("alma")}
+      equipo={equipo}
+      firma={tm("bienvenidos")}
+      fotoAlt={t("foto")}
+      desliza={th("desliza")}
+      saltar={th("saltar")}
+      capitulos={[
+        // Fotografía provisional de la identidad: sustituir por una foto real de la familia.
+        { nombre: nombres[0], texto: historia, imagen: "/marca/abuela.webp", ancho: 550, alto: 302, foto: true },
+        { nombre: nombres[1], texto: t("arroz"), imagen: "/marca/icono-arroz.webp", ancho: 120, alto: 114 },
+        { nombre: nombres[2], texto: t("paella"), imagen: "/marca/icono-paella.webp", ancho: 164, alto: 78 },
+        { nombre: nombres[3], texto: t("casaElemento"), imagen: "/marca/icono-casa.webp", ancho: 120, alto: 108 },
+        { nombre: nombres[4], texto: t("almaElemento"), imagen: "/marca/icono-alma.webp", ancho: 80, alto: 70 },
+      ]}
+    />
   );
 }
 

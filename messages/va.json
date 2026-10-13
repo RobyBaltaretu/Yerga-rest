@@ -360,6 +360,17 @@
     "marca": {
       "lema": "Arrossos amb ànima",
       "bienvenidos": "Benvinguts a sa casa."
+    },
+    "historia": {
+      "capitulos": [
+        "L'àvia Yerga",
+        "L'arròs",
+        "La paella",
+        "Sa casa",
+        "L'ànima"
+      ],
+      "desliza": "Llisca i coneix la seua història",
+      "saltar": "Botar la història"
     }
   }
 }
