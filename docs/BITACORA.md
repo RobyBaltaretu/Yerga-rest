@@ -17,10 +17,10 @@ cliente y la sala.
 |---|---|---|---|
 | P1 | Reserva: el contador «Paso X de Y» cambia de total a mitad del flujo (de 5 a 6 si aparece la zona) y la confirmación cuenta como un paso más | Cliente | hecho (#23) |
 | P2 | Reserva: al confirmar, la cabecera fija tapa el principio de la tarjeta de «¡Mesa reservada!» | Cliente | hecho (#23) |
-| P3 | Panel: fechas y números en español correcto («13 De Octubre» en mayúsculas, fechas ISO `2026-10-13`, decimales con punto, «Telefono» sin tilde) en reservas, detalle, hoja e informes | Sala | pendiente |
+| P3 | Panel: fechas y números en español correcto («13 De Octubre» en mayúsculas, fechas ISO `2026-10-13`, decimales con punto, «Telefono» sin tilde) en reservas, detalle, hoja e informes | Sala | hecho (#24) |
 | P4 | Portada en escritorio: el titular deja «sí.» solo en la segunda línea | Cliente | hecho (#25) |
 | P5 | Datos de ejemplo: fecha de creación realista en las reservas de la semilla (la «antelación media» de informes sale negativa) | Encargado | hecho (#26) |
-| P6 | Galería de capturas en `docs/vista-previa/` (móvil, tableta y escritorio; tres idiomas; panel) | Propietario | en curso |
+| P6 | Galería de capturas en `docs/vista-previa/` (móvil, tableta y escritorio; tres idiomas; panel) | Propietario | hecho (#27) |
 | P7 | Vista navegable gratis en GitHub Pages a partir de la rama `vista-estatica` | Propietario | hecho (#28); falta activar Pages (propietario) |
 | P8 | Cerrar en `docs/DUDAS.md` las decisiones «a confirmar» que no dependen del restaurante | Propietario | hecho |
 | P9 | Capturas y Lighthouse contra producción | Propietario | bloqueado: despliegue (B-1) |
@@ -405,6 +405,20 @@ borrar desde la pestaña Branches.
 - **Decisión:** el botón «Confirmo que vamos» se sigue mostrando también justo después
   de reservar. Es redundante pero inofensivo, y quitarlo cambiaría el flujo del
   recordatorio. Se revisará con datos reales.
+
+### 13/10 · P6: galería de capturas (rama `feat/galeria-vista-previa`)
+- `scripts/vista-previa/capturas.mjs` recorre la app con Playwright a 375, 768 y 1440 px
+  contra Supabase local y la semilla: web en `/es`, `/va` y `/en` (portada, arroces,
+  carta, la casa, contacto y la reserva paso a paso hasta la página de gestión) y todo el
+  panel (acceso, servicio de hoy con su mapa, reservas y línea de tiempo, mapa en edición,
+  espera, clientes, arroces del día, informes, configuración, carta, usuarios, registro y
+  hoja del turno). 201 capturas JPEG.
+- `scripts/vista-previa/galeria.mjs` las junta en `docs/vista-previa/index.html` con
+  índice por sección y botones por tamaño.
+- **Decisión:** JPEG de calidad 72 (unos 17 MB en total) en vez de PNG (varias veces más).
+  Las reservas y clientes que crea el recorrido se borran al terminar.
+- Cuando producción responda, el mismo script con `CAPTURAS_URL=<url>` hace las capturas
+  públicas en `docs/vista-previa/produccion/` y la galería las muestra arriba.
 
 ### 13/10 · P7: vista navegable en GitHub Pages (rama `feat/vista-pages`)
 - La rama `vista-estatica` estaba desfasada (anterior al panel en el navegador y a la

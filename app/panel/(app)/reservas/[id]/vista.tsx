@@ -5,7 +5,7 @@ import { Cabecera } from "@/components/panel/Cabecera";
 import { EditarReserva } from "@/components/panel/EditarReserva";
 import { ConDatos, NoEncontrado, sinError, useDatos, useIdRuta } from "@/components/panel/DatosPanel";
 import { reservaPorId } from "@/lib/panel/datos";
-import { fechaLocal } from "@/lib/format";
+import { fechaLarga, fechaLocal } from "@/lib/format";
 import { hora } from "@/lib/panel/estados";
 
 export function VistaReserva() {
@@ -37,7 +37,7 @@ export function VistaReserva() {
           <main className="pb-16">
             <Cabecera
               titulo={r.nombre}
-              descripcion={`${fechaLocal(r.inicio)} · ${hora(r.inicio)} · ${r.comensales} pax · ${r.mesas.map((m) => m.nombre).join("+") || "sin mesa"}`}
+              descripcion={`${fechaLarga(fechaLocal(r.inicio))} · ${hora(r.inicio)} · ${r.comensales} pax · ${r.mesas.map((m) => m.nombre).join("+") || "sin mesa"}`}
               acciones={r.cliente_id ? <Link href={`/panel/clientes/${r.cliente_id}`} className="min-h-11 rounded-full bg-white px-4 py-2.5 font-semibold ring-1 ring-tinta/15">Ficha del cliente</Link> : null}
             />
             <div className="grid gap-8 px-4 py-6 sm:px-6 lg:grid-cols-[1fr_320px]">
