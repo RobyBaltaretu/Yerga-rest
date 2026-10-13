@@ -62,6 +62,9 @@ export type BloqueoPanel = { id: string; desde: string; hasta: string; mesa_id: 
 
 export type EstadoMesa = "libre" | "proxima" | "ocupada" | "terminando" | "pasada" | "bloqueada";
 
+/** Etiquetas del origen de una reserva, para mostrarlas en el panel y en los informes. */
+export const ORIGENES: Record<string, string> = { web: "Web", telefono: "Teléfono", puerta: "Sin reserva" };
+
 export const ACTIVAS: EstadoReserva[] = ["pendiente", "confirmada", "reconfirmada", "sentada"];
 
 export const estadoMesaTexto: Record<EstadoMesa, string> = {

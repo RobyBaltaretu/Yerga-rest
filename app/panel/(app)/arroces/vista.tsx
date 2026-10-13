@@ -6,7 +6,7 @@ import { ConDatos, esFecha, useDatos, useParam } from "@/components/panel/DatosP
 import { reservasDelDia, turnosDelDia } from "@/lib/panel/datos";
 import { resumenArroces, type Total } from "@/lib/panel/arroces";
 import { hora } from "@/lib/panel/estados";
-import { fechaLocal, formatFecha, sumarDias } from "@/lib/format";
+import { fechaLarga, fechaLocal, sumarDias } from "@/lib/format";
 
 const boton = "grid min-h-11 place-items-center rounded-full bg-white px-4 font-semibold ring-1 ring-tinta/15";
 
@@ -37,8 +37,8 @@ export function VistaArroces() {
       <Cabecera
         titulo="Arroces del día"
         descripcion={
-          <span className="capitalize">
-            {formatFecha(`${fecha}T12:00:00Z`, "es")}
+          <span>
+            {fechaLarga(fecha)}
             {turno ? ` · ${turno}` : ""}
           </span>
         }

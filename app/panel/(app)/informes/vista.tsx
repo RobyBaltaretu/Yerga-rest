@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Cabecera } from "@/components/panel/Cabecera";
 import { ConDatos, RequiereRol, esFecha, sinError, useDatos, useParam } from "@/components/panel/DatosPanel";
 import { getBrowserClient } from "@/lib/supabase/client";
-import { fechaLocal, sumarDias } from "@/lib/format";
-import { hora } from "@/lib/panel/estados";
+import { fechaCorta, fechaLocal, formatNumero, sumarDias } from "@/lib/format";
+import { ORIGENES, hora } from "@/lib/panel/estados";
 import { aCsv, periodoAnterior, variacion } from "@/lib/panel/informes";
 
 type Informe = {
@@ -74,7 +74,7 @@ async function descargarReservas(desde: string, hasta: string) {
     ["Turno", (r) => r.turno_nombre],
     ["Comensales", (r) => r.comensales],
     ["Estado", (r) => r.estado],
-    ["Origen", (r) => r.origen],
+    ["Origen", (r) => ORIGENES[r.origen] ?? r.origen],
     ["Mesas", (r) => r.asignacion.filter((a) => a.activa).map((a) => a.mesa?.nombre).join("+")],
     ["Arroces", (r) => r.encargo_arroz.map((e) => `${e.plato?.nombre.es ?? "?"} x${e.raciones}`).join(", ")],
     ["Creada", (r) => `${fechaLocal(r.creada_en)} ${hora(r.creada_en)}`],
@@ -118,7 +118,7 @@ function Informes() {
         </nav>
       </div>
       <p className="px-4 pb-4 text-sm text-niebla sm:px-6">
-        Comparado con el periodo anterior: del {anterior.desde} al {anterior.hasta}.
+        Comparado con el periodo anterior: del {fechaCorta(anterior.desde)} al {fechaCorta(anterior.hasta)}.
       </p>
       <ConDatos estado={estado}>{({ i, ant }) => <Resultados i={i} ant={ant} desde={desde} hasta={hasta} />}</ConDatos>
     </main>
@@ -169,7 +169,7 @@ function Resultados({ i, ant, desde, hasta }: { i: Informe; ant: Informe; desde:
           {tarjetas.map((t) => (
             <div key={t.titulo} className="rounded-2xl bg-white p-4 ring-1 ring-tinta/10">
               <p className="text-sm text-niebla">{t.titulo}</p>
-              <p className="mt-1 font-display text-4xl tabular-nums">{t.valor ?? "—"}<span className="text-xl">{t.valor != null ? t.unidad : ""}</span></p>
+              <p className="mt-1 font-display text-4xl tabular-nums">{t.valor == null ? "—" : formatNumero(t.valor)}<span className="text-xl">{t.valor != null ? t.unidad : ""}</span></p>
               <Variacion actual={t.valor} anterior={t.previo} unidad={t.unidad} mejorSiSube={t.sube} />
               {t.meta ? <p className={`mt-1 text-xs font-semibold ${t.ok == null || t.valor == null ? "text-niebla" : t.ok ? "text-huerta" : "text-pimenton-oscuro"}`}>Meta: {t.meta}{t.valor != null && t.ok != null ? (t.ok ? " · cumplida" : " · por debajo") : ""}</p> : null}
             </div>
@@ -179,10 +179,10 @@ function Resultados({ i, ant, desde, hasta }: { i: Informe; ant: Informe; desde:
         <section aria-labelledby="t-origen">
           <h2 id="t-origen" className="font-display text-2xl">Origen de las reservas</h2>
           <p className="text-sm text-niebla">{i.total} reservas · {i.comensales} comensales atendidos · {i.cancelaciones} canceladas</p>
-          <div className="mt-3 flex h-8 overflow-hidden rounded-full ring-1 ring-tinta/10" role="img" aria-label={Object.entries(i.origen).map(([k, v]) => `${k}: ${v}`).join(", ")}>
+          <div className="mt-3 flex h-8 overflow-hidden rounded-full ring-1 ring-tinta/10" role="img" aria-label={Object.entries(i.origen).map(([k, v]) => `${ORIGENES[k] ?? k}: ${v}`).join(", ")}>
             {Object.entries(i.origen).map(([k, v]) => (
               <div key={k} className={`grid place-items-center text-xs font-semibold ${k === "web" ? "bg-huerta text-white" : k === "telefono" ? "bg-azafran" : "bg-arroz-2"}`} style={{ width: `${(100 * v) / Math.max(1, i.total)}%` }}>
-                {k === "puerta" ? "sin reserva" : k} {v}
+                {ORIGENES[k] ?? k} {v}
               </div>
             ))}
           </div>
@@ -210,10 +210,10 @@ function Resultados({ i, ant, desde, hasta }: { i: Informe; ant: Informe; desde:
             <tbody className="divide-y divide-tinta/10">
               {i.por_turno.map((t) => (
                 <tr key={`${t.fecha}-${t.turno}`}>
-                  <td className="py-1.5 tabular-nums">{t.fecha}</td>
+                  <td className="py-1.5 tabular-nums">{fechaCorta(t.fecha)}</td>
                   <td className="capitalize">{t.turno}</td>
                   <td className="tabular-nums">{t.comensales}</td>
-                  <td className="tabular-nums">{t.ocupacion ?? "—"} %</td>
+                  <td className="tabular-nums">{t.ocupacion == null ? "—" : `${formatNumero(t.ocupacion)} %`}</td>
                 </tr>
               ))}
             </tbody>
